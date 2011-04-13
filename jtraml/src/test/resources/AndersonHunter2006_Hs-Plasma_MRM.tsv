@@ -1,0 +1,138 @@
+Protein	Peptide	RT	q1	q3	MRM Quality	Comment
+Afamin	DADPDTFFAK	21.5	563.8	825.4	Best	
+Afamin	DADPDTFFAK	21.5	563.8	940.4	OK	
+Alpha-1-acid glycoprotein 1	NWGLSVYADKPETTK	19.7	570.3	1052.5	OK	SIS
+Alpha-1-acid glycoprotein 1	NWGLSVYADKPETTK	19.7	570.3	575.3	Best	
+Alpha-1-acid glycoprotein 1	NWGLSVYADKPETTK	19.7	575.6	1068.5	OK	
+Alpha-1-antichymotrypsin	EIGELYLPK	22.4	531.3	633.4	OK	
+Alpha-1-antichymotrypsin	EIGELYLPK	22.4	531.3	819.5	Best	
+Alpha-1-antichymotrypsin	EIGELYLPK	22.4	535.3	827.5	OK	SIS
+Alpha-1B-glycoprotein	LETPDFQLFK	27.7	619.4	995.5	OK	
+Alpha-1B-glycoprotein	LETPDFQLFK	27.7	619.4	894.5	Best	
+Alpha-2-antiplasmin	LGNQEPGGQTALK	12.6	656.8	771.4	Best	
+Alpha-2-antiplasmin	LGNQEPGGQTALK	12.6	656.8	900.5	OK	
+Alpha-2-antiplasmin	LGNQEPGGQTALK	12.6	660.8	779.4	OK	SIS
+Alpha-1-antitrypsin	DTEEEDFHVDQVTTVK	17.4	631.3	790.4	OK	
+Alpha-1-antitrypsin	DTEEEDFHVDQVTTVK	17.4	631.3	889.5	OK	
+Alpha-2-macroglbulin	LLIYAVLPTGDVIGDSAK	36.5	923	1059.5	Best	
+Alpha-2-macroglbulin	LLIYAVLPTGDVIGDSAK	36.5	923	1172.6	OK	
+Angiotensinogen	ALQDQLVLVAAK	23.5	634.9	956.6	OK	
+Angiotensinogen	ALQDQLVLVAAK	23.5	634.9	713.5	OK	
+Angiotensinogen	ALQDQLVLVAAK	23.5	638.9	964.6	OK	SIS
+Angiotensinogen	PKDPTFIPAPIQAK	19.1	508.3	724.4	OK	
+Angiotensinogen	PKDPTFIPAPIQAK	19.1	508.3	556.4	Best	
+Antithrombin-III	DDLYVSDAFHK	19.2	437.2	803.4	OK	
+Antithrombin-III	DDLYVSDAFHK	19.2	437.2	704.3	Best	
+Antithrombin-III	DDLYVSDAFHK	19.2	439.9	811.4	OK	SIS
+Apolipoprotein A-I	ATEHLSTLSEK	12.1	405.9	664.4	Best	
+Apolipoprotein A-I	ATEHLSTLSEK	12.1	405.9	777.5	OK	
+Apolipoprotein A-I	ATEHLSTLSEK	12.1	408.5	672.4	OK	SIS
+Apolipoprotein A-II precursor	SPELQAEAK	12.1	486.8	546.4	OK	
+Apolipoprotein A-II precursor	SPELQAEAK	12.1	486.8	659.4	Best	
+Apolipoprotein A-IV	SLAPYAQDTQEK	13.8	675.8	982.4	Best	
+Apolipoprotein A-IV	SLAPYAQDTQEK	13.8	675.8	1079.5	OK	
+Apolipoprotein B-100	FPEVDVLTK	22.8	524.3	803.5	OK	
+Apolipoprotein B-100	FPEVDVLTK	22.8	524.3	674.4	Best	
+Apolipoprotein B-100	FPEVDVLTK	22.8	528.3	811.5	OK	SIS
+Apolipoprotein B-100	TEVIPPLIENR	22.9	640.8	838.4	OK	
+Apolipoprotein B-100	TEVIPPLIENR	22.9	640.8	741.4	OK	
+Apolipoprotein C-I lipoprotein	TPDVSSALDK	14.9	516.8	620.3	Best	
+Apolipoprotein C-I lipoprotein	TPDVSSALDK	14.9	516.8	719.4	OK	
+Apolipoprotein C-II lipoprotein	STAAMSTYTGIFTDQVLSVLK	36.2	745.1	1149.7	OK	
+Apolipoprotein C-II lipoprotein	STAAMSTYTGIFTDQVLSVLK	36.2	745.1	1002.6	OK	
+Apolipoprotein C-III	DALSSVQESQVAQQAR	17.8	858.9	1144.6	OK	
+Apolipoprotein C-III	DALSSVQESQVAQQAR	17.8	858.9	1417.7	Best	
+Apolipoprotein E	LGPLVEQGR	15.5	484.8	701.4	OK	
+Apolipoprotein E	LGPLVEQGR	15.5	484.8	588.3	Best	
+Beta-2-glycoprotein I	ATVVYQGER	12.4	511.8	652.3	OK	
+Beta-2-glycoprotein I	ATVVYQGER	12.4	511.8	751.4	Best	
+Beta-2-glycoprotein I	EHSSLAFWK	19.3	552.8	838.5	OK	
+Beta-2-glycoprotein I	EHSSLAFWK	19.3	552.8	664.4	OK	
+Beta-2-glycoprotein I	EHSSLAFWK	19.3	556.8	846.5	OK	SIS
+C4b-binding protein alpha	LSLEIEQLELQR	27	735.9	915.5	OK	
+C4b-binding protein alpha	LSLEIEQLELQR	27	735.9	1028.6	OK	
+Ceruloplasmin	EYTDASFTNR	14.9	602.3	624.3	OK	
+Ceruloplasmin	EYTDASFTNR	14.9	602.3	695.3	Best	
+Clusterin	LFDSDPITVTVPVEVSR	28.5	937.5	1296.7	OK	
+Clusterin	LFDSDPITVTVPVEVSR	28.5	937.5	686.4	Best	
+Coagulation  factor V	DPPSDLLLLK	26.7	555.8	898.6	OK	
+Coagulation  factor V	DPPSDLLLLK	26.7	559.8	906.6	OK	SIS
+Coagulation factor XIIa light chain	VVGGLVALR	19.7	442.3	784.5	OK	
+Coagulation factor XIIa light chain	VVGGLVALR	19.7	442.3	685.4	Best	
+Complement C3	TGLQEVEVK	15	501.8	731.4	OK	
+Complement C3	TGLQEVEVK	15	501.8	603.3	Best	
+Complement C3	TGLQEVEVK	15	505.8	739.4	OK	SIS
+Complement C4 gamma chain	ITQVLHFTK	16.2	362.9	645.4	OK	
+Complement C4 gamma chain	ITQVLHFTK	16.2	362.9	744.4	Best	
+Complement C4 gamma chain	ITQVLHFTK	16.2	365.6	653.4	OK	SIS
+Complement C4 beta chain	VGDTLNLNLR	20.9	557.8	629.4	Best	
+Complement C4 beta chain	VGDTLNLNLR	20.9	557.8	843.5	OK	
+Complement C9	AIEDYINEFSVR	28.3	728.5	1271.6	Best	
+Complement C9	AIEDYINEFSVR	28.3	728.5	1027.5	OK	
+Complement factor B	EELLPAQDIK	19	578.4	671.4	Best	
+Complement factor B	EELLPAQDIK	19	578.4	784.5	OK	
+Complement factor H	SPDVINGSPISQK	16.3	671.4	830.4	Best	
+Complement factor H	SPDVINGSPISQK	16.3	671.4	572.3	OK	
+Fibrinogen alpha chain	TVIGPDGHK	11.7	462.3	723.4	OK	
+Fibrinogen alpha chain	TVIGPDGHK	11.7	462.3	610.3	OK	
+Fibrinogen alpha chain	TVIGPDGHK	11.7	466.2	731.4	OK	SIS
+Fibrinogen alpha chain	GSESGIFTNTK	14.7	570.8	780.4	Best	
+Fibrinogen alpha chain	GSESGIFTNTK	14.7	570.8	867.5	OK	
+Fibrinogen beta chain	QGFGNVATNTDGK	13.5	654.8	706.3	Best	
+Fibrinogen beta chain	QGFGNVATNTDGK	13.5	654.8	805.4	OK	
+Fibrinogen beta chain	QGFGNVATNTDGK	13.5	658.8	714.3	OK	SIS
+Fibrinogen gamma chain	DTVQIHDITGK	15.4	409.5	670.4	OK	
+Fibrinogen gamma chain	DTVQIHDITGK	15.4	409.5	533.3	Best	
+Fibrinogen gamma chain	DTVQIHDITGK	15.4	412.2	678.4	OK	SIS
+Fibronectin	DLQFVEVTDVK	24.7	647.3	789.4	Best	
+Fibronectin	DLQFVEVTDVK	24.7	647.3	690.4	OK	
+Fibronectin	VTWAPPPSIDLTNFLVR	38.2	642.7	977.5	OK	
+Fibronectin	VTWAPPPSIDLTNFLVR	38.2	642.7	862.5	OK	
+Gelsolin isoform I	TGAQELLR	14.8	444.3	786.5	Best	
+Gelsolin isoform I	TGAQELLR	14.8	444.3	729.4	OK	
+Haptoglobin beta chain	VGYVSGWGR	18.2	490.8	562.3	Best	
+Haptoglobin beta chain	VGYVSGWGR	18.2	490.8	661.3	OK	
+Hemopexin	NFPSPVDAAFR	23.6	610.8	959.6	Best	
+Hemopexin	NFPSPVDAAFR	23.6	610.8	775.3	OK	
+Heparin cofactor II	TLEAQLTPR	16.4	514.8	814.4	Best	
+Heparin cofactor II	TLEAQLTPR	16.4	514.8	685.4	OK	
+Histidine-rich glycoprotein	DSPVLIDFFEDTER	37.7	841.9	1171.5	Best	
+Histidine-rich glycoprotein	DSPVLIDFFEDTER	37.7	841.9	1058.4	OK	
+Inter-alpha-trypsin inhibitor heavy chain	AAISGENAGLVR	14.9	579.4	902.5	Best	
+Inter-alpha-trypsin inhibitor heavy chain	AAISGENAGLVR	14.9	579.4	629.4	OK	
+Inter-alpha-trypsin inhibitor light chain	AFIQLWAFDAVK	38	704.9	836.4	OK	
+Inter-alpha-trypsin inhibitor light chain	AFIQLWAFDAVK	38	704.9	949.5	OK	
+Kininogen	TVGSDTFYSFK	21.5	626.3	1051.4	Best	
+Kininogen	TVGSDTFYSFK	21.5	626.3	994.5	OK	
+L-selectin	AEIEYLEK	16.9	497.8	794.4	OK	
+L-selectin	AEIEYLEK	16.9	497.8	681.3	Best	
+L-selectin	AEIEYLEK	16.9	501.8	802.4	OK	SIS
+Plasma retinol-binding protein	YWGVASFLQK	35.1	599.8	849.5	Best	
+Plasma retinol-binding protein	YWGVASFLQK	35.1	599.8	693.4	OK	
+Plasminogen	LSSPAVITDK	15.3	515.8	743.4	OK	
+Plasminogen	LSSPAVITDK	15.3	515.8	830.5	OK	
+Plasminogen	LSSPAVITDK	15.3	519.8	751.4	OK	SIS
+Plasminogen	LFLEPTR	19.1	438.3	615.4	OK	
+Plasminogen	LFLEPTR	19.1	438.3	502.3	Best	
+Prothrombin	ETAASLLQAGYK	20.2	626.3	879.5	OK	
+Prothrombin	ETAASLLQAGYK	20.2	626.3	679.4	Best	
+Prothrombin	ETAASLLQAGYK	20.2	630.3	887.5	OK	SIS
+Serum albumin	LVNEVTEFAK	19.3	575.4	937.4	OK	
+Serum albumin	LVNEVTEFAK	19.3	575.4	694.4	Best	
+Serum amyloid P-component	VGEYSLYIGR	21.3	578.8	1057.5	OK	
+Serum amyloid P-component	VGEYSLYIGR	21.3	578.8	871.5	Best	
+Transferrin	EDPQTFYYAVAVVK	20.3	815.4	1160.6	Best	
+Transferrin	EDPQTFYYAVAVVK	20.3	815.4	1288.7	OK	
+Transthyretin	AADDTWEPFASGK	22.3	697.8	921.4	OK	
+Transthyretin	AADDTWEPFASGK	22.3	697.8	606.4	Best	
+Vitamin D-binding protein	THLPEVFLSK	19.7	585.8	819.5	Best	
+Vitamin D-binding protein	THLPEVFLSK	19.7	585.8	932.5	OK	
+Vitamin K-dependent protein C	WELDLDIK	20.1	516.3	716.4	OK	
+Vitamin K-dependent protein C	WELDLDIK	20.1	516.3	603.3	OK	
+Vitamin K-dependent protein C	WELDLDIK	20.1	520.3	724.4	OK	SIS
+Vitronectin	DVWGIEGPIDAAFTR	36.4	823.9	947.5	OK	
+Vitronectin	DVWGIEGPIDAAFTR	36.4	823.9	890.5	OK	
+Vitronectin	FEDGVLDPDYPR	22.2	711.9	875.4	Best	
+Vitronectin	FEDGVLDPDYPR	22.2	711.9	1031.5	OK	
+Zinc-alpha-2-glycoprotein	EIPAWVPFDPAAQITK	36.2	891.9	1087.7	Best	
+Zinc-alpha-2-glycoprotein	EIPAWVPFDPAAQITK	36.2	891.9	728.4	OK	
