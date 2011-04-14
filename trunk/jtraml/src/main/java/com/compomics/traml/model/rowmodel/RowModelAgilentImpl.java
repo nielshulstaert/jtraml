@@ -2,7 +2,6 @@ package com.compomics.traml.model.rowmodel;
 
 import com.compomics.traml.exception.JTramlException;
 import com.compomics.traml.factory.CustomTypeFactory;
-import com.compomics.traml.interfaces.ColumnModel;
 import com.compomics.traml.interfaces.RowModel;
 import org.apache.log4j.Logger;
 import org.hupo.psi.ms.traml.*;
@@ -22,14 +21,7 @@ public class RowModelAgilentImpl implements RowModel {
 
     private static Logger logger = Logger.getLogger(RowModelAgilentImpl.class);
 
-    private static ColumnModel[] iColumnModels;
     private ObjectFactory iObjectFactory;
-
-    static {
-        iColumnModels = new ColumnModel[12];
-//        iColumnModels[0] = new TransitionIDImpl();
-    }
-
 
     /**
      * Construct a new RowModel implementation for Agilent inputformat.
@@ -47,7 +39,7 @@ public class RowModelAgilentImpl implements RowModel {
     public void addRowToTraml(TraMLType aTraMLType, String[] aRowValues) {
 
         // validate number of line values.
-        if (aRowValues.length != iColumnModels.length) {
+        if (aRowValues.length != 12) {
             throw new JTramlException("Unexpected numer of columns for the Agilent RowModel!!");
         }
 
