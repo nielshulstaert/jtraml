@@ -1,11 +1,12 @@
 package com.compomics.traml.interfaces;
 
+import org.hupo.psi.ms.traml.SourceFileListType;
 import org.hupo.psi.ms.traml.TraMLType;
 
 /**
  * This class is a generic model for a number of Transition specifying columns.
  */
-public interface RowModel {
+public interface FileModel {
 
     /**
      * Implementing classes must be capable of writing an array of rowvalues into a TramlType instance.
@@ -14,6 +15,12 @@ public interface RowModel {
      */
     public void addRowToTraml(TraMLType aTraMLType, String[] aRowValues);
 
+
+    /**
+     * Implementing classes must be capable to describe a SourceFileListType to insert into a TraMLType
+     * @return SourceFileListType for the implementing converting classes.
+     */
+    public SourceFileListType getSourceTypeList();
 
 }
 

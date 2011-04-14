@@ -5,9 +5,17 @@ package com.compomics.traml.enumeration;
  */
 public enum FrequentOBoEnum {
     MZ("m/z"),
-    ELECTRON_VOLT("electronvolt"),
     ISOLATION_WINDOW("isolation window target m/z"),
     COLLISION_ENERGY("collision energy"),
+    ACCELERATING_VOLTAGE("accelerating voltage"),
+
+    RETENTION_TIME("retention time"),
+    RETENTION_TIME_WINDOW("retention time window attribute"),
+
+    ELECTRON_VOLT("electronvolt"),
+    VOLT("volt"),
+    MINUTES("minute"),
+
     TSV_ABI("ABI_TSV");
 
     /**
