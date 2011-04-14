@@ -10,6 +10,8 @@ import java.io.File;
  */
 public class CoreConfiguration {
 
+    public final static String VERSION = "0.1";
+
     private static PropertiesConfiguration input;
     private static File iWorkSpace = null;
 

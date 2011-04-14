@@ -2,8 +2,8 @@ package com.compomics.traml;
 
 import com.compomics.traml.config.CoreConfiguration;
 import com.compomics.traml.factory.CustomTypeFactory;
-import com.compomics.traml.interfaces.RowModel;
-import com.compomics.traml.model.rowmodel.RowModelAgilentImpl;
+import com.compomics.traml.interfaces.FileModel;
+import com.compomics.traml.model.rowmodel.AgilentQQQImpl;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
 import junit.framework.Assert;
@@ -74,16 +74,18 @@ public class TestAgilentQQQ extends TestCase {
             br.readLine();
 
             String sep = CoreConfiguration.getSeparationChar();
-            RowModel lRowModel = new RowModelAgilentImpl();
+            FileModel lFileModel = new AgilentQQQImpl(iAgilentInputFile);
 
             logger.debug("reading AgilentQQQ input file\t" + lURL);
+
             while ((line = br.readLine()) != null) {
                 String[] lValues = line.split(sep);
-                lRowModel.addRowToTraml(lTraMLType, lValues);
+                lFileModel.addRowToTraml(lTraMLType, lValues);
             }
             logger.debug("finished reading AgilentQQQ input file\t");
 
             lTraMLType.setCvList(CustomTypeFactory.getCvListType());
+            lTraMLType.setSourceFileList(lFileModel.getSourceTypeList());
 
             // Ok, all rows have been added.
             TraMLCreator lTraMLCreator = new TraMLCreator();
