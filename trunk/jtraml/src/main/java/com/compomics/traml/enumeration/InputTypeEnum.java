@@ -4,7 +4,7 @@ package com.compomics.traml.enumeration;
  * This enum is a wraps the distinct input types.
  */
 public enum InputTypeEnum {
-    TRAML("PSI_TraML"), TSV_THERMO("Thermo_TSV"), TSV_ABI("ABI_TSV");
+    TRAML("psi_traml"), TSV_THERMO_TSQ("thermo_tsv"), TSV_AGILENT_QQQ("agilent_tsv"), TSV_ABI("abi_tsv");
 
     /**
      * The name for the input type enumeration.

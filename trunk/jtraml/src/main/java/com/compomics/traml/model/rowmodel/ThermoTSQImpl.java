@@ -13,24 +13,24 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 /**
- * This class is an FileModel implementation for the Agilent QQQ instrument.
+ * This class is an FileModel implementation for the Thermo TSQ instrument.
  * e.g.
  * ""
- * Dynamic MRM
- * Compound Name	ISTD?	Precursor Ion	MS1 Res	Product Ion	MS2 Res	Fragmentor	Collision Energy	Cell Accelerator Voltage	Ret Time (min)	Delta Ret Time	Polarity
- * CSASVLPVDVQTLNSSGPPFGK.2y16-1	FALSE	1130.5681	Wide	1642.8233	Unit	125	39.8	5	42.35	5.00	Positive
+ * Q1,Q3,CE,Start time (min),Stop time (min),Polarity,Trigger,Reaction category,Name
+ * 651.8366,790.4038,25.5,18.61,28.61,1,1.00E+04,0,AAELQTGLETNR.2y7-1
+ *
  */
-public class AgilentQQQImpl implements FileModel {
+public class ThermoTSQImpl implements FileModel {
 
-    private static Logger logger = Logger.getLogger(AgilentQQQImpl.class);
+    private static Logger logger = Logger.getLogger(ThermoTSQImpl.class);
 
     private ObjectFactory iObjectFactory;
     private File iFile;
 
     /**
-     * Construct a new FileModel implementation for Agilent inputformat.
+     * Construct a new FileModel implementation for Thermo TSQ inputformat.
      */
-    public AgilentQQQImpl(File aFile) {
+    public ThermoTSQImpl(File aFile) {
         iFile = aFile;
         iObjectFactory = new ObjectFactory();
     }
@@ -44,31 +44,28 @@ public class AgilentQQQImpl implements FileModel {
     public void addRowToTraml(TraMLType aTraMLType, String[] aRowValues) {
 
         // validate number of line values.
-        if (aRowValues.length != 12) {
-            throw new JTramlException("Unexpected numer of columns for the Agilent FileModel!!");
+        if (aRowValues.length != 9) {
+            throw new JTramlException("Unexpected numer of columns for the Thermo TSQ FileModel!!");
         }
 
         if (aTraMLType.getTransitionList() == null) {
             aTraMLType.setTransitionList(iObjectFactory.createTransitionListType());
         }
 
-        String lID = aRowValues[0];// OK
-        String lISTD = aRowValues[1];
-        String lQ1 = aRowValues[2];//OK
+        String lQ1 = aRowValues[0];//OK
+        String lQ3 = aRowValues[1];//OK
 
-        String lRes1 = aRowValues[3];
-        String lQ3 = aRowValues[4];//OK
-        String lRes3 = aRowValues[5];
+        String lCE = aRowValues[2];
 
-        String lFragmentor = aRowValues[6];
-        String lEnergy = aRowValues[7];//OK
-        String lAccVoltage = aRowValues[8];//OK
+        String lStartTime = aRowValues[3];
+        String lStopTime = aRowValues[4];
 
-        String lRt = aRowValues[9];//OK
-        String lRtdelta = aRowValues[10];//OK
-        String lPolarity = aRowValues[11];
+        String lPolarity = aRowValues[5];
+        String lTrigger = aRowValues[6];
 
-//        CompoundListType lCompoundList = aTraMLType.getCompoundList();
+        String lReactionCategory = aRowValues[7];
+
+        String lID = aRowValues[8];// OK
 
 
         // <cvParam cvRef="MS" accession="MS:1000827" name="isolation window target m/z" value="862.9467"
@@ -79,8 +76,8 @@ public class AgilentQQQImpl implements FileModel {
             CvParamType lCV_Q1 = CustomTypeFactory.createCVType_MZ(lQ1);
             CvParamType lCV_Q3 = CustomTypeFactory.createCVType_MZ(lQ3);
 
-            CvParamType lCV_AcceleratingVoltage = CustomTypeFactory.createCVType_AcceleratingVoltage(lAccVoltage);
-            CvParamType lCV_CollisionEnergy = CustomTypeFactory.createCVType_CollisionEnergy(lEnergy);
+            CvParamType lCV_Trigger = CustomTypeFactory.createCVType_AcceleratingVoltage(lAccVoltage);
+//            CvParamType lCV_CollisionEnergy = CustomTypeFactory.createCVType_CollisionEnergy(lEnergy);
 
             // 1. Make the Precursor Type
             PrecursorType lPrecursorType = iObjectFactory.createPrecursorType();
@@ -92,8 +89,8 @@ public class AgilentQQQImpl implements FileModel {
 
             // 3. Define the configuration
             ConfigurationType lConfigurationType = iObjectFactory.createConfigurationType();
-            lConfigurationType.getCvParam().add(lCV_CollisionEnergy);
-            lConfigurationType.getCvParam().add(lCV_AcceleratingVoltage);
+//            lConfigurationType.getCvParam().add(lCV_CollisionEnergy);
+            lConfigurationType.getCvParam().add(lCV_Trigger);
 
             // add this configuration to the configuration list.
             ConfigurationListType lConfigurationListType = iObjectFactory.createConfigurationListType();
@@ -205,7 +202,7 @@ public class AgilentQQQImpl implements FileModel {
         SourceFileListType lSourceFileListType = iObjectFactory.createSourceFileListType();
         SourceFileType lSourceFileType = iObjectFactory.createSourceFileType();
 
-        lSourceFileType.setId("AgilentQQQ_to_traml_converter_v" + CoreConfiguration.VERSION);
+        lSourceFileType.setId("ThermoTSQ_to_traml_converter_v" + CoreConfiguration.VERSION);
         lSourceFileType.setLocation(iFile.getParent());
         lSourceFileType.setName(iFile.getName());
 

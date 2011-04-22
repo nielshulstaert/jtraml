@@ -1,11 +1,17 @@
 package com.compomics.traml;
 
 import com.compomics.traml.enumeration.InputTypeEnum;
+import com.compomics.traml.interfaces.FileModel;
+import com.compomics.traml.model.rowmodel.AgilentQQQImpl;
+import com.compomics.traml.thread.TSVToTRAMLJob;
 import org.apache.commons.cli.*;
 import org.apache.log4j.Logger;
+import sun.misc.ConditionLock;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * This class has a main method for converting tab separated files to TraML.
@@ -29,7 +35,45 @@ public class TramlConverter {
             } else {
                 logger.debug("parameters ok!");
 
+                File lInputFile = new File(line.getOptionValue("input"));
+                File lOutputFile = new File(line.getOptionValue("output"));
+                String lInputtype = line.getOptionValue("inputtype");
 
+                if (lInputtype.equals(InputTypeEnum.TRAML.getName())) {
+                    // TraML -> TSV
+                    logger.info("traml is not yet implemented.");
+                    System.exit(1);
+                } else {
+                    // TSV -> TraML
+                    FileModel lFileModel = null;
+                    if (lInputtype.equals(InputTypeEnum.TSV_ABI.getName())) {
+                        logger.info("ABI TSV input is not yet implemented.");
+                        System.exit(1);
+
+                    } else if (lInputtype.equals(InputTypeEnum.TSV_THERMO_TSQ.getName())) {
+                        logger.info("Thermo TSQ TSV input is not yet implemented.");
+                        System.exit(1);
+
+                    } else if (lInputtype.equals(InputTypeEnum.TSV_AGILENT_QQQ.getName())) {
+                        logger.info("starting conversion from Agilent QQQ to TraML");
+                        lFileModel = new AgilentQQQImpl(lInputFile);
+                    }
+
+                    TSVToTRAMLJob job = new TSVToTRAMLJob(lFileModel, lInputFile, lOutputFile);
+                    Future lSubmit = Executors.newSingleThreadExecutor().submit(job);
+
+                    ConditionLock lConditionLock = new ConditionLock();
+                    synchronized (lConditionLock) {
+                        while (lSubmit.isDone() != true) {
+                            try {
+                                lConditionLock.wait(1000);
+                            } catch (InterruptedException e) {
+                                logger.error(e.getMessage(), e);
+                            }
+                        }
+                    }
+                    logger.debug("finished writing \t" + lOutputFile.getName());
+                }
             }
         } catch (ParseException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
