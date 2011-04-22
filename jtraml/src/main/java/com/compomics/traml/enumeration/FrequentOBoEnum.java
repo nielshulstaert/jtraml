@@ -10,6 +10,8 @@ public enum FrequentOBoEnum {
     ACCELERATING_VOLTAGE("accelerating voltage"),
 
     RETENTION_TIME("retention time"),
+    RETENTION_TIME_LOWER("retention time window lower offset"),
+    RETENTION_TIME_UPPER("retention time window upper offset"),
     RETENTION_TIME_WINDOW("retention time window attribute"),
 
     ELECTRON_VOLT("electronvolt"),
