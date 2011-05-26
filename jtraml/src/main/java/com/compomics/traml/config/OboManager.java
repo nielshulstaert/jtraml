@@ -51,38 +51,37 @@ public class OboManager {
      */
     private OboManager() {
         iServiceLocator = new QueryServiceLocator();
-
-
     }
 
     /**
      * Returns a String name from the PSI obo file.
      *
-     * @param aName MS vocabulary term name
-     * @return
+     * @param aTermName MS vocabulary term name
+     * @return HashMap with the name, description and id for the specified term name.
      */
-    public HashMap getMSTerm(String aName) throws ServiceException, RemoteException {
+    public HashMap getMSTerm(String aTermName) throws ServiceException, RemoteException {
 
-        if (iMSTermsMap.containsKey(aName)) {
+        if (iMSTermsMap.containsKey(aTermName)) {
             // Return the cached value.
-            return iMSTermsMap.get(aName);
+            return iMSTermsMap.get(aTermName);
         } else {
-            logger.debug("querying PSI-MS ontology for " + aName);
+            logger.debug("querying PSI-MS ontology for " + aTermName);
 
-            Set lTerms = iServiceLocator.getOntologyQuery().getTermsByExactName(aName, "MS").keySet();
+
+            Set lTerms = iServiceLocator.getOntologyQuery().getTermsByExactName(aTermName, "MS").keySet();
+
             if (lTerms.size() == 0) {
-                throw new JTramlException("cannot find term for name " + aName + "!!");
+                throw new JTramlException("cannot find term for name " + aTermName + "!!");
             } else if (lTerms.size() > 1) {
-                throw new JTramlException("more then one term was returned for name " + aName + "!!");
+                throw new JTramlException("more then one term was returned for name " + aTermName + "!!");
             }
 
             String lID = lTerms.toArray()[0].toString();
-
             HashMap lMetadata = iServiceLocator.getOntologyQuery().getTermMetadata(lID, "MS");
             lMetadata.put("id", lID);
 
-            // Store the value,
-            iMSTermsMap.put(aName, lMetadata);
+            // Store the value in our locally cached TermsMap.
+            iMSTermsMap.put(aTermName, lMetadata);
 
             // And return this value.
             return lMetadata;
@@ -94,7 +93,7 @@ public class OboManager {
      * Returns a String name from the PSI obo file.
      *
      * @param aName UO vocabulary term name
-     * @return
+     * @return HashMap with the name, description and id for the specified term name.
      */
     public HashMap getUOTerm(String aName) throws ServiceException, RemoteException {
         if (iUOTermsMap.containsKey(aName)) {
@@ -104,15 +103,14 @@ public class OboManager {
             logger.debug("querying UO for " + aName);
 
             Set lTerms = iServiceLocator.getOntologyQuery().getTermsByExactName(aName, "UO").keySet();
+
             if (lTerms.size() == 0) {
                 throw new JTramlException("cannot find term for name " + aName + "!!");
             } else if (lTerms.size() > 1) {
                 throw new JTramlException("more then one term was returned for name " + aName + "!!");
             }
 
-
             String lID = lTerms.toArray()[0].toString();
-
             HashMap lMetadata = iServiceLocator.getOntologyQuery().getTermMetadata(lID, "UO");
             lMetadata.put("id", lID);
 
