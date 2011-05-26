@@ -17,7 +17,7 @@ import java.io.OutputStream;
 import java.util.Collection;
 
 @SuppressWarnings("serial")
-public class MyUpload extends Panel implements Field {
+public class UploadField extends Panel implements Field {
 
     private FileReceiver receiver = new FileReceiver();
 
@@ -29,7 +29,7 @@ public class MyUpload extends Panel implements Field {
     public Property iDataSource;
     public AbstractField iAbstractField;
 
-    public MyUpload() {
+    public UploadField() {
         super();
 
         iAbstractField = new AbstractField() {
