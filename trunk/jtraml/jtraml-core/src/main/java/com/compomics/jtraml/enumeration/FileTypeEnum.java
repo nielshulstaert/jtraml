@@ -52,4 +52,5 @@ public enum FileTypeEnum {
     public String toString() {
         return iName.substring(0, iName.indexOf("_")) + " (" + iExtension + ")";
     }
+
 }

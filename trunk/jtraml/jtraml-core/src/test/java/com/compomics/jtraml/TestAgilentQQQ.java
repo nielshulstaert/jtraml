@@ -1,9 +1,8 @@
 package com.compomics.jtraml;
 
-import com.compomics.jtraml.config.CoreConfiguration;
 import com.compomics.jtraml.factory.CVFactory;
 import com.compomics.jtraml.interfaces.FileModel;
-import com.compomics.jtraml.model.AgilentQQQImpl;
+import com.compomics.jtraml.model.AgilentToTraml;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
 import junit.framework.Assert;
@@ -73,8 +72,8 @@ public class TestAgilentQQQ extends TestCase {
             br.readLine();
             br.readLine();
 
-            String sep = CoreConfiguration.getSeparationChar();
-            FileModel lFileModel = new AgilentQQQImpl(iAgilentInputFile);
+            FileModel lFileModel = new AgilentToTraml(iAgilentInputFile);
+            String sep = "" + lFileModel.getSeparator();
 
             logger.debug("reading AgilentQQQ input file\t" + lURL);
 

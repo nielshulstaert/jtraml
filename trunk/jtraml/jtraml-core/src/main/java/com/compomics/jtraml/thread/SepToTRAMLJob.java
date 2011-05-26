@@ -1,9 +1,12 @@
 package com.compomics.jtraml.thread;
 
+import com.compomics.jtraml.enumeration.FileTypeEnum;
+import com.compomics.jtraml.exception.JTramlException;
 import com.compomics.jtraml.factory.CVFactory;
 import com.compomics.jtraml.interfaces.FileModel;
-import com.compomics.jtraml.model.AgilentQQQImpl;
-import com.compomics.jtraml.model.ThermoTSQImpl;
+import com.compomics.jtraml.model.AgilentToTraml;
+import com.compomics.jtraml.model.ConversionJobOptions;
+import com.compomics.jtraml.model.ThermoToTraml;
 import com.google.common.io.Files;
 import org.apache.log4j.Logger;
 import org.hupo.psi.ms.traml.ObjectFactory;
@@ -42,12 +45,38 @@ public class SepToTRAMLJob extends Observable implements Runnable {
     private String iStatus;
 
 
-    public SepToTRAMLJob(FileModel aFileModel, File aInputFile, File aOutputFile) {
-        iFileModel = aFileModel;
-        iInputFile = aInputFile;
-        iOutputFile = aOutputFile;
+    /**
+     * Creates a new job to convert a separated file with transitions into the TraML specification.
+     * @param aConversionJobOptions
+     */
+    public SepToTRAMLJob(ConversionJobOptions aConversionJobOptions) {
+        this(
+                aConversionJobOptions.getInputFile(),
+                aConversionJobOptions.getOutputFile(),
+                aConversionJobOptions.getImportType()
+        );
     }
 
+
+    /**
+     * Creates a new job to convert a separated file with transitions into the TraML specification.
+     * @param aInputFile
+     * @param aOutputFile
+     * @param aImportType
+     */
+    public SepToTRAMLJob(File aInputFile, File aOutputFile, FileTypeEnum aImportType) {
+        iInputFile = aInputFile;
+        iOutputFile = aOutputFile;
+
+
+        if(aImportType == FileTypeEnum.TSV_THERMO_TSQ){
+            iFileModel = new ThermoToTraml(iInputFile);
+        }else if(aImportType == FileTypeEnum.TSV_AGILENT_QQQ){
+            iFileModel = new AgilentToTraml(iInputFile);
+        }else {
+            throw new JTramlException("unsupported import format!!");
+        }
+    }
 
     /**
      * Run the conversion.
@@ -64,12 +93,12 @@ public class SepToTRAMLJob extends Observable implements Runnable {
             String line = "";
 
 
-            if (iFileModel instanceof AgilentQQQImpl) {
+            if (iFileModel instanceof AgilentToTraml) {
                 // skip the first two lines.
                 br.readLine();
                 br.readLine();
 
-            } else if (iFileModel instanceof ThermoTSQImpl) {
+            } else if (iFileModel instanceof ThermoToTraml) {
                 // skip the first line.
                 br.readLine();
             }
