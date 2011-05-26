@@ -14,10 +14,10 @@ import java.util.HashMap;
 /**
  * This factory generates a series of Types.
  */
-public class CustomTypeFactory {
+public class CVFactory {
 
     /**
-     * An ObjectFactory used by the CustomTypeFactory
+     * An ObjectFactory used by the CVFactory
      */
     private static ObjectFactory iObjectFactory = new ObjectFactory();
 

@@ -2,7 +2,7 @@ package com.compomics.jtraml.model.rowmodel;
 
 import com.compomics.jtraml.config.CoreConfiguration;
 import com.compomics.jtraml.exception.JTramlException;
-import com.compomics.jtraml.factory.CustomTypeFactory;
+import com.compomics.jtraml.factory.CVFactory;
 import com.compomics.jtraml.interfaces.FileModel;
 import org.apache.log4j.Logger;
 import org.hupo.psi.ms.traml.*;
@@ -73,10 +73,10 @@ public class ThermoTSQImpl implements FileModel {
         try {
 
             // Make required CvParamTypes from the current line.
-            CvParamType lCV_Q1 = CustomTypeFactory.createCVType_MZ(lQ1);
-            CvParamType lCV_Q3 = CustomTypeFactory.createCVType_MZ(lQ3);
+            CvParamType lCV_Q1 = CVFactory.createCVType_MZ(lQ1);
+            CvParamType lCV_Q3 = CVFactory.createCVType_MZ(lQ3);
 
-            CvParamType lCV_CollisionEnergy = CustomTypeFactory.createCVType_CollisionEnergy(lEnergy);
+            CvParamType lCV_CollisionEnergy = CVFactory.createCVType_CollisionEnergy(lEnergy);
 
             // 1. Make the Precursor Type
             PrecursorType lPrecursorType = iObjectFactory.createPrecursorType();
@@ -151,10 +151,10 @@ public class ThermoTSQImpl implements FileModel {
 
                 RetentionTimeType lRetentionTimeType = iObjectFactory.createRetentionTimeType();
 
-                CvParamType lCVType_retentionTimeStart = CustomTypeFactory.createCVType_RetentionTimeStart(lStartTime);
+                CvParamType lCVType_retentionTimeStart = CVFactory.createCVType_RetentionTimeStart(lStartTime);
                 lRetentionTimeType.getCvParam().add(lCVType_retentionTimeStart);
 
-                CvParamType lCVType_retentionTimeStop = CustomTypeFactory.createCVType_RetentionTimeStart(lStopTime);
+                CvParamType lCVType_retentionTimeStop = CVFactory.createCVType_RetentionTimeStart(lStopTime);
                 lRetentionTimeType.getCvParam().add(lCVType_retentionTimeStop);
 
                 RetentionTimeListType lRetentionTimeList = lCurrentPeptideType.getRetentionTimeList();

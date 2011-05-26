@@ -1,6 +1,6 @@
 package com.compomics.jtraml.thread;
 
-import com.compomics.jtraml.factory.CustomTypeFactory;
+import com.compomics.jtraml.factory.CVFactory;
 import com.compomics.jtraml.interfaces.FileModel;
 import com.compomics.jtraml.model.rowmodel.AgilentQQQImpl;
 import com.compomics.jtraml.model.rowmodel.ThermoTSQImpl;
@@ -85,7 +85,7 @@ public class TSVToTRAMLJob extends Observable implements Runnable {
                 iFileModel.addRowToTraml(lTraMLType, lValues);
             }
 
-            lTraMLType.setCvList(CustomTypeFactory.getCvListType());
+            lTraMLType.setCvList(CVFactory.getCvListType());
             lTraMLType.setSourceFileList(iFileModel.getSourceTypeList());
 
             // Ok, all rows have been added.

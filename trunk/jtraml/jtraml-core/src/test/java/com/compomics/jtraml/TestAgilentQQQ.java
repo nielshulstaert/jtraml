@@ -1,7 +1,7 @@
 package com.compomics.jtraml;
 
 import com.compomics.jtraml.config.CoreConfiguration;
-import com.compomics.jtraml.factory.CustomTypeFactory;
+import com.compomics.jtraml.factory.CVFactory;
 import com.compomics.jtraml.interfaces.FileModel;
 import com.compomics.jtraml.model.rowmodel.AgilentQQQImpl;
 import com.google.common.io.Files;
@@ -84,7 +84,7 @@ public class TestAgilentQQQ extends TestCase {
             }
             logger.debug("finished reading AgilentQQQ input file\t");
 
-            lTraMLType.setCvList(CustomTypeFactory.getCvListType());
+            lTraMLType.setCvList(CVFactory.getCvListType());
             lTraMLType.setSourceFileList(lFileModel.getSourceTypeList());
 
             // Ok, all rows have been added.
