@@ -2,7 +2,7 @@ package com.compomics.jtraml;
 
 import com.compomics.jtraml.factory.CVFactory;
 import com.compomics.jtraml.interfaces.FileModel;
-import com.compomics.jtraml.model.AgilentToTraml;
+import com.compomics.jtraml.model.ThermoToTraml;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
 import junit.framework.Assert;
@@ -30,18 +30,18 @@ import java.util.Collection;
  * This class is a test scenario to generate a TraML file from an AgilentQQQ input file.
  */
 
-public class TestAgilentQQQ extends TestCase {
+public class TestThermoTSQ extends TestCase {
 
-    private static Logger logger = Logger.getLogger(TestAgilentQQQ.class);
+    private static Logger logger = Logger.getLogger(TestThermoTSQ.class);
 
-    private File iAgilentInputFile;
+    private File iThermoTSQInputFile;
 
     /**
      * Create TestAgilentQQQ
      *
      * @param testName name of the test case
      */
-    public TestAgilentQQQ(String testName) {
+    public TestThermoTSQ(String testName) {
         super(testName);
     }
 
@@ -49,39 +49,39 @@ public class TestAgilentQQQ extends TestCase {
      * @return the suite of tests being tested
      */
     public static Test suite() {
-        return new TestSuite(TestAgilentQQQ.class);
+        return new TestSuite(TestThermoTSQ.class);
     }
 
     /**
      * Main test.
      */
-    public void testAgilentToTraml() {
+    public void testThermoToTraml() {
 
         try {
-            URL lURL = Resources.getResource("AgilentQQQ_example.tsv");
-            iAgilentInputFile = new File(lURL.getFile());
+            URL lURL = Resources.getResource("TSQ_example.csv");
+            iThermoTSQInputFile = new File(lURL.getFile());
 
-            BufferedReader br = Files.newReader(iAgilentInputFile, Charset.defaultCharset());
+            BufferedReader br = Files.newReader(iThermoTSQInputFile, Charset.defaultCharset());
 
             ObjectFactory lObjectFactory = new ObjectFactory();
             TraMLType lTraMLType = lObjectFactory.createTraMLType();
 
             String line = "";
 
-            // skip the first two lines.
-            br.readLine();
+            // skip the first line.
             br.readLine();
 
-            FileModel lFileModel = new AgilentToTraml(iAgilentInputFile);
+            FileModel lFileModel = new ThermoToTraml(iThermoTSQInputFile);
             String sep = "" + lFileModel.getSeparator();
 
-            logger.debug("reading AgilentQQQ input file\t" + lURL);
+            logger.debug("reading ThermoTSQ input file\t" + lURL);
 
             while ((line = br.readLine()) != null) {
                 String[] lValues = line.split(sep);
                 lFileModel.addRowToTraml(lTraMLType, lValues);
             }
-            logger.debug("finished reading AgilentQQQ input file\t");
+
+            logger.debug("finished reading ThermoTSQ input file\t");
 
             lTraMLType.setCvList(CVFactory.getCvListType());
             lTraMLType.setSourceFileList(lFileModel.getSourceTypeList());
@@ -90,7 +90,7 @@ public class TestAgilentQQQ extends TestCase {
             TraMLCreator lTraMLCreator = new TraMLCreator();
             lTraMLCreator.setTraML(lTraMLType);
 
-            File lTempOutput = new File(MyTestSuite.getTestResourceURI().getPath(), "test.agilent.traml");
+            File lTempOutput = new File(MyTestSuite.getTestResourceURI().getPath(), "test.thermo.traml");
 
             if (lTempOutput.exists()) {
                 lTempOutput.delete();
@@ -103,7 +103,6 @@ public class TestAgilentQQQ extends TestCase {
             lWriter.flush();
             lWriter.close();
 
-
             // Now re-read the file.
             TraMLParser lTraMLParser = new TraMLParser();
             lTraMLParser.parse_file(lTempOutput.getAbsolutePath(), logger);
@@ -111,19 +110,20 @@ public class TestAgilentQQQ extends TestCase {
             int lSize = lTraMLParser.getTraML().getTransitionList().getTransition().size();
 
             // Now test whether we have actually parsed 'n' transitions.
-            Assert.assertEquals(1354, lSize);
+            Assert.assertEquals(1941, lSize);
 
 
             // Now run the Validator.
-
             logger.debug("Running validator");
             File ontologyFile = new File(Resources.getResource("xml" + File.separator + "ontologies.xml").getFile());
             File mappingRules = new File(Resources.getResource("xml" + File.separator + "TraML-mapping.xml").getFile());
             File objectRules = new File(Resources.getResource("xml" + File.separator + "object_rules.xml").getFile());
 
-            TraMLValidator validator = new TraMLValidator(new FileInputStream(ontologyFile),
+            TraMLValidator validator = new TraMLValidator(
+                    new FileInputStream(ontologyFile),
                     new FileInputStream(mappingRules),
-                    new FileInputStream(objectRules));
+                    new FileInputStream(objectRules)
+            );
 
             TraMLType traml = lTraMLParser.getTraML();
 

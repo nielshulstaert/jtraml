@@ -2,7 +2,7 @@ package com.compomics.jtraml;
 
 import com.compomics.jtraml.factory.CVFactory;
 import com.compomics.jtraml.interfaces.FileModel;
-import com.compomics.jtraml.model.AgilentToTraml;
+import com.compomics.jtraml.model.ABIToTraml;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
 import junit.framework.Assert;
@@ -30,18 +30,18 @@ import java.util.Collection;
  * This class is a test scenario to generate a TraML file from an AgilentQQQ input file.
  */
 
-public class TestAgilentQQQ extends TestCase {
+public class TestABIQTRAP extends TestCase {
 
-    private static Logger logger = Logger.getLogger(TestAgilentQQQ.class);
+    private static Logger logger = Logger.getLogger(TestABIQTRAP.class);
 
-    private File iAgilentInputFile;
+    private File iQtrapInputFile;
 
     /**
      * Create TestAgilentQQQ
      *
      * @param testName name of the test case
      */
-    public TestAgilentQQQ(String testName) {
+    public TestABIQTRAP(String testName) {
         super(testName);
     }
 
@@ -49,7 +49,7 @@ public class TestAgilentQQQ extends TestCase {
      * @return the suite of tests being tested
      */
     public static Test suite() {
-        return new TestSuite(TestAgilentQQQ.class);
+        return new TestSuite(TestABIQTRAP.class);
     }
 
     /**
@@ -58,30 +58,26 @@ public class TestAgilentQQQ extends TestCase {
     public void testAgilentToTraml() {
 
         try {
-            URL lURL = Resources.getResource("AgilentQQQ_example.tsv");
-            iAgilentInputFile = new File(lURL.getFile());
+            URL lURL = Resources.getResource("QTRAP5500_example.csv");
+            iQtrapInputFile = new File(lURL.getFile());
 
-            BufferedReader br = Files.newReader(iAgilentInputFile, Charset.defaultCharset());
+            BufferedReader br = Files.newReader(iQtrapInputFile, Charset.defaultCharset());
 
             ObjectFactory lObjectFactory = new ObjectFactory();
             TraMLType lTraMLType = lObjectFactory.createTraMLType();
 
             String line = "";
 
-            // skip the first two lines.
-            br.readLine();
-            br.readLine();
-
-            FileModel lFileModel = new AgilentToTraml(iAgilentInputFile);
+            FileModel lFileModel = new ABIToTraml(iQtrapInputFile);
             String sep = "" + lFileModel.getSeparator();
 
-            logger.debug("reading AgilentQQQ input file\t" + lURL);
+            logger.debug("reading QTRAP5500 input file\t" + lURL);
 
             while ((line = br.readLine()) != null) {
                 String[] lValues = line.split(sep);
                 lFileModel.addRowToTraml(lTraMLType, lValues);
             }
-            logger.debug("finished reading AgilentQQQ input file\t");
+            logger.debug("finished reading QTRAP5500 input file\t");
 
             lTraMLType.setCvList(CVFactory.getCvListType());
             lTraMLType.setSourceFileList(lFileModel.getSourceTypeList());
@@ -90,7 +86,7 @@ public class TestAgilentQQQ extends TestCase {
             TraMLCreator lTraMLCreator = new TraMLCreator();
             lTraMLCreator.setTraML(lTraMLType);
 
-            File lTempOutput = new File(MyTestSuite.getTestResourceURI().getPath(), "test.agilent.traml");
+            File lTempOutput = new File(MyTestSuite.getTestResourceURI().getPath(), "test.qtrap.traml");
 
             if (lTempOutput.exists()) {
                 lTempOutput.delete();
@@ -111,7 +107,7 @@ public class TestAgilentQQQ extends TestCase {
             int lSize = lTraMLParser.getTraML().getTransitionList().getTransition().size();
 
             // Now test whether we have actually parsed 'n' transitions.
-            Assert.assertEquals(1354, lSize);
+            Assert.assertEquals(192, lSize);
 
 
             // Now run the Validator.

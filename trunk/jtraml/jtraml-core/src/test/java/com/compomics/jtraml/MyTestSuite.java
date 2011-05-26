@@ -21,6 +21,9 @@ public class MyTestSuite extends TestSuite {
         TestSuite lTestSuite = new TestSuite();
 
         lTestSuite.addTest(TestAgilentQQQ.suite());
+        lTestSuite.addTest(TestThermoTSQ.suite());
+        lTestSuite.addTest(TestABIQTRAP.suite());
+        lTestSuite.addTest(TestOboInput.suite());
 
 
         return lTestSuite;
