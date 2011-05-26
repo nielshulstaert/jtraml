@@ -11,7 +11,7 @@ public class CoreConfiguration {
     /**
      * The current version of the library.
      */
-    public final static String VERSION = "0.1";
+    public final static String VERSION = "0.2";
 
     /**
      * Properties instance to manage the properties of the library.
