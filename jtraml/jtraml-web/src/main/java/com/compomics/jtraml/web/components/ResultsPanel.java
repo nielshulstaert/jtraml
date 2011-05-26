@@ -1,4 +1,4 @@
-package com.compomics.jtraml.web.panel;
+package com.compomics.jtraml.web.components;
 
 import com.compomics.jtraml.model.ConversionJobOptions;
 import com.compomics.jtraml.web.TramlConverterApplication;
