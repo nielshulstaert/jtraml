@@ -11,7 +11,7 @@
     <url>code.google.com/p/jtraml/</url>
 
     <parent>
-        <groupId>com.compomics</groupId>
+        <groupId>com.compomics.jtraml</groupId>
         <artifactId>jtraml</artifactId>
         <version>0.2</version>
     </parent>

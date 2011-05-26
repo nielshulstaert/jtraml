@@ -6,7 +6,7 @@ import com.compomics.jtraml.model.ConversionJobOptions;
 import com.compomics.jtraml.thread.SepToTRAMLJob;
 import com.compomics.jtraml.validation.ConversionJobOptionValidator;
 import com.compomics.jtraml.web.TramlConverterApplication;
-import com.compomics.jtraml.web.panel.MyUpload;
+import com.compomics.jtraml.web.panel.UploadField;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.*;
@@ -183,7 +183,7 @@ public class TramlConversionForm extends VerticalLayout implements Observer {
             } else if ("importType".equals(propertyId)) {
                 return importTypes;
             } else if ("inputFile".equals(propertyId)) {
-                return new MyUpload();
+                return new UploadField();
             } else {
 //                Do nothing.
                 f = super.createField(item, propertyId, uiContext);
