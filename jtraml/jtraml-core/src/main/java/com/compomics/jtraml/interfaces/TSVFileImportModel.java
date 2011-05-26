@@ -6,7 +6,7 @@ import org.hupo.psi.ms.traml.TraMLType;
 /**
  * This class is a generic model for a number of Transition specifying columns.
  */
-public interface FileModel {
+public interface TSVFileImportModel {
 
     /**
      * Implementing classes must be capable of writing an array of rowvalues into a TramlType instance.

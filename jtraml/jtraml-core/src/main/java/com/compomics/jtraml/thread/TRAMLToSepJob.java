@@ -20,10 +20,10 @@ import java.nio.charset.Charset;
 import java.util.Observable;
 
 /**
- * This class converts a TSV file to a TRAML file in a single thread.
+ * This class converts a a TRAML file into a TSV/CSV file in a single thread.
  */
-public class SepToTRAMLJob extends Observable implements Runnable {
-    private static Logger logger = Logger.getLogger(SepToTRAMLJob.class);
+public class TRAMLToSepJob extends Observable implements Runnable {
+    private static Logger logger = Logger.getLogger(TRAMLToSepJob.class);
 
     /**
      * The TSV TSVFileImportModel of the input file.
@@ -50,7 +50,7 @@ public class SepToTRAMLJob extends Observable implements Runnable {
      * Creates a new job to convert a separated file with transitions into the TraML specification.
      * @param aConversionJobOptions
      */
-    public SepToTRAMLJob(ConversionJobOptions aConversionJobOptions) {
+    public TRAMLToSepJob(ConversionJobOptions aConversionJobOptions) {
         this(
                 aConversionJobOptions.getInputFile(),
                 aConversionJobOptions.getOutputFile(),
@@ -65,7 +65,7 @@ public class SepToTRAMLJob extends Observable implements Runnable {
      * @param aOutputFile
      * @param aImportType
      */
-    public SepToTRAMLJob(File aInputFile, File aOutputFile, FileTypeEnum aImportType) {
+    public TRAMLToSepJob(File aInputFile, File aOutputFile, FileTypeEnum aImportType) {
         iInputFile = aInputFile;
         iOutputFile = aOutputFile;
 
