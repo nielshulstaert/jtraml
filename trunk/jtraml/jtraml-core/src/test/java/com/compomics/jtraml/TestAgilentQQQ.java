@@ -3,7 +3,7 @@ package com.compomics.jtraml;
 import com.compomics.jtraml.config.CoreConfiguration;
 import com.compomics.jtraml.factory.CVFactory;
 import com.compomics.jtraml.interfaces.FileModel;
-import com.compomics.jtraml.model.rowmodel.AgilentQQQImpl;
+import com.compomics.jtraml.model.AgilentQQQImpl;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
 import junit.framework.Assert;

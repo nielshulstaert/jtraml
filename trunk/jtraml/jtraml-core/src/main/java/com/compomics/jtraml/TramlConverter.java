@@ -2,8 +2,8 @@ package com.compomics.jtraml;
 
 import com.compomics.jtraml.enumeration.FileTypeEnum;
 import com.compomics.jtraml.interfaces.FileModel;
-import com.compomics.jtraml.model.rowmodel.AgilentQQQImpl;
-import com.compomics.jtraml.model.rowmodel.ThermoTSQImpl;
+import com.compomics.jtraml.model.AgilentQQQImpl;
+import com.compomics.jtraml.model.ThermoTSQImpl;
 import com.compomics.jtraml.thread.TSVToTRAMLJob;
 import org.apache.commons.cli.*;
 import org.apache.log4j.Logger;
