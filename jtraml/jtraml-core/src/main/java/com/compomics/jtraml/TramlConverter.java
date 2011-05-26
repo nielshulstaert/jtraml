@@ -4,7 +4,7 @@ import com.compomics.jtraml.enumeration.FileTypeEnum;
 import com.compomics.jtraml.interfaces.FileModel;
 import com.compomics.jtraml.model.AgilentQQQImpl;
 import com.compomics.jtraml.model.ThermoTSQImpl;
-import com.compomics.jtraml.thread.TSVToTRAMLJob;
+import com.compomics.jtraml.thread.SepToTRAMLJob;
 import org.apache.commons.cli.*;
 import org.apache.log4j.Logger;
 import sun.misc.ConditionLock;
@@ -60,8 +60,8 @@ public class TramlConverter {
                         lFileModel = new AgilentQQQImpl(lInputFile);
                     }
 
-                    TSVToTRAMLJob job = new TSVToTRAMLJob(lFileModel, lInputFile, lOutputFile);
-                    Future lSubmit = Executors.newSingleThreadExecutor().submit(job);
+                    SepToTRAMLJob lJob = new SepToTRAMLJob(lFileModel, lInputFile, lOutputFile);
+                    Future lSubmit = Executors.newSingleThreadExecutor().submit(lJob);
 
                     ConditionLock lConditionLock = new ConditionLock();
                     synchronized (lConditionLock) {
