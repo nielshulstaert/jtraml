@@ -5,7 +5,7 @@
     <groupId>com.compomics.jtraml</groupId>
     <artifactId>jtraml</artifactId>
     <packaging>pom</packaging>
-    <version>0.1</version>
+    <version>0.2</version>
     <name>jtraml</name>
     <url>code.google.com/p/jtraml/</url>
 
