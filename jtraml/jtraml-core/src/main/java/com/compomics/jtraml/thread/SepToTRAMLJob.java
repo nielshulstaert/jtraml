@@ -4,6 +4,7 @@ import com.compomics.jtraml.enumeration.FileTypeEnum;
 import com.compomics.jtraml.exception.JTramlException;
 import com.compomics.jtraml.factory.CVFactory;
 import com.compomics.jtraml.interfaces.FileModel;
+import com.compomics.jtraml.model.ABIToTraml;
 import com.compomics.jtraml.model.AgilentToTraml;
 import com.compomics.jtraml.model.ConversionJobOptions;
 import com.compomics.jtraml.model.ThermoToTraml;
@@ -73,6 +74,8 @@ public class SepToTRAMLJob extends Observable implements Runnable {
             iFileModel = new ThermoToTraml(iInputFile);
         }else if(aImportType == FileTypeEnum.TSV_AGILENT_QQQ){
             iFileModel = new AgilentToTraml(iInputFile);
+        }else if(aImportType == FileTypeEnum.TSV_ABI){
+            iFileModel = new ABIToTraml(iInputFile);
         }else {
             throw new JTramlException("unsupported import format!!");
         }
@@ -91,7 +94,6 @@ public class SepToTRAMLJob extends Observable implements Runnable {
             TraMLType lTraMLType = lObjectFactory.createTraMLType();
 
             String line = "";
-
 
             if (iFileModel instanceof AgilentToTraml) {
                 // skip the first two lines.

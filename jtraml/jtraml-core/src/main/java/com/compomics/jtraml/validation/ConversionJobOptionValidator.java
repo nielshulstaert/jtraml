@@ -39,11 +39,6 @@ public class ConversionJobOptionValidator {
             return false;
         }
 
-        if (lImportType == FileTypeEnum.TSV_ABI) {
-            iStatus = "the converter does not support tsv_abi import conversions";
-            return false;
-        }
-
         if (lExportType != FileTypeEnum.TRAML) {
             iStatus = "the converter only supports traml export conversions";
             return false;
