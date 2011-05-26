@@ -17,9 +17,9 @@ package com.compomics.jtraml.web;
 
 
 import com.compomics.jtraml.model.ConversionJobOptions;
-import com.compomics.jtraml.web.form.TramlConversionForm;
-import com.compomics.jtraml.web.panel.HeaderPanel;
-import com.compomics.jtraml.web.panel.ResultsPanel;
+import com.compomics.jtraml.web.components.ResultsPanel;
+import com.compomics.jtraml.web.components.TramlConversionForm;
+import com.compomics.jtraml.web.components.HeaderPanel;
 import com.google.common.io.Files;
 import com.vaadin.Application;
 import com.vaadin.ui.Label;

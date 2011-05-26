@@ -1,4 +1,4 @@
-package com.compomics.jtraml.web.form;
+package com.compomics.jtraml.web.components;
 
 
 import com.compomics.jtraml.enumeration.FileTypeEnum;
@@ -6,7 +6,6 @@ import com.compomics.jtraml.model.ConversionJobOptions;
 import com.compomics.jtraml.thread.SepToTRAMLJob;
 import com.compomics.jtraml.validation.ConversionJobOptionValidator;
 import com.compomics.jtraml.web.TramlConverterApplication;
-import com.compomics.jtraml.web.panel.UploadField;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.*;
