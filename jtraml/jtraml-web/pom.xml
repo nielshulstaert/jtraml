@@ -193,7 +193,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.compomics</groupId>
+            <groupId>com.compomics.jtraml</groupId>
             <artifactId>jtraml-core</artifactId>
             <version>0.1</version>
         </dependency>

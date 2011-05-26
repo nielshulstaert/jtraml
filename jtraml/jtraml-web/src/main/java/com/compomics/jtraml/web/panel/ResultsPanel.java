@@ -1,7 +1,7 @@
 package com.compomics.jtraml.web.panel;
 
+import com.compomics.jtraml.model.ConversionJobOptions;
 import com.compomics.jtraml.web.TramlConverterApplication;
-import com.compomics.jtraml.web.data.ConversionItem;
 import com.google.common.io.Files;
 import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.terminal.StreamResource;
@@ -63,18 +63,18 @@ public class ResultsPanel extends VerticalLayout {
 
     }
 
-    public void addItem(ConversionItem aItem) {
+    public void addItem(ConversionJobOptions aConversionJobOptions) {
         iItemCounter++;
         Object id = iConversionTable.addItem();
 
         // String values.
-        iConversionTable.getContainerProperty(id, "Filename").setValue(aItem.getInputFile().getName());
-        iConversionTable.getContainerProperty(id, "Input").setValue(aItem.getImportType().getName());
-        iConversionTable.getContainerProperty(id, "Output").setValue(aItem.getExportType().getName());
+        iConversionTable.getContainerProperty(id, "Filename").setValue(aConversionJobOptions.getInputFile().getName());
+        iConversionTable.getContainerProperty(id, "Input").setValue(aConversionJobOptions.getImportType().getName());
+        iConversionTable.getContainerProperty(id, "Output").setValue(aConversionJobOptions.getExportType().getName());
         iConversionTable.getContainerProperty(id, "Date").setValue(new Date(System.currentTimeMillis()).toString());
 
         // Download link.
-        File lOutputFile = aItem.getOutputFile();
+        File lOutputFile = aConversionJobOptions.getOutputFile();
         try {
             final InputStream is = Files.newInputStreamSupplier(lOutputFile).getInput();
 

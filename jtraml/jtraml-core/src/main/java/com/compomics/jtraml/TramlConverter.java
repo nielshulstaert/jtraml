@@ -1,10 +1,10 @@
 package com.compomics.jtraml;
 
 import com.compomics.jtraml.enumeration.FileTypeEnum;
-import com.compomics.jtraml.interfaces.FileModel;
-import com.compomics.jtraml.model.AgilentQQQImpl;
-import com.compomics.jtraml.model.ThermoTSQImpl;
+import com.compomics.jtraml.exception.JTramlException;
+import com.compomics.jtraml.model.ConversionJobOptions;
 import com.compomics.jtraml.thread.SepToTRAMLJob;
+import com.compomics.jtraml.validation.ConversionJobOptionValidator;
 import org.apache.commons.cli.*;
 import org.apache.log4j.Logger;
 import sun.misc.ConditionLock;
@@ -38,47 +38,60 @@ public class TramlConverter {
 
                 File lInputFile = new File(line.getOptionValue("input"));
                 File lOutputFile = new File(line.getOptionValue("output"));
-                String lInputtype = line.getOptionValue("inputtype");
+                String lInputTypeName = line.getOptionValue("inputtype");
+                FileTypeEnum lInputType = getFileTypeEnum(lInputTypeName);
 
-                if (lInputtype.equals(FileTypeEnum.TRAML.getName())) {
-                    // TraML -> TSV
-                    logger.info("traml is not yet implemented.");
-                    System.exit(1);
-                } else {
-                    // TSV -> TraML
-                    FileModel lFileModel = null;
-                    if (lInputtype.equals(FileTypeEnum.TSV_ABI.getName())) {
-                        logger.info("ABI TSV input is not yet implemented.");
-                        System.exit(1);
+                ConversionJobOptions lConversionJobOptions = new ConversionJobOptions();
+                lConversionJobOptions.setOutputFile(lOutputFile);
+                lConversionJobOptions.setInputFile(lInputFile);
+                lConversionJobOptions.setExportType(FileTypeEnum.TRAML);
+                lConversionJobOptions.setImportType(lInputType);
 
-                    } else if (lInputtype.equals(FileTypeEnum.TSV_THERMO_TSQ.getName())) {
-                        logger.info("starting conversion from Thermo TSQ to TraML");
-                        lFileModel = new ThermoTSQImpl(lInputFile);
+                boolean valid = ConversionJobOptionValidator.isValid(lConversionJobOptions);
+                String lStatus = ConversionJobOptionValidator.getStatus();
+                if (valid) {
 
-                    } else if (lInputtype.equals(FileTypeEnum.TSV_AGILENT_QQQ.getName())) {
-                        logger.info("starting conversion from Agilent QQQ to TraML");
-                        lFileModel = new AgilentQQQImpl(lInputFile);
-                    }
-
-                    SepToTRAMLJob lJob = new SepToTRAMLJob(lFileModel, lInputFile, lOutputFile);
-                    Future lSubmit = Executors.newSingleThreadExecutor().submit(lJob);
+                    SepToTRAMLJob job = new SepToTRAMLJob(lConversionJobOptions);
+                    Future lSubmit = Executors.newSingleThreadExecutor().submit(job);
 
                     ConditionLock lConditionLock = new ConditionLock();
                     synchronized (lConditionLock) {
                         while (lSubmit.isDone() != true) {
                             try {
                                 lConditionLock.wait(1000);
+                                logger.debug(job.getStatus());
                             } catch (InterruptedException e) {
                                 logger.error(e.getMessage(), e);
                             }
                         }
                     }
                     logger.debug("finished writing \t" + lOutputFile.getName());
+                } else {
+                    logger.error(lStatus, new JTramlException(lStatus));
                 }
+
             }
-        } catch (ParseException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (ParseException e){
+            logger.error(e.getMessage(), e);
         }
+    }
+
+    /**
+     * This method attempts to decode reqruied FileType for a String by its name.
+     *
+     * @param aInputtype
+     */
+    private static FileTypeEnum getFileTypeEnum(String aInputtype) {
+        FileTypeEnum lFileTypeEnum = null;
+
+        FileTypeEnum[] lValues = FileTypeEnum.values();
+        for (FileTypeEnum lValue : lValues) {
+            if (aInputtype.equals(lValue.getName())) {
+                lFileTypeEnum = lValue;
+            }
+        }
+
+        return lFileTypeEnum;
     }
 
     /**

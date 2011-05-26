@@ -16,7 +16,7 @@
 package com.compomics.jtraml.web;
 
 
-import com.compomics.jtraml.web.data.ConversionItem;
+import com.compomics.jtraml.model.ConversionJobOptions;
 import com.compomics.jtraml.web.form.TramlConversionForm;
 import com.compomics.jtraml.web.panel.HeaderPanel;
 import com.compomics.jtraml.web.panel.ResultsPanel;
@@ -83,8 +83,8 @@ public class TramlConverterApplication extends Application
         return iApplication;
     }
 
-    public void addResult(ConversionItem aConversionItem){
-        iOutputTable.addItem(aConversionItem);
+    public void addResult(ConversionJobOptions aConversionJobOptions){
+        iOutputTable.addItem(aConversionJobOptions);
         if(iOutputTable.getNumberOfResults() > 0){
             iOutputTable.setVisible(true);
             iOutputTable.requestRepaintAll();

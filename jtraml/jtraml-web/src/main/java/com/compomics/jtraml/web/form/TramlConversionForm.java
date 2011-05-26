@@ -1,12 +1,11 @@
 package com.compomics.jtraml.web.form;
 
+
 import com.compomics.jtraml.enumeration.FileTypeEnum;
-import com.compomics.jtraml.interfaces.FileModel;
-import com.compomics.jtraml.model.rowmodel.AgilentQQQImpl;
-import com.compomics.jtraml.model.rowmodel.ThermoTSQImpl;
-import com.compomics.jtraml.thread.TSVToTRAMLJob;
+import com.compomics.jtraml.model.ConversionJobOptions;
+import com.compomics.jtraml.thread.SepToTRAMLJob;
+import com.compomics.jtraml.validation.ConversionJobOptionValidator;
 import com.compomics.jtraml.web.TramlConverterApplication;
-import com.compomics.jtraml.web.data.ConversionItem;
 import com.compomics.jtraml.web.panel.MyUpload;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
@@ -24,12 +23,11 @@ import java.util.concurrent.Executors;
  */
 public class TramlConversionForm extends VerticalLayout implements Observer {
 
-    ConversionItem lConversion;
+    ConversionJobOptions iConversionJobOptions;
 
     private static final String COMMON_FIELD_WIDTH = "12em";
     public ProgressIndicator iProgressIndicator;
     public Button btnConvert;
-    public File iRunningOutputFile;
     public Form iConversionForm;
 
     public TramlConversionForm() {
@@ -38,8 +36,8 @@ public class TramlConversionForm extends VerticalLayout implements Observer {
         iProgressIndicator.setPollingInterval(1000);
         iProgressIndicator.setEnabled(false);
 
-        lConversion = new ConversionItem(); // a person POJO
-        BeanItem<ConversionItem> lConversionItem = new BeanItem<ConversionItem>(lConversion); // item from
+        iConversionJobOptions = new ConversionJobOptions(); // a person POJO
+        BeanItem<ConversionJobOptions> lConversionItem = new BeanItem<ConversionJobOptions>(iConversionJobOptions); // item from
         // POJO
 
         // Create the Form
@@ -91,55 +89,51 @@ public class TramlConversionForm extends VerticalLayout implements Observer {
             iProgressIndicator.setImmediate(true);
             iProgressIndicator.setVisible(true);
 
-            FileTypeEnum lInputtype = lConversion.getImportType();
-            FileModel lFileModel = null;
-            File lInputFile = lConversion.getInputFile();
+            boolean lValidOptions = ConversionJobOptionValidator.isValid(iConversionJobOptions);
 
-            if (lInputtype.equals(FileTypeEnum.TSV_ABI)) {
-                getWindow().showNotification("ABI TSV input is not yet implemented", Window.Notification.TYPE_WARNING_MESSAGE);
-                System.exit(1);
+            if (lValidOptions) {
+                // create a new outputf file for the upcomming Thread.
+                File lOutputFile = makeOutputFile();
+                iConversionJobOptions.setOutputFile(lOutputFile);
 
-            } else if (lInputtype.equals(FileTypeEnum.TSV_THERMO_TSQ)) {
-                getWindow().showNotification("starting conversion from Thermo TSQ to TraML", Window.Notification.TYPE_HUMANIZED_MESSAGE);
-                lFileModel = new ThermoTSQImpl(lInputFile);
+                // create the job, listen for the finish, and start the job!
+                SepToTRAMLJob job = new SepToTRAMLJob(iConversionJobOptions);
+                job.addObserver(this);
+                Executors.newSingleThreadExecutor().submit(job);
 
-            } else if (lInputtype.equals(FileTypeEnum.TSV_AGILENT_QQQ)) {
-                getWindow().showNotification("starting conversion from Agilent QQQ to TraML", Window.Notification.TYPE_HUMANIZED_MESSAGE);
-                lFileModel = new AgilentQQQImpl(lInputFile);
+            } else {
+                // else, the validation went wrong - notify the user about what went wrong..
+                getWindow().showNotification(ConversionJobOptionValidator.getStatus(), Window.Notification.TYPE_WARNING_MESSAGE);
             }
-
-            makeOutputFile();
-
-            TSVToTRAMLJob job = new TSVToTRAMLJob(lFileModel, lInputFile, iRunningOutputFile);
-            job.addObserver(this);
-
-            Executors.newSingleThreadExecutor().submit(job);
 
             iProgressIndicator.setEnabled(true);
             iProgressIndicator.setVisible(true);
             btnConvert.setEnabled(false);
         }
-
-
-//        getWindow().showNotification("finished conversion", Window.Notification.TYPE_TRAY_NOTIFICATION);
-
     }
 
-    private void makeOutputFile() throws IOException {
-        File lInputFile = lConversion.getInputFile();
-        String lInputFileName = lInputFile.getName();
+    private File makeOutputFile() throws IOException {
+        File lInputFile = iConversionJobOptions.getInputFile();
+        File lOutputFile = null;
+
+        // parse the inputfilename.
+        String lInputFileName;
+        lInputFileName = lInputFile.getName();
         lInputFileName = lInputFileName.substring(0, lInputFileName.lastIndexOf("."));
 
-        String lOutputFileName = lInputFileName + "_converted" + lConversion.getExportType().getExtension();
+        // create the outputfilename
+        String lOutputFileName;
+        lOutputFileName = lInputFileName + "_converted" + iConversionJobOptions.getExportType().getExtension();
 
-        iRunningOutputFile = new File(lInputFile.getParentFile(), lOutputFileName);
-        iRunningOutputFile.createNewFile();
+        // create the outputfile.
+        lOutputFile = new File(lInputFile.getParentFile(), lOutputFileName);
+        lOutputFile.createNewFile();
 
+        return lOutputFile;
     }
 
     public void update(Observable aObservable, Object o) {
-        lConversion.setOutputFile(iRunningOutputFile);
-        TramlConverterApplication.getApplication().addResult(lConversion);
+        TramlConverterApplication.getApplication().addResult(iConversionJobOptions);
 
         iProgressIndicator.setEnabled(false);
         iProgressIndicator.setVisible(false);

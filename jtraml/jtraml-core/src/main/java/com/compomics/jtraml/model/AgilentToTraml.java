@@ -13,30 +13,46 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 /**
- * This class is an FileModel implementation for the Thermo TSQ instrument.
+ * This class is an FileModel implementation for the Agilent QQQ instrument.
  * e.g.
  * ""
- * Q1,Q3,CE,Start time (min),Stop time (min),Polarity,Trigger,Reaction category,Name
- * 651.8366,790.4038,25.5,18.61,28.61,1,1.00E+04,0,AAELQTGLETNR.2y7-1
- *
+ * Dynamic MRM
+ * Compound Name	ISTD?	Precursor Ion	MS1 Res	Product Ion	MS2 Res	Fragmentor	Collision Energy	Cell Accelerator Voltage	Ret Time (min)	Delta Ret Time	Polarity
+ * CSASVLPVDVQTLNSSGPPFGK.2y16-1	FALSE	1130.5681	Wide	1642.8233	Unit	125	39.8	5	42.35	5.00	Positive
  */
-public class ThermoTSQImpl implements FileModel {
+public class AgilentToTraml implements FileModel {
 
-    private static Logger logger = Logger.getLogger(ThermoTSQImpl.class);
+    private static Logger logger = Logger.getLogger(AgilentToTraml.class);
 
+    /**
+     * Jaxb generated Factory for the traml xsd.
+     */
     private ObjectFactory iObjectFactory;
+
+    /**
+     * The specified file for the model.
+     */
     private File iFile;
 
     /**
-     * Construct a new FileModel implementation for Thermo TSQ inputformat.
+     * Construct a new FileModel instance for an Agilent tsv file.
+     * <p/>
+     * Dynamic MRM
+     * Compound Name	ISTD?	Precursor Ion	MS1 Res	Product Ion	MS2 Res	Fragmentor	Collision Energy	Cell Accelerator Voltage	Ret Time (min)	Delta Ret Time	Polarity
+     * CSASVLPVDVQTLNSSGPPFGK.2y16-1	FALSE	1130.5681	Wide	1642.8233	Unit	125	39.8	5	42.35	5.00	Positive
      */
-    public ThermoTSQImpl(File aFile) {
+
+    public AgilentToTraml(File aFile) {
         iFile = aFile;
         iObjectFactory = new ObjectFactory();
     }
 
     /**
      * Implementing classes must be capable of writing an array of rowvalues into a TramlType instance.
+     * <p/>
+     * Dynamic MRM
+     * Compound Name	ISTD?	Precursor Ion	MS1 Res	Product Ion	MS2 Res	Fragmentor	Collision Energy	Cell Accelerator Voltage	Ret Time (min)	Delta Ret Time	Polarity
+     * CSASVLPVDVQTLNSSGPPFGK.2y16-1	FALSE	1130.5681	Wide	1642.8233	Unit	125	39.8	5	42.35	5.00	Positive
      *
      * @param aTraMLType The TraMLType instance to store the rows into.
      * @param aRowValues The separates values from a single row.
@@ -44,38 +60,41 @@ public class ThermoTSQImpl implements FileModel {
     public void addRowToTraml(TraMLType aTraMLType, String[] aRowValues) {
 
         // validate number of line values.
-        if (aRowValues.length != 9) {
-            throw new JTramlException("Unexpected numer of columns for the Thermo TSQ FileModel!!");
+        if (aRowValues.length != 12) {
+            throw new JTramlException("Unexpected number of columns for the Agilent FileModel!!");
         }
 
         if (aTraMLType.getTransitionList() == null) {
             aTraMLType.setTransitionList(iObjectFactory.createTransitionListType());
         }
 
-        String lQ1 = aRowValues[0];//OK
-        String lQ3 = aRowValues[1];//OK
+        String lID = aRowValues[0];// OK
+        String lISTD = aRowValues[1];
+        String lQ1 = aRowValues[2];//OK
 
-        String lEnergy = aRowValues[2];//OK
+        String lRes1 = aRowValues[3];
+        String lQ3 = aRowValues[4];//OK
+        String lRes3 = aRowValues[5];
 
-        String lStartTime = aRowValues[3];//OK
-        String lStopTime = aRowValues[4];//OK
+        String lFragmentor = aRowValues[6];
+        String lEnergy = aRowValues[7];//OK
+        String lAccVoltage = aRowValues[8];//OK
 
-        String lPolarity = aRowValues[5];
-        String lTrigger = aRowValues[6];
+        String lRt = aRowValues[9];//OK
+        String lRtdelta = aRowValues[10];//OK
+        String lPolarity = aRowValues[11];
 
-        String lReactionCategory = aRowValues[7];
-
-        String lID = aRowValues[8];// OK
-
-
+        //CompoundListType lCompoundList = aTraMLType.getCompoundList();
         // <cvParam cvRef="MS" accession="MS:1000827" name="isolation window target m/z" value="862.9467"
         // unitCvRef="MS" unitAccession="MS:1000040" unitName="m/z"/>
+
         try {
 
             // Make required CvParamTypes from the current line.
             CvParamType lCV_Q1 = CVFactory.createCVType_MZ(lQ1);
             CvParamType lCV_Q3 = CVFactory.createCVType_MZ(lQ3);
 
+            CvParamType lCV_AcceleratingVoltage = CVFactory.createCVType_AcceleratingVoltage(lAccVoltage);
             CvParamType lCV_CollisionEnergy = CVFactory.createCVType_CollisionEnergy(lEnergy);
 
             // 1. Make the Precursor Type
@@ -89,6 +108,7 @@ public class ThermoTSQImpl implements FileModel {
             // 3. Define the configuration
             ConfigurationType lConfigurationType = iObjectFactory.createConfigurationType();
             lConfigurationType.getCvParam().add(lCV_CollisionEnergy);
+            lConfigurationType.getCvParam().add(lCV_AcceleratingVoltage);
 
             // add this configuration to the configuration list.
             ConfigurationListType lConfigurationListType = iObjectFactory.createConfigurationListType();
@@ -102,7 +122,6 @@ public class ThermoTSQImpl implements FileModel {
             // Get peptide.
             // CSASVLPVDVQTLNSSGPPFGK
             String lPeptide = lSplit[0];
-
 
             // 2
             String lPrecursorChargeValue = "" + lSplit[1].charAt(0);
@@ -125,7 +144,7 @@ public class ThermoTSQImpl implements FileModel {
 
             CompoundListType lCompoundList = aTraMLType.getCompoundList();
 
-            if(lCompoundList == null){
+            if (lCompoundList == null) {
                 // Create the object upon first encounter.
                 lCompoundList = iObjectFactory.createCompoundListType();
                 aTraMLType.setCompoundList(lCompoundList);
@@ -133,14 +152,14 @@ public class ThermoTSQImpl implements FileModel {
 
             List<PeptideType> lPeptideTypeList = lCompoundList.getPeptide();
             for (PeptideType lRunningPeptideType : lPeptideTypeList) {
-                if(lRunningPeptideType.getId().equals(lPeptideID)){
+                if (lRunningPeptideType.getId().equals(lPeptideID)) {
                     // Ok! We need this PeptideType!
                     lCurrentPeptideType = lRunningPeptideType;
                     break;
                 }
             }
 
-            if(lCurrentPeptideType == null){
+            if (lCurrentPeptideType == null) {
                 // If null, then current PeptideId has not been seen in the previous loop.
                 // so create one!
                 lCurrentPeptideType = iObjectFactory.createPeptideType();
@@ -150,15 +169,14 @@ public class ThermoTSQImpl implements FileModel {
                 aTraMLType.getCompoundList().getPeptide().add(lCurrentPeptideType);
 
                 RetentionTimeType lRetentionTimeType = iObjectFactory.createRetentionTimeType();
+                CvParamType lCVType_retentionTime = CVFactory.createCVType_RetentionTime(lRt);
+                lRetentionTimeType.getCvParam().add(lCVType_retentionTime);
 
-                CvParamType lCVType_retentionTimeStart = CVFactory.createCVType_RetentionTimeStart(lStartTime);
-                lRetentionTimeType.getCvParam().add(lCVType_retentionTimeStart);
-
-                CvParamType lCVType_retentionTimeStop = CVFactory.createCVType_RetentionTimeStart(lStopTime);
-                lRetentionTimeType.getCvParam().add(lCVType_retentionTimeStop);
+                CvParamType lRetentionTimeWindow = CVFactory.createCVType_RetentionTimeWindow(lRtdelta);
+                lRetentionTimeType.getCvParam().add(lRetentionTimeWindow);
 
                 RetentionTimeListType lRetentionTimeList = lCurrentPeptideType.getRetentionTimeList();
-                if(lRetentionTimeList == null){
+                if (lRetentionTimeList == null) {
                     lRetentionTimeList = iObjectFactory.createRetentionTimeListType();
                     lCurrentPeptideType.setRetentionTimeList(lRetentionTimeList);
                 }
@@ -201,7 +219,7 @@ public class ThermoTSQImpl implements FileModel {
         SourceFileListType lSourceFileListType = iObjectFactory.createSourceFileListType();
         SourceFileType lSourceFileType = iObjectFactory.createSourceFileType();
 
-        lSourceFileType.setId("ThermoTSQ_to_traml_converter_v" + CoreConfiguration.VERSION);
+        lSourceFileType.setId("AgilentQQQ_to_traml_converter_v" + CoreConfiguration.VERSION);
         lSourceFileType.setLocation(iFile.getParent());
         lSourceFileType.setName(iFile.getName());
 
@@ -214,6 +232,6 @@ public class ThermoTSQImpl implements FileModel {
      * {@inheritDoc}
      */
     public char getSeparator() {
-        return ',';
+        return '\t';
     }
 }
