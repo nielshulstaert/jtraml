@@ -2,8 +2,8 @@ package com.compomics.jtraml.thread;
 
 import com.compomics.jtraml.factory.CVFactory;
 import com.compomics.jtraml.interfaces.FileModel;
-import com.compomics.jtraml.model.rowmodel.AgilentQQQImpl;
-import com.compomics.jtraml.model.rowmodel.ThermoTSQImpl;
+import com.compomics.jtraml.model.AgilentQQQImpl;
+import com.compomics.jtraml.model.ThermoTSQImpl;
 import com.google.common.io.Files;
 import org.apache.log4j.Logger;
 import org.hupo.psi.ms.traml.ObjectFactory;
