@@ -5,7 +5,7 @@ package com.compomics.jtraml.enumeration;
  */
 public enum FileTypeEnum {
     TRAML("psi_traml", ".traml"),
-    TSV_THERMO_TSQ("thermo_tsv", ".tsv"),
+    TSV_THERMO_TSQ("thermo_tsv", ".csv"),
     TSV_AGILENT_QQQ("agilent_tsv", ".tsv"),
     TSV_ABI("abi_tsv", ".tsv");
 

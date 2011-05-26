@@ -24,12 +24,24 @@ public class AgilentQQQImpl implements FileModel {
 
     private static Logger logger = Logger.getLogger(AgilentQQQImpl.class);
 
+    /**
+     * Jaxb generated Factory for the traml xsd.
+     */
     private ObjectFactory iObjectFactory;
+
+    /**
+     * The specified file for the model.
+     */
     private File iFile;
 
     /**
-     * Construct a new FileModel implementation for Agilent inputformat.
+     * Construct a new FileModel instance for an Agilent tsv file.
+     * <p/>
+     * Dynamic MRM
+     * Compound Name	ISTD?	Precursor Ion	MS1 Res	Product Ion	MS2 Res	Fragmentor	Collision Energy	Cell Accelerator Voltage	Ret Time (min)	Delta Ret Time	Polarity
+     * CSASVLPVDVQTLNSSGPPFGK.2y16-1	FALSE	1130.5681	Wide	1642.8233	Unit	125	39.8	5	42.35	5.00	Positive
      */
+
     public AgilentQQQImpl(File aFile) {
         iFile = aFile;
         iObjectFactory = new ObjectFactory();
@@ -37,6 +49,10 @@ public class AgilentQQQImpl implements FileModel {
 
     /**
      * Implementing classes must be capable of writing an array of rowvalues into a TramlType instance.
+     * <p/>
+     * Dynamic MRM
+     * Compound Name	ISTD?	Precursor Ion	MS1 Res	Product Ion	MS2 Res	Fragmentor	Collision Energy	Cell Accelerator Voltage	Ret Time (min)	Delta Ret Time	Polarity
+     * CSASVLPVDVQTLNSSGPPFGK.2y16-1	FALSE	1130.5681	Wide	1642.8233	Unit	125	39.8	5	42.35	5.00	Positive
      *
      * @param aTraMLType The TraMLType instance to store the rows into.
      * @param aRowValues The separates values from a single row.
@@ -45,7 +61,7 @@ public class AgilentQQQImpl implements FileModel {
 
         // validate number of line values.
         if (aRowValues.length != 12) {
-            throw new JTramlException("Unexpected numer of columns for the Agilent FileModel!!");
+            throw new JTramlException("Unexpected number of columns for the Agilent FileModel!!");
         }
 
         if (aTraMLType.getTransitionList() == null) {
@@ -68,11 +84,10 @@ public class AgilentQQQImpl implements FileModel {
         String lRtdelta = aRowValues[10];//OK
         String lPolarity = aRowValues[11];
 
-//        CompoundListType lCompoundList = aTraMLType.getCompoundList();
-
-
+        //CompoundListType lCompoundList = aTraMLType.getCompoundList();
         // <cvParam cvRef="MS" accession="MS:1000827" name="isolation window target m/z" value="862.9467"
         // unitCvRef="MS" unitAccession="MS:1000040" unitName="m/z"/>
+
         try {
 
             // Make required CvParamTypes from the current line.
@@ -108,7 +123,6 @@ public class AgilentQQQImpl implements FileModel {
             // CSASVLPVDVQTLNSSGPPFGK
             String lPeptide = lSplit[0];
 
-
             // 2
             String lPrecursorChargeValue = "" + lSplit[1].charAt(0);
 
@@ -130,7 +144,7 @@ public class AgilentQQQImpl implements FileModel {
 
             CompoundListType lCompoundList = aTraMLType.getCompoundList();
 
-            if(lCompoundList == null){
+            if (lCompoundList == null) {
                 // Create the object upon first encounter.
                 lCompoundList = iObjectFactory.createCompoundListType();
                 aTraMLType.setCompoundList(lCompoundList);
@@ -138,14 +152,14 @@ public class AgilentQQQImpl implements FileModel {
 
             List<PeptideType> lPeptideTypeList = lCompoundList.getPeptide();
             for (PeptideType lRunningPeptideType : lPeptideTypeList) {
-                if(lRunningPeptideType.getId().equals(lPeptideID)){
+                if (lRunningPeptideType.getId().equals(lPeptideID)) {
                     // Ok! We need this PeptideType!
                     lCurrentPeptideType = lRunningPeptideType;
                     break;
                 }
             }
 
-            if(lCurrentPeptideType == null){
+            if (lCurrentPeptideType == null) {
                 // If null, then current PeptideId has not been seen in the previous loop.
                 // so create one!
                 lCurrentPeptideType = iObjectFactory.createPeptideType();
@@ -162,7 +176,7 @@ public class AgilentQQQImpl implements FileModel {
                 lRetentionTimeType.getCvParam().add(lRetentionTimeWindow);
 
                 RetentionTimeListType lRetentionTimeList = lCurrentPeptideType.getRetentionTimeList();
-                if(lRetentionTimeList == null){
+                if (lRetentionTimeList == null) {
                     lRetentionTimeList = iObjectFactory.createRetentionTimeListType();
                     lCurrentPeptideType.setRetentionTimeList(lRetentionTimeList);
                 }

@@ -15,7 +15,6 @@ public interface FileModel {
      */
     public void addRowToTraml(TraMLType aTraMLType, String[] aRowValues);
 
-
     /**
      * Implementing classes must be capable to describe a SourceFileListType to insert into a TraMLType
      * @return SourceFileListType for the implementing converting classes.
