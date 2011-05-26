@@ -121,7 +121,6 @@ public class SepToTRAMLJob extends Observable implements Runnable {
             TraMLCreator lTraMLCreator = new TraMLCreator();
             lTraMLCreator.setTraML(lTraMLType);
 
-
             if (iOutputFile.exists()) {
                 iOutputFile.delete();
             }
