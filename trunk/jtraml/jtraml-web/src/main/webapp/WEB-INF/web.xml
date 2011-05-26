@@ -13,7 +13,7 @@
         <init-param>
             <description>Vaadin application class to start</description>
             <param-name>application</param-name>
-            <param-value>com.compomics.traml.web.TramlConverterApplication</param-value>
+            <param-value>com.compomics.jtraml.web.TramlConverterApplication</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
