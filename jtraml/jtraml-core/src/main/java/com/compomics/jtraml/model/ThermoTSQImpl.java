@@ -55,10 +55,10 @@ public class ThermoTSQImpl implements FileModel {
         String lQ1 = aRowValues[0];//OK
         String lQ3 = aRowValues[1];//OK
 
-        String lEnergy = aRowValues[2];
+        String lEnergy = aRowValues[2];//OK
 
-        String lStartTime = aRowValues[3];
-        String lStopTime = aRowValues[4];
+        String lStartTime = aRowValues[3];//OK
+        String lStopTime = aRowValues[4];//OK
 
         String lPolarity = aRowValues[5];
         String lTrigger = aRowValues[6];

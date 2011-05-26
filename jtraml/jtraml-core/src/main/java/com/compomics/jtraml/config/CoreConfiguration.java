@@ -18,15 +18,6 @@ public class CoreConfiguration {
      */
     private static PropertiesConfiguration input;
 
-
-    /**
-     * The standard separation character to be used by the library.
-     * @return
-     */
-    public static String getSeparationChar() {
-        return input.getString("sep.char");
-    }
-
     /**
      * Static initiatlizer.
      */
