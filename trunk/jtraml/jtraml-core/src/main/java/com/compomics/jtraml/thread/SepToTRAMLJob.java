@@ -18,8 +18,8 @@ import java.util.Observable;
 /**
  * This class converts a TSV file to a TRAML file in a single thread.
  */
-public class TSVToTRAMLJob extends Observable implements Runnable {
-    private static Logger logger = Logger.getLogger(TSVToTRAMLJob.class);
+public class SepToTRAMLJob extends Observable implements Runnable {
+    private static Logger logger = Logger.getLogger(SepToTRAMLJob.class);
 
     /**
      * The TSV FileModel of the input file.
@@ -42,7 +42,7 @@ public class TSVToTRAMLJob extends Observable implements Runnable {
     private String iStatus;
 
 
-    public TSVToTRAMLJob(FileModel aFileModel, File aInputFile, File aOutputFile) {
+    public SepToTRAMLJob(FileModel aFileModel, File aInputFile, File aOutputFile) {
         iFileModel = aFileModel;
         iInputFile = aInputFile;
         iOutputFile = aOutputFile;
