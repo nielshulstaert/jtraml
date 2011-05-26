@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.compomics.jtraml.gui.forms.TramlConverterGUI">
+  <grid id="27dc6" binding="jpanContent" layout-manager="FormLayout">
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:3dlu:noGrow"/>
+    <rowspec value="fill:d:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:3dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <colspec value="fill:d:grow"/>
+    <constraints>
+      <xy x="20" y="20" width="544" height="467"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="dd52d" binding="jpanCenter" layout-manager="FormLayout">
+        <rowspec value="center:40px:noGrow"/>
+        <rowspec value="top:5dlu:noGrow"/>
+        <rowspec value="center:180px:grow"/>
+        <rowspec value="fill:d:noGrow"/>
+        <rowspec value="fill:p:noGrow"/>
+        <colspec value="fill:200px:noGrow"/>
+        <colspec value="left:4dlu:noGrow"/>
+        <colspec value="fill:p:grow"/>
+        <colspec value="left:4dlu:noGrow"/>
+        <colspec value="fill:200px:noGrow"/>
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="1" use-parent-layout="false"/>
+          <forms defaultalign-vert="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="3f4c7" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="4" use-parent-layout="false"/>
+              <forms top="5" left="15" bottom="5" right="5"/>
+            </constraints>
+            <properties>
+              <font size="14" style="1"/>
+              <text value="TraML converter"/>
+            </properties>
+          </component>
+          <grid id="7bf55" layout-manager="GridBagLayout">
+            <constraints>
+              <grid row="2" column="0" row-span="3" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="2" use-parent-layout="false"/>
+              <forms top="10" left="10" bottom="10" right="10" defaultalign-vert="false"/>
+            </constraints>
+            <properties/>
+            <border type="none" title="Import"/>
+            <children>
+              <component id="72194" class="javax.swing.JRadioButton" binding="btnImportThermo">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="4" use-parent-layout="false"/>
+                  <gridbag top="5" left="5" bottom="5" right="5" weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <selected value="false"/>
+                  <text value="Thermo"/>
+                </properties>
+              </component>
+              <component id="93ed3" class="javax.swing.JRadioButton" binding="btnImportAgilent">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="3" use-parent-layout="false"/>
+                  <gridbag top="5" left="5" bottom="5" right="5" weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <text value="Agilent"/>
+                </properties>
+              </component>
+              <component id="1dc45" class="javax.swing.JRadioButton" binding="btnImportABI">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="3" use-parent-layout="false"/>
+                  <gridbag top="5" left="5" bottom="5" right="5" weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <text value="ABI"/>
+                </properties>
+              </component>
+              <component id="95ecc" class="javax.swing.JRadioButton" binding="btnImportTraml">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="3" use-parent-layout="false"/>
+                  <gridbag top="5" left="5" bottom="5" right="5" weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <text value="TraML"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="ca3ef" layout-manager="GridBagLayout">
+            <constraints>
+              <grid row="2" column="4" row-span="3" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="2" use-parent-layout="false"/>
+              <forms top="10" left="10" bottom="10" right="10" defaultalign-vert="false"/>
+            </constraints>
+            <properties/>
+            <border type="none" title="Export"/>
+            <children>
+              <component id="b48ad" class="javax.swing.JRadioButton" binding="btnExportThermo">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
+                  <gridbag top="5" left="5" bottom="5" right="5" weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <text value="Thermo"/>
+                </properties>
+              </component>
+              <component id="5e40e" class="javax.swing.JRadioButton" binding="btnExportAgilent">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
+                  <gridbag top="5" left="5" bottom="5" right="5" weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <text value="Agilent"/>
+                </properties>
+              </component>
+              <component id="e2e61" class="javax.swing.JRadioButton" binding="btnExportABI">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
+                  <gridbag top="5" left="5" bottom="5" right="5" weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <text value="ABI"/>
+                </properties>
+              </component>
+              <component id="3761f" class="javax.swing.JRadioButton" binding="btnExportTraml">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
+                  <gridbag top="5" left="5" bottom="5" right="5" weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <selected value="false"/>
+                  <text value="TraML"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="11a28" binding="jpanArrow" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints>
+              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="2" indent="1" use-parent-layout="false"/>
+              <forms defaultalign-horz="false" defaultalign-vert="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <grid id="4630e" class="org.divxdede.swing.busy.JBusyComponent" binding="iBusyComponent" layout-manager="FormLayout">
+                <rowspec value="center:d:noGrow"/>
+                <colspec value="fill:d:noGrow"/>
+                <constraints border-constraint="West"/>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="b091b" class="javax.swing.JLabel" binding="lblArrow">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <forms/>
+                    </constraints>
+                    <properties>
+                      <background swing-color="Button.background"/>
+                      <icon value="images/right.png"/>
+                      <text value=""/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <grid id="19830" binding="jpanHeader" layout-manager="FormLayout">
+        <colspec value="fill:d:grow"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children/>
+      </grid>
+      <grid id="403be" binding="jpanFiles" layout-manager="FormLayout">
+        <rowspec value="center:40px:grow"/>
+        <rowspec value="top:3dlu:noGrow"/>
+        <rowspec value="center:35px:grow"/>
+        <rowspec value="top:3dlu:noGrow"/>
+        <rowspec value="center:40px:grow"/>
+        <rowspec value="top:3dlu:noGrow"/>
+        <rowspec value="center:35px:grow"/>
+        <colspec value="left:478px:grow"/>
+        <colspec value="left:4dlu:noGrow"/>
+        <colspec value="fill:d:grow"/>
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="2" indent="2" use-parent-layout="false"/>
+          <forms top="0" left="10" bottom="0" right="10" defaultalign-horz="false"/>
+        </constraints>
+        <properties/>
+        <border type="empty"/>
+        <children>
+          <component id="b7886" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms top="5" left="5" bottom="5" right="5" defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <font swing-font="OptionPane.font"/>
+              <text value="input file:"/>
+            </properties>
+          </component>
+          <component id="c11c" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <forms top="5" left="5" bottom="5" right="5"/>
+            </constraints>
+            <properties>
+              <font swing-font="OptionPane.font"/>
+              <text value="output file:"/>
+            </properties>
+          </component>
+          <grid id="6026f" layout-manager="GridBagLayout">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="8" fill="2" indent="0" use-parent-layout="false"/>
+              <forms top="5" left="10" bottom="5" right="5" defaultalign-horz="false"/>
+            </constraints>
+            <properties/>
+            <border type="line">
+              <color color="-3355444"/>
+            </border>
+            <children>
+              <component id="3e6ba" class="javax.swing.JLabel" binding="lblInputFile">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag top="5" left="5" bottom="5" right="5" weightx="0.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <font swing-font="Slider.font"/>
+                  <foreground color="-10066330"/>
+                  <text value="no file selected"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="1e0f7" layout-manager="GridBagLayout">
+            <constraints>
+              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="92" height="40"/>
+              </grid>
+              <forms top="5" left="10" bottom="5" right="5"/>
+            </constraints>
+            <properties/>
+            <border type="line">
+              <color color="-3355444"/>
+            </border>
+            <children>
+              <component id="c2ef1" class="javax.swing.JLabel" binding="lblOutputFile">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag top="5" left="5" bottom="5" right="5" weightx="0.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <font swing-font="Slider.font"/>
+                  <foreground color="-10066330"/>
+                  <text value="no file selected"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <component id="f7149" class="javax.swing.JButton" binding="btnInputSelect">
+            <constraints>
+              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="1" use-parent-layout="false"/>
+              <forms top="5" left="5" bottom="5" right="5" defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <maximumSize width="29" height="29"/>
+              <minimumSize width="29" height="29"/>
+              <preferredSize width="29" height="29"/>
+              <text value="..."/>
+            </properties>
+          </component>
+          <component id="60bbc" class="javax.swing.JButton" binding="btnOutputSelect">
+            <constraints>
+              <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="2" use-parent-layout="false"/>
+              <forms top="5" left="5" bottom="5" right="5" defaultalign-vert="false"/>
+            </constraints>
+            <properties>
+              <maximumSize width="29" height="29"/>
+              <minimumSize width="29" height="29"/>
+              <preferredSize width="29" height="29"/>
+              <text value="..."/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="f2c94" binding="jpanBottom" layout-manager="FormLayout">
+        <rowspec value="center:d:noGrow"/>
+        <colspec value="fill:max(d;4px):grow"/>
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="80843" class="javax.swing.JButton" binding="btnConvert">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="1" use-parent-layout="false"/>
+              <forms top="0" left="10" bottom="0" right="10" defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <icon value="images/star.png"/>
+              <text value="convert!"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+  <buttonGroups>
+    <group name="grpTarget">
+      <member id="b48ad"/>
+      <member id="5e40e"/>
+      <member id="e2e61"/>
+      <member id="3761f"/>
+    </group>
+    <group name="btnSource">
+      <member id="72194"/>
+      <member id="93ed3"/>
+      <member id="1dc45"/>
+      <member id="95ecc"/>
+    </group>
+  </buttonGroups>
+</form>
