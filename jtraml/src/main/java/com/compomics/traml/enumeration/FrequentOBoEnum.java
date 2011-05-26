@@ -1,10 +1,12 @@
 package com.compomics.traml.enumeration;
 
 /**
- * This enum is a wraps the distinct input types.
+ * This enum is a wraps the distinct input type term names.
  */
 public enum FrequentOBoEnum {
+
     MZ("m/z"),
+
     ISOLATION_WINDOW("isolation window target m/z"),
     COLLISION_ENERGY("collision energy"),
     ACCELERATING_VOLTAGE("accelerating voltage"),
