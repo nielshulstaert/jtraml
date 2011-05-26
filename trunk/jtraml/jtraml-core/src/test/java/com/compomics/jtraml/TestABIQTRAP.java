@@ -1,8 +1,10 @@
 package com.compomics.jtraml;
 
 import com.compomics.jtraml.factory.CVFactory;
-import com.compomics.jtraml.interfaces.FileModel;
+import com.compomics.jtraml.interfaces.TSVFileExportModel;
+import com.compomics.jtraml.interfaces.TSVFileImportModel;
 import com.compomics.jtraml.model.ABIToTraml;
+import com.compomics.jtraml.model.TramlToThermo;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
 import junit.framework.Assert;
@@ -12,6 +14,7 @@ import junit.framework.TestSuite;
 import org.apache.log4j.Logger;
 import org.hupo.psi.ms.traml.ObjectFactory;
 import org.hupo.psi.ms.traml.TraMLType;
+import org.hupo.psi.ms.traml.TransitionType;
 import org.systemsbiology.apps.tramlcreator.TraMLCreator;
 import org.systemsbiology.apps.tramlparser.TraMLParser;
 import org.systemsbiology.apps.tramlvalidator.TraMLValidator;
@@ -25,6 +28,7 @@ import java.io.FileInputStream;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * This class is a test scenario to generate a TraML file from an AgilentQQQ input file.
@@ -55,7 +59,7 @@ public class TestABIQTRAP extends TestCase {
     /**
      * Main test.
      */
-    public void testAgilentToTraml() {
+    public void testABIToTraml() {
 
         try {
             URL lURL = Resources.getResource("QTRAP5500_example.csv");
@@ -68,19 +72,19 @@ public class TestABIQTRAP extends TestCase {
 
             String line = "";
 
-            FileModel lFileModel = new ABIToTraml(iQtrapInputFile);
-            String sep = "" + lFileModel.getSeparator();
+            TSVFileImportModel lTSVFileImportModel = new ABIToTraml(iQtrapInputFile);
+            String sep = "" + lTSVFileImportModel.getSeparator();
 
             logger.debug("reading QTRAP5500 input file\t" + lURL);
 
             while ((line = br.readLine()) != null) {
                 String[] lValues = line.split(sep);
-                lFileModel.addRowToTraml(lTraMLType, lValues);
+                lTSVFileImportModel.addRowToTraml(lTraMLType, lValues);
             }
             logger.debug("finished reading QTRAP5500 input file\t");
 
             lTraMLType.setCvList(CVFactory.getCvListType());
-            lTraMLType.setSourceFileList(lFileModel.getSourceTypeList());
+            lTraMLType.setSourceFileList(lTSVFileImportModel.getSourceTypeList());
 
             // Ok, all rows have been added.
             TraMLCreator lTraMLCreator = new TraMLCreator();
@@ -130,15 +134,77 @@ public class TestABIQTRAP extends TestCase {
             for (ValidatorMessage message : messages) {
                 if (message.getLevel().isHigher(MessageLevel.INFO)) {
                     errorMessage += message.getMessage() + "\n";
-                }else{
+                } else {
                     logger.debug(message.getMessage());
                 }
             }
 
-            if(!errorMessage.equals("")){
+            if (!errorMessage.equals("")) {
                 Assert.fail("The should not have been errors in the Validation!!");
                 logger.debug(errorMessage);
             }
+
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+
+    }
+
+    /**
+     * Main test.
+     */
+    public void testTramlToABI() {
+
+        try {
+            URL lURL = Resources.getResource("test.qtrap.traml");
+            iQtrapInputFile = new File(lURL.getFile());
+
+            // Now re-read the file.
+            TraMLParser lTraMLParser = new TraMLParser();
+            lTraMLParser.parse_file(iQtrapInputFile.getCanonicalPath(), logger);
+
+            TSVFileExportModel lTSVFileExportModel = new TramlToThermo();
+
+
+            File lTempOutput = new File(MyTestSuite.getTestResourceURI().getPath(), "test.qtrap.csv");
+            if (lTempOutput.exists()) {
+                lTempOutput.delete();
+            }
+            BufferedWriter lWriter = Files.newWriter(lTempOutput, Charset.defaultCharset());
+
+            if(lTSVFileExportModel.hasHeader()){
+                lWriter.write(lTSVFileExportModel.getHeader());
+                lWriter.write("\n");
+            }
+
+            TraMLType lTraML = lTraMLParser.getTraML();
+            List<TransitionType> lTransitionTypeList = lTraML.getTransitionList().getTransition();
+            for (TransitionType lTransitionType : lTransitionTypeList) {
+                String line = lTSVFileExportModel.parseTransitionType(lTransitionType, lTraML);
+                lWriter.write(line);
+                lWriter.write("\n");
+            }
+
+            // Ok. The File should have been written!
+            lWriter.flush();
+            lWriter.close();
+
+
+            // Ok, now re-read the file.
+            BufferedReader lBufferedReader = Files.newReader(lTempOutput, Charset.defaultCharset());
+            String line = "";
+            int lineCounter = 0;
+            while((line = lBufferedReader.readLine()) != null){
+                lineCounter++;
+                // hard coded test!
+                if(lineCounter == 1){
+                    String lExpectedFirstLine = "564.9618,663.4081,10,LSTADPADASTIYAVVV.O95866.O95866-3.O95866-5.3y6,29.3";
+                    Assert.assertEquals(line, lExpectedFirstLine);
+                }
+            }
+            // Asset the number of entries that must have been read.
+            Assert.assertEquals(lineCounter, 192);
+            lBufferedReader.close();
 
         } catch (Exception e) {
             logger.error(e.getMessage(), e);

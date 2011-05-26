@@ -1,8 +1,10 @@
 package com.compomics.jtraml;
 
 import com.compomics.jtraml.factory.CVFactory;
-import com.compomics.jtraml.interfaces.FileModel;
+import com.compomics.jtraml.interfaces.TSVFileExportModel;
+import com.compomics.jtraml.interfaces.TSVFileImportModel;
 import com.compomics.jtraml.model.ThermoToTraml;
+import com.compomics.jtraml.model.TramlToThermo;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
 import junit.framework.Assert;
@@ -12,6 +14,7 @@ import junit.framework.TestSuite;
 import org.apache.log4j.Logger;
 import org.hupo.psi.ms.traml.ObjectFactory;
 import org.hupo.psi.ms.traml.TraMLType;
+import org.hupo.psi.ms.traml.TransitionType;
 import org.systemsbiology.apps.tramlcreator.TraMLCreator;
 import org.systemsbiology.apps.tramlparser.TraMLParser;
 import org.systemsbiology.apps.tramlvalidator.TraMLValidator;
@@ -25,6 +28,7 @@ import java.io.FileInputStream;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * This class is a test scenario to generate a TraML file from an AgilentQQQ input file.
@@ -71,20 +75,20 @@ public class TestThermoTSQ extends TestCase {
             // skip the first line.
             br.readLine();
 
-            FileModel lFileModel = new ThermoToTraml(iThermoTSQInputFile);
-            String sep = "" + lFileModel.getSeparator();
+            TSVFileImportModel lTSVFileImportModel = new ThermoToTraml(iThermoTSQInputFile);
+            String sep = "" + lTSVFileImportModel.getSeparator();
 
             logger.debug("reading ThermoTSQ input file\t" + lURL);
 
             while ((line = br.readLine()) != null) {
                 String[] lValues = line.split(sep);
-                lFileModel.addRowToTraml(lTraMLType, lValues);
+                lTSVFileImportModel.addRowToTraml(lTraMLType, lValues);
             }
 
             logger.debug("finished reading ThermoTSQ input file\t");
 
             lTraMLType.setCvList(CVFactory.getCvListType());
-            lTraMLType.setSourceFileList(lFileModel.getSourceTypeList());
+            lTraMLType.setSourceFileList(lTSVFileImportModel.getSourceTypeList());
 
             // Ok, all rows have been added.
             TraMLCreator lTraMLCreator = new TraMLCreator();
@@ -143,6 +147,68 @@ public class TestThermoTSQ extends TestCase {
                 Assert.fail("The should not have been errors in the Validation!!");
                 logger.debug(errorMessage);
             }
+
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+
+    }
+
+     /**
+     * Main test.
+     */
+    public void testTramlToThermo() {
+
+        try {
+            URL lURL = Resources.getResource("test.thermo.traml");
+            iThermoTSQInputFile = new File(lURL.getFile());
+
+            // Now re-read the file.
+            TraMLParser lTraMLParser = new TraMLParser();
+            lTraMLParser.parse_file(iThermoTSQInputFile.getCanonicalPath(), logger);
+
+            TSVFileExportModel lTSVFileExportModel = new TramlToThermo();
+
+
+            File lTempOutput = new File(MyTestSuite.getTestResourceURI().getPath(), "test.thermo.csv");
+            if (lTempOutput.exists()) {
+                lTempOutput.delete();
+            }
+            BufferedWriter lWriter = Files.newWriter(lTempOutput, Charset.defaultCharset());
+
+            if(lTSVFileExportModel.hasHeader()){
+                lWriter.write(lTSVFileExportModel.getHeader());
+                lWriter.write("\n");
+            }
+
+            TraMLType lTraML = lTraMLParser.getTraML();
+            List<TransitionType> lTransitionTypeList = lTraML.getTransitionList().getTransition();
+            for (TransitionType lTransitionType : lTransitionTypeList) {
+                String line = lTSVFileExportModel.parseTransitionType(lTransitionType, lTraML);
+                lWriter.write(line);
+                lWriter.write("\n");
+            }
+
+            // Ok. The File should have been written!
+            lWriter.flush();
+            lWriter.close();
+
+
+            // Ok, now re-read the file.
+            BufferedReader lBufferedReader = Files.newReader(lTempOutput, Charset.defaultCharset());
+            String line = "";
+            int lineCounter = 0;
+            while((line = lBufferedReader.readLine()) != null){
+                lineCounter++;
+                // hard coded test!
+                if(lineCounter == 2){
+                    String lExpectedFirstLine = "651.8366,790.4038,25.5,18.61,28.61,NA,NA,NA,AAELQTGLETNR.2y7-1";
+                    Assert.assertEquals(lExpectedFirstLine, line);
+                }
+            }
+            // Asset the number of entries that must have been read.
+            Assert.assertEquals(1942, lineCounter);
+            lBufferedReader.close();
 
         } catch (Exception e) {
             logger.error(e.getMessage(), e);

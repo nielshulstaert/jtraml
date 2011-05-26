@@ -3,7 +3,7 @@ package com.compomics.jtraml.model;
 import com.compomics.jtraml.config.CoreConfiguration;
 import com.compomics.jtraml.exception.JTramlException;
 import com.compomics.jtraml.factory.CVFactory;
-import com.compomics.jtraml.interfaces.FileModel;
+import com.compomics.jtraml.interfaces.TSVFileImportModel;
 import org.apache.log4j.Logger;
 import org.hupo.psi.ms.traml.*;
 
@@ -13,14 +13,14 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 /**
- * This class is an FileModel implementation for the Agilent QQQ instrument.
+ * This class is an TSVFileImportModel implementation for the Agilent QQQ instrument.
  * e.g.
  * ""
  * Dynamic MRM
  * Compound Name	ISTD?	Precursor Ion	MS1 Res	Product Ion	MS2 Res	Fragmentor	Collision Energy	Cell Accelerator Voltage	Ret Time (min)	Delta Ret Time	Polarity
  * CSASVLPVDVQTLNSSGPPFGK.2y16-1	FALSE	1130.5681	Wide	1642.8233	Unit	125	39.8	5	42.35	5.00	Positive
  */
-public class AgilentToTraml implements FileModel {
+public class AgilentToTraml implements TSVFileImportModel {
 
     private static Logger logger = Logger.getLogger(AgilentToTraml.class);
 
@@ -35,7 +35,7 @@ public class AgilentToTraml implements FileModel {
     private File iFile;
 
     /**
-     * Construct a new FileModel instance for an Agilent tsv file.
+     * Construct a new TSVFileImportModel instance for an Agilent tsv file.
      * <p/>
      * Dynamic MRM
      * Compound Name	ISTD?	Precursor Ion	MS1 Res	Product Ion	MS2 Res	Fragmentor	Collision Energy	Cell Accelerator Voltage	Ret Time (min)	Delta Ret Time	Polarity
@@ -61,7 +61,7 @@ public class AgilentToTraml implements FileModel {
 
         // validate number of line values.
         if (aRowValues.length != 12) {
-            throw new JTramlException("Unexpected number of columns for the Agilent FileModel!!");
+            throw new JTramlException("Unexpected number of columns for the Agilent TSVFileImportModel!!");
         }
 
         if (aTraMLType.getTransitionList() == null) {

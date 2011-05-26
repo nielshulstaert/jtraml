@@ -3,7 +3,7 @@ package com.compomics.jtraml.model;
 import com.compomics.jtraml.config.CoreConfiguration;
 import com.compomics.jtraml.exception.JTramlException;
 import com.compomics.jtraml.factory.CVFactory;
-import com.compomics.jtraml.interfaces.FileModel;
+import com.compomics.jtraml.interfaces.TSVFileImportModel;
 import org.apache.log4j.Logger;
 import org.hupo.psi.ms.traml.*;
 
@@ -13,14 +13,14 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 /**
- * This class is an FileModel implementation for the Thermo TSQ instrument.
+ * This class is an TSVFileImportModel implementation for the Thermo TSQ instrument.
  * e.g.
  * ""
  * Q1,Q3,CE,Start time (min),Stop time (min),Polarity,Trigger,Reaction category,Name
  * 651.8366,790.4038,25.5,18.61,28.61,1,1.00E+04,0,AAELQTGLETNR.2y7-1
  *
  */
-public class ThermoToTraml implements FileModel {
+public class ThermoToTraml implements TSVFileImportModel {
 
     private static Logger logger = Logger.getLogger(ThermoToTraml.class);
 
@@ -28,7 +28,7 @@ public class ThermoToTraml implements FileModel {
     private File iFile;
 
     /**
-     * Construct a new FileModel implementation for Thermo TSQ inputformat.
+     * Construct a new TSVFileImportModel implementation for Thermo TSQ inputformat.
      */
     public ThermoToTraml(File aFile) {
         iFile = aFile;
@@ -45,7 +45,7 @@ public class ThermoToTraml implements FileModel {
 
         // validate number of line values.
         if (aRowValues.length != 9) {
-            throw new JTramlException("Unexpected numer of columns for the Thermo TSQ FileModel!!");
+            throw new JTramlException("Unexpected numer of columns for the Thermo TSQ TSVFileImportModel!!");
         }
 
         if (aTraMLType.getTransitionList() == null) {
@@ -154,7 +154,7 @@ public class ThermoToTraml implements FileModel {
                 CvParamType lCVType_retentionTimeStart = CVFactory.createCVType_RetentionTimeStart(lStartTime);
                 lRetentionTimeType.getCvParam().add(lCVType_retentionTimeStart);
 
-                CvParamType lCVType_retentionTimeStop = CVFactory.createCVType_RetentionTimeStart(lStopTime);
+                CvParamType lCVType_retentionTimeStop = CVFactory.createCVType_RetentionTimeStop(lStopTime);
                 lRetentionTimeType.getCvParam().add(lCVType_retentionTimeStop);
 
                 RetentionTimeListType lRetentionTimeList = lCurrentPeptideType.getRetentionTimeList();

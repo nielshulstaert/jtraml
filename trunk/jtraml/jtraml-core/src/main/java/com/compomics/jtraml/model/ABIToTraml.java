@@ -3,7 +3,7 @@ package com.compomics.jtraml.model;
 import com.compomics.jtraml.config.CoreConfiguration;
 import com.compomics.jtraml.exception.JTramlException;
 import com.compomics.jtraml.factory.CVFactory;
-import com.compomics.jtraml.interfaces.FileModel;
+import com.compomics.jtraml.interfaces.TSVFileImportModel;
 import org.apache.log4j.Logger;
 import org.hupo.psi.ms.traml.*;
 
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class is a FileModel implementation for the ABI QTRAP instrument.
+ * This class is a TSVFileImportModel implementation for the ABI QTRAP instrument.
  * <p/>
  * e.g.;
  * <i>564.9618,663.4081,10,LSTADPADASTIYAVVV.O95866.O95866-3.O95866-5.3y6,29.3</i>
@@ -30,7 +30,7 @@ import java.util.List;
  * <li >29.3 = retention time
  * </nu>
  */
-public class ABIToTraml implements FileModel {
+public class ABIToTraml implements TSVFileImportModel {
 
 
     private static Logger logger = Logger.getLogger(AgilentToTraml.class);
@@ -46,7 +46,7 @@ public class ABIToTraml implements FileModel {
     private File iFile;
 
     /**
-     * Construct a new FileModel instance for an ABI QTRAP csv file.
+     * Construct a new TSVFileImportModel instance for an ABI QTRAP csv file.
      * <p/>
      * <p/>
      * e.g.;
@@ -90,7 +90,7 @@ public class ABIToTraml implements FileModel {
 
         // validate number of line values.
         if (aRowValues.length != 5) {
-            throw new JTramlException("Unexpected number of columns for the ABI QTRAP FileModel!!");
+            throw new JTramlException("Unexpected number of columns for the ABI QTRAP TSVFileImportModel!!");
         }
 
         if (aTraMLType.getTransitionList() == null) {
