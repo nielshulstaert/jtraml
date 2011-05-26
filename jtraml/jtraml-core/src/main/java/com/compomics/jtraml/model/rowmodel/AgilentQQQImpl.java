@@ -2,7 +2,7 @@ package com.compomics.jtraml.model.rowmodel;
 
 import com.compomics.jtraml.config.CoreConfiguration;
 import com.compomics.jtraml.exception.JTramlException;
-import com.compomics.jtraml.factory.CustomTypeFactory;
+import com.compomics.jtraml.factory.CVFactory;
 import com.compomics.jtraml.interfaces.FileModel;
 import org.apache.log4j.Logger;
 import org.hupo.psi.ms.traml.*;
@@ -76,11 +76,11 @@ public class AgilentQQQImpl implements FileModel {
         try {
 
             // Make required CvParamTypes from the current line.
-            CvParamType lCV_Q1 = CustomTypeFactory.createCVType_MZ(lQ1);
-            CvParamType lCV_Q3 = CustomTypeFactory.createCVType_MZ(lQ3);
+            CvParamType lCV_Q1 = CVFactory.createCVType_MZ(lQ1);
+            CvParamType lCV_Q3 = CVFactory.createCVType_MZ(lQ3);
 
-            CvParamType lCV_AcceleratingVoltage = CustomTypeFactory.createCVType_AcceleratingVoltage(lAccVoltage);
-            CvParamType lCV_CollisionEnergy = CustomTypeFactory.createCVType_CollisionEnergy(lEnergy);
+            CvParamType lCV_AcceleratingVoltage = CVFactory.createCVType_AcceleratingVoltage(lAccVoltage);
+            CvParamType lCV_CollisionEnergy = CVFactory.createCVType_CollisionEnergy(lEnergy);
 
             // 1. Make the Precursor Type
             PrecursorType lPrecursorType = iObjectFactory.createPrecursorType();
@@ -155,10 +155,10 @@ public class AgilentQQQImpl implements FileModel {
                 aTraMLType.getCompoundList().getPeptide().add(lCurrentPeptideType);
 
                 RetentionTimeType lRetentionTimeType = iObjectFactory.createRetentionTimeType();
-                CvParamType lCVType_retentionTime = CustomTypeFactory.createCVType_RetentionTime(lRt);
+                CvParamType lCVType_retentionTime = CVFactory.createCVType_RetentionTime(lRt);
                 lRetentionTimeType.getCvParam().add(lCVType_retentionTime);
 
-                CvParamType lRetentionTimeWindow = CustomTypeFactory.createCVType_RetentionTimeWindow(lRtdelta);
+                CvParamType lRetentionTimeWindow = CVFactory.createCVType_RetentionTimeWindow(lRtdelta);
                 lRetentionTimeType.getCvParam().add(lRetentionTimeWindow);
 
                 RetentionTimeListType lRetentionTimeList = lCurrentPeptideType.getRetentionTimeList();
