@@ -6,9 +6,13 @@
     <artifactId>jtraml-core</artifactId>
     <packaging>jar</packaging>
     <name>jtraml-core</name>
-    <!--<version>${version.number}</version>-->
+    <version>${version.number}</version>
 
     <url>code.google.com/p/jtraml/</url>
+
+    <properties>
+        <version.number>0.2</version.number>
+    </properties>
 
     <parent>
         <groupId>com.compomics.jtraml</groupId>

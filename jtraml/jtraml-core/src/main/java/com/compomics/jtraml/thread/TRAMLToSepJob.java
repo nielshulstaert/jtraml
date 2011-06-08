@@ -2,21 +2,24 @@ package com.compomics.jtraml.thread;
 
 import com.compomics.jtraml.enumeration.FileTypeEnum;
 import com.compomics.jtraml.exception.JTramlException;
-import com.compomics.jtraml.factory.CVFactory;
-import com.compomics.jtraml.interfaces.TSVFileImportModel;
-import com.compomics.jtraml.model.ABIToTraml;
-import com.compomics.jtraml.model.AgilentToTraml;
+import com.compomics.jtraml.interfaces.TSVFileExportModel;
 import com.compomics.jtraml.model.ConversionJobOptions;
-import com.compomics.jtraml.model.ThermoToTraml;
+import com.compomics.jtraml.model.TramlToABI;
+import com.compomics.jtraml.model.TramlToAgilent;
+import com.compomics.jtraml.model.TramlToThermo;
 import com.google.common.io.Files;
 import org.apache.log4j.Logger;
-import org.hupo.psi.ms.traml.ObjectFactory;
 import org.hupo.psi.ms.traml.TraMLType;
-import org.systemsbiology.apps.tramlcreator.TraMLCreator;
+import org.hupo.psi.ms.traml.TransitionType;
+import org.systemsbiology.apps.tramlparser.TraMLParser;
 
 import javax.xml.bind.JAXBException;
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.List;
 import java.util.Observable;
 
 /**
@@ -26,9 +29,9 @@ public class TRAMLToSepJob extends Observable implements Runnable {
     private static Logger logger = Logger.getLogger(TRAMLToSepJob.class);
 
     /**
-     * The TSV TSVFileImportModel of the input file.
+     * The TSV TSVFileExportModel of the input file.
      */
-    private TSVFileImportModel iTSVFileImportModel = null;
+    private TSVFileExportModel iTSVFileExportModel = null;
 
     /**
      * The input TSV file.
@@ -44,40 +47,43 @@ public class TRAMLToSepJob extends Observable implements Runnable {
      * This descriptive String returns the current state of the job.
      */
     private String iStatus;
+    public int iCounter;
 
 
     /**
      * Creates a new job to convert a separated file with transitions into the TraML specification.
+     *
      * @param aConversionJobOptions
      */
     public TRAMLToSepJob(ConversionJobOptions aConversionJobOptions) {
         this(
                 aConversionJobOptions.getInputFile(),
                 aConversionJobOptions.getOutputFile(),
-                aConversionJobOptions.getImportType()
+                aConversionJobOptions.getExportType()
         );
     }
 
 
     /**
      * Creates a new job to convert a separated file with transitions into the TraML specification.
+     *
      * @param aInputFile
      * @param aOutputFile
-     * @param aImportType
+     * @param aExportType
      */
-    public TRAMLToSepJob(File aInputFile, File aOutputFile, FileTypeEnum aImportType) {
+    public TRAMLToSepJob(File aInputFile, File aOutputFile, FileTypeEnum aExportType) {
         iInputFile = aInputFile;
         iOutputFile = aOutputFile;
 
 
-        if(aImportType == FileTypeEnum.TSV_THERMO_TSQ){
-            iTSVFileImportModel = new ThermoToTraml(iInputFile);
-        }else if(aImportType == FileTypeEnum.TSV_AGILENT_QQQ){
-            iTSVFileImportModel = new AgilentToTraml(iInputFile);
-        }else if(aImportType == FileTypeEnum.TSV_ABI){
-            iTSVFileImportModel = new ABIToTraml(iInputFile);
-        }else {
-            throw new JTramlException("unsupported import format!!");
+        if (aExportType == FileTypeEnum.TSV_THERMO_TSQ) {
+            iTSVFileExportModel = new TramlToThermo();
+        } else if (aExportType == FileTypeEnum.TSV_AGILENT_QQQ) {
+            iTSVFileExportModel = new TramlToAgilent();
+        } else if (aExportType == FileTypeEnum.TSV_ABI) {
+            iTSVFileExportModel = new TramlToABI();
+        } else {
+            throw new JTramlException("unsupported export format!!");
         }
     }
 
@@ -87,50 +93,29 @@ public class TRAMLToSepJob extends Observable implements Runnable {
     public void run() {
 
         try {
-            BufferedReader br = null;
-            br = Files.newReader(iInputFile, Charset.defaultCharset());
-
-            ObjectFactory lObjectFactory = new ObjectFactory();
-            TraMLType lTraMLType = lObjectFactory.createTraMLType();
-
-            String line = "";
-
-            if (iTSVFileImportModel instanceof AgilentToTraml) {
-                // skip the first two lines.
-                br.readLine();
-                br.readLine();
-
-            } else if (iTSVFileImportModel instanceof ThermoToTraml) {
-                // skip the first line.
-                br.readLine();
-            }
-
-            String sep = "" + iTSVFileImportModel.getSeparator();
-            logger.debug("reading input file\t" + iInputFile);
-
-            int lineCount = 0;
-            while ((line = br.readLine()) != null) {
-                lineCount++;
-                iStatus = "reading line " + lineCount;
-                String[] lValues = line.split(sep);
-                iTSVFileImportModel.addRowToTraml(lTraMLType, lValues);
-            }
-
-            lTraMLType.setCvList(CVFactory.getCvListType());
-            lTraMLType.setSourceFileList(iTSVFileImportModel.getSourceTypeList());
-
-            // Ok, all rows have been added.
-            TraMLCreator lTraMLCreator = new TraMLCreator();
-            lTraMLCreator.setTraML(lTraMLType);
-
-            if (iOutputFile.exists()) {
-                iOutputFile.delete();
-            }
-
             BufferedWriter lWriter = Files.newWriter(iOutputFile, Charset.defaultCharset());
 
-            lWriter.write(lTraMLCreator.asString());
-            // Ok. The File should have been written!
+            if (iTSVFileExportModel.hasHeader()) {
+                lWriter.write(iTSVFileExportModel.getHeader());
+                lWriter.write("\n");
+            }
+
+            // Now read the traml file.
+            TraMLParser lTraMLParser = new TraMLParser();
+            lTraMLParser.parse_file(iInputFile.getCanonicalPath(), logger);
+
+            TraMLType lTraML = lTraMLParser.getTraML();
+            List<TransitionType> lTransitionTypeList = lTraML.getTransitionList().getTransition();
+            iCounter = 0;
+            for (TransitionType lTransitionType : lTransitionTypeList) {
+                iCounter++;
+                iStatus = "writing transition " + iCounter;
+                String line = iTSVFileExportModel.parseTransitionType(lTransitionType, lTraML);
+                lWriter.write(line);
+                lWriter.write("\n");
+            }
+
+            // Ok. The File should have completed!
             lWriter.flush();
             lWriter.close();
 
@@ -143,6 +128,8 @@ public class TRAMLToSepJob extends Observable implements Runnable {
         } catch (JAXBException e) {
             logger.error(e.getMessage(), e);
         } catch (IOException e) {
+            logger.error(e.getMessage(), e);
+        } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
 
