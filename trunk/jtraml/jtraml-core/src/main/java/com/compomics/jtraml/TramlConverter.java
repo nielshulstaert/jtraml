@@ -4,6 +4,7 @@ import com.compomics.jtraml.enumeration.FileTypeEnum;
 import com.compomics.jtraml.exception.JTramlException;
 import com.compomics.jtraml.model.ConversionJobOptions;
 import com.compomics.jtraml.thread.SepToTRAMLJob;
+import com.compomics.jtraml.thread.TRAMLToSepJob;
 import com.compomics.jtraml.validation.ConversionJobOptionValidator;
 import org.apache.commons.cli.*;
 import org.apache.log4j.Logger;
@@ -38,40 +39,58 @@ public class TramlConverter {
 
                 File lInputFile = new File(line.getOptionValue("input"));
                 File lOutputFile = new File(line.getOptionValue("output"));
-                String lInputTypeName = line.getOptionValue("inputtype");
-                FileTypeEnum lInputType = getFileTypeEnum(lInputTypeName);
+                FileTypeEnum lInputType = getFileTypeEnum(line.getOptionValue("importtype"));
+                FileTypeEnum lExportType = getFileTypeEnum(line.getOptionValue("exporttype"));
 
                 ConversionJobOptions lConversionJobOptions = new ConversionJobOptions();
                 lConversionJobOptions.setOutputFile(lOutputFile);
                 lConversionJobOptions.setInputFile(lInputFile);
-                lConversionJobOptions.setExportType(FileTypeEnum.TRAML);
+                lConversionJobOptions.setExportType(lExportType);
                 lConversionJobOptions.setImportType(lInputType);
 
                 boolean valid = ConversionJobOptionValidator.isValid(lConversionJobOptions);
                 String lStatus = ConversionJobOptionValidator.getStatus();
+
                 if (valid) {
 
-                    SepToTRAMLJob job = new SepToTRAMLJob(lConversionJobOptions);
-                    Future lSubmit = Executors.newSingleThreadExecutor().submit(job);
+                    if (lConversionJobOptions.getImportType() != FileTypeEnum.TRAML) {
+                        SepToTRAMLJob job = new SepToTRAMLJob(lConversionJobOptions);
+                        Future lSubmit = Executors.newSingleThreadExecutor().submit(job);
 
-                    ConditionLock lConditionLock = new ConditionLock();
-                    synchronized (lConditionLock) {
-                        while (lSubmit.isDone() != true) {
-                            try {
-                                lConditionLock.wait(1000);
-                                logger.debug(job.getStatus());
-                            } catch (InterruptedException e) {
-                                logger.error(e.getMessage(), e);
+                        ConditionLock lConditionLock = new ConditionLock();
+                        synchronized (lConditionLock) {
+                            while (lSubmit.isDone() != true) {
+                                try {
+                                    lConditionLock.wait(1000);
+                                    logger.debug(job.getStatus());
+                                } catch (InterruptedException e) {
+                                    logger.error(e.getMessage(), e);
+                                }
+                            }
+                        }
+                    } else {
+                        TRAMLToSepJob job = new TRAMLToSepJob(lConversionJobOptions);
+                        Future lSubmit = Executors.newSingleThreadExecutor().submit(job);
+
+                        ConditionLock lConditionLock = new ConditionLock();
+                        synchronized (lConditionLock) {
+                            while (lSubmit.isDone() != true) {
+                                try {
+                                    lConditionLock.wait(1000);
+                                    logger.debug(job.getStatus());
+                                } catch (InterruptedException e) {
+                                    logger.error(e.getMessage(), e);
+                                }
                             }
                         }
                     }
+
                     logger.debug("finished writing \t" + lOutputFile.getName());
                 } else {
                     logger.error(lStatus, new JTramlException(lStatus));
                 }
-
             }
-        } catch (ParseException e){
+        } catch (ParseException e) {
             logger.error(e.getMessage(), e);
         }
     }
@@ -126,18 +145,18 @@ public class TramlConverter {
 
     private static void createOptions(Options aOptions) {
         // Prepare.
-        StringBuffer sb = new StringBuffer("The available input types:");
+        StringBuffer sb = new StringBuffer("The available file types:");
         FileTypeEnum[] lTypeEnums = FileTypeEnum.values();
         for (FileTypeEnum lFileType : lTypeEnums) {
             sb.append("<").append(lFileType.getName()).append(">");
         }
-        String lInputTypes = sb.toString();
+        String lFileTypes = sb.toString();
 
         // Set.
+        aOptions.addOption("importtype", true, lFileTypes);
+        aOptions.addOption("exporttype", true, lFileTypes);
         aOptions.addOption("input", true, "The transition input file");
-        aOptions.addOption("inputtype", true, lInputTypes);
         aOptions.addOption("output", true, "The converted transition output file");
-
     }
 
     /**
@@ -178,6 +197,13 @@ public class TramlConverter {
                 }
             }
         }
+
+        // has import and export type?
+        if (aLine.hasOption("importtype") && aLine.hasOption("exporttype")) {
+            logger.error("importtype and exporttype must be supplied!!");
+            return false;
+        }
+
 
         // All is fine!
         return true;
