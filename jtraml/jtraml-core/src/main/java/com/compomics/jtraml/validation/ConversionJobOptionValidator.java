@@ -1,6 +1,5 @@
 package com.compomics.jtraml.validation;
 
-import com.compomics.jtraml.enumeration.FileTypeEnum;
 import com.compomics.jtraml.model.ConversionJobOptions;
 import org.apache.log4j.Logger;
 
@@ -31,18 +30,6 @@ public class ConversionJobOptionValidator {
             return false;
         }
 
-        FileTypeEnum lImportType = aConversionJobOptions.getImportType();
-        FileTypeEnum lExportType = aConversionJobOptions.getExportType();
-
-        if (lImportType == FileTypeEnum.TRAML) {
-            iStatus = "the converter does not support traml import conversions";
-            return false;
-        }
-
-        if (lExportType != FileTypeEnum.TRAML) {
-            iStatus = "the converter only supports traml export conversions";
-            return false;
-        }
 
         // else return true!
         iStatus = "";
