@@ -4,6 +4,7 @@ package com.compomics.jtraml.web.components;
 import com.compomics.jtraml.enumeration.FileTypeEnum;
 import com.compomics.jtraml.model.ConversionJobOptions;
 import com.compomics.jtraml.thread.SepToTRAMLJob;
+import com.compomics.jtraml.thread.TRAMLToSepJob;
 import com.compomics.jtraml.validation.ConversionJobOptionValidator;
 import com.compomics.jtraml.web.TramlConverterApplication;
 import com.vaadin.data.Item;
@@ -84,21 +85,29 @@ public class TramlConversionForm extends VerticalLayout implements Observer {
 
     private void startConversion() throws IOException {
         if (iConversionForm.isValid()) {
-            iProgressIndicator.setEnabled(true);
-            iProgressIndicator.setImmediate(true);
-            iProgressIndicator.setVisible(true);
 
-            boolean lValidOptions = ConversionJobOptionValidator.isValid(iConversionJobOptions);
+            // create a new outputf file for the upcomming Thread.
+            File lOutputFile = makeOutputFile();
+            iConversionJobOptions.setOutputFile(lOutputFile);
 
-            if (lValidOptions) {
-                // create a new outputf file for the upcomming Thread.
-                File lOutputFile = makeOutputFile();
-                iConversionJobOptions.setOutputFile(lOutputFile);
+            boolean valid = ConversionJobOptionValidator.isValid(iConversionJobOptions);
+
+            if (valid) {
+                iProgressIndicator.setEnabled(true);
+                iProgressIndicator.setImmediate(true);
+                iProgressIndicator.setVisible(true);
 
                 // create the job, listen for the finish, and start the job!
-                SepToTRAMLJob job = new SepToTRAMLJob(iConversionJobOptions);
-                job.addObserver(this);
-                Executors.newSingleThreadExecutor().submit(job);
+                if (iConversionJobOptions.getImportType() != FileTypeEnum.TRAML) {
+                    SepToTRAMLJob job = new SepToTRAMLJob(iConversionJobOptions);
+                    job.addObserver(this);
+                    Executors.newSingleThreadExecutor().submit(job);
+
+                } else {
+                    TRAMLToSepJob job = new TRAMLToSepJob(iConversionJobOptions);
+                    job.addObserver(this);
+                    Executors.newSingleThreadExecutor().submit(job);
+                }
 
             } else {
                 // else, the validation went wrong - notify the user about what went wrong..
@@ -134,9 +143,21 @@ public class TramlConversionForm extends VerticalLayout implements Observer {
     public void update(Observable aObservable, Object o) {
         TramlConverterApplication.getApplication().addResult(iConversionJobOptions);
 
+        Field lField = iConversionForm.getField("inputFile");
+        if (lField instanceof UploadField) {
+            UploadField lUploadField = (UploadField) lField;
+            lUploadField.reset();
+        }
+
+        iConversionJobOptions.setInputFile(null);
+        iConversionJobOptions.setOutputFile(null);
+
         iProgressIndicator.setEnabled(false);
         iProgressIndicator.setVisible(false);
+
         btnConvert.setEnabled(true);
+
+        requestRepaintAll();
 
     }
 
