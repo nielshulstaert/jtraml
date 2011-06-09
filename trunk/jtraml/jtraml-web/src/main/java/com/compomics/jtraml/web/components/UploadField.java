@@ -55,6 +55,15 @@ public class UploadField extends Panel implements Field {
 
     }
 
+    /**
+     * This method will reset upload field.
+     */
+    public void reset(){
+        upload = new Upload("", receiver);
+        result.setCaption("");
+        result.setIcon(null);
+    }
+
     public class FileReceiver implements Receiver {
 
         private String fileName;
