@@ -10,14 +10,14 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * Product (Q3) of the transition
+ * Intermediate product ion information of the transition when using MS3 or above
  * 
- * <p>Java class for ProductType complex type.
+ * <p>Java class for IntermediateProductType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="ProductType">
+ * &lt;complexType name="IntermediateProductType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
@@ -33,12 +33,12 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ProductType", namespace = "http://psi.hupo.org/ms/traml", propOrder = {
+@XmlType(name = "IntermediateProductType", namespace = "http://psi.hupo.org/ms/traml", propOrder = {
     "cvParam",
     "interpretationList",
     "configurationList"
 })
-public class ProductType {
+public class IntermediateProductType {
 
     @XmlElement(namespace = "http://psi.hupo.org/ms/traml")
     protected List<CvParamType> cvParam;
