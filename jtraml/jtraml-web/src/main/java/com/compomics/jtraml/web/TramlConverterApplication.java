@@ -17,13 +17,15 @@ package com.compomics.jtraml.web;
 
 
 import com.compomics.jtraml.model.ConversionJobOptions;
+import com.compomics.jtraml.web.components.FooterPanel;
+import com.compomics.jtraml.web.components.HeaderPanel;
 import com.compomics.jtraml.web.components.ResultsPanel;
 import com.compomics.jtraml.web.components.TramlConversionForm;
-import com.compomics.jtraml.web.components.HeaderPanel;
 import com.google.common.io.Files;
 import com.vaadin.Application;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Window;
+import org.vaadin.googleanalytics.tracking.GoogleAnalyticsTracker;
 
 import java.io.File;
 
@@ -31,8 +33,7 @@ import java.io.File;
  * The Application's "main" class
  */
 @SuppressWarnings("serial")
-public class TramlConverterApplication extends Application
-{
+public class TramlConverterApplication extends Application {
     private Window window;
     Label header;
     public File iTempDir;
@@ -42,8 +43,7 @@ public class TramlConverterApplication extends Application
     public TramlConversionForm iInputForm;
 
     @Override
-    public void init()
-    {
+    public void init() {
         iApplication = this;
         // initiate the window
         window = new Window("TraML converter");
@@ -53,6 +53,15 @@ public class TramlConverterApplication extends Application
         iTempDir = Files.createTempDir();
 
         initLayout();
+
+        // Create a tracker for vaadin.com domain.
+        GoogleAnalyticsTracker tracker = new GoogleAnalyticsTracker("UA-23742568-1","jtraml");
+
+        // Add only one tracker per window.
+        window.addComponent(tracker);
+
+        // Track the page view
+        tracker.trackPageview("/");
 
 
     }
@@ -66,13 +75,15 @@ public class TramlConverterApplication extends Application
         iInputForm = new TramlConversionForm();
         iOutputTable = new ResultsPanel();
 
-        if(iOutputTable.getNumberOfResults() == 0){
+        if (iOutputTable.getNumberOfResults() == 0) {
             iOutputTable.setVisible(false);
         }
 
 
         window.addComponent(iInputForm);
         window.addComponent(iOutputTable);
+
+        window.addComponent(new FooterPanel());
     }
 
     public File getTempDir() {
@@ -83,9 +94,9 @@ public class TramlConverterApplication extends Application
         return iApplication;
     }
 
-    public void addResult(ConversionJobOptions aConversionJobOptions){
+    public void addResult(ConversionJobOptions aConversionJobOptions) {
         iOutputTable.addItem(aConversionJobOptions);
-        if(iOutputTable.getNumberOfResults() > 0){
+        if (iOutputTable.getNumberOfResults() > 0) {
             iOutputTable.setVisible(true);
             iOutputTable.requestRepaintAll();
         }
