@@ -10,18 +10,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * List of insutrument configurations used in the validation or optimization of the transitions
+ * Information about the state of validation of a transition on a given instrument model
  * 
- * <p>Java class for ConfigurationListType complex type.
+ * <p>Java class for ValidationStatusType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="ConfigurationListType">
+ * &lt;complexType name="ValidationStatusType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Configuration" type="{http://psi.hupo.org/ms/traml}ConfigurationType" maxOccurs="unbounded"/>
+ *         &lt;element name="cvParam" type="{http://psi.hupo.org/ms/traml}cvParamType" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -31,41 +31,41 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ConfigurationListType", namespace = "http://psi.hupo.org/ms/traml", propOrder = {
-    "configuration"
+@XmlType(name = "ValidationStatusType", namespace = "http://psi.hupo.org/ms/traml", propOrder = {
+    "cvParam"
 })
-public class ConfigurationListType {
+public class ValidationStatusType {
 
-    @XmlElement(name = "Configuration", namespace = "http://psi.hupo.org/ms/traml", required = true)
-    protected List<ConfigurationType> configuration;
+    @XmlElement(namespace = "http://psi.hupo.org/ms/traml")
+    protected List<CvParamType> cvParam;
 
     /**
-     * Gets the value of the configuration property.
+     * Gets the value of the cvParam property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the configuration property.
+     * This is why there is not a <CODE>set</CODE> method for the cvParam property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getConfiguration().add(newItem);
+     *    getCvParam().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ConfigurationType }
+     * {@link CvParamType }
      * 
      * 
      */
-    public List<ConfigurationType> getConfiguration() {
-        if (configuration == null) {
-            configuration = new ArrayList<ConfigurationType>();
+    public List<CvParamType> getCvParam() {
+        if (cvParam == null) {
+            cvParam = new ArrayList<CvParamType>();
         }
-        return this.configuration;
+        return this.cvParam;
     }
 
 }
