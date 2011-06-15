@@ -1,4 +1,4 @@
-#labels toc,Featured
+#labels toc
   * [versions versions]
 
   * [traml jTraML]
