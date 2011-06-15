@@ -1,3 +1,5 @@
+#summary description of the jTraML API
+#labels Featured
 #sidebar toc
 = peptide to genome transformation =
 The first module that has been build into the acromics project can *transform a set of peptide sequences into genome coordinates*. First, it creates a Gene-Transcript-Translation-Exon (GTTE) object in which each biotype (e.g. from protein) cross-references to related biotypes (e.g. to transcript) based on a gene build *extracted from Ensembl*. Second, it makes a protein sequence database from all translation entries that are consequently prepared for BLASTP searches.
