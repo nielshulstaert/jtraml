@@ -1,8 +1,9 @@
+#labels toc
 #table of contents.
 
 * [main main]
   * [versions versions]
 
-* [TraML traml]
-* [jTraML API api]
-* [TraML Converter converter]
+* [traml TraML]
+* [api jTraML API]
+* [converter TraML Converter]
