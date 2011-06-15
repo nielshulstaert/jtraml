@@ -74,7 +74,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.compomics.jtraml.Test</mainClass>
+                            <mainClass>com.compomics.jtraml.TramlConverter</mainClass>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib</classpathPrefix>
                         </manifest>

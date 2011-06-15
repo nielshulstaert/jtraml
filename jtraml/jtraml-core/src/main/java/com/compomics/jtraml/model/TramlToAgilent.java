@@ -98,16 +98,22 @@ public class TramlToAgilent implements TSVFileExportModel {
             }
         }
 
+
         // Get the configuration options.
-        List<CvParamType> ConfigurationList = aTransitionType.getConfigurationList().getConfiguration().getCvParam();
-        for (CvParamType lCvParamType : ConfigurationList) {
-            // cvparam on energy?
-            if (lCvParamType.getName().equals(FrequentOBoEnum.COLLISION_ENERGY.getName())) {
-                lEnergy = lCvParamType.getValue();
-            }else if (lCvParamType.getName().equals(FrequentOBoEnum.ACCELERATING_VOLTAGE.getName())) {
-                lAccVoltage = lCvParamType.getValue();
+        List<ConfigurationType> ConfigurationList = aTransitionType.getProduct().getConfigurationList().getConfiguration();
+        for (ConfigurationType lConfigurationType : ConfigurationList) {
+            List<CvParamType> lCvParam = lConfigurationType.getCvParam();
+
+            for (CvParamType lCvParamType : lCvParam) {
+                // cvparam on energy?
+                if (lCvParamType.getName().equals(FrequentOBoEnum.COLLISION_ENERGY.getName())) {
+                    lEnergy = lCvParamType.getValue();
+                } else if (lCvParamType.getName().equals(FrequentOBoEnum.ACCELERATING_VOLTAGE.getName())) {
+                    lAccVoltage = lCvParamType.getValue();
+                }
             }
         }
+
 
         StringBuffer sb = new StringBuffer();
 

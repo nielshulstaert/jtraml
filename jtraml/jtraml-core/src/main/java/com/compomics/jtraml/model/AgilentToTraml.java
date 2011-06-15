@@ -112,7 +112,7 @@ public class AgilentToTraml implements TSVFileImportModel {
 
             // add this configuration to the configuration list.
             ConfigurationListType lConfigurationListType = iObjectFactory.createConfigurationListType();
-            lConfigurationListType.setConfiguration(lConfigurationType);
+            lConfigurationListType.getConfiguration().add(lConfigurationType);
 
 
             // 4. Parse the peptide, charge and iontypes from the id.
@@ -190,10 +190,10 @@ public class AgilentToTraml implements TSVFileImportModel {
             lTransitionType.setId(lID);
             lTransitionType.setPeptideRef(lCurrentPeptideType);
 
+            lProductType.setConfigurationList(lConfigurationListType);
+
             lTransitionType.setPrecursor(lPrecursorType);
             lTransitionType.setProduct(lProductType);
-
-            lTransitionType.setConfigurationList(lConfigurationListType);
 
             // Finish by adding this TransitionType to the TraML main tag.
             aTraMLType.getTransitionList().getTransition().add(lTransitionType);
