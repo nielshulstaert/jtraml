@@ -2,7 +2,7 @@
 #labels Featured
 #sidebar toc
 
-==== Reduced UML diagram ====
+=== Reduced UML diagram ===
 
 The *TraMLType* is the root element of the TraML file. Central in this diagram are the *TransitionType* and *CompoundType/PeptideType* elements which represent all transitions that need to be analyzed in a SRM experiment. Note that a PeptideType in term references a *ProteinType*, and also links to a RetentionTimeType element in order to define expected chromatographic elution times.
 
