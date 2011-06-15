@@ -1,4 +1,6 @@
 #summary description of the jTraML API
 #labels Featured
 #sidebar toc
-= peptide to genome transformation =
+= UML diagram =
+
+[http://jtraml.googlecode.com/svn/wiki/images/jtraml_0.2_uml.png http://jtraml.googlecode.com/svn/wiki/images/jtraml_0.2_uml.png]
