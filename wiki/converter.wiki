@@ -1,5 +1,6 @@
+#summary main page
 #sidebar toc
-= peptide to genome web application =
+= TraML converter =
 This web application is a simple implementation of the peptide to genome function of the acromics library *([ptg link])*.
 
 
