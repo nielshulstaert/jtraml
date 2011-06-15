@@ -3,6 +3,6 @@
 
   * [versions versions]
 
-  * [traml TraML]
+  * [TraML TraML]
   * [jtramlAPI API]
   * [converter Converter]
