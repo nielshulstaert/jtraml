@@ -1,8 +1,6 @@
 #summary short description of the traml standard
 #sidebar toc
 
-= Introduction =
-
 TraML is a new standardized format for encoding transition lists and associated metadata developed by the [http://www.psidev.info/ Proteomics Standards Initiative].
 
 TraML builds on the same design concepts that were used for [http://www.ncbi.nlm.nih.gov/pubmed/20716697 mzML] and mzIdentML. Like these formats previously developed for different data types, TraML is based on Extensible Markup Language (XML) and can be parsed and validated for structural correctness with a large variety of industry-standard tools. As with the other PSI formats, most of the metadata in the TraML file are encoded with the use of controlled vocabulary (CV) terms. These terms are all included in the PSI-MS CV, the same CV used by mzML and mzIdentML, and actively maintained by the PSI MSSWG.
