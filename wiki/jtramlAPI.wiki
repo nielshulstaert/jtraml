@@ -1,6 +1,19 @@
 #summary description of the jTraML API
 #labels Featured
 #sidebar toc
-= UML diagram =
+
+= Overview=
+  * [Reduced_UML_diagram]
+
+= Reduced UML diagram =
+
+The *TraMLType* is the root element of the TraML file. Central in this diagram are the *TransitionType* and *CompoundType/PeptideType* elements which represent all transitions that need to be analyzed in a SRM experiment. Note that a PeptideType in term references a *ProteinType*, and also links to a RetentionTimeType element in order to define expected chromatographic elution times.
+
+Aside from these JAXB generated classes, the reduced UML diagram highlights jTraML convenience classes such as the *CVFactory* and the *OboManager*, both working together to detail each of the TraML elements with *Controlled Vocabulary based Parameters*.  
+
+Furthermore, the *TSVFileImportModel* and *TSVFileExportModel* declare a conversion interface for generating TraML or TSV files respectively. The *SepToTRAMLJob* and the *TRAMLToSepJob* in turn make use of these models for threaded conversion of SRM input files.  
 
 [http://jtraml.googlecode.com/svn/wiki/images/jtraml_0.2_uml.png http://jtraml.googlecode.com/svn/wiki/images/jtraml_0.2_uml.png]
+
+
+= SepToTraML Conversion =
