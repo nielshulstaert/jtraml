@@ -1,9 +1,5 @@
 #labels toc
-#table of contents.
-
-* [main main]
   * [versions versions]
-
 
   * [traml jTraML]
   * [jtramlAPI API]
