@@ -1,12 +1,9 @@
+#sidebar toc
+= peptide to genome web application =
+This web application is a simple implementation of the peptide to genome function of the acromics library *([ptg link])*.
 
-= Introduction =
 
-Add your content here.
+[http://acromics.googlecode.com/svn/wiki/images/ptg_web.png http://acromics.googlecode.com/svn/wiki/images/ptg_web.png]
 
 
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+In this interface, the user must first select the required species from a drop-down list and insert peptide sequences with optional quantitative attributes before starting the transformation. The returning peptides are then annotated with gene model coordinates and can be downloaded in Sequence Alignment/Map format SAM file for visualization in client genome browsers like the Integrated Genome Viewer ([http://www.broadinstitute.org/software/igv/ IGV]).
