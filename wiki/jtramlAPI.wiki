@@ -1,13 +1,92 @@
-#summary One-sentence summary of this page.
-
-= Introduction =
-
-Add your content here.
+#sidebar toc
+= peptide to genome transformation =
+The first module that has been build into the acromics project can *transform a set of peptide sequences into genome coordinates*. First, it creates a Gene-Transcript-Translation-Exon (GTTE) object in which each biotype (e.g. from protein) cross-references to related biotypes (e.g. to transcript) based on a gene build *extracted from Ensembl*. Second, it makes a protein sequence database from all translation entries that are consequently prepared for BLASTP searches.
 
 
-= Details =
+_Taken together, BLASTP maps peptides onto amino acid coordinates, and the GTTE model simultaneously transforms these amino acid coordinates into nucleic acid coordinates of the specified gene model._
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+[http://acromics.googlecode.com/svn/wiki/images/gtte.png http://acromics.googlecode.com/svn/wiki/images/gtte.png]
+
+== Example ==
+The following code takes an input file with ids, peptide sequences and a variable number of attributes to each sequence.
+
+
+*INPUT*
+{{{
+	#id,sequence,ratio
+	id1,AGFAGDXAPR,1.1
+	id2,AVFPSIVGRPR,0.9
+	id3,CDVDIR,1.05
+	id4,CPEALFQPSFLGMESCGIHETTFNSIMK,1.24
+	id5,DLTDYLMK,0.5
+}}}
+
+
+A BLASTP will be performed to these peptide sequences, and the resulting protein coordinates are then transformed into genome coordinates, and the resulting output files produce a .igv file to visualize the given peptides as a genome track.
+
+
+[http://code.google.com/p/acromics/source/browse/trunk/acromics-app/src/main/java/com/compomics/acromics/playground/TransformPeptides.java TransformPeptides.java]     
+
+{{{
+	
+    public static void main(String[] args) {
+        try {
+            Options lOptions = new Options();
+            createOptions(lOptions);
+
+            BasicParser parser = new BasicParser();
+            CommandLine line = parser.parse(lOptions, args);
+
+            if (isValidStartup(line) == false) {
+                HelpFormatter formatter = new HelpFormatter();
+                formatter.printHelp("TransformPeptides", lOptions);
+            } else {
+                logger.debug("parameters ok!");
+                logger.info("Starting new BlastPTask");
+
+                PTGFile lInput = new PTGFile(line.getOptionValue("input"));
+                File lOutput = new PTGFile(line.getOptionValue("output"));
+                String lSpecies = line.getOptionValue("species");
+
+                TransformPeptideJob lTransformPeptideJob = new TransformPeptideJob(lInput, lOutput, lSpecies);
+                Future lSubmit = Executors.newSingleThreadExecutor().submit(lTransformPeptideJob);
+
+                ConditionLock lConditionLock = new ConditionLock();
+                synchronized (lConditionLock) {
+                    while (lSubmit.isDone() != true) {
+                        lConditionLock.wait(1000);
+                        System.out.println(".");
+                    }
+                }
+
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+ 
+	
+}}}
+
+
+The algorithm returns the genomic coordinates of the input peptides. 
+
+
+*OUTPUT*
+{{{
+	chromosome	start	end	feature	attr_0
+	1	143904157	143904189	AVFPSIVGRPR	4
+	1	143906433	143906456	DLTDYLMK	6
+	3	3869415	3869447	AVFPSIVGRPR	4
+	3	3870459	3870482	DLTDYLMK	6
+	3	3870465	3870488	DLTDYLMK	6
+	3	3870816	3870859	CPEALFQPSFLGMESCGIHETTFNSIMK	1
+	3	3870860	3870877	CDVDIR	1
+	3	63610452	63610475	DLTDYLMK	6
+	14	62714343	62714375	AVFPSIVGRPR	4
+	14	62715036	62715059	DLTDYLMK	6
+	14	105767541	105767573	AVFPSIVGRPR	4
+	14	105773322	105773345	DLTDYLMK	6
+}}}
