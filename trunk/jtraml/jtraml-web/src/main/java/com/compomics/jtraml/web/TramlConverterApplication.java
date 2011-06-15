@@ -55,13 +55,13 @@ public class TramlConverterApplication extends Application {
         initLayout();
 
         // Create a tracker for vaadin.com domain.
-        GoogleAnalyticsTracker tracker = new GoogleAnalyticsTracker("UA-23742568-1","jtraml");
+        GoogleAnalyticsTracker tracker = new GoogleAnalyticsTracker("UA-23742568-1","http://iomics.ugent.be/jtraml/");
 
         // Add only one tracker per window.
         window.addComponent(tracker);
 
         // Track the page view
-        tracker.trackPageview("/");
+//        tracker.trackPageview("/jtraml/analytics");
 
 
     }

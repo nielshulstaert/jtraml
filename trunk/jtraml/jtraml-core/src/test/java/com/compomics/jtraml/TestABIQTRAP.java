@@ -4,7 +4,7 @@ import com.compomics.jtraml.factory.CVFactory;
 import com.compomics.jtraml.interfaces.TSVFileExportModel;
 import com.compomics.jtraml.interfaces.TSVFileImportModel;
 import com.compomics.jtraml.model.ABIToTraml;
-import com.compomics.jtraml.model.TramlToThermo;
+import com.compomics.jtraml.model.TramlToABI;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
 import junit.framework.Assert;
@@ -163,7 +163,7 @@ public class TestABIQTRAP extends TestCase {
             TraMLParser lTraMLParser = new TraMLParser();
             lTraMLParser.parse_file(iQtrapInputFile.getCanonicalPath(), logger);
 
-            TSVFileExportModel lTSVFileExportModel = new TramlToThermo();
+            TSVFileExportModel lTSVFileExportModel = new TramlToABI();
 
 
             File lTempOutput = new File(MyTestSuite.getTestResourceURI().getPath(), "test.qtrap.csv");
