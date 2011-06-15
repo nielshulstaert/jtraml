@@ -3,7 +3,8 @@
 #sidebar toc
 
 = Overview=
-  * [Reduced_UML_diagram]
+  * [#Reduced_UML_diagram Reduced UML diagram]
+  * [#SepToTraML_Conversion SepToTraML Conversion]
 
 = Reduced UML diagram =
 
