@@ -1272,7 +1272,7 @@
             <ProteinRef ref="Q7Z408"/>
             <RetentionTimeList>
                 <RetentionTime>
-                    <cvParam unitCvRef="UO" unitName="minute" unitAccession="UO:0000031" value="60.2" accession="MS:1000894" name="retention time" cvRef="MS"/>
+                    <cvParam unitCvRef="UO" unitName="minute" unitAccession="UO:0000031" value="60.3" accession="MS:1000894" name="retention time" cvRef="MS"/>
                 </RetentionTime>
             </RetentionTimeList>
         </Peptide>
@@ -1720,7 +1720,7 @@
             <ProteinRef ref="P43234"/>
             <RetentionTimeList>
                 <RetentionTime>
-                    <cvParam unitCvRef="UO" unitName="minute" unitAccession="UO:0000031" value="30.2" accession="MS:1000894" name="retention time" cvRef="MS"/>
+                    <cvParam unitCvRef="UO" unitName="minute" unitAccession="UO:0000031" value="30.3" accession="MS:1000894" name="retention time" cvRef="MS"/>
                 </RetentionTime>
             </RetentionTimeList>
         </Peptide>
@@ -2136,7 +2136,7 @@
                 </Configuration>
             </ConfigurationList>
         </Transition>
-        <Transition id="LDSDQQHNLQEHSTTSV.Q5VWQ0.2y10" peptideRef="LDSDQQHNLQEHSTTSV.2">
+        <Transition id="LDSDQQHNLQEHSTTSV.Q5VWQ0.3y10" peptideRef="LDSDQQHNLQEHSTTSV.2">
             <Precursor>
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="969.9436" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
@@ -2448,7 +2448,7 @@
                 </Configuration>
             </ConfigurationList>
         </Transition>
-        <Transition id="TTHLAGALSPGEAWPFESV.Q9Y3X0.2y10" peptideRef="TTHLAGALSPGEAWPFESV.2">
+        <Transition id="TTHLAGALSPGEAWPFESV.Q9Y3X0.3y10" peptideRef="TTHLAGALSPGEAWPFESV.2">
             <Precursor>
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="985.4869" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
@@ -2617,7 +2617,7 @@
                 </Configuration>
             </ConfigurationList>
         </Transition>
-        <Transition id="SSQTPEAVCGLQSPQGAEV.P0CG20.2y11" peptideRef="SSQTPEAVCGLQSPQGAEV.2">
+        <Transition id="SSQTPEAVCGLQSPQGAEV.P0CG20.3y11" peptideRef="SSQTPEAVCGLQSPQGAEV.2">
             <Precursor>
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="972.9526" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>

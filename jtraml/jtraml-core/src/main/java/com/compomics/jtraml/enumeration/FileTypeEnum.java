@@ -4,7 +4,7 @@ package com.compomics.jtraml.enumeration;
  * This enum is a wraps the distinct input types.
  */
 public enum FileTypeEnum {
-    TRAML("psi_traml", ".traml"),
+    TRAML("TrAML", ".traml"),
     TSV_THERMO_TSQ("thermo_csv", ".csv"),
     TSV_AGILENT_QQQ("agilent_tsv", ".tsv"),
     TSV_ABI("abi_csv", ".csv");
@@ -50,7 +50,11 @@ public enum FileTypeEnum {
 
     @Override
     public String toString() {
-        return iName.substring(0, iName.indexOf("_")) + " (" + iExtension + ")";
+        if(iName.indexOf("_") != -1){
+            return iName.substring(0, iName.indexOf("_")) + " (" + iExtension + ")";
+        }else{
+            return iName;
+        }
     }
 
 }

@@ -69,9 +69,9 @@ AT5g48230,ALQLGLLVLAK,2,569.8820725,1,713.49251,y,7,10,30.57481119,::::::::::::,
 AT5g48230,ALQLGLLVLAK,2,569.8820725,1,826.57657,y,8,10,30.57481119,::::::::::::,Gln,,,1137.748495,,acetyl-CoA C-acetyltransferase,-0.5
 AT5g48230,ALQLGLLVLAK,2,569.8820725,1,954.63515,y,9,10,30.57481119,::::::::::::,Gln,,,1137.748495,,acetyl-CoA C-acetyltransferase,-0.5
 AT5g48230,ALQLGLLVLAK,3,380.257323333333,1,430.30293,y,4,10,19.89312349,::::::::::::,Gln,,,1137.748495,,acetyl-CoA C-acetyltransferase,-0.5
-AT5g48230,ALQLGLLVLAK,3,380.257323333333,1,543.38699,y,5,10,19.89312349,::::::::::::,Gln,,,1137.748495,,acetyl-CoA C-acetyltransferase,-0.5
-AT5g48230,ALQLGLLVLAK,3,380.257323333333,1,656.47105,y,6,10,19.89312349,::::::::::::,Gln,,,1137.748495,,acetyl-CoA C-acetyltransferase,-0.5
-AT5g48230,ALQLGLLVLAK,3,380.257323333333,1,713.49251,y,7,10,19.89312349,::::::::::::,Gln,,,1137.748495,,acetyl-CoA C-acetyltransferase,-0.5
+AT5g48230,ALQLGLLVLAK,3,380.357323333333,1,543.38699,y,5,10,19.89312349,::::::::::::,Gln,,,1137.748495,,acetyl-CoA C-acetyltransferase,-0.5
+AT5g48230,ALQLGLLVLAK,3,380.357323333333,1,656.47105,y,6,10,19.89312349,::::::::::::,Gln,,,1137.748495,,acetyl-CoA C-acetyltransferase,-0.5
+AT5g48230,ALQLGLLVLAK,3,380.357323333333,1,713.49251,y,7,10,19.89312349,::::::::::::,Gln,,,1137.748495,,acetyl-CoA C-acetyltransferase,-0.5
 AT5g48230,LGSLAIAAALK,2,514.3296725,1,586.3928,y,6,10,28.13050559,::::::::::::,,,,1026.643695,,acetyl-CoA C-acetyltransferase,0
 AT5g48230,LGSLAIAAALK,2,514.3296725,1,657.42991,y,7,10,28.13050559,::::::::::::,,,,1026.643695,,acetyl-CoA C-acetyltransferase,0
 AT5g48230,LGSLAIAAALK,2,514.3296725,1,770.51397,y,8,10,28.13050559,::::::::::::,,,,1026.643695,,acetyl-CoA C-acetyltransferase,0
@@ -107,7 +107,7 @@ AT4g11820,LLYNDFLR,2,527.2905575,1,664.34184,y,5,10,28.70078453,:::::::::,Asn,,,
 AT4g11820,LLYNDFLR,2,527.2905575,1,827.40517,y,6,10,28.70078453,:::::::::,Asn,,,1052.565465,,hydroxymethylglutaryl-CoA synthase,-0.5
 AT4g11820,LLYNDFLR,2,527.2905575,1,940.48923,y,7,10,28.70078453,:::::::::,Asn,,,1052.565465,,hydroxymethylglutaryl-CoA synthase,-0.5
 AT4g11820,LLYNDFLR,3,351.86298,1,435.27197,y,3,10,18.44501198,:::::::::,Asn,,,1052.565465,,hydroxymethylglutaryl-CoA synthase,-0.5
-AT4g11820,LLYNDFLR,3,351.86298,1,550.29891,y,4,10,18.44501198,:::::::::,Asn,,,1052.565465,,hydroxymethylglutaryl-CoA synthase,-0.5
+AT4g11820,LLYNDFLR,3,351.86298,1,550.39891,y,4,10,18.44501198,:::::::::,Asn,,,1052.565465,,hydroxymethylglutaryl-CoA synthase,-0.5
 AT4g11820,LLYNDFLR,3,351.86298,1,664.34184,y,5,10,18.44501198,:::::::::,Asn,,,1052.565465,,hydroxymethylglutaryl-CoA synthase,-0.5
 AT4g11820,LLYNDFLR,3,351.86298,1,827.40517,y,6,10,18.44501198,:::::::::,Asn,,,1052.565465,,hydroxymethylglutaryl-CoA synthase,-0.5
 AT4g11820,EFSINDADYIVFHSPYNK,2,1080.0081775,1,1267.64752,y,10,10,53.02035981,:::::::::::::::::::,Asn and >15 AAs,,,2158.000705,,hydroxymethylglutaryl-CoA synthase,-1.5
@@ -241,7 +241,7 @@ AT5g27450,ALVSGVSQR,2,458.7647075,1,489.27852,y,4,10,25.68564713,::::::::::,Gln,
 AT5g27450,ALVSGVSQR,2,458.7647075,1,546.29998,y,5,10,25.68564713,::::::::::,Gln,,,915.513765,,mevalonate kinase,-0.5
 AT5g27450,ALVSGVSQR,2,458.7647075,1,633.33201,y,6,10,25.68564713,::::::::::,Gln,,,915.513765,,mevalonate kinase,-0.5
 AT5g27450,ALVSGVSQR,2,458.7647075,1,732.40042,y,7,10,25.68564713,::::::::::,Gln,,,915.513765,,mevalonate kinase,-0.5
-AT5g27450,ALVSGVSQR,3,306.17908,1,390.21011,y,3,10,16.11513308,::::::::::,Gln,,,915.513765,,mevalonate kinase,-0.5
+AT5g27450,ALVSGVSQR,3,306.17908,1,390.31011,y,3,10,16.11513308,::::::::::,Gln,,,915.513765,,mevalonate kinase,-0.5
 AT5g27450,ALVSGVSQR,3,306.17908,1,489.27852,y,4,10,16.11513308,::::::::::,Gln,,,915.513765,,mevalonate kinase,-0.5
 AT5g27450,ALVSGVSQR,3,306.17908,1,546.29998,y,5,10,16.11513308,::::::::::,Gln,,,915.513765,,mevalonate kinase,-0.5
 AT5g27450,ALVSGVSQR,3,306.17908,1,633.33201,y,6,10,16.11513308,::::::::::,Gln,,,915.513765,,mevalonate kinase,-0.5
@@ -255,7 +255,7 @@ AT5g27450,STPASCSEETLK,2,655.3011925,1,706.3623,y,6,10,34.33325247,::::::Cys_CAM
 AT5g27450,STPASCSEETLK,2,655.3011925,1,866.39295,y,7,10,34.33325247,::::::Cys_CAM:::::::,Cysteine,,,1308.586735,,mevalonate kinase,-0.5
 AT5g27450,STPASCSEETLK,2,655.3011925,1,953.42498,y,8,10,34.33325247,::::::Cys_CAM:::::::,Cysteine,,,1308.586735,,mevalonate kinase,-0.5
 AT5g27450,STPASCSEETLK,2,655.3011925,1,1024.46209,y,9,10,34.33325247,::::::Cys_CAM:::::::,Cysteine,,,1308.586735,,mevalonate kinase,-0.5
-AT5g27450,STPASCSEETLK,3,437.203403333333,1,490.28768,y,4,10,22.79737357,::::::Cys_CAM:::::::,Cysteine,,,1308.586735,,mevalonate kinase,-0.5
+AT5g27450,STPASCSEETLK,3,437.203403333333,1,490.38768,y,4,10,22.79737357,::::::Cys_CAM:::::::,Cysteine,,,1308.586735,,mevalonate kinase,-0.5
 AT5g27450,STPASCSEETLK,3,437.203403333333,1,619.33027,y,5,10,22.79737357,::::::Cys_CAM:::::::,Cysteine,,,1308.586735,,mevalonate kinase,-0.5
 AT5g27450,STPASCSEETLK,3,437.203403333333,1,706.3623,y,6,10,22.79737357,::::::Cys_CAM:::::::,Cysteine,,,1308.586735,,mevalonate kinase,-0.5
 AT5g27450,STPASCSEETLK,3,437.203403333333,1,866.39295,y,7,10,22.79737357,::::::Cys_CAM:::::::,Cysteine,,,1308.586735,,mevalonate kinase,-0.5
@@ -279,7 +279,7 @@ At1g31910,EDPHGVCLESGDPR,2,784.3444425,1,933.40999,y,8,10,40.01115547,:::::::Cys
 At1g31910,EDPHGVCLESGDPR,2,784.3444425,1,1032.4784,y,9,10,40.01115547,:::::::Cys_CAM::::::::,Cysteine and Asp-Pro,,,1566.673235,,hypothetical protein,-1.5
 At1g31910,EDPHGVCLESGDPR,2,784.3444425,1,1089.49986,y,10,10,40.01115547,:::::::Cys_CAM::::::::,Cysteine and Asp-Pro,,,1566.673235,,hypothetical protein,-1.5
 At1g31910,EDPHGVCLESGDPR,2,784.3444425,1,1226.55877,y,11,10,40.01115547,:::::::Cys_CAM::::::::,Cysteine and Asp-Pro,,,1566.673235,,hypothetical protein,-1.5
-At1g31910,EDPHGVCLESGDPR,3,523.232236666667,1,660.29528,y,6,10,27.18484407,:::::::Cys_CAM::::::::,Cysteine and Asp-Pro,,,1566.673235,,hypothetical protein,-1.5
+At1g31910,EDPHGVCLESGDPR,3,523.232236666667,1,660.39528,y,6,10,27.18484407,:::::::Cys_CAM::::::::,Cysteine and Asp-Pro,,,1566.673235,,hypothetical protein,-1.5
 At1g31910,EDPHGVCLESGDPR,3,523.232236666667,1,773.37934,y,7,10,27.18484407,:::::::Cys_CAM::::::::,Cysteine and Asp-Pro,,,1566.673235,,hypothetical protein,-1.5
 At1g31910,EDPHGVCLESGDPR,3,523.232236666667,1,933.40999,y,8,10,27.18484407,:::::::Cys_CAM::::::::,Cysteine and Asp-Pro,,,1566.673235,,hypothetical protein,-1.5
 At1g31910,EDPHGVCLESGDPR,3,523.232236666667,1,1032.4784,y,9,10,27.18484407,:::::::Cys_CAM::::::::,Cysteine and Asp-Pro,,,1566.673235,,hypothetical protein,-1.5
@@ -330,10 +330,10 @@ At2g38700,EAGLEGELPQGIK,3,447.573926666667,1,542.33021,y,5,10,23.32627026,::::::
 At2g38700,EAGLEGELPQGIK,3,447.573926666667,1,655.41427,y,6,10,23.32627026,::::::::::::::,Gln,,,1339.698305,,mevalonate diphosphate decarboxylase,-0.5
 At2g38700,EAGLEGELPQGIK,3,447.573926666667,1,784.45686,y,7,10,23.32627026,::::::::::::::,Gln,,,1339.698305,,mevalonate diphosphate decarboxylase,-0.5
 At2g38700,EAGLEGELPQGIK,3,447.573926666667,1,841.47832,y,8,10,23.32627026,::::::::::::::,Gln,,,1339.698305,,mevalonate diphosphate decarboxylase,-0.5
-At2g38700,EDGSDSVAVQLVDDK,2,788.8710125,1,887.4838,y,8,10,40.21032455,::::::::::::::::,Asp-Gly and Gln,,,1575.726375,,mevalonate diphosphate decarboxylase,-1.5
-At2g38700,EDGSDSVAVQLVDDK,2,788.8710125,1,986.55221,y,9,10,40.21032455,::::::::::::::::,Asp-Gly and Gln,,,1575.726375,,mevalonate diphosphate decarboxylase,-1.5
-At2g38700,EDGSDSVAVQLVDDK,2,788.8710125,1,1073.58424,y,10,10,40.21032455,::::::::::::::::,Asp-Gly and Gln,,,1575.726375,,mevalonate diphosphate decarboxylase,-1.5
-At2g38700,EDGSDSVAVQLVDDK,2,788.8710125,1,1188.61118,y,11,10,40.21032455,::::::::::::::::,Asp-Gly and Gln,,,1575.726375,,mevalonate diphosphate decarboxylase,-1.5
+At2g38700,EDGSDSVAVQLVDDK,2,788.8710125,1,887.4838,y,8,10,40.31032455,::::::::::::::::,Asp-Gly and Gln,,,1575.726375,,mevalonate diphosphate decarboxylase,-1.5
+At2g38700,EDGSDSVAVQLVDDK,2,788.8710125,1,986.55221,y,9,10,40.31032455,::::::::::::::::,Asp-Gly and Gln,,,1575.726375,,mevalonate diphosphate decarboxylase,-1.5
+At2g38700,EDGSDSVAVQLVDDK,2,788.8710125,1,1073.58424,y,10,10,40.31032455,::::::::::::::::,Asp-Gly and Gln,,,1575.726375,,mevalonate diphosphate decarboxylase,-1.5
+At2g38700,EDGSDSVAVQLVDDK,2,788.8710125,1,1188.61118,y,11,10,40.31032455,::::::::::::::::,Asp-Gly and Gln,,,1575.726375,,mevalonate diphosphate decarboxylase,-1.5
 At2g38700,EDGSDSVAVQLVDDK,3,526.24995,1,589.3197,y,5,10,27.33874745,::::::::::::::::,Asp-Gly and Gln,,,1575.726375,,mevalonate diphosphate decarboxylase,-1.5
 At2g38700,EDGSDSVAVQLVDDK,3,526.24995,1,717.37828,y,6,10,27.33874745,::::::::::::::::,Asp-Gly and Gln,,,1575.726375,,mevalonate diphosphate decarboxylase,-1.5
 At2g38700,EDGSDSVAVQLVDDK,3,526.24995,1,816.44669,y,7,10,27.33874745,::::::::::::::::,Asp-Gly and Gln,,,1575.726375,,mevalonate diphosphate decarboxylase,-1.5

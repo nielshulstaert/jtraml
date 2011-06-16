@@ -844,8 +844,8 @@
         <Peptide sequence="VHVGDEDFVHLR" id="VHVGDEDFVHLR.4">
             <RetentionTimeList>
                 <RetentionTime>
-                    <cvParam unitCvRef="UO" unitName="minute" unitAccession="UO:0000031" value="30.28" accession="MS:1000916" name="retention time window lower offset" cvRef="MS"/>
-                    <cvParam unitCvRef="UO" unitName="minute" unitAccession="UO:0000031" value="40.28" accession="MS:1000917" name="retention time window upper offset" cvRef="MS"/>
+                    <cvParam unitCvRef="UO" unitName="minute" unitAccession="UO:0000031" value="30.38" accession="MS:1000916" name="retention time window lower offset" cvRef="MS"/>
+                    <cvParam unitCvRef="UO" unitName="minute" unitAccession="UO:0000031" value="40.38" accession="MS:1000917" name="retention time window upper offset" cvRef="MS"/>
                 </RetentionTime>
             </RetentionTimeList>
         </Peptide>
@@ -1088,7 +1088,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="651.8366" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="390.2091" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="390.3091" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -1205,7 +1205,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="597.8462" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="430.2398" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="430.3398" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -1270,7 +1270,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="597.8462" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="510.2910" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="510.3910" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -2102,7 +2102,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="419.2389" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="420.2603" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="420.3603" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -2349,7 +2349,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="692.3675" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="520.2779" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="520.3779" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -2479,7 +2479,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="461.9143" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="520.2771" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="520.3771" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -4026,7 +4026,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="615.3466" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="430.2410" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="430.3410" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -4117,7 +4117,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="630.3105" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="480.2599" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="480.3599" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -4195,7 +4195,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="643.3289" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="560.2812" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="560.3812" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -4611,7 +4611,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="734.3731" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="520.2183" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="520.3183" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -4702,7 +4702,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="623.3391" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="440.2615" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="440.3615" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -5079,7 +5079,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="686.8232" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="510.2664" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="510.3664" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -5885,7 +5885,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="426.2231" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="480.2547" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="480.3547" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -6002,7 +6002,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="735.3677" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="400.2299" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="400.3299" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -6015,7 +6015,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="735.3677" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="390.2019" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="390.3019" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -6171,7 +6171,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="490.5811" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="400.2297" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="400.3297" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -6301,7 +6301,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="490.5811" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="390.2024" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="390.3024" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -7068,7 +7068,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="576.2944" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="440.2132" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="440.3132" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -7133,7 +7133,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="576.2944" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="430.2406" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="430.3406" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -7159,7 +7159,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="576.2944" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="490.2700" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="490.3700" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -7757,7 +7757,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="442.2606" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="510.2922" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="510.3922" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -10149,7 +10149,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="631.3548" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="400.2296" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="400.3296" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -10305,7 +10305,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="631.3548" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="480.2458" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="480.3458" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -10357,7 +10357,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="623.3027" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="650.2552" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="650.3552" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -10565,7 +10565,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="703.3703" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="460.2551" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="460.3551" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -11592,7 +11592,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="654.3701" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="460.2516" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="460.3516" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -11683,7 +11683,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="436.5827" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="460.2506" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="460.3506" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -13074,7 +13074,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="744.3803" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="560.2778" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="560.3778" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -13204,7 +13204,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="496.5895" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="560.2802" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="560.3802" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -14686,7 +14686,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="465.9518" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="570.2938" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="570.3938" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -15011,7 +15011,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="514.7420" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="590.2615" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="590.3615" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -15245,7 +15245,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="487.5922" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="200.2076" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="200.3076" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -16311,7 +16311,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="719.8252" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="360.2001" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="360.3001" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -16662,7 +16662,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="606.3413" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="430.2400" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="430.3400" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -21459,7 +21459,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="601.8411" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="430.2766" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="430.3766" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -21680,7 +21680,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="658.8752" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="490.2617" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="490.3617" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -21836,7 +21836,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="439.5861" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="490.2614" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="490.3614" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -23461,7 +23461,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="443.2631" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="370.2194" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="370.3194" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -23682,7 +23682,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="636.3595" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="430.2760" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="430.3760" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -23812,7 +23812,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="424.5756" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="430.2766" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="430.3766" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -24111,7 +24111,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="583.3568" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="440.2866" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="440.3866" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
@@ -24189,7 +24189,7 @@
                 <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="389.2405" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Precursor>
             <Product>
-                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="440.2866" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
+                <cvParam unitCvRef="MS" unitName="m/z" unitAccession="MS:1000040" value="440.3866" accession="MS:1000827" name="isolation window target m/z" cvRef="MS"/>
             </Product>
             <ConfigurationList>
                 <Configuration>
