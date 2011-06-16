@@ -2,9 +2,9 @@ protein.name, peptide.seq, precursor.retT, precursor.mz, product.m_z
 ADH1_YEAST (P00330) Alcohol dehydrogenase I (EC 1.1.1.1) (YADH-1) - Saccharomyces cerevisiae (Bakers yeast)., SISIVGSYVGNR, 40.9675, 626.3357, 1251.6766
 ADH1_YEAST (P00330) Alcohol dehydrogenase I (EC 1.1.1.1) (YADH-1) - Saccharomyces cerevisiae (Bakers yeast)., SISIVGSYVGNR, 40.9675, 626.3357, 752.3767
 ADH1_YEAST (P00330) Alcohol dehydrogenase I (EC 1.1.1.1) (YADH-1) - Saccharomyces cerevisiae (Bakers yeast)., EALDFFAR, 48.2316, 484.7424, 968.4982
-ADH1_YEAST (P00330) Alcohol dehydrogenase I (EC 1.1.1.1) (YADH-1) - Saccharomyces cerevisiae (Bakers yeast)., EALDFFAR, 48.2316, 484.7424, 540.2956
-P00350 6PGD_ECOLI 6-phosphogluconate dehydrogenase, EAYELVAPILTK, 50.2328, 673.8868, 642.4263
-P00350 6PGD_ECOLI 6-phosphogluconate dehydrogenase, EAYELVAPILTK, 50.2328, 673.8868, 741.4954
+ADH1_YEAST (P00330) Alcohol dehydrogenase I (EC 1.1.1.1) (YADH-1) - Saccharomyces cerevisiae (Bakers yeast)., EALDFFAR, 48.2316, 484.7424, 540.3956
+P00350 6PGD_ECOLI 6-phosphogluconate dehydrogenase, EAYELVAPILTK, 50.3328, 673.8868, 642.4263
+P00350 6PGD_ECOLI 6-phosphogluconate dehydrogenase, EAYELVAPILTK, 50.3328, 673.8868, 741.4954
 P00350 6PGD_ECOLI 6-phosphogluconate dehydrogenase, AGAGTDAAIDSLKPYLDK, 45.1939, 602.6442, 635.348
 P00350 6PGD_ECOLI 6-phosphogluconate dehydrogenase, AGAGTDAAIDSLKPYLDK, 45.1939, 602.6442, 843.4071
 P00363 FRDA_ECOLI Fumarate reductase flavoprotein subunit - Escherichia coli strain K12, AAIAAAQANPNAK, 24.2838, 605.8323, 813.4312
@@ -15,8 +15,8 @@ P00448 SODM_ECOLI Superoxide dismutase [Mn] - Escherichia coli strain K12, DFGSV
 P00448 SODM_ECOLI Superoxide dismutase [Mn] - Escherichia coli strain K12, DFGSVDNFK, 39.1851, 514.7383, 766.3824
 P00448 SODM_ECOLI Superoxide dismutase [Mn] - Escherichia coli strain K12, GTTLQGDLK, 29.0511, 466.7523, 932.5138
 P00448 SODM_ECOLI Superoxide dismutase [Mn] - Escherichia coli strain K12, GTTLQGDLK, 29.0511, 466.7523, 560.3101
-P00452 RIR1_ECOLI Ribonucleoside-diphosphate reductase 1 subunit alpha - Escherichia coli strain K12, GILPIDTYK, 44.3607, 510.292, 1019.5943
-P00452 RIR1_ECOLI Ribonucleoside-diphosphate reductase 1 subunit alpha - Escherichia coli strain K12, GILPIDTYK, 44.3607, 510.292, 639.3386
+P00452 RIR1_ECOLI Ribonucleoside-diphosphate reductase 1 subunit alpha - Escherichia coli strain K12, GILPIDTYK, 44.3607, 510.392, 1019.5943
+P00452 RIR1_ECOLI Ribonucleoside-diphosphate reductase 1 subunit alpha - Escherichia coli strain K12, GILPIDTYK, 44.3607, 510.392, 639.3386
 P00452 RIR1_ECOLI Ribonucleoside-diphosphate reductase 1 subunit alpha - Escherichia coli strain K12, ALDALLDYQDYPIPAAK, 54.9776, 938.9933, 386.2423
 P00452 RIR1_ECOLI Ribonucleoside-diphosphate reductase 1 subunit alpha - Escherichia coli strain K12, ALDALLDYQDYPIPAAK, 54.9776, 938.9933, 596.3782
 P00490 PHSM_ECOLI Maltodextrin phosphorylase - Escherichia coli strain K12, AQPFAKPVANQR, 40.3467, 663.8609, 1030.5573
@@ -73,7 +73,7 @@ P02925 RBSB_ECOLI D-ribose-binding periplasmic protein precursor - Escherichia c
 P02925 RBSB_ECOLI D-ribose-binding periplasmic protein precursor - Escherichia coli strain K12, LAATIAQLPDQIGAK, 45.0615, 755.4411, 728.4021
 P02925 RBSB_ECOLI D-ribose-binding periplasmic protein precursor - Escherichia coli strain K12, LAATIAQLPDQIGAK, 45.0615, 755.4411, 1040.5858
 P03841 MALM_ECOLI Maltose operon periplasmic protein precursor - Escherichia coli strain K12, LTPALGQQK, 28.022, 478.2805, 955.5696
-P03841 MALM_ECOLI Maltose operon periplasmic protein precursor - Escherichia coli strain K12, LTPALGQQK, 28.022, 478.2805, 460.2654
+P03841 MALM_ECOLI Maltose operon periplasmic protein precursor - Escherichia coli strain K12, LTPALGQQK, 28.022, 478.2805, 460.3654
 P03841 MALM_ECOLI Maltose operon periplasmic protein precursor - Escherichia coli strain K12, GVGNSIPDIPDPVAR, 44.8677, 753.9071, 979.5335
 P03841 MALM_ECOLI Maltose operon periplasmic protein precursor - Escherichia coli strain K12, GVGNSIPDIPDPVAR, 44.8677, 753.9071, 511.2627
 P04805 SYE_ECOLI Glutamyl-tRNA synthetase - Escherichia coli strain K12, FANPQEGSVVFDDQIR, 43.8293, 911.4492, 991.5531
@@ -104,7 +104,7 @@ P07003 POXB_ECOLI Pyruvate dehydrogenase [cytochrome] - Escherichia coli strain 
 P07003 POXB_ECOLI Pyruvate dehydrogenase [cytochrome] - Escherichia coli strain K12, ALLPLVEEK, 46.3452, 506.3069, 827.5156
 P07003 POXB_ECOLI Pyruvate dehydrogenase [cytochrome] - Escherichia coli strain K12, AGGYLTDGTELHDTNFAR, 40.1157, 646.6409, 1203.5942
 P07003 POXB_ECOLI Pyruvate dehydrogenase [cytochrome] - Escherichia coli strain K12, AGGYLTDGTELHDTNFAR, 40.1157, 646.6409, 723.3608
-P07014 DHSB_ECOLI Succinate dehydrogenase iron-sulfur subunit - Escherichia coli strain K12, IKPYLLNNGQNPPAR, 34.3979, 565.6465, 440.2672
+P07014 DHSB_ECOLI Succinate dehydrogenase iron-sulfur subunit - Escherichia coli strain K12, IKPYLLNNGQNPPAR, 34.3979, 565.6465, 440.3672
 P07014 DHSB_ECOLI Succinate dehydrogenase iron-sulfur subunit - Escherichia coli strain K12, IKPYLLNNGQNPPAR, 34.3979, 565.6465, 682.384
 P07014 DHSB_ECOLI Succinate dehydrogenase iron-sulfur subunit - Escherichia coli strain K12, YNPDVDDAPR, 27.1421, 581.2676, 343.2127
 P07014 DHSB_ECOLI Succinate dehydrogenase iron-sulfur subunit - Escherichia coli strain K12, YNPDVDDAPR, 27.1421, 581.2676, 573.2679
@@ -118,27 +118,27 @@ P07118 SYV_ECOLI Valyl-tRNA synthetase - Escherichia coli strain K12, GNESDVYSSE
 P07118 SYV_ECOLI Valyl-tRNA synthetase - Escherichia coli strain K12, GNESDVYSSEIPAEFQK, 42.1404, 950.4409, 602.2426
 P07395 SYFB_ECOLI Phenylalanyl-tRNA synthetase beta chain - Escherichia coli strain K12, AEANPALHPGQSAAIYLK, 39.1716, 617.6646, 386.1698
 P07395 SYFB_ECOLI Phenylalanyl-tRNA synthetase beta chain - Escherichia coli strain K12, AEANPALHPGQSAAIYLK, 39.1716, 617.6646, 1086.5812
-P07395 SYFB_ECOLI Phenylalanyl-tRNA synthetase beta chain - Escherichia coli strain K12, TLEEEEIAATVAK, 40.2927, 702.3713, 802.4809
-P07395 SYFB_ECOLI Phenylalanyl-tRNA synthetase beta chain - Escherichia coli strain K12, TLEEEEIAATVAK, 40.2927, 702.3713, 931.5039
+P07395 SYFB_ECOLI Phenylalanyl-tRNA synthetase beta chain - Escherichia coli strain K12, TLEEEEIAATVAK, 40.3927, 702.3713, 802.4809
+P07395 SYFB_ECOLI Phenylalanyl-tRNA synthetase beta chain - Escherichia coli strain K12, TLEEEEIAATVAK, 40.3927, 702.3713, 931.5039
 P07650 TYPH_ECOLI Thymidine phosphorylase - Escherichia coli strain K12, DVGVAIIGQTSSLAPADK, 46.5526, 871.4742, 501.2781
-P07650 TYPH_ECOLI Thymidine phosphorylase - Escherichia coli strain K12, DVGVAIIGQTSSLAPADK, 46.5526, 871.4742, 430.2406
+P07650 TYPH_ECOLI Thymidine phosphorylase - Escherichia coli strain K12, DVGVAIIGQTSSLAPADK, 46.5526, 871.4742, 430.3406
 P07650 TYPH_ECOLI Thymidine phosphorylase - Escherichia coli strain K12, RDGHALSDEEIR, 30.918, 699.3398, 932.46
 P07650 TYPH_ECOLI Thymidine phosphorylase - Escherichia coli strain K12, RDGHALSDEEIR, 30.918, 699.3398, 466.2142
 P07813 SYL_ECOLI Leucyl-tRNA synthetase - Escherichia coli strain K12, GEGDIDNAPWPVADEK, 42.3451, 856.8998, 941.5017
 P07813 SYL_ECOLI Leucyl-tRNA synthetase - Escherichia coli strain K12, GEGDIDNAPWPVADEK, 42.3451, 856.8998, 658.3469
 P07813 SYL_ECOLI Leucyl-tRNA synthetase - Escherichia coli strain K12, NWVSPVDAIVER, 50.5949, 692.8648, 584.3051
-P07813 SYL_ECOLI Leucyl-tRNA synthetase - Escherichia coli strain K12, NWVSPVDAIVER, 50.5949, 692.8648, 400.2008
+P07813 SYL_ECOLI Leucyl-tRNA synthetase - Escherichia coli strain K12, NWVSPVDAIVER, 50.5949, 692.8648, 400.3008
 P08194 GLPT_ECOLI Glycerol-3-phosphate transporter - Escherichia coli strain K12, LPAAEIDPTYR, 37.1442, 623.3326, 764.4157
 P08194 GLPT_ECOLI Glycerol-3-phosphate transporter - Escherichia coli strain K12, LPAAEIDPTYR, 37.1442, 623.3326, 710.3796
 P08194 GLPT_ECOLI Glycerol-3-phosphate transporter - Escherichia coli strain K12, NDYPDDYNEK, 25.815, 636.7594, 880.3804
 P08194 GLPT_ECOLI Glycerol-3-phosphate transporter - Escherichia coli strain K12, NDYPDDYNEK, 25.815, 636.7594, 393.1461
 P08200 IDH_ECOLI Isocitrate dehydrogenase [NADP] - Escherichia coli strain K12, GPLTTPVGGGIR, 36.5353, 562.8282, 655.3953
 P08200 IDH_ECOLI Isocitrate dehydrogenase [NADP] - Escherichia coli strain K12, GPLTTPVGGGIR, 36.5353, 562.8282, 857.494
-P08200 IDH_ECOLI Isocitrate dehydrogenase [NADP] - Escherichia coli strain K12, YYQGTPSPVK, 27.8412, 570.2925, 1139.5892
-P08200 IDH_ECOLI Isocitrate dehydrogenase [NADP] - Escherichia coli strain K12, YYQGTPSPVK, 27.8412, 570.2925, 813.4576
+P08200 IDH_ECOLI Isocitrate dehydrogenase [NADP] - Escherichia coli strain K12, YYQGTPSPVK, 27.8412, 570.3925, 1139.5892
+P08200 IDH_ECOLI Isocitrate dehydrogenase [NADP] - Escherichia coli strain K12, YYQGTPSPVK, 27.8412, 570.3925, 813.4576
 P08312 SYFA_ECOLI Phenylalanyl-tRNA synthetase alpha chain - Escherichia coli strain K12, AAISQASDVAALDNVR, 39.9813, 800.923, 687.3813
 P08312 SYFA_ECOLI Phenylalanyl-tRNA synthetase alpha chain - Escherichia coli strain K12, AAISQASDVAALDNVR, 39.9813, 800.923, 1130.5924
-P08312 SYFA_ECOLI Phenylalanyl-tRNA synthetase alpha chain - Escherichia coli strain K12, EQVQQALNAR, 29.0683, 578.8115, 360.2073
+P08312 SYFA_ECOLI Phenylalanyl-tRNA synthetase alpha chain - Escherichia coli strain K12, EQVQQALNAR, 29.0683, 578.8115, 360.3073
 P08312 SYFA_ECOLI Phenylalanyl-tRNA synthetase alpha chain - Escherichia coli strain K12, EQVQQALNAR, 29.0683, 578.8115, 800.4493
 P08839 PT1_ECOLI Phosphoenolpyruvate-protein phosphotransferase - Escherichia coli strain K12, SLELPAIVGTGSVTSQVK, 50.5958, 893.503, 1343.7747
 P08839 PT1_ECOLI Phosphoenolpyruvate-protein phosphotransferase - Escherichia coli strain K12, SLELPAIVGTGSVTSQVK, 50.5958, 893.503, 963.5189
@@ -176,7 +176,7 @@ P0A6A8 ACP_ECOLI Acyl carrier protein - Escherichia coli strain K12, ITTVQAAIDYI
 P0A6A8 ACP_ECOLI Acyl carrier protein - Escherichia coli strain K12, ITTVQAAIDYINGHQA, 53.9386, 572.2905, 917.4241
 P0A6A8 ACP_ECOLI Acyl carrier protein - Escherichia coli strain K12, IIGEQLGVK, 35.7944, 478.7894, 730.4093
 P0A6A8 ACP_ECOLI Acyl carrier protein - Escherichia coli strain K12, IIGEQLGVK, 35.7944, 478.7894, 956.5857
-P0A6B7 ISCS_ECOLI Cysteine desulfurase - Escherichia coli strain K12, GIIYHVDATQSVGK, 34.1283, 496.596, 390.2354
+P0A6B7 ISCS_ECOLI Cysteine desulfurase - Escherichia coli strain K12, GIIYHVDATQSVGK, 34.1283, 496.596, 390.3354
 P0A6B7 ISCS_ECOLI Cysteine desulfurase - Escherichia coli strain K12, GIIYHVDATQSVGK, 33.9781, 496.5971, 683.386
 P0A6B7 ISCS_ECOLI Cysteine desulfurase - Escherichia coli strain K12, NQIADLVGADPR, 41.2335, 634.8426, 356.2024
 P0A6B7 ISCS_ECOLI Cysteine desulfurase - Escherichia coli strain K12, NQIADLVGADPR, 41.2335, 634.8426, 655.3429
@@ -215,7 +215,7 @@ P0A6N1 EFTU_ECOLI Elongation factor Tu - Escherichia coli strain K12, VGEEVEIVGI
 P0A6P1 EFTS_ECOLI Elongation factor Ts - Escherichia coli strain K12, AGNVAADGVIK, 29.0991, 507.7847, 673.3925
 P0A6P1 EFTS_ECOLI Elongation factor Ts - Escherichia coli strain K12, AGNVAADGVIK, 29.0991, 507.7847, 602.3595
 P0A6P1 EFTS_ECOLI Elongation factor Ts - Escherichia coli strain K12, DAGFQAFADK, 38.6647, 535.2524, 883.4414
-P0A6P1 EFTS_ECOLI Elongation factor Ts - Escherichia coli strain K12, DAGFQAFADK, 38.6647, 535.2524, 480.2505
+P0A6P1 EFTS_ECOLI Elongation factor Ts - Escherichia coli strain K12, DAGFQAFADK, 38.6647, 535.2524, 480.3505
 P0A6P9 ENO_ECOLI Enolase - Escherichia coli strain K12, AVAAVNGPIAQALIGK, 49.0686, 746.9463, 967.6105
 P0A6P9 ENO_ECOLI Enolase - Escherichia coli strain K12, AVAAVNGPIAQALIGK, 49.0686, 746.9463, 700.4452
 P0A6P9 ENO_ECOLI Enolase - Escherichia coli strain K12, FNQIGSLTETLAAIK, 55.9024, 803.4479, 1103.6436
@@ -223,7 +223,7 @@ P0A6P9 ENO_ECOLI Enolase - Escherichia coli strain K12, FNQIGSLTETLAAIK, 55.9024
 P0A6Q3 FABA_ECOLI 3-hydroxydecanoyl-[acyl-carrier-protein] dehydratase - Escherichia coli strain K12, FTGQVLPTAK, 35.5067, 531.3036, 416.2527
 P0A6Q3 FABA_ECOLI 3-hydroxydecanoyl-[acyl-carrier-protein] dehydratase - Escherichia coli strain K12, FTGQVLPTAK, 35.5067, 531.3036, 646.3676
 P0A6Q3 FABA_ECOLI 3-hydroxydecanoyl-[acyl-carrier-protein] dehydratase - Escherichia coli strain K12, EDLLASGR, 31.6871, 430.7297, 860.4608
-P0A6Q3 FABA_ECOLI 3-hydroxydecanoyl-[acyl-carrier-protein] dehydratase - Escherichia coli strain K12, EDLLASGR, 31.6871, 430.7297, 390.2141
+P0A6Q3 FABA_ECOLI 3-hydroxydecanoyl-[acyl-carrier-protein] dehydratase - Escherichia coli strain K12, EDLLASGR, 31.6871, 430.7297, 390.3141
 P0A6S7 GPDA_ECOLI Glycerol-3-phosphate dehydrogenase [NADP+] - Escherichia coli strain K12, VYSNPDFIGVQLGGAVK, 40.6586, 588.6505, 317.2184
 P0A6S7 GPDA_ECOLI Glycerol-3-phosphate dehydrogenase [NADP+] - Escherichia coli strain K12, VYSNPDFIGVQLGGAVK, 40.6586, 588.6505, 1075.5436
 P0A6S7 GPDA_ECOLI Glycerol-3-phosphate dehydrogenase [NADP+] - Escherichia coli strain K12, IGQVVEGYR, 31.5819, 510.78, 907.4817
@@ -248,7 +248,7 @@ P0A6Z3 HTPG_ECOLI Chaperone protein htpG - Escherichia coli strain K12, DEVIDHLG
 P0A6Z3 HTPG_ECOLI Chaperone protein htpG - Escherichia coli strain K12, DEVIDHLGTIAK, 41.3216, 437.5644, 739.4607
 P0A6Z3 HTPG_ECOLI Chaperone protein htpG - Escherichia coli strain K12, YSDHIALPVEIEK, 43.6707, 505.2632, 714.4148
 P0A6Z3 HTPG_ECOLI Chaperone protein htpG - Escherichia coli strain K12, YSDHIALPVEIEK, 43.6707, 505.2632, 617.3686
-P0A705 IF2_ECOLI Translation initiation factor IF-2 - Escherichia coli strain K12, AAQVPVVVAVNK, 37.1165, 597.8683, 370.2122
+P0A705 IF2_ECOLI Translation initiation factor IF-2 - Escherichia coli strain K12, AAQVPVVVAVNK, 37.1165, 597.8683, 370.3122
 P0A705 IF2_ECOLI Translation initiation factor IF-2 - Escherichia coli strain K12, AAQVPVVVAVNK, 37.1165, 597.8683, 924.613
 P0A705 IF2_ECOLI Translation initiation factor IF-2 - Escherichia coli strain K12, ADVQGSVEAISDSLLK, 53.5274, 544.617, 1218.6553
 P0A705 IF2_ECOLI Translation initiation factor IF-2 - Escherichia coli strain K12, ADVQGSVEAISDSLLK, 53.5274, 544.617, 662.3827
@@ -274,8 +274,8 @@ P0A799 PGK_ECOLI Phosphoglycerate kinase - Escherichia coli strain K12, VATEFSET
 P0A799 PGK_ECOLI Phosphoglycerate kinase - Escherichia coli strain K12, VATEFSETAPATLK, 37.479, 732.8903, 529.3408
 P0A799 PGK_ECOLI Phosphoglycerate kinase - Escherichia coli strain K12, ASLPTIELALK, 51.4116, 578.3521, 1155.709
 P0A799 PGK_ECOLI Phosphoglycerate kinase - Escherichia coli strain K12, ASLPTIELALK, 51.4116, 578.3521, 884.553
-P0A7D4 PURA_ECOLI Adenylosuccinate synthetase - Escherichia coli strain K12, VGDLFDKETFAEK, 41.0338, 500.2466, 967.4838
-P0A7D4 PURA_ECOLI Adenylosuccinate synthetase - Escherichia coli strain K12, VGDLFDKETFAEK, 41.0796, 500.2488, 532.293
+P0A7D4 PURA_ECOLI Adenylosuccinate synthetase - Escherichia coli strain K12, VGDLFDKETFAEK, 41.0338, 500.3466, 967.4838
+P0A7D4 PURA_ECOLI Adenylosuccinate synthetase - Escherichia coli strain K12, VGDLFDKETFAEK, 41.0796, 500.3488, 532.293
 P0A7D4 PURA_ECOLI Adenylosuccinate synthetase - Escherichia coli strain K12, IEELTGVPIDIISTGPDR, 54.8488, 963.0249, 1183.6506
 P0A7D4 PURA_ECOLI Adenylosuccinate synthetase - Escherichia coli strain K12, IEELTGVPIDIISTGPDR, 54.8488, 963.0249, 742.4085
 P0A7D7 PUR7_ECOLI Phosphoribosylaminoimidazole-succinocarboxamide synthase - Escherichia coli strain K12, GEVVLGDEFSPDGSR, 42.2404, 782.3762, 1179.554
@@ -375,7 +375,7 @@ P0A825 GLYA_ECOLI Serine hydroxymethyltransferase - Escherichia coli strain K12,
 P0A825 GLYA_ECOLI Serine hydroxymethyltransferase - Escherichia coli strain K12, GGSEELYK, 25.7643, 441.7112, 768.3934
 P0A836 SUCC_ECOLI Succinyl-CoA synthetase beta chain - Escherichia coli strain K12, GLTDAAQQVVAAVEGK, 56.7193, 778.9184, 574.3273
 P0A836 SUCC_ECOLI Succinyl-CoA synthetase beta chain - Escherichia coli strain K12, GLTDAAQQVVAAVEGK, 56.7193, 778.9184, 673.3937
-P0A836 SUCC_ECOLI Succinyl-CoA synthetase beta chain - Escherichia coli strain K12, LHGGEPANFLDVGGGATK, 40.7831, 580.6237, 490.2694
+P0A836 SUCC_ECOLI Succinyl-CoA synthetase beta chain - Escherichia coli strain K12, LHGGEPANFLDVGGGATK, 40.7831, 580.6237, 490.3694
 P0A836 SUCC_ECOLI Succinyl-CoA synthetase beta chain - Escherichia coli strain K12, LHGGEPANFLDVGGGATK, 40.7831, 580.6237, 704.3668
 P0A850 TIG_ECOLI Trigger factor - Escherichia coli strain K12, INPAGAPTYVPGEYK, 37.0572, 788.9084, 1053.5404
 P0A850 TIG_ECOLI Trigger factor - Escherichia coli strain K12, INPAGAPTYVPGEYK, 37.0572, 788.9084, 593.302
@@ -403,10 +403,10 @@ P0A870 TALB_ECOLI Transaldolase B - Escherichia coli strain K12, LTIAPALLK, 46.6
 P0A870 TALB_ECOLI Transaldolase B - Escherichia coli strain K12, LTIAPALLK, 46.6263, 470.3113, 725.4991
 P0A8E7 YAJQ_ECOLI UPF0234 protein yajQ - Escherichia coli strain K12, GIEGSSLDVPENIVHSGK, 41.3121, 613.3109, 980.5291
 P0A8E7 YAJQ_ECOLI UPF0234 protein yajQ - Escherichia coli strain K12, GIEGSSLDVPENIVHSGK, 41.3121, 613.3109, 1194.6361
-P0A8E7 YAJQ_ECOLI UPF0234 protein yajQ - Escherichia coli strain K12, VQAQIQGDEIR, 30.2458, 628.8377, 830.4504
-P0A8E7 YAJQ_ECOLI UPF0234 protein yajQ - Escherichia coli strain K12, VQAQIQGDEIR, 30.2458, 628.8377, 717.3688
+P0A8E7 YAJQ_ECOLI UPF0234 protein yajQ - Escherichia coli strain K12, VQAQIQGDEIR, 30.3458, 628.8377, 830.4504
+P0A8E7 YAJQ_ECOLI UPF0234 protein yajQ - Escherichia coli strain K12, VQAQIQGDEIR, 30.3458, 628.8377, 717.3688
 P0A8F0 UPP_ECOLI Uracil phosphoribosyltransferase - Escherichia coli strain K12, VTIEGWNGPVEIDQIK, 51.3402, 899.4772, 503.2919
-P0A8F0 UPP_ECOLI Uracil phosphoribosyltransferase - Escherichia coli strain K12, VTIEGWNGPVEIDQIK, 51.3402, 899.4772, 500.265
+P0A8F0 UPP_ECOLI Uracil phosphoribosyltransferase - Escherichia coli strain K12, VTIEGWNGPVEIDQIK, 51.3402, 899.4772, 500.365
 P0A8F0 UPP_ECOLI Uracil phosphoribosyltransferase - Escherichia coli strain K12, NEETLEPVPYFQK, 44.4601, 797.4003, 1593.8127
 P0A8F0 UPP_ECOLI Uracil phosphoribosyltransferase - Escherichia coli strain K12, NEETLEPVPYFQK, 44.4601, 797.4003, 878.482
 P0A8G6 WRBA_ECOLI Flavoprotein wrbA - Escherichia coli strain K12, VDGAEVVVK, 29.0401, 458.2591, 701.4237
@@ -487,7 +487,7 @@ P0A9M8 PTA_ECOLI Phosphate acetyltransferase - Escherichia coli strain K12, NTNI
 P0A9M8 PTA_ECOLI Phosphate acetyltransferase - Escherichia coli strain K12, NTNITGVIVNK, 36.4112, 586.8325, 629.4037
 P0A9P0 DLDH_ECOLI Dihydrolipoyl dehydrogenase - Escherichia coli strain K12, FTGANTLEVEGENGK, 34.3713, 783.3788, 861.408
 P0A9P0 DLDH_ECOLI Dihydrolipoyl dehydrogenase - Escherichia coli strain K12, FTGANTLEVEGENGK, 34.3713, 783.3788, 633.2979
-P0A9P0 DLDH_ECOLI Dihydrolipoyl dehydrogenase - Escherichia coli strain K12, ALAEHGIVFGEPK, 38.1861, 456.5759, 430.2312
+P0A9P0 DLDH_ECOLI Dihydrolipoyl dehydrogenase - Escherichia coli strain K12, ALAEHGIVFGEPK, 38.1861, 456.5759, 430.3312
 P0A9P0 DLDH_ECOLI Dihydrolipoyl dehydrogenase - Escherichia coli strain K12, ALAEHGIVFGEPK, 38.1861, 456.5759, 995.509
 P0A9Q7 ADHE_ECOLI Aldehyde-alcohol dehydrogenase - Escherichia coli strain K12, GSLPIALDEVITDGHK, 51.1711, 555.6282, 557.2769
 P0A9Q7 ADHE_ECOLI Aldehyde-alcohol dehydrogenase - Escherichia coli strain K12, GSLPIALDEVITDGHK, 51.1711, 555.6282, 670.3535
@@ -507,8 +507,8 @@ P0AA25 THIO_ECOLI Thioredoxin-1 - Escherichia coli strain K12, LNIDQNPGTAPK, 30.
 P0AA25 THIO_ECOLI Thioredoxin-1 - Escherichia coli strain K12, LNIDQNPGTAPK, 30.1283, 634.3413, 570.3339
 P0AA25 THIO_ECOLI Thioredoxin-1 - Escherichia coli strain K12, IIHLTDDSFDTDVLK, 47.6632, 577.9598, 690.3718
 P0AA25 THIO_ECOLI Thioredoxin-1 - Escherichia coli strain K12, IIHLTDDSFDTDVLK, 47.6632, 577.9598, 895.4672
-P0AAI5 FABF_ECOLI 3-oxoacyl-[acyl-carrier-protein] synthase 2 - Escherichia coli strain K12, NDNPQAASRPWDK, 27.4741, 500.2379, 441.181
-P0AAI5 FABF_ECOLI 3-oxoacyl-[acyl-carrier-protein] synthase 2 - Escherichia coli strain K12, NDNPQAASRPWDK, 27.4741, 500.2379, 954.4677
+P0AAI5 FABF_ECOLI 3-oxoacyl-[acyl-carrier-protein] synthase 2 - Escherichia coli strain K12, NDNPQAASRPWDK, 27.4741, 500.3379, 441.181
+P0AAI5 FABF_ECOLI 3-oxoacyl-[acyl-carrier-protein] synthase 2 - Escherichia coli strain K12, NDNPQAASRPWDK, 27.4741, 500.3379, 954.4677
 P0AAI5 FABF_ECOLI 3-oxoacyl-[acyl-carrier-protein] synthase 2 - Escherichia coli strain K12, ASTPLGVGGFGAAR, 40.8742, 630.8449, 791.4225
 P0AAI5 FABF_ECOLI 3-oxoacyl-[acyl-carrier-protein] synthase 2 - Escherichia coli strain K12, ASTPLGVGGFGAAR, 40.8742, 630.8449, 635.3333
 P0AAI9 FABD_ECOLI Malonyl CoA-acyl carrier protein transacylase - Escherichia coli strain K12, ITFNAPTVPVVNNVDVK, 48.7553, 914.0132, 983.5671
@@ -564,7 +564,7 @@ P0ABK5 CYSK_ECOLI Cysteine synthase A - Escherichia coli strain K12, LQEDESFTNK,
 P0ABP8 DEOD_ECOLI Purine nucleoside phosphorylase deoD-type - Escherichia coli strain K12, IALESVLLGDKE, 51.8561, 643.8619, 1102.6147
 P0ABP8 DEOD_ECOLI Purine nucleoside phosphorylase deoD-type - Escherichia coli strain K12, IALESVLLGDKE, 51.8561, 643.8619, 989.5243
 P0ABP8 DEOD_ECOLI Purine nucleoside phosphorylase deoD-type - Escherichia coli strain K12, ELITDFGVK, 44.7458, 511.283, 666.3546
-P0ABP8 DEOD_ECOLI Purine nucleoside phosphorylase deoD-type - Escherichia coli strain K12, ELITDFGVK, 44.7458, 511.283, 450.2766
+P0ABP8 DEOD_ECOLI Purine nucleoside phosphorylase deoD-type - Escherichia coli strain K12, ELITDFGVK, 44.7458, 511.283, 450.3766
 P0ABQ2 GARR_ECOLI 2-hydroxy-3-oxopropionate reductase - Escherichia coli strain K12, AGVNPDLVYQAIR, 47.024, 708.3875, 1074.6042
 P0ABQ2 GARR_ECOLI 2-hydroxy-3-oxopropionate reductase - Escherichia coli strain K12, AGVNPDLVYQAIR, 47.024, 708.3875, 650.3692
 P0ABZ6 SURA_ECOLI Chaperone surA precursor - Escherichia coli strain K12, IQELPGIFAQALSTAK, 58.2828, 843.9761, 1203.6949
@@ -583,15 +583,15 @@ P0AC41 DHSA_ECOLI Succinate dehydrogenase flavoprotein subunit - Escherichia col
 P0AC41 DHSA_ECOLI Succinate dehydrogenase flavoprotein subunit - Escherichia coli strain K12, GEGGYLLNK, 33.3034, 475.751, 914.4978
 P0AC41 DHSA_ECOLI Succinate dehydrogenase flavoprotein subunit - Escherichia coli strain K12, LPGILELSR, 49.1392, 499.3011, 787.4737
 P0AC41 DHSA_ECOLI Succinate dehydrogenase flavoprotein subunit - Escherichia coli strain K12, LPGILELSR, 49.1392, 499.3011, 617.3681
-P0AC59 GLRX2_ECOLI Glutaredoxin-2 - Escherichia coli strain K12, SAFDEFSTPAAR, 40.2302, 649.8071, 749.4069
-P0AC59 GLRX2_ECOLI Glutaredoxin-2 - Escherichia coli strain K12, SAFDEFSTPAAR, 40.2302, 649.8071, 602.331
+P0AC59 GLRX2_ECOLI Glutaredoxin-2 - Escherichia coli strain K12, SAFDEFSTPAAR, 40.3302, 649.8071, 749.4069
+P0AC59 GLRX2_ECOLI Glutaredoxin-2 - Escherichia coli strain K12, SAFDEFSTPAAR, 40.3302, 649.8071, 602.331
 P0AC62 GLRX3_ECOLI Glutaredoxin-3 - Escherichia coli strain K12, GVSFQELPIDGNAAK, 44.8067, 773.407, 785.4349
 P0AC62 GLRX3_ECOLI Glutaredoxin-3 - Escherichia coli strain K12, GVSFQELPIDGNAAK, 44.8067, 773.407, 898.5104
 P0AC62 GLRX3_ECOLI Glutaredoxin-3 - Escherichia coli strain K12, ANVEIYTK, 29.0636, 469.255, 752.4331
 P0AC62 GLRX3_ECOLI Glutaredoxin-3 - Escherichia coli strain K12, ANVEIYTK, 29.0636, 469.255, 524.3171
 P0AC69 GLRX4_ECOLI Glutaredoxin-4 - Escherichia coli strain K12, GELQQLIK, 40.6692, 464.7755, 928.5642
 P0AC69 GLRX4_ECOLI Glutaredoxin-4 - Escherichia coli strain K12, GELQQLIK, 40.6692, 464.7755, 742.5015
-P0AC69 GLRX4_ECOLI Glutaredoxin-4 - Escherichia coli strain K12, FAYVDILQNPDIR, 53.0382, 782.4139, 500.2843
+P0AC69 GLRX4_ECOLI Glutaredoxin-4 - Escherichia coli strain K12, FAYVDILQNPDIR, 53.0382, 782.4139, 500.3843
 P0AC69 GLRX4_ECOLI Glutaredoxin-4 - Escherichia coli strain K12, FAYVDILQNPDIR, 53.0382, 782.4139, 614.3325
 P0AC86 PHSG_ECOLI Glycogen phosphorylase - Escherichia coli strain K12, LWSAQASSEINLGK, 51.8746, 752.3927, 1283.6244
 P0AC86 PHSG_ECOLI Glycogen phosphorylase - Escherichia coli strain K12, LWSAQASSEINLGK, 51.8746, 752.3927, 414.2346
@@ -622,7 +622,7 @@ P0ACF8 HNS_ECOLI DNA-binding protein H-NS - Escherichia coli strain K12, YSYVDEN
 P0ACI6 ASNC_ECOLI Regulatory protein asnC - Escherichia coli strain K12, ENYLIDNLDR, 44.2199, 632.8172, 632.3148
 P0ACI6 ASNC_ECOLI Regulatory protein asnC - Escherichia coli strain K12, ENYLIDNLDR, 44.2199, 632.8172, 858.4671
 P0ACI6 ASNC_ECOLI Regulatory protein asnC - Escherichia coli strain K12, IDVSPK, 24.933, 329.6894, 545.294
-P0ACI6 ASNC_ECOLI Regulatory protein asnC - Escherichia coli strain K12, IDVSPK, 24.933, 329.6894, 430.2778
+P0ACI6 ASNC_ECOLI Regulatory protein asnC - Escherichia coli strain K12, IDVSPK, 24.933, 329.6894, 430.3778
 P0ACJ0 LRP_ECOLI Leucine-responsive regulatory protein - Escherichia coli strain K12, GAPDVFEQFNTAVQK, 48.4471, 825.9175, 1064.5386
 P0ACJ0 LRP_ECOLI Leucine-responsive regulatory protein - Escherichia coli strain K12, GAPDVFEQFNTAVQK, 48.4471, 825.9175, 716.3183
 P0ACJ8 CRP_ECOLI Catabolite gene activator - Escherichia coli strain K12, IAQTLLNLAK, 45.531, 542.8422, 558.3747
@@ -638,7 +638,7 @@ P0AD33 YFCZ_ECOLI UPF0381 protein yfcZ - Escherichia coli strain K12, ITPTFTEESD
 P0AD33 YFCZ_ECOLI UPF0381 protein yfcZ - Escherichia coli strain K12, AEAEQTLAALTEK, 41.6657, 687.8647, 814.4203
 P0AD33 YFCZ_ECOLI UPF0381 protein yfcZ - Escherichia coli strain K12, AEAEQTLAALTEK, 41.6657, 687.8647, 846.4985
 P0AD61 KPYK1_ECOLI Pyruvate kinase I - Escherichia coli strain K12, LDAPLIVVATQGGK, 49.286, 691.4089, 561.3041
-P0AD61 KPYK1_ECOLI Pyruvate kinase I - Escherichia coli strain K12, LDAPLIVVATQGGK, 49.286, 691.4089, 490.263
+P0AD61 KPYK1_ECOLI Pyruvate kinase I - Escherichia coli strain K12, LDAPLIVVATQGGK, 49.286, 691.4089, 490.363
 P0AD61 KPYK1_ECOLI Pyruvate kinase I - Escherichia coli strain K12, GVNLPGVSIALPALAEK, 57.8016, 824.9819, 1265.7584
 P0AD61 KPYK1_ECOLI Pyruvate kinase I - Escherichia coli strain K12, GVNLPGVSIALPALAEK, 57.8016, 824.9819, 628.3733
 P0ADE8 YGFZ_ECOLI tRNA-modifying protein ygfZ - Escherichia coli strain K12, AALANLFSELPSK, 54.4786, 680.8775, 1030.5511
@@ -667,20 +667,20 @@ P0AE08 AHPC_ECOLI Alkyl hydroperoxide reductase subunit C - Escherichia coli str
 P0AE08 AHPC_ECOLI Alkyl hydroperoxide reductase subunit C - Escherichia coli strain K12, EGEATLAPSLDLVGK, 47.6527, 750.4127, 899.5238
 P0AE08 AHPC_ECOLI Alkyl hydroperoxide reductase subunit C - Escherichia coli strain K12, NGEFIEITEK, 39.9656, 590.3053, 879.4897
 P0AE08 AHPC_ECOLI Alkyl hydroperoxide reductase subunit C - Escherichia coli strain K12, NGEFIEITEK, 39.9656, 590.3053, 619.3333
-P0AE52 BCP_ECOLI Putative peroxiredoxin bcp - Escherichia coli strain K12, AGVDVLGISTDKPEK, 39.7016, 510.2736, 974.5237
-P0AE52 BCP_ECOLI Putative peroxiredoxin bcp - Escherichia coli strain K12, AGVDVLGISTDKPEK, 39.7016, 510.2736, 804.4129
+P0AE52 BCP_ECOLI Putative peroxiredoxin bcp - Escherichia coli strain K12, AGVDVLGISTDKPEK, 39.7016, 510.3736, 974.5237
+P0AE52 BCP_ECOLI Putative peroxiredoxin bcp - Escherichia coli strain K12, AGVDVLGISTDKPEK, 39.7016, 510.3736, 804.4129
 P0AEE5 DGAL_ECOLI D-galactose-binding periplasmic protein precursor - Escherichia coli strain K12, SGALAGTVLNDANNQAK, 37.0228, 822.4299, 987.5054
 P0AEE5 DGAL_ECOLI D-galactose-binding periplasmic protein precursor - Escherichia coli strain K12, SGALAGTVLNDANNQAK, 37.0228, 822.4299, 1244.6394
 P0AEE5 DGAL_ECOLI D-galactose-binding periplasmic protein precursor - Escherichia coli strain K12, ALAINLVDPAAAGTVIEK, 52.9352, 883.5105, 956.55
 P0AEE5 DGAL_ECOLI D-galactose-binding periplasmic protein precursor - Escherichia coli strain K12, ALAINLVDPAAAGTVIEK, 52.9352, 883.5105, 1071.5813
-P0AEK2 FABG_ECOLI 3-oxoacyl-[acyl-carrier-protein] reductase - Escherichia coli strain K12, AGILAQVPAGR, 37.2837, 526.8167, 400.2346
+P0AEK2 FABG_ECOLI 3-oxoacyl-[acyl-carrier-protein] reductase - Escherichia coli strain K12, AGILAQVPAGR, 37.2837, 526.8167, 400.3346
 P0AEK2 FABG_ECOLI 3-oxoacyl-[acyl-carrier-protein] reductase - Escherichia coli strain K12, AGILAQVPAGR, 37.2837, 526.8167, 499.3041
 P0AEK2 FABG_ECOLI 3-oxoacyl-[acyl-carrier-protein] reductase - Escherichia coli strain K12, AIAETLAAR, 31.0442, 458.2683, 731.4205
 P0AEK2 FABG_ECOLI 3-oxoacyl-[acyl-carrier-protein] reductase - Escherichia coli strain K12, AIAETLAAR, 31.0442, 458.2683, 531.3354
 P0AEK4 FABI_ECOLI Enoyl-[acyl-carrier-protein] reductase [NADH] - Escherichia coli strain K12, VNAISAGPIR, 33.8304, 499.2932, 600.3521
 P0AEK4 FABI_ECOLI Enoyl-[acyl-carrier-protein] reductase [NADH] - Escherichia coli strain K12, VNAISAGPIR, 33.8304, 499.2932, 784.4792
-P0AEK4 FABI_ECOLI Enoyl-[acyl-carrier-protein] reductase [NADH] - Escherichia coli strain K12, ASLEANVR, 26.3574, 430.2317, 859.47
-P0AEK4 FABI_ECOLI Enoyl-[acyl-carrier-protein] reductase [NADH] - Escherichia coli strain K12, ASLEANVR, 26.3574, 430.2317, 588.3195
+P0AEK4 FABI_ECOLI Enoyl-[acyl-carrier-protein] reductase [NADH] - Escherichia coli strain K12, ASLEANVR, 26.3574, 430.3317, 859.47
+P0AEK4 FABI_ECOLI Enoyl-[acyl-carrier-protein] reductase [NADH] - Escherichia coli strain K12, ASLEANVR, 26.3574, 430.3317, 588.3195
 P0AEM9 FLIY_ECOLI Cystine-binding periplasmic protein precursor - Escherichia coli strain K12, TNDTLAVTGEAFSR, 40.4496, 741.3711, 937.4866
 P0AEM9 FLIY_ECOLI Cystine-binding periplasmic protein precursor - Escherichia coli strain K12, TNDTLAVTGEAFSR, 40.4496, 741.3711, 866.4556
 P0AEM9 FLIY_ECOLI Cystine-binding periplasmic protein precursor - Escherichia coli strain K12, IDAILVDR, 39.4261, 457.7716, 914.5481
@@ -705,8 +705,8 @@ P0AEU0 HISJ_ECOLI Histidine-binding periplasmic protein precursor - Escherichia 
 P0AEU0 HISJ_ECOLI Histidine-binding periplasmic protein precursor - Escherichia coli strain K12, NSDIQPTVESLK, 44.7999, 665.8518, 984.4712
 P0AEU7 SKP_ECOLI Chaperone protein skp precursor - Escherichia coli strain K12, TGVSNTLENEFK, 39.962, 669.8377, 1081.5344
 P0AEU7 SKP_ECOLI Chaperone protein skp precursor - Escherichia coli strain K12, TGVSNTLENEFK, 39.962, 669.8377, 345.1871
-P0AEU7 SKP_ECOLI Chaperone protein skp precursor - Escherichia coli strain K12, IQTAVK, 27.7064, 330.205, 397.2117
-P0AEU7 SKP_ECOLI Chaperone protein skp precursor - Escherichia coli strain K12, IQTAVK, 27.7064, 330.205, 414.2484
+P0AEU7 SKP_ECOLI Chaperone protein skp precursor - Escherichia coli strain K12, IQTAVK, 27.7064, 330.305, 397.2117
+P0AEU7 SKP_ECOLI Chaperone protein skp precursor - Escherichia coli strain K12, IQTAVK, 27.7064, 330.305, 414.2484
 P0AEX9 MALE_ECOLI Maltose-binding periplasmic protein precursor - Escherichia coli strain K12, VNYGVTVLPTFK, 49.2712, 669.375, 805.4945
 P0AEX9 MALE_ECOLI Maltose-binding periplasmic protein precursor - Escherichia coli strain K12, VNYGVTVLPTFK, 49.2712, 669.375, 492.2867
 P0AEX9 MALE_ECOLI Maltose-binding periplasmic protein precursor - Escherichia coli strain K12, DKPLGAVALK, 32.8023, 506.3149, 768.5082
@@ -794,8 +794,8 @@ P0C0L2 OSMC_ECOLI Peroxiredoxin osmC - Escherichia coli strain K12, VDAGFAITK, 3
 P0C0L2 OSMC_ECOLI Peroxiredoxin osmC - Escherichia coli strain K12, VDAGFAITK, 35.8006, 461.2528, 707.4108
 P0C0V0 DEGP_ECOLI Protease do precursor - Escherichia coli strain K12, GYVVTNNHVVDNATVIK, 36.1114, 614.9967, 645.3942
 P0C0V0 DEGP_ECOLI Protease do precursor - Escherichia coli strain K12, GYVVTNNHVVDNATVIK, 36.1114, 614.9967, 419.2409
-P0C0V0 DEGP_ECOLI Protease do precursor - Escherichia coli strain K12, GAFVSQVLPNSSAAK, 40.2166, 738.4013, 674.3542
-P0C0V0 DEGP_ECOLI Protease do precursor - Escherichia coli strain K12, GAFVSQVLPNSSAAK, 40.2166, 738.4013, 1101.6053
+P0C0V0 DEGP_ECOLI Protease do precursor - Escherichia coli strain K12, GAFVSQVLPNSSAAK, 40.3166, 738.4013, 674.3542
+P0C0V0 DEGP_ECOLI Protease do precursor - Escherichia coli strain K12, GAFVSQVLPNSSAAK, 40.3166, 738.4013, 1101.6053
 P10408 SECA_ECOLI Protein translocase subunit secA - Escherichia coli strain K12, SELVSNELTK, 33.453, 560.3015, 691.3625
 P10408 SECA_ECOLI Protein translocase subunit secA - Escherichia coli strain K12, SELVSNELTK, 33.453, 560.3015, 1119.6031
 P10408 SECA_ECOLI Protein translocase subunit secA - Escherichia coli strain K12, NELLDVSDVSETINSIR, 55.2397, 952.4903, 919.4954
@@ -864,8 +864,8 @@ P21170 SPEA_ECOLI Biosynthetic arginine decarboxylase - Escherichia coli strain 
 P21170 SPEA_ECOLI Biosynthetic arginine decarboxylase - Escherichia coli strain K12, DIATGVRESAR, 24.8935, 392.2079, 557.2878
 P21177 FADB_ECOLI Fatty acid oxidation complex subunit alpha - Escherichia coli strain K12, DAIDALFDANR, 51.312, 610.7988, 622.3013
 P21177 FADB_ECOLI Fatty acid oxidation complex subunit alpha - Escherichia coli strain K12, DAIDALFDANR, 51.312, 610.7988, 300.1603
-P21177 FADB_ECOLI Fatty acid oxidation complex subunit alpha - Escherichia coli strain K12, EEALNLENK, 30.8055, 530.2754, 390.2161
-P21177 FADB_ECOLI Fatty acid oxidation complex subunit alpha - Escherichia coli strain K12, EEALNLENK, 30.8055, 530.2754, 503.2805
+P21177 FADB_ECOLI Fatty acid oxidation complex subunit alpha - Escherichia coli strain K12, EEALNLENK, 30.8055, 530.3754, 390.3161
+P21177 FADB_ECOLI Fatty acid oxidation complex subunit alpha - Escherichia coli strain K12, EEALNLENK, 30.8055, 530.3754, 503.2805
 P21599 KPYK2_ECOLI Pyruvate kinase II - Escherichia coli strain K12, GLPADVVPGDILLLDDGR, 59.4324, 917.9927, 1183.6472
 P21599 KPYK2_ECOLI Pyruvate kinase II - Escherichia coli strain K12, GLPADVVPGDILLLDDGR, 59.4324, 917.9927, 652.3726
 P21599 KPYK2_ECOLI Pyruvate kinase II - Escherichia coli strain K12, GDLGVEIGDPELVGIQK, 49.5838, 869.9641, 883.5324
@@ -904,10 +904,10 @@ P23843 OPPA_ECOLI Periplasmic oligopeptide-binding protein precursor - Escherich
 P23843 OPPA_ECOLI Periplasmic oligopeptide-binding protein precursor - Escherichia coli strain K12, LTQPEWFGWSQEK, 51.016, 818.3994, 1293.6146
 P23847 DPPA_ECOLI Periplasmic dipeptide transport protein precursor - Escherichia coli strain K12, IGTTEVIPGLAEK, 43.4425, 664.3797, 614.3568
 P23847 DPPA_ECOLI Periplasmic dipeptide transport protein precursor - Escherichia coli strain K12, IGTTEVIPGLAEK, 43.4425, 664.3797, 727.4482
-P23847 DPPA_ECOLI Periplasmic dipeptide transport protein precursor - Escherichia coli strain K12, GYVVDPLGK, 40.2595, 474.2635, 947.5331
-P23847 DPPA_ECOLI Periplasmic dipeptide transport protein precursor - Escherichia coli strain K12, GYVVDPLGK, 40.2595, 474.2635, 727.4592
-P24182 ACCC_ECOLI Biotin carboxylase - Escherichia coli strain K12, VVEEAPAPGITPELR, 40.2098, 789.4367, 1050.6115
-P24182 ACCC_ECOLI Biotin carboxylase - Escherichia coli strain K12, VVEEAPAPGITPELR, 40.2098, 789.4367, 615.3547
+P23847 DPPA_ECOLI Periplasmic dipeptide transport protein precursor - Escherichia coli strain K12, GYVVDPLGK, 40.3595, 474.2635, 947.5331
+P23847 DPPA_ECOLI Periplasmic dipeptide transport protein precursor - Escherichia coli strain K12, GYVVDPLGK, 40.3595, 474.2635, 727.4592
+P24182 ACCC_ECOLI Biotin carboxylase - Escherichia coli strain K12, VVEEAPAPGITPELR, 40.3098, 789.4367, 1050.6115
+P24182 ACCC_ECOLI Biotin carboxylase - Escherichia coli strain K12, VVEEAPAPGITPELR, 40.3098, 789.4367, 615.3547
 P24182 ACCC_ECOLI Biotin carboxylase - Escherichia coli strain K12, NALQELIIDGIK, 57.7334, 663.8861, 1028.6097
 P24182 ACCC_ECOLI Biotin carboxylase - Escherichia coli strain K12, NALQELIIDGIK, 57.7334, 663.8861, 658.4204
 P24215 UXUA_ECOLI Mannonate dehydratase - Escherichia coli strain K12, AIIPVAEEVGVR, 44.7087, 626.872, 955.5509
@@ -921,7 +921,7 @@ P25516 ACON1_ECOLI Aconitate hydratase 1 - Escherichia coli strain K12, SEDQVELV
 P25526 GABD_ECOLI Succinate-semialdehyde dehydrogenase [NADP+] - Escherichia coli strain K12, VEEHIADALEK, 32.4951, 418.5435, 646.3505
 P25526 GABD_ECOLI Succinate-semialdehyde dehydrogenase [NADP+] - Escherichia coli strain K12, VEEHIADALEK, 32.4951, 418.5435, 759.4385
 P25526 GABD_ECOLI Succinate-semialdehyde dehydrogenase [NADP+] - Escherichia coli strain K12, GGNFFQPTILVDVPANAK, 54.6165, 944.5095, 1237.7401
-P25526 GABD_ECOLI Succinate-semialdehyde dehydrogenase [NADP+] - Escherichia coli strain K12, GGNFFQPTILVDVPANAK, 54.6165, 944.5095, 500.2894
+P25526 GABD_ECOLI Succinate-semialdehyde dehydrogenase [NADP+] - Escherichia coli strain K12, GGNFFQPTILVDVPANAK, 54.6165, 944.5095, 500.3894
 P25553 ALDA_ECOLI Aldehyde dehydrogenase A - Escherichia coli strain K12, GETVGQELAGNPK, 31.1787, 650.3365, 913.4868
 P25553 ALDA_ECOLI Aldehyde dehydrogenase A - Escherichia coli strain K12, GETVGQELAGNPK, 31.1787, 650.3365, 599.3497
 P25553 ALDA_ECOLI Aldehyde dehydrogenase A - Escherichia coli strain K12, GIYDQFVNR, 40.7987, 556.2812, 941.4593
@@ -929,7 +929,7 @@ P25553 ALDA_ECOLI Aldehyde dehydrogenase A - Escherichia coli strain K12, GIYDQF
 P25738 MSYB_ECOLI Acidic protein msyB - Escherichia coli strain K12, AAADEWDER, 29.0265, 531.7297, 1062.467
 P25738 MSYB_ECOLI Acidic protein msyB - Escherichia coli strain K12, AAADEWDER, 29.0265, 531.7297, 920.388
 P26646 YHDH_ECOLI Protein yhdH - Escherichia coli strain K12, LVADLPESFYTQAAK, 48.5723, 826.9375, 1141.5623
-P26646 YHDH_ECOLI Protein yhdH - Escherichia coli strain K12, LVADLPESFYTQAAK, 48.5723, 826.9375, 500.2835
+P26646 YHDH_ECOLI Protein yhdH - Escherichia coli strain K12, LVADLPESFYTQAAK, 48.5723, 826.9375, 500.3835
 P26646 YHDH_ECOLI Protein yhdH - Escherichia coli strain K12, DALAITGK, 32.1944, 394.7275, 602.4084
 P26646 YHDH_ECOLI Protein yhdH - Escherichia coli strain K12, DALAITGK, 32.1944, 394.7275, 300.1559
 P27248 GCST_ECOLI Aminomethyltransferase - Escherichia coli strain K12, AATLFNDAQR, 34.5441, 553.7856, 1106.5734
@@ -949,7 +949,7 @@ P27302 TKT1_ECOLI Transketolase 1 - Escherichia coli strain K12, TEEQLANIAR, 33.
 P27302 TKT1_ECOLI Transketolase 1 - Escherichia coli strain K12, AYPQEAAEFTR, 35.4789, 641.8102, 823.4069
 P27302 TKT1_ECOLI Transketolase 1 - Escherichia coli strain K12, AYPQEAAEFTR, 35.4789, 641.8102, 951.4718
 P27306 STHA_ECOLI Soluble pyridine nucleotide transhydrogenase - Escherichia coli strain K12, VDLINTR, 33.8129, 415.7379, 503.2913
-P27306 STHA_ECOLI Soluble pyridine nucleotide transhydrogenase - Escherichia coli strain K12, VDLINTR, 33.8129, 415.7379, 390.2112
+P27306 STHA_ECOLI Soluble pyridine nucleotide transhydrogenase - Escherichia coli strain K12, VDLINTR, 33.8129, 415.7379, 390.3112
 P27306 STHA_ECOLI Soluble pyridine nucleotide transhydrogenase - Escherichia coli strain K12, IAAQALVK, 31.1836, 407.2605, 455.2635
 P27306 STHA_ECOLI Soluble pyridine nucleotide transhydrogenase - Escherichia coli strain K12, IAAQALVK, 31.1836, 407.2605, 430.3191
 P27550 ACSA_ECOLI Acetyl-coenzyme A synthetase - Escherichia coli strain K12, NTSFAPGNVSIK, 37.1336, 617.8301, 714.4264
@@ -992,8 +992,8 @@ P33602 NUOG_ECOLI NADH-quinone oxidoreductase subunit G - Escherichia coli strai
 P33602 NUOG_ECOLI NADH-quinone oxidoreductase subunit G - Escherichia coli strain K12, IAPYYHLFGSDELSQR, 49.8299, 948.4831, 745.3813
 P35340 AHPF_ECOLI Alkyl hydroperoxide reductase subunit F - Escherichia coli strain K12, HTAIDGGTFQNEITDR, 37.1717, 592.2842, 747.3825
 P35340 AHPF_ECOLI Alkyl hydroperoxide reductase subunit F - Escherichia coli strain K12, HTAIDGGTFQNEITDR, 37.1717, 592.2842, 753.3726
-P35340 AHPF_ECOLI Alkyl hydroperoxide reductase subunit F - Escherichia coli strain K12, SIIVATGAK, 29.771, 430.2639, 659.4233
-P35340 AHPF_ECOLI Alkyl hydroperoxide reductase subunit F - Escherichia coli strain K12, SIIVATGAK, 29.771, 430.2639, 585.3565
+P35340 AHPF_ECOLI Alkyl hydroperoxide reductase subunit F - Escherichia coli strain K12, SIIVATGAK, 29.771, 430.3639, 659.4233
+P35340 AHPF_ECOLI Alkyl hydroperoxide reductase subunit F - Escherichia coli strain K12, SIIVATGAK, 29.771, 430.3639, 585.3565
 P36683 ACON2_ECOLI Aconitate hydratase 2 - Escherichia coli strain K12, GFPLAYVGDVVGTGSSR, 53.9103, 841.4352, 564.2823
 P36683 ACON2_ECOLI Aconitate hydratase 2 - Escherichia coli strain K12, GFPLAYVGDVVGTGSSR, 53.9103, 841.4352, 934.4788
 P36683 ACON2_ECOLI Aconitate hydratase 2 - Escherichia coli strain K12, EGIEPDQPGVVGPIK, 39.424, 767.9154, 1106.6361
@@ -1043,8 +1043,8 @@ P41409 RIHA_ECOLI Pyrimidine-specific ribonucleoside hydrolase rihA - Escherichi
 P41409 RIHA_ECOLI Pyrimidine-specific ribonucleoside hydrolase rihA - Escherichia coli strain K12, AITSSAGNQTPEK, 22.7028, 652.3327, 588.3152
 P45523 FKBA_ECOLI FKBP-type peptidyl-prolyl cis-trans isomerase fkpA precursor - Escherichia coli strain K12, TSSTGLVYQVVEAGK, 44.8362, 769.9139, 893.49
 P45523 FKBA_ECOLI FKBP-type peptidyl-prolyl cis-trans isomerase fkpA precursor - Escherichia coli strain K12, TSSTGLVYQVVEAGK, 44.8362, 769.9139, 992.5559
-P45523 FKBA_ECOLI FKBP-type peptidyl-prolyl cis-trans isomerase fkpA precursor - Escherichia coli strain K12, LDKDQLIAGVQDAFADK, 50.2249, 616.3169, 713.3928
-P45523 FKBA_ECOLI FKBP-type peptidyl-prolyl cis-trans isomerase fkpA precursor - Escherichia coli strain K12, LDKDQLIAGVQDAFADK, 50.2249, 616.3169, 826.4752
+P45523 FKBA_ECOLI FKBP-type peptidyl-prolyl cis-trans isomerase fkpA precursor - Escherichia coli strain K12, LDKDQLIAGVQDAFADK, 50.3249, 616.3169, 713.3928
+P45523 FKBA_ECOLI FKBP-type peptidyl-prolyl cis-trans isomerase fkpA precursor - Escherichia coli strain K12, LDKDQLIAGVQDAFADK, 50.3249, 616.3169, 826.4752
 P52643 LDHD_ECOLI D-lactate dehydrogenase - Escherichia coli strain K12, SNDVIQDDVFR, 42.1299, 654.3167, 892.4653
 P52643 LDHD_ECOLI D-lactate dehydrogenase - Escherichia coli strain K12, SNDVIQDDVFR, 42.1299, 654.3167, 1307.6462
 P52643 LDHD_ECOLI D-lactate dehydrogenase - Escherichia coli strain K12, GALIDSQAAIEALK, 47.4554, 700.3954, 1045.5753
@@ -1087,8 +1087,8 @@ P61949 FLAV_ECOLI Flavodoxin-1 - Escherichia coli strain K12, GLADDDHFVGLAIDEDR,
 P61949 FLAV_ECOLI Flavodoxin-1 - Escherichia coli strain K12, GLADDDHFVGLAIDEDR, 42.2984, 619.9522, 1027.4852
 P61949 FLAV_ECOLI Flavodoxin-1 - Escherichia coli strain K12, DVADVHDIAK, 29.6011, 541.7826, 868.4634
 P61949 FLAV_ECOLI Flavodoxin-1 - Escherichia coli strain K12, DVADVHDIAK, 29.6011, 541.7826, 583.3211
-P62399 RL5_ECOLI 50S ribosomal protein L5 - Escherichia coli strain K12, EQIIFPEIDYDK, 50.2593, 755.3798, 879.4228
-P62399 RL5_ECOLI 50S ribosomal protein L5 - Escherichia coli strain K12, EQIIFPEIDYDK, 50.2593, 755.3798, 1026.5024
+P62399 RL5_ECOLI 50S ribosomal protein L5 - Escherichia coli strain K12, EQIIFPEIDYDK, 50.3593, 755.3798, 879.4228
+P62399 RL5_ECOLI 50S ribosomal protein L5 - Escherichia coli strain K12, EQIIFPEIDYDK, 50.3593, 755.3798, 1026.5024
 P62399 RL5_ECOLI 50S ribosomal protein L5 - Escherichia coli strain K12, LITIAVPR, 43.2113, 441.7882, 442.2801
 P62399 RL5_ECOLI 50S ribosomal protein L5 - Escherichia coli strain K12, LITIAVPR, 43.2113, 441.7882, 371.2381
 P62707 GPMA_ECOLI 2, GFAVTPPELTK, 42.7608, 580.3193, 684.397
@@ -1115,10 +1115,10 @@ P64581 YQJD_ECOLI Uncharacterized protein yqjD - Escherichia coli strain K12, LG
 P64581 YQJD_ECOLI Uncharacterized protein yqjD - Escherichia coli strain K12, LGETGDAIAK, 27.4239, 487.76, 804.416
 P68066 GRCA_ECOLI Autonomous glycyl radical cofactor - Escherichia coli strain K12, AGYAEDEVVAVSK, 35.2505, 669.3379, 975.5097
 P68066 GRCA_ECOLI Autonomous glycyl radical cofactor - Escherichia coli strain K12, AGYAEDEVVAVSK, 35.2505, 669.3379, 846.46
-P68066 GRCA_ECOLI Autonomous glycyl radical cofactor - Escherichia coli strain K12, EVPVEVKPEVR, 31.3442, 427.5757, 500.2882
+P68066 GRCA_ECOLI Autonomous glycyl radical cofactor - Escherichia coli strain K12, EVPVEVKPEVR, 31.3442, 427.5757, 500.3882
 P68066 GRCA_ECOLI Autonomous glycyl radical cofactor - Escherichia coli strain K12, EVPVEVKPEVR, 31.3442, 427.5757, 628.3976
 P68191 SRA_ECOLI Stationary-phase-induced ribosome-associated protein - Escherichia coli strain K12, SSVVNNPTGR, 23.7248, 515.7667, 658.3375
-P68191 SRA_ECOLI Stationary-phase-induced ribosome-associated protein - Escherichia coli strain K12, SSVVNNPTGR, 23.7248, 515.7667, 430.2473
+P68191 SRA_ECOLI Stationary-phase-induced ribosome-associated protein - Escherichia coli strain K12, SSVVNNPTGR, 23.7248, 515.7667, 430.3473
 P68206 YJBJ_ECOLI UPF0337 protein yjbJ - Escherichia coli strain K12, EVVDWETR, 35.405, 517.2522, 1033.5085
 P68206 YJBJ_ECOLI UPF0337 protein yjbJ - Escherichia coli strain K12, EVVDWETR, 35.405, 517.2522, 706.3228
 P68206 YJBJ_ECOLI UPF0337 protein yjbJ - Escherichia coli strain K12, DQAEKEVVDWETR, 38.6502, 802.8832, 572.2848
@@ -1135,12 +1135,12 @@ P69783 PTGA_ECOLI Glucose-specific phosphotransferase enzyme IIA component - Esc
 P69783 PTGA_ECOLI Glucose-specific phosphotransferase enzyme IIA component - Escherichia coli strain K12, IVGDGIAIKPTGNK, 32.5278, 461.5992, 828.5094
 P69783 PTGA_ECOLI Glucose-specific phosphotransferase enzyme IIA component - Escherichia coli strain K12, LSGSVTVGETPVIR, 39.716, 707.9037, 771.4449
 P69783 PTGA_ECOLI Glucose-specific phosphotransferase enzyme IIA component - Escherichia coli strain K12, LSGSVTVGETPVIR, 39.716, 707.9037, 971.5673
-P69797 PTNAB_ECOLI PTS system mannose-specific EIIAB component - Escherichia coli strain K12, IIVVSDEVAADTVR, 44.8936, 743.9078, 490.2696
+P69797 PTNAB_ECOLI PTS system mannose-specific EIIAB component - Escherichia coli strain K12, IIVVSDEVAADTVR, 44.8936, 743.9078, 490.3696
 P69797 PTNAB_ECOLI PTS system mannose-specific EIIAB component - Escherichia coli strain K12, IIVVSDEVAADTVR, 44.8936, 743.9078, 1213.6665
 P69797 PTNAB_ECOLI PTS system mannose-specific EIIAB component - Escherichia coli strain K12, TQVNNAVSVDEK, 26.3659, 652.3312, 577.2988
 P69797 PTNAB_ECOLI PTS system mannose-specific EIIAB component - Escherichia coli strain K12, TQVNNAVSVDEK, 26.3659, 652.3312, 443.2249
-P69908 DCEA_ECOLI Glutamate decarboxylase alpha - Escherichia coli strain K12, AISTIAESK, 26.4056, 460.2584, 735.3886
-P69908 DCEA_ECOLI Glutamate decarboxylase alpha - Escherichia coli strain K12, AISTIAESK, 26.4056, 460.2584, 919.522
+P69908 DCEA_ECOLI Glutamate decarboxylase alpha - Escherichia coli strain K12, AISTIAESK, 26.4056, 460.3584, 735.3886
+P69908 DCEA_ECOLI Glutamate decarboxylase alpha - Escherichia coli strain K12, AISTIAESK, 26.4056, 460.3584, 919.522
 P69908 DCEA_ECOLI Glutamate decarboxylase alpha - Escherichia coli strain K12, LLTDFR, 28.4265, 382.7165, 651.354
 P69908 DCEA_ECOLI Glutamate decarboxylase alpha - Escherichia coli strain K12, LLTDFR, 28.4265, 382.7165, 633.3376
 P69910 DCEB_ECOLI Glutamate decarboxylase beta - Escherichia coli strain K12, SISTIAESK, 27.5101, 468.2561, 935.5155
@@ -1160,8 +1160,8 @@ P76402 YEGP_ECOLI UPF0339 protein yegP - Escherichia coli strain K12, AGNGETILTS
 P76402 YEGP_ECOLI UPF0339 protein yegP - Escherichia coli strain K12, AGNGETILTSELYTSK, 44.0932, 842.4301, 928.4765
 P76402 YEGP_ECOLI UPF0339 protein yegP - Escherichia coli strain K12, AGWFELSK, 46.9995, 469.2401, 623.3469
 P76402 YEGP_ECOLI UPF0339 protein yegP - Escherichia coli strain K12, AGWFELSK, 46.9995, 469.2401, 809.4218
-P76558 MAO2_ECOLI NADP-dependent malic enzyme - Escherichia coli strain K12, IQVSPTKPLATQR, 30.6555, 480.2869, 685.412
-P76558 MAO2_ECOLI NADP-dependent malic enzyme - Escherichia coli strain K12, IQVSPTKPLATQR, 30.6555, 480.2869, 475.272
+P76558 MAO2_ECOLI NADP-dependent malic enzyme - Escherichia coli strain K12, IQVSPTKPLATQR, 30.6555, 480.3869, 685.412
+P76558 MAO2_ECOLI NADP-dependent malic enzyme - Escherichia coli strain K12, IQVSPTKPLATQR, 30.6555, 480.3869, 475.272
 P76558 MAO2_ECOLI NADP-dependent malic enzyme - Escherichia coli strain K12, VVLPEGEEAR, 31.7777, 549.795, 787.368
 P76558 MAO2_ECOLI NADP-dependent malic enzyme - Escherichia coli strain K12, VVLPEGEEAR, 31.7777, 549.795, 900.4539
 P77318 YDEN_ECOLI Uncharacterized sulfatase ydeN precursor - Escherichia coli strain K12, FTNGYVAHGVSGPSR, 35.3493, 774.8735, 796.389
@@ -1171,7 +1171,7 @@ P77318 YDEN_ECOLI Uncharacterized sulfatase ydeN precursor - Escherichia coli st
 P77581 ASTC_ECOLI Succinylornithine transaminase - Escherichia coli strain K12, FAPALNVSEEEVTTGLDR, 47.7113, 974.4938, 1235.6091
 P77581 ASTC_ECOLI Succinylornithine transaminase - Escherichia coli strain K12, FAPALNVSEEEVTTGLDR, 47.7113, 974.4938, 561.2976
 P77581 ASTC_ECOLI Succinylornithine transaminase - Escherichia coli strain K12, YGLFSEVR, 44.3341, 485.7516, 637.3382
-P77581 ASTC_ECOLI Succinylornithine transaminase - Escherichia coli strain K12, YGLFSEVR, 44.3341, 485.7516, 490.2665
+P77581 ASTC_ECOLI Succinylornithine transaminase - Escherichia coli strain K12, YGLFSEVR, 44.3341, 485.7516, 490.3665
 P77717 YBAY_ECOLI Uncharacterized lipoprotein ybaY precursor - Escherichia coli strain K12, LVFITDTVQPVINQGGTK, 50.3086, 965.5392, 913.506
 P77717 YBAY_ECOLI Uncharacterized lipoprotein ybaY precursor - Escherichia coli strain K12, LVFITDTVQPVINQGGTK, 50.3086, 965.5392, 1041.5803
 P77804 YDGA_ECOLI Protein ydgA precursor - Escherichia coli strain K12, EAPQTLAQEVDR, 29.6322, 452.8938, 968.4583
@@ -1188,8 +1188,8 @@ Q46851 YGHZ_ECOLI Uncharacterized protein yghZ - Escherichia coli strain K12, DE
 Q46851 YGHZ_ECOLI Uncharacterized protein yghZ - Escherichia coli strain K12, DELIISTK, 36.2035, 459.757, 674.462
 Q46857 DKGA_ECOLI 2, IAENFDVWDFR, 34.9103, 706.3308, 690.3267
 Q46857 DKGA_ECOLI 2, IAENFDVWDFR, 34.9103, 706.3308, 437.2172
-Q46857 DKGA_ECOLI 2, EELFITTK, 40.2281, 490.7678, 980.5453
-Q46857 DKGA_ECOLI 2, EELFITTK, 40.2281, 490.7678, 609.3677
+Q46857 DKGA_ECOLI 2, EELFITTK, 40.3281, 490.7678, 980.5453
+Q46857 DKGA_ECOLI 2, EELFITTK, 40.3281, 490.7678, 609.3677
 Q46938 KDUI_ECOLI 4-deoxy-L-threo-5-hexosulose-uronate ketol-isomerase - Escherichia coli strain K12, NEFLVEK, 34.4029, 439.73, 878.4705
 Q46938 KDUI_ECOLI 4-deoxy-L-threo-5-hexosulose-uronate ketol-isomerase - Escherichia coli strain K12, NEFLVEK, 34.4029, 439.73, 635.383
 Q46938 KDUI_ECOLI 4-deoxy-L-threo-5-hexosulose-uronate ketol-isomerase - Escherichia coli strain K12, TVSVGGEVGK, 26.383, 466.7549, 732.3968
