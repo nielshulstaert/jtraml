@@ -7,6 +7,7 @@ import com.vaadin.terminal.ExternalResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Link;
+import com.vaadin.ui.themes.Reindeer;
 
 @SuppressWarnings("serial")
 public class FooterPanel extends com.vaadin.ui.HorizontalLayout {
@@ -16,12 +17,19 @@ public class FooterPanel extends com.vaadin.ui.HorizontalLayout {
 
 
         // Create a grid layout
-        final HorizontalLayout horiz = new HorizontalLayout();
-        horiz.setSpacing(true);
+        HorizontalLayout horiz = new HorizontalLayout();
+        horiz.setStyleName(Reindeer.LAYOUT_WHITE);
 
+        horiz.setSpacing(true);
         horiz.setWidth("100%");
 
         Link l = new Link();
+        l.setResource(new ExternalResource("http://www.psidev.info"));
+        l.setDescription("go to psi website");
+        l.setIcon(new ExternalResource("http://www.psidev.info/files/psi.gif"));
+        addComponent(l);
+
+        l = new Link();
         l.setResource(new ExternalResource("http://www.compomics.com/"));
         l.setDescription("go to psi website");
         l.setIcon(new ClassResource("/images/compomics.png", TramlConverterApplication.getApplication()));

@@ -1,6 +1,7 @@
 package com.compomics.jtraml.web.components;
 
 
+import com.compomics.jtraml.MessageBean;
 import com.compomics.jtraml.enumeration.FileTypeEnum;
 import com.compomics.jtraml.model.ConversionJobOptions;
 import com.compomics.jtraml.thread.SepToTRAMLJob;
@@ -10,25 +11,33 @@ import com.compomics.jtraml.web.TramlConverterApplication;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.*;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
  * This class is a
  */
 public class TramlConversionForm extends VerticalLayout implements Observer {
+    private static Logger logger = Logger.getLogger(TramlConversionForm.class);
 
     ConversionJobOptions iConversionJobOptions;
 
     private static final String COMMON_FIELD_WIDTH = "12em";
     public ProgressIndicator iProgressIndicator;
     public Button btnConvert;
+    public Button btnCancel;
+
     public Form iConversionForm;
+
+    private boolean isCancelled = false;
+    public ExecutorService iExecutorService;
 
     public TramlConversionForm() {
         iProgressIndicator = new ProgressIndicator();
@@ -75,8 +84,28 @@ public class TramlConversionForm extends VerticalLayout implements Observer {
             }
         });
 
+
+        btnCancel = new Button("Cancel", new Button.ClickListener() {
+            public void buttonClick(Button.ClickEvent event) {
+                try {
+                    if (iExecutorService != null) {
+                        iExecutorService.shutdownNow();
+                        getWindow().showNotification("Cancelled conversion process");
+                        isCancelled = true;
+                    }
+                    resetButtons();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    // Ignored, we'll let the Form handle the errors
+                }
+            }
+        });
+        btnCancel.setVisible(false);
+
         buttons.addComponent(btnConvert);
+        buttons.addComponent(new InfoLink());
         buttons.addComponent(iProgressIndicator);
+        buttons.addComponent(btnCancel);
 
         iConversionForm.getFooter().addComponent(buttons);
         iConversionForm.getFooter().setMargin(false, false, true, true);
@@ -84,7 +113,10 @@ public class TramlConversionForm extends VerticalLayout implements Observer {
     }
 
     private void startConversion() throws IOException {
+
         if (iConversionForm.isValid()) {
+            // Reset any previous cancel states.
+            isCancelled = false;
 
             // create a new outputf file for the upcomming Thread.
             File lOutputFile = makeOutputFile();
@@ -98,15 +130,17 @@ public class TramlConversionForm extends VerticalLayout implements Observer {
                 iProgressIndicator.setVisible(true);
 
                 // create the job, listen for the finish, and start the job!
+                iExecutorService = Executors.newSingleThreadExecutor();
                 if (iConversionJobOptions.getImportType() != FileTypeEnum.TRAML) {
                     SepToTRAMLJob job = new SepToTRAMLJob(iConversionJobOptions);
                     job.addObserver(this);
-                    Executors.newSingleThreadExecutor().submit(job);
+                    iExecutorService.submit(job);
 
                 } else {
                     TRAMLToSepJob job = new TRAMLToSepJob(iConversionJobOptions);
+                    job.setGraphical(true);
                     job.addObserver(this);
-                    Executors.newSingleThreadExecutor().submit(job);
+                    iExecutorService.submit(job);
                 }
 
             } else {
@@ -114,9 +148,14 @@ public class TramlConversionForm extends VerticalLayout implements Observer {
                 getWindow().showNotification(ConversionJobOptionValidator.getStatus(), Window.Notification.TYPE_WARNING_MESSAGE);
             }
 
+            // Update the buttons and indicators
             iProgressIndicator.setEnabled(true);
             iProgressIndicator.setVisible(true);
-            btnConvert.setEnabled(false);
+            btnConvert.setVisible(false);
+            btnCancel.setVisible(true);
+
+            logger.info("requesting repaint");
+            requestRepaintAll();
         }
     }
 
@@ -140,25 +179,47 @@ public class TramlConversionForm extends VerticalLayout implements Observer {
         return lOutputFile;
     }
 
-    public void update(Observable aObservable, Object o) {
-        TramlConverterApplication.getApplication().addResult(iConversionJobOptions);
+    public void update(Observable aObservable, final Object o) {
+        if (o instanceof MessageBean) {
+            final MessageBean lMessageBean = (MessageBean) o;
 
-        Field lField = iConversionForm.getField("inputFile");
-        if (lField instanceof UploadField) {
-            UploadField lUploadField = (UploadField) lField;
-            lUploadField.reset();
+            new InputDialog(getWindow(), lMessageBean.getMessage(),
+                    new InputDialog.Recipient() {
+                        public void gotInput(String input) {
+                            lMessageBean.getInterruptible().proceed(input);
+                        }
+                    }, lMessageBean.isRequiresAnswer());
+        } else {
+            if (isCancelled == false) {
+                TramlConverterApplication.getApplication().addResult(iConversionJobOptions);
+
+                Field lField = iConversionForm.getField("inputFile");
+                if (lField instanceof UploadField) {
+                    UploadField lUploadField = (UploadField) lField;
+                    lUploadField.reset();
+                }
+
+                iConversionJobOptions.setInputFile(null);
+                iConversionJobOptions.setOutputFile(null);
+
+                resetButtons();
+            }
         }
+    }
 
-        iConversionJobOptions.setInputFile(null);
-        iConversionJobOptions.setOutputFile(null);
+    /**
+     * Reset the convert/cancel buttons and the progressbar.
+     * This method is called either when the Observable Job calls for an update or when the Job is cancelled.
+     */
+    private void resetButtons() {
 
         iProgressIndicator.setEnabled(false);
         iProgressIndicator.setVisible(false);
 
-        btnConvert.setEnabled(true);
+        btnConvert.setVisible(true);
+        btnCancel.setVisible(false);
 
         requestRepaintAll();
-
     }
 
 

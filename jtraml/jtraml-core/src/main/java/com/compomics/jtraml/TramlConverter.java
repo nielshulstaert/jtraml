@@ -42,7 +42,13 @@ public class TramlConverter {
                 FileTypeEnum lInputType = getFileTypeEnum(line.getOptionValue("importtype"));
                 FileTypeEnum lExportType = getFileTypeEnum(line.getOptionValue("exporttype"));
 
+                double lRtDelta = -1;
+                if (line.hasOption("rtdelta")) {
+                    lRtDelta = Double.parseDouble(line.getOptionValue("rtdelta"));
+                }
+
                 ConversionJobOptions lConversionJobOptions = new ConversionJobOptions();
+                lConversionJobOptions.setRtDelta(lRtDelta);
                 lConversionJobOptions.setOutputFile(lOutputFile);
                 lConversionJobOptions.setInputFile(lInputFile);
                 lConversionJobOptions.setExportType(lExportType);
@@ -70,6 +76,7 @@ public class TramlConverter {
                         }
                     } else {
                         TRAMLToSepJob job = new TRAMLToSepJob(lConversionJobOptions);
+                        job.setGraphical(false);
                         Future lSubmit = Executors.newSingleThreadExecutor().submit(job);
 
                         ConditionLock lConditionLock = new ConditionLock();
@@ -157,6 +164,7 @@ public class TramlConverter {
         aOptions.addOption("exporttype", true, lFileTypes);
         aOptions.addOption("input", true, "The transition input file");
         aOptions.addOption("output", true, "The converted transition output file");
+        aOptions.addOption("rtdelta", true, "This delta retention time (minutes) is used when appropriate (cfr. Wiki)");
     }
 
     /**
@@ -202,6 +210,16 @@ public class TramlConverter {
         if (aLine.hasOption("importtype") && aLine.hasOption("exporttype")) {
             logger.error("importtype and exporttype must be supplied!!");
             return false;
+        }
+
+        // Is the rtDelta specified?
+        if (aLine.hasOption("rtdelta")) {
+            String lRtdelta = aLine.getOptionValue("rtdelta");
+            try {
+                Double.parseDouble(lRtdelta);
+            } catch (NumberFormatException e) {
+                logger.error("rtdelta must be specified in minutes!! e.g.: --rtdelta 5.0");
+            }
         }
 
 

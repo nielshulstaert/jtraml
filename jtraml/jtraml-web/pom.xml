@@ -69,7 +69,7 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>resources</goal>
+                            <!--<goal>resources</goal>-->
                             <goal>compile</goal>
                         </goals>
                     </execution>
@@ -119,35 +119,25 @@
                 </configuration>
             </plugin>
 
-            <!-- google code upload plugin -->
             <plugin>
-                <groupId>org.riedelcastro</groupId>
-                <artifactId>gcupload-maven-plugin</artifactId>
-                <version>0.9</version>
-                <configuration>
-                    <projectName>jtraml</projectName>
-                    <uploads>
-                        <upload>
-                            <extensions>zip</extensions>
-                            <labels>Type-Library,Featured</labels>
-                            <summary>Release package of ${project.artifactId} version ${project.version}</summary>
-                        </upload>
-                    </uploads>
-                </configuration>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.5</version>
                 <executions>
                     <execution>
-                        <id>upload-gc</id>
-                        <!-- this is used for inheritance merges -->
-                        <phase>deploy</phase>
-                        <!-- append to the packaging phase. -->
-                        <goals>
-                            <goal>gcupload</goal>
-                            <!-- goals == mojos -->
-                        </goals>
+                        <id>copy-resources</id>
+                        <phase>compile</phase>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/${project.name}-${project.version}/VAADIN/themes</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources/themes</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
                     </execution>
+
                 </executions>
             </plugin>
-
         </plugins>
     </build>
 
@@ -206,6 +196,13 @@
             <artifactId>googleanalyticstracker</artifactId>
             <version>${analytics.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.vaadin.addons</groupId>
+            <artifactId>reindeermods</artifactId>
+            <version>0.2</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.vaadin.addons</groupId>

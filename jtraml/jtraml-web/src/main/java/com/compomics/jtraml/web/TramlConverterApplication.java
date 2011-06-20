@@ -23,6 +23,7 @@ import com.compomics.jtraml.web.components.ResultsPanel;
 import com.compomics.jtraml.web.components.TramlConversionForm;
 import com.google.common.io.Files;
 import com.vaadin.Application;
+import com.vaadin.ui.*;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Window;
 import org.vaadin.googleanalytics.tracking.GoogleAnalyticsTracker;
@@ -41,6 +42,7 @@ public class TramlConverterApplication extends Application {
     public static TramlConverterApplication iApplication = null;
     public ResultsPanel iOutputTable;
     public TramlConversionForm iInputForm;
+    public Panel iSeparatorPanel;
 
     @Override
     public void init() {
@@ -49,13 +51,15 @@ public class TramlConverterApplication extends Application {
         window = new Window("TraML converter");
         setMainWindow(window);
 
+        setTheme("jtraml");
+
         // Create a temporary folder for this application
         iTempDir = Files.createTempDir();
 
         initLayout();
 
         // Create a tracker for vaadin.com domain.
-        GoogleAnalyticsTracker tracker = new GoogleAnalyticsTracker("UA-23742568-1","http://iomics.ugent.be/jtraml/");
+        GoogleAnalyticsTracker tracker = new GoogleAnalyticsTracker("UA-23742568-1", "http://iomics.ugent.be/jtraml/");
 
         // Add only one tracker per window.
         window.addComponent(tracker);
@@ -75,14 +79,23 @@ public class TramlConverterApplication extends Application {
         iInputForm = new TramlConversionForm();
         iOutputTable = new ResultsPanel();
 
+
+        iSeparatorPanel = new Panel();
+        iSeparatorPanel.setStyleName("split-line");
+
+
         if (iOutputTable.getNumberOfResults() == 0) {
             iOutputTable.setVisible(false);
+            iSeparatorPanel.setVisible(false);
         }
 
+        GridLayout grid = new GridLayout(3, 1);
 
-        window.addComponent(iInputForm);
-        window.addComponent(iOutputTable);
+        grid.addComponent(iInputForm, 0, 0);
+        grid.addComponent(iSeparatorPanel, 1, 0);
+        grid.addComponent(iOutputTable, 2, 0);
 
+        window.addComponent(grid);
         window.addComponent(new FooterPanel());
     }
 
@@ -98,6 +111,7 @@ public class TramlConverterApplication extends Application {
         iOutputTable.addItem(aConversionJobOptions);
         if (iOutputTable.getNumberOfResults() > 0) {
             iOutputTable.setVisible(true);
+            iSeparatorPanel.setVisible(true);
             iOutputTable.requestRepaintAll();
         }
     }

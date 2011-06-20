@@ -22,7 +22,7 @@ import java.util.Observable;
 /**
  * This class converts a TSV file to a TRAML file in a single thread.
  */
-public class SepToTRAMLJob extends Observable implements Runnable {
+public class SepToTRAMLJob extends Observable implements Runnable{
     private static Logger logger = Logger.getLogger(SepToTRAMLJob.class);
 
     /**
@@ -145,10 +145,10 @@ public class SepToTRAMLJob extends Observable implements Runnable {
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
         }
-
     }
 
     public String getStatus() {
         return iStatus;
     }
+
 }

@@ -1,7 +1,9 @@
 package com.compomics.jtraml.thread;
 
+import com.compomics.jtraml.MessageBean;
 import com.compomics.jtraml.enumeration.FileTypeEnum;
 import com.compomics.jtraml.exception.JTramlException;
+import com.compomics.jtraml.interfaces.Interruptible;
 import com.compomics.jtraml.interfaces.TSVFileExportModel;
 import com.compomics.jtraml.model.ConversionJobOptions;
 import com.compomics.jtraml.model.TramlToABI;
@@ -12,6 +14,7 @@ import org.apache.log4j.Logger;
 import org.hupo.psi.ms.traml.TraMLType;
 import org.hupo.psi.ms.traml.TransitionType;
 import org.systemsbiology.apps.tramlparser.TraMLParser;
+import sun.misc.ConditionLock;
 
 import javax.xml.bind.JAXBException;
 import java.io.BufferedWriter;
@@ -25,7 +28,7 @@ import java.util.Observable;
 /**
  * This class converts a a TRAML file into a TSV/CSV file in a single thread.
  */
-public class TRAMLToSepJob extends Observable implements Runnable {
+public class TRAMLToSepJob extends Observable implements Runnable, Interruptible {
     private static Logger logger = Logger.getLogger(TRAMLToSepJob.class);
 
     /**
@@ -44,10 +47,26 @@ public class TRAMLToSepJob extends Observable implements Runnable {
     private File iOutputFile = null;
 
     /**
+     * The Target export type.
+     */
+    private FileTypeEnum iExportType;
+
+    /**
+     * Keeps track whether this Job is exerted via a Graphical User Interface.
+     */
+    private boolean iGraphical = false;
+
+    /**
+     * This boolean tracks the interruption status of the Converter.
+     */
+    private boolean boolInterrupted = false;
+
+    /**
      * This descriptive String returns the current state of the job.
      */
     private String iStatus;
     public int iCounter;
+    public TraMLType iTraML;
 
 
     /**
@@ -61,6 +80,10 @@ public class TRAMLToSepJob extends Observable implements Runnable {
                 aConversionJobOptions.getOutputFile(),
                 aConversionJobOptions.getExportType()
         );
+
+        if(aConversionJobOptions.hasRtDelta()){
+            iTSVFileExportModel.setRetentionTimeDelta(aConversionJobOptions.getRtDelta());
+        }
     }
 
 
@@ -74,7 +97,7 @@ public class TRAMLToSepJob extends Observable implements Runnable {
     public TRAMLToSepJob(File aInputFile, File aOutputFile, FileTypeEnum aExportType) {
         iInputFile = aInputFile;
         iOutputFile = aOutputFile;
-
+        iExportType = aExportType;
 
         if (aExportType == FileTypeEnum.TSV_THERMO_TSQ) {
             iTSVFileExportModel = new TramlToThermo();
@@ -83,8 +106,10 @@ public class TRAMLToSepJob extends Observable implements Runnable {
         } else if (aExportType == FileTypeEnum.TSV_ABI) {
             iTSVFileExportModel = new TramlToABI();
         } else {
-            throw new JTramlException("unsupported export format!!");
+            throw new JTramlException("export format is not implemented!!");
         }
+
+
     }
 
     /**
@@ -104,13 +129,27 @@ public class TRAMLToSepJob extends Observable implements Runnable {
             TraMLParser lTraMLParser = new TraMLParser();
             lTraMLParser.parse_file(iInputFile.getCanonicalPath(), logger);
 
-            TraMLType lTraML = lTraMLParser.getTraML();
-            List<TransitionType> lTransitionTypeList = lTraML.getTransitionList().getTransition();
+            iTraML = lTraMLParser.getTraML();
+            List<TransitionType> lTransitionTypeList = iTraML.getTransitionList().getTransition();
             iCounter = 0;
             for (TransitionType lTransitionType : lTransitionTypeList) {
                 iCounter++;
+
+                // Validate the first transition.
+                if (iCounter == 1) {
+                    boolean lConvertable = iTSVFileExportModel.isConvertable(lTransitionType, iTraML);
+                    if (lConvertable == false) {
+                        // Cannot be converted, at the moment. Try and solve!
+                        MessageBean lConversionMessage = iTSVFileExportModel.getConversionMessage();
+                        lConversionMessage.setInterruptible(this);
+                        setChanged();
+                        notifyObservers(lConversionMessage);
+                        interrupt();
+                    }
+                }
+
                 iStatus = "writing transition " + iCounter;
-                String line = iTSVFileExportModel.parseTransitionType(lTransitionType, lTraML);
+                String line = iTSVFileExportModel.parseTransitionType(lTransitionType, iTraML);
                 lWriter.write(line);
                 lWriter.write("\n");
             }
@@ -132,10 +171,49 @@ public class TRAMLToSepJob extends Observable implements Runnable {
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
-
     }
 
     public String getStatus() {
         return iStatus;
     }
+
+    /**
+     * Interrupt the implementing class.
+     */
+    public void interrupt() throws InterruptedException {
+        boolInterrupted = true;
+        String o = "sync";
+
+        ConditionLock lConditionLock = new ConditionLock();
+        synchronized (lConditionLock) {
+            while (boolInterrupted) {
+                lConditionLock.wait(1000);
+                System.out.println(".");
+            }
+        }
+
+    }
+
+    /**
+     * Proceed the operations of the current Class.
+     *
+     * @param o
+     */
+    public void proceed(Object o) {
+        String s = o.toString();
+        if(!s.equals("")){
+            Double d = new Double(s);
+            iTSVFileExportModel.setRetentionTimeDelta(d.doubleValue());
+        }
+        boolInterrupted = false;
+    }
+
+    public boolean isGraphical() {
+        return iGraphical;
+    }
+
+    public void setGraphical(boolean aGraphical) {
+        iGraphical = aGraphical;
+    }
+
 }
