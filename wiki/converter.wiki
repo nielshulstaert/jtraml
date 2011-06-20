@@ -17,7 +17,7 @@
 ====ABI csv====
 example transition:
 {{{
-#564.9618,663.4081,10,LSTADPADASTIYAVVV.O95866.O95866-3.O95866-5.3y6,29.3
+# 564.9618,663.4081,10,LSTADPADASTIYAVVV.O95866.O95866-3.O95866-5.3y6,29.3
 }}}
  
   # 564.9618 = precursor ion m/z (Q1)
@@ -34,8 +34,8 @@ example transition:
 ====Thermo csv====
 example transition:
 {{{
-#Q1,Q3,CE,Start time (min),Stop time (min),Polarity,Trigger,Reaction category,Name
-#651.8366,790.4038,25.5,18.61,28.61,1,1.00E+04,0,AAELQTGLETNR.2y7-1
+# Q1,Q3,CE,Start time (min),Stop time (min),Polarity,Trigger,Reaction category,Name
+# 651.8366,790.4038,25.5,18.61,28.61,1,1.00E+04,0,AAELQTGLETNR.2y7-1
 }}}
  
   # 651.8366 = precursor ion m/z (Q1)
