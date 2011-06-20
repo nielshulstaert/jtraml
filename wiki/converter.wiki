@@ -104,7 +104,7 @@ OPTIONS
 
 -importtype <arg>   The available file
                      types:<TraML><thermo_csv><agilent_tsv><abi_csv>
- 
+
 -input <arg>        The transition input file
 
 -output <arg>       The converted transition output file
