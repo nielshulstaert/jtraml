@@ -17,26 +17,26 @@
 ====ABI csv====
 example transition:
 {{{
-564.9618,663.4081,10,LSTADPADASTIYAVVV.O95866.O95866-3.O95866-5.3y6,29.3
+#564.9618,663.4081,10,LSTADPADASTIYAVVV.O95866.O95866-3.O95866-5.3y6,29.3
 }}}
  
-  # 564.9618 = precursor mass
-  # 663.4081 = fragment mass
+  # 564.9618 = precursor ion m/z (Q1)
+  # 663.4081 = product ion m/z (Q3)
   # 10 = ???
   # LSTADPADASTIYAVVV = peptide sequence
   # O95866 = protein accession (A)
   # O95866-3 = protein accession (B)
   # O95866-5 = protein accession (C)
   # 3y6 = precursor charge 3+, fragment y6
-  # 29.3 = retention time
+  # 29.3 = centroid retention time (min)
 
 ----
 ====Thermo csv====
 example transition:
 {{{
-Q1,Q3,CE,Start time (min),Stop time (min),Polarity,Trigger,Reaction category,Name
-651.8366,790.4038,25.5,18.61,28.61,1,1.00E+04,0,AAELQTGLETNR.2y7-1
-
+#Q1,Q3,CE,Start time (min),Stop time (min),Polarity,Trigger,Reaction category,Name
+#651.8366,790.4038,25.5,18.61,28.61,1,1.00E+04,0,AAELQTGLETNR.2y7-1
+}}}
  
   # 651.8366 = precursor ion m/z (Q1)
   # 790.4038 = product ion m/z (Q3)
@@ -49,7 +49,6 @@ Q1,Q3,CE,Start time (min),Stop time (min),Polarity,Trigger,Reaction category,Nam
   # AAELQTGLETNR.2y7-1 = name
 
 
-}}}
 ----
 ====Agilent tsv====
 ----
