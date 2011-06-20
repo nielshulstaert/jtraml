@@ -31,12 +31,12 @@ example transition:
   # 29.3 = retention time
 
 ----
-=====Thermo csv=====
+====Thermo csv====
 example transition:
 {{{
 Q1,Q3,CE,Start time (min),Stop time (min),Polarity,Trigger,Reaction category,Name
 651.8366,790.4038,25.5,18.61,28.61,1,1.00E+04,0,AAELQTGLETNR.2y7-1
-}}}
+
  
   # 651.8366 = precursor ion m/z (Q1)
   # 790.4038 = product ion m/z (Q3)
@@ -48,8 +48,10 @@ Q1,Q3,CE,Start time (min),Stop time (min),Polarity,Trigger,Reaction category,Nam
   # 0 = reaction category
   # AAELQTGLETNR.2y7-1 = name
 
+
+}}}
 ----
-=====Agilent tsv=====
+====Agilent tsv====
 ----
 ===TraML Converter Command Line===
 
