@@ -87,8 +87,7 @@ java -jar jtraml-core-x.x.jar
 
 If no options are provided, then the command line usage will be displayed in the prompt.
 
-<code><pre>
-
+<code>
 usage: TraMLConverter
 ----------------------
 INFO
@@ -116,7 +115,7 @@ OPTIONS
 http://code.google.com/p/jtraml/
 
 
-</pre></code>
+</code>
 
 
 
