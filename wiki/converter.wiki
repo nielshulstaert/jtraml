@@ -11,9 +11,9 @@
 
   * [#TraML_Converter_Web TraML Converter Web]
 
-
+----
 ===Conversion Formats===
-
+----
 =====ABI csv=====
 example line:
 {{{
@@ -30,14 +30,15 @@ example line:
   * 3y6 = precursor charge 3+, fragment y6
   * 29.3 = retention time
 
-  
+----
 =====Thermo csv=====
+----
 
 =====Agilent tsv=====
-
+----
 ===TraML Converter Command Line===
 
 
-
+----
 ===TraML Converter Web===
 [http://iomics.ugent.be/jtraml http://iomics.ugent.be/jtraml]
