@@ -1,6 +1,6 @@
 #labels version,wiki
 #sidebar toc
-#All releases of the jTraML library are listed here.
+#description All releases of the jTraML library are listed here.
 
 ==0.2 (15 June 2011)==
  * Initial public version of the jTraML library
