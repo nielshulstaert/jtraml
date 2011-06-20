@@ -15,7 +15,22 @@
 ===Conversion Formats===
 
 =====ABI csv=====
+example line:
+{{{
+564.9618,663.4081,10,LSTADPADASTIYAVVV.O95866.O95866-3.O95866-5.3y6,29.3
+}}}
+ 
+  * 564.9618 = precursor mass
+  * 663.4081 = fragment mass
+  * 10 = ???
+  * LSTADPADASTIYAVVV = peptide sequence
+  * O95866 = protein accession (A)
+  * O95866-3 = protein accession (B)
+  * O95866-5 = protein accession (C)
+  * 3y6 = precursor charge 3+, fragment y6
+  * 29.3 = retention time
 
+  
 =====Thermo csv=====
 
 =====Agilent tsv=====
