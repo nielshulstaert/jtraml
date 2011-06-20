@@ -99,13 +99,17 @@ Otherwise, if the input type is a .TSV file, then the converter generates a .Tra
 ----------------------
 OPTIONS
 ----------------------
- -exporttype <arg>   The available file
+-exporttype <arg>   The available file
                      types:<TraML><thermo_csv><agilent_tsv><abi_csv>
- -importtype <arg>   The available file
+
+-importtype <arg>   The available file
                      types:<TraML><thermo_csv><agilent_tsv><abi_csv>
- -input <arg>        The transition input file
- -output <arg>       The converted transition output file
- -rtdelta <arg>      This delta retention time (minutes) is used when
+ 
+-input <arg>        The transition input file
+
+-output <arg>       The converted transition output file
+
+-rtdelta <arg>      This delta retention time (minutes) is used when
                      appropriate (cfr. Wiki)
 
 ----------------------
