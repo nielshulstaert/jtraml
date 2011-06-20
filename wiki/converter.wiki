@@ -76,6 +76,43 @@ example transition:
 
 ----
 ===TraML Converter Command Line===
+The TraML Converter is the starter class in the jtraml-core library.
+So executing the following statement in the command line will launch the jTraML converter.
+{{{
+java -jar jtraml-core-x.x.jar 
+}}}
+
+If no options are provided, then the command line usage will be displayed in the prompt.
+
+{{{
+
+usage: TraMLConverter
+----------------------
+INFO
+----------------------
+The TraML converter command line tool takes an input file and an input type and generates an output file.
+If the input type is a .TraML file, then the converter generates be a .TSV file.
+Otherwise, if the input type is a .TSV file, then the converter generates a .TraML file.
+----------------------
+OPTIONS
+----------------------
+ -exporttype <arg>   The available file
+                     types:<TraML><thermo_csv><agilent_tsv><abi_csv>
+ -importtype <arg>   The available file
+                     types:<TraML><thermo_csv><agilent_tsv><abi_csv>
+ -input <arg>        The transition input file
+ -output <arg>       The converted transition output file
+ -rtdelta <arg>      This delta retention time (minutes) is used when
+                     appropriate (cfr. Wiki)
+
+----------------------
+http://code.google.com/p/jtraml/
+
+
+
+}}}
+
+
 
 
 ----
