@@ -51,6 +51,28 @@ example transition:
 
 ----
 ====Agilent tsv====
+example transition:
+{{{
+# Dynamic MRM
+# Compound Name	ISTD?	Precursor Ion	MS1 Res	Product Ion	MS2 Res	Fragmentor	Collision Energy	Cell Accelerator Voltage	Ret Time (min)	Delta Ret Time	Polarity
+# CSASVLPVDVQTLNSSGPPFGK.2y16-1	FALSE	1130.5681	Wide	1642.8233	Unit	125	39.8	5	42.35	5.00	Positive
+}}}
+
+	
+  # CSASVLPVDVQTLNSSGPPFGK.2y16-1 = name
+  # FALSE = ISTD (?)
+  # 1130.5681 = precursor ion m/z (Q1)
+  # Wide = MS1 resolution
+  # 1642.8233 = product ion m/z (Q3)
+  # Unit = MS2 resolution
+  # 125 = fragmentor
+  # 39.8 = collision energy
+  # 5 = cell accelerator voltage
+  # 42.35 = centroid retention time
+  # 5.00 = delta retention time
+  # Positive = polarity
+ 
+
 ----
 ===TraML Converter Command Line===
 
