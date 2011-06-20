@@ -1,5 +1,4 @@
 #summary description of the jTraML API
-#labels Featured
 #sidebar toc
 
 === Reduced UML diagram ===
