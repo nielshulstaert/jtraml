@@ -13,7 +13,6 @@
 
 ----
 ===Conversion Formats===
-----
 ====ABI csv====
 example transition:
 {{{
@@ -30,7 +29,9 @@ example transition:
   # 3y6 = precursor charge 3+, fragment y6
   # 29.3 = centroid retention time (min)
 
-----
+
+
+
 ====Thermo csv====
 example transition:
 {{{
@@ -49,7 +50,8 @@ example transition:
   # AAELQTGLETNR.2y7-1 = name
 
 
-----
+
+
 ====Agilent tsv====
 example transition:
 {{{
