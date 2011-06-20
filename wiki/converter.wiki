@@ -78,13 +78,16 @@ example transition:
 ===TraML Converter Command Line===
 The TraML Converter is the starter class in the jtraml-core library.
 So executing the following statement in the command line will launch the jTraML converter.
-{{{
+
+<code language="bash">
+
 java -jar jtraml-core-x.x.jar 
-}}}
+
+</code>
 
 If no options are provided, then the command line usage will be displayed in the prompt.
 
-<code language="shell">
+<code language="bash">
 
 usage: TraMLConverter
 ----------------------
