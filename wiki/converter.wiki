@@ -111,9 +111,6 @@ OPTIONS
 -rtdelta <arg>      This delta retention time (minutes) is used when
                      appropriate (cfr. Wiki)
 
-----------------------
-http://code.google.com/p/jtraml/
-
 
 </code>
 
