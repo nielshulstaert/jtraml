@@ -79,7 +79,7 @@ example transition:
 The TraML Converter is the starter class in the jtraml-core library.
 So executing the following statement in the command line will launch the jTraML converter.
 
-<code language="bash">
+<code language="java">
 
 java -jar jtraml-core-x.x.jar 
 
