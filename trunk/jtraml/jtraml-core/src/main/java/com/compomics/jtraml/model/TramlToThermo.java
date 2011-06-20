@@ -1,5 +1,7 @@
 package com.compomics.jtraml.model;
 
+import com.compomics.jtraml.MessageBean;
+import com.compomics.jtraml.RetentionTimeEvaluation;
 import com.compomics.jtraml.enumeration.FrequentOBoEnum;
 import com.compomics.jtraml.interfaces.TSVFileExportModel;
 import org.hupo.psi.ms.traml.*;
@@ -10,6 +12,18 @@ import java.util.List;
  * This class is aFileExportModel to write separated file format of transitions similar to the Thermo TSQ.
  */
 public class TramlToThermo implements TSVFileExportModel {
+
+    /**
+     * This MessageBean keeps track of the
+     */
+    private MessageBean iMessageBean = null;
+
+
+    /**
+     * This double represents the delta retention time window for the Agilent export model.
+     */
+    private double iRetentionTimeWindow = Double.MAX_VALUE;
+
 
     /**
      * Returns whether this export model has a header.
@@ -27,6 +41,42 @@ public class TramlToThermo implements TSVFileExportModel {
      */
     public String getHeader() {
         return "Q1,Q3,CE,Start time (min),Stop time (min),Polarity,Trigger,Reaction category,Name";
+    }
+
+    /**
+     * Returns whether the given TransitionType is convertable.
+     * The ABI export separated file format expects the collision energy, as well as a centroid
+     *
+     * @return
+     */
+    public boolean isConvertable(TransitionType aTransitionType, TraMLType aTraMLType) {
+
+        RetentionTimeEvaluation lEvaluation = new RetentionTimeEvaluation(aTransitionType, aTraMLType);
+
+        if (lEvaluation.hasRtLower() && lEvaluation.hasRtUpper()) {
+            // Ok!
+            return true;
+        } else if (lEvaluation.hasRt() && lEvaluation.hasRtDelta()) {
+            // We are missing the Delta RetentionTime!
+            iMessageBean = new MessageBean("No lower and upper retention times are found.\nYet, a centroid retention time and a window have been found that will be used as lower and upper retentiontimes.", false);
+            return false;
+        } else if (lEvaluation.hasRt() && !lEvaluation.hasRtDelta()) {
+            // We are missing the Delta RetentionTime!
+            iMessageBean = new MessageBean("No lower and upper retention times are found.\nYet, a centroid retention time has been found. Please provide a window time to create the required lower and upper retention times.", true);
+            return false;
+        } else {
+            iMessageBean = new MessageBean("The required retention times have not been found.\nAll retention times will be 'NA'", false);
+            return false;
+        }
+    }
+
+    /**
+     * Returns the conversion Message if needed. Null if the TransitionType is convertable.
+     *
+     * @return
+     */
+    public MessageBean getConversionMessage() {
+        return null;
     }
 
     /**
@@ -79,17 +129,13 @@ public class TramlToThermo implements TSVFileExportModel {
         PeptideType lPeptideType = (PeptideType) aTransitionType.getPeptideRef();
 
         // Get the retention time.
-        List<RetentionTimeType> lRetentionTime = lPeptideType.getRetentionTimeList().getRetentionTime();
-        for (RetentionTimeType lRetentionTimeType : lRetentionTime) {
-            List<CvParamType> lCvParams = lRetentionTimeType.getCvParam();
-            for (CvParamType lCvParamType : lCvParams) {
-                if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_LOWER.getName())) {
-                    lStartTime = lCvParamType.getValue();
-                } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_UPPER.getName())) {
-                    lStopTime = lCvParamType.getValue();
-                }
-            }
-        }
+        // The Thermo format requires a lower and upper time.
+
+
+        RetentionTimeParser retentionTimeParser = new RetentionTimeParser(aTransitionType, aTraMLType, lStartTime, lStopTime, lPeptideType).invoke();
+        lStartTime = retentionTimeParser.getStartTime();
+        lStopTime = retentionTimeParser.getStopTime();
+
 
         // Get the configuration options.
         List<ConfigurationType> ConfigurationList = aTransitionType.getProduct().getConfigurationList().getConfiguration();
@@ -143,5 +189,107 @@ public class TramlToThermo implements TSVFileExportModel {
 
         return sb.toString();
 
+    }
+
+    /**
+     * Add a constant CVParamType to be used by the ExportType
+     */
+
+    public void setRetentionTimeDelta(double aRetentionTimeWindow) {
+        iRetentionTimeWindow = aRetentionTimeWindow;
+    }
+
+
+    /**
+     * This private class can parse retention time information specific to the Thermo output format.
+     */
+    private class RetentionTimeParser {
+        private TransitionType iTransitionType;
+        private TraMLType iTraMLType;
+        private String iStartTime;
+        private String iStopTime;
+        private PeptideType iPeptideType;
+
+
+        public RetentionTimeParser(TransitionType aTransitionType, TraMLType aTraMLType, String aStartTime, String aStopTime, PeptideType aPeptideType) {
+            iTransitionType = aTransitionType;
+            iTraMLType = aTraMLType;
+            iStartTime = aStartTime;
+            iStopTime = aStopTime;
+            iPeptideType = aPeptideType;
+        }
+
+        public String getStartTime() {
+            return iStartTime;
+        }
+
+        public String getStopTime() {
+            return iStopTime;
+        }
+
+        public RetentionTimeParser invoke() {
+            RetentionTimeEvaluation lEvaluation = new RetentionTimeEvaluation(iTransitionType, iTraMLType);
+
+            if (lEvaluation.hasRtLower() && lEvaluation.hasRtUpper()) {
+                // Ok!
+                List<RetentionTimeType> lRetentionTime = iPeptideType.getRetentionTimeList().getRetentionTime();
+                for (RetentionTimeType lRetentionTimeType : lRetentionTime) {
+                    List<CvParamType> lCvParams = lRetentionTimeType.getCvParam();
+                    for (CvParamType lCvParamType : lCvParams) {
+                        if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_LOWER.getName())) {
+                            iStartTime = lCvParamType.getValue();
+                        } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_UPPER.getName())) {
+                            iStopTime = lCvParamType.getValue();
+                        }
+                    }
+                }
+
+
+            } else if (lEvaluation.hasRt() && lEvaluation.hasRtDelta()) {
+                // Calculate it from the retention time and the delta retention time!
+                double lRt = 0;
+                double lRtDelta = 0;
+
+                List<RetentionTimeType> lRetentionTime = iPeptideType.getRetentionTimeList().getRetentionTime();
+                for (RetentionTimeType lRetentionTimeType : lRetentionTime) {
+                    List<CvParamType> lCvParams = lRetentionTimeType.getCvParam();
+                    for (CvParamType lCvParamType : lCvParams) {
+                        if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME.getName())) {
+                            lRt = Double.parseDouble(lCvParamType.getValue());
+                        } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_WINDOW.getName())) {
+                            lRtDelta = Double.parseDouble(lCvParamType.getValue());
+                        }
+                    }
+                }
+
+                iStartTime = "" + (lRt - lRtDelta);
+                iStopTime = "" + (lRt + lRtDelta);
+
+            } else if (lEvaluation.hasRt() && !lEvaluation.hasRtDelta()) {
+                // Calculate it from the retention time and the user-specified delta retention time!
+
+                if (iRetentionTimeWindow != Double.MAX_VALUE) {
+                    // The window has been defined!
+                    double lRt = 0;
+                    double lRtDelta = 0;
+
+                    List<RetentionTimeType> lRetentionTime = iPeptideType.getRetentionTimeList().getRetentionTime();
+                    for (RetentionTimeType lRetentionTimeType : lRetentionTime) {
+                        List<CvParamType> lCvParams = lRetentionTimeType.getCvParam();
+                        for (CvParamType lCvParamType : lCvParams) {
+                            if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME.getName())) {
+                                lRt = Double.parseDouble(lCvParamType.getValue());
+                            }
+                        }
+                    }
+                    iStartTime = "" + (lRt - iRetentionTimeWindow);
+                    iStopTime = "" + (lRt + iRetentionTimeWindow);
+                }
+
+            } else {
+                // Leave lRt and lRtdelta as 'NA'.
+            }
+            return this;
+        }
     }
 }

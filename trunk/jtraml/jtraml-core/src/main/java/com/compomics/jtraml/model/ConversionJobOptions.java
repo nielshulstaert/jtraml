@@ -15,6 +15,11 @@ public class ConversionJobOptions implements Serializable {
     private static Logger logger = Logger.getLogger(ConversionJobOptions.class);
 
     /**
+     * The user specified delta retention time.
+     */
+    private double iRtDelta = Double.MIN_VALUE;
+
+    /**
      * The user input file.
      */
     private File iInputFile = null;
@@ -40,7 +45,7 @@ public class ConversionJobOptions implements Serializable {
      * empty constructor.
      */
     public ConversionJobOptions() {
-            uuid = UUID.fromString("3856c3da-ea56-4717-9f58-85f6c5f560a5");
+        uuid = UUID.fromString("3856c3da-ea56-4717-9f58-85f6c5f560a5");
     }
 
 
@@ -58,6 +63,15 @@ public class ConversionJobOptions implements Serializable {
 
     public void setExportType(FileTypeEnum aExportType) {
         iExportType = aExportType;
+    }
+
+    /**
+     * Set the delta retention time specified by the user.
+     *
+     * @param aRtDelta
+     */
+    public void setRtDelta(double aRtDelta) {
+        iRtDelta = aRtDelta;
     }
 
     /**
@@ -94,6 +108,25 @@ public class ConversionJobOptions implements Serializable {
      */
     public boolean hasOutputFile() {
         return !(iOutputFile == null);
+    }
+
+    /**
+     * Returns true if the RtDelta time was specified by the user.
+     *
+     * @return
+     */
+    public boolean hasRtDelta() {
+        return (iRtDelta != Double.MIN_VALUE);
+    }
+
+
+    /**
+     * Returns the user specified delta retention time.
+     *
+     * @return
+     */
+    public double getRtDelta() {
+        return iRtDelta;
     }
 
     /**

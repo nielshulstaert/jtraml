@@ -1,5 +1,7 @@
 package com.compomics.jtraml.model;
 
+import com.compomics.jtraml.MessageBean;
+import com.compomics.jtraml.RetentionTimeEvaluation;
 import com.compomics.jtraml.enumeration.FrequentOBoEnum;
 import com.compomics.jtraml.interfaces.TSVFileExportModel;
 import org.hupo.psi.ms.traml.*;
@@ -10,6 +12,11 @@ import java.util.List;
  * This class is a FileExportModel to write separated file format of transitions similar to the ABI QTRAP 5500.
  */
 public class TramlToABI implements TSVFileExportModel {
+
+    /**
+     * This MessageBean keeps track of the
+     */
+    private MessageBean iMessageBean = null;
 
     /**
      * Returns whether this export model has a header.
@@ -27,6 +34,38 @@ public class TramlToABI implements TSVFileExportModel {
      */
     public String getHeader() {
         return "";
+    }
+
+    /**
+     * Returns whether the given TransitionType is convertable.
+     * The ABI export separated file format expects the collision energy, as well as a centroid
+     *
+     * @return
+     */
+    public boolean isConvertable(TransitionType aTransitionType, TraMLType aTraMLType) {
+
+        RetentionTimeEvaluation lEvaluation = new RetentionTimeEvaluation(aTransitionType, aTraMLType);
+
+        if (lEvaluation.hasRt()) {
+            // Ok!
+            return true;
+        } else if (lEvaluation.hasRtLower()) {
+            // Ok, we are trying to make assumptions now.
+            iMessageBean = new MessageBean("The Centroid Retention Time is missing.\nThe lower retention time will be used instead.", false);
+            return false;
+        } else {
+            iMessageBean = new MessageBean("The required retention times have not been found.\nAll retention times will be 'NA'", false);
+            return false;
+        }
+    }
+
+    /**
+     * Returns the conversion Message if needed. Null if the TransitionType is convertable.
+     *
+     * @return
+     */
+    public MessageBean getConversionMessage() {
+        return iMessageBean;
     }
 
     /**
@@ -77,14 +116,8 @@ public class TramlToABI implements TSVFileExportModel {
         // Get the peptide instance of the current transition.
         PeptideType lPeptideType = (PeptideType) aTransitionType.getPeptideRef();
 
-        // Get the retention time.
-        List<RetentionTimeType> lRetentionTime = lPeptideType.getRetentionTimeList().getRetentionTime();
-        for (RetentionTimeType aLRetentionTime : lRetentionTime) {
-            CvParamType lCvParamType = aLRetentionTime.getCvParam().get(0);
-            if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME.getName())) {
-                lRt = lCvParamType.getValue();
-            }
-        }
+        lRt = new RetentionTimeParser(aTransitionType, aTraMLType, lRt, lPeptideType).invoke();
+
 
         // Get the configuration options.
         List<ConfigurationType> ConfigurationList = aTransitionType.getProduct().getConfigurationList().getConfiguration();
@@ -119,5 +152,60 @@ public class TramlToABI implements TSVFileExportModel {
 
         return sb.toString();
 
+    }
+
+    /**
+     * The ABI export model does not need the retention time delta.
+     */
+    public void setRetentionTimeDelta(double aRetentionTimeWindow) {
+        //
+    }
+
+
+    /**
+     * This private class can parse retention time information specific to the ABI output format.
+     */
+    private class RetentionTimeParser {
+        private TransitionType iTransitionType;
+        private TraMLType iTraMLType;
+        private String iRt;
+        private PeptideType iPeptideType;
+
+        public RetentionTimeParser(TransitionType aTransitionType, TraMLType aTraMLType, String aRt, PeptideType aPeptideType) {
+            iTransitionType = aTransitionType;
+            iTraMLType = aTraMLType;
+            iRt = aRt;
+            iPeptideType = aPeptideType;
+        }
+
+        public String invoke() {
+            // Get the retention time.
+            RetentionTimeEvaluation lEvaluation = new RetentionTimeEvaluation(iTransitionType, iTraMLType);
+
+            if (lEvaluation.hasRt()) {
+                // Ok!
+                List<RetentionTimeType> lRetentionTime = iPeptideType.getRetentionTimeList().getRetentionTime();
+                for (RetentionTimeType aLRetentionTime : lRetentionTime) {
+                    CvParamType lCvParamType = aLRetentionTime.getCvParam().get(0);
+                    if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME.getName())) {
+                        iRt = lCvParamType.getValue();
+                    }
+                }
+
+            } else if (lEvaluation.hasRtLower()) {
+                // Ok, use the lower retention time as the centroid time.
+                List<RetentionTimeType> lRetentionTime = iPeptideType.getRetentionTimeList().getRetentionTime();
+                for (RetentionTimeType aLRetentionTime : lRetentionTime) {
+                    CvParamType lCvParamType = aLRetentionTime.getCvParam().get(0);
+                    if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_LOWER.getName())) {
+                        iRt = lCvParamType.getValue();
+                    }
+                }
+
+            } else {
+                // Leave lRt as 'NA'.
+            }
+            return iRt;
+        }
     }
 }

@@ -20,7 +20,7 @@ import java.util.Date;
 public class ResultsPanel extends VerticalLayout {
 
     private IndexedContainer iConversionData;
-    private Table iConversionTable = new Table();
+    private Table iConversionTable = new Table("TraML Converter Results Table");
 
     private static String[] fields = {"Download", "Filename", "Input", "Output",
             "Date", "UUID"};

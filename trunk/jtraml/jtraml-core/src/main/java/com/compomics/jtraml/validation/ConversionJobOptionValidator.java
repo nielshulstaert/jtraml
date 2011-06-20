@@ -1,5 +1,6 @@
 package com.compomics.jtraml.validation;
 
+import com.compomics.jtraml.enumeration.FileTypeEnum;
 import com.compomics.jtraml.model.ConversionJobOptions;
 import org.apache.log4j.Logger;
 
@@ -27,6 +28,19 @@ public class ConversionJobOptionValidator {
         File lInputFile = aConversionJobOptions.getInputFile();
         if (lInputFile == null) {
             iStatus = "input file is null";
+            return false;
+        }
+
+        FileTypeEnum lImportType = aConversionJobOptions.getImportType();
+        FileTypeEnum lExportType = aConversionJobOptions.getExportType();
+
+        if (lImportType != FileTypeEnum.TRAML && lExportType!= FileTypeEnum.TRAML) {
+            iStatus = "Vendor specific separated file formats cannot be converted into each other";
+            return false;
+        }
+
+        if (lImportType == lExportType) {
+            iStatus = "Import and Export types cannot be identical";
             return false;
         }
 
