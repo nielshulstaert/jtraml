@@ -1,0 +1,18 @@
+@import "../reindeer/styles.css";
+
+.v-app {
+    background: white;
+}
+
+.v-horizontallayout{
+    vertical-align:baseline;
+    margin:10px
+}
+
+.split-line{
+    width:1px;
+    height:200px;
+    background:#dcdcdc;
+    margin:10px;
+}
+

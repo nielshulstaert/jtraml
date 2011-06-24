@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.compomics.jtraml</groupId>
+    <artifactId>jtraml</artifactId>
+    <packaging>pom</packaging>
+    <version>0.3</version>
+    <name>jtraml</name>
+    <url>http://jtraml.googlecode.com</url>
+
+    <!-- Licence -->
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+
+    <modules>
+        <module>jtraml-core</module>
+        <module>jtraml-web</module>
+    </modules>
+
+    <!-- Developers -->
+    <developers>
+        <developer>
+            <name>Kenny Helsens</name>
+            <id>kenny</id>
+            <email>kenny.helsens@ugent.be</email>
+            <organization>Computational Omics and Systems Biology Group, VIB Department of Medical Protein Research,
+                UGent, Belgium
+            </organization>
+        </developer>
+        <developer>
+            <name>Mi-Youn Brusniak</name>
+            <id>mykb</id>
+            <email>mbrusniak@systemsbiology.org</email>
+            <organization>Computational Biology, Seattle Proteome Center</organization>
+        </developer>
+    </developers>
+
+
+    <!-- Build -->
+    <build>
+        <!-- Plugins -->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-idea-plugin</artifactId>
+                <configuration>
+                    <jdkName>1.5</jdkName>
+                </configuration>
+            </plugin>
+
+
+        </plugins>
+    </build>
+    <!-- Repositories -->
+    <repositories>
+        <!-- UGent Genesis Maven 1 repository -->
+        <repository>
+            <id>genesis-maven-repository</id>
+            <name>Genesis repository</name>
+            <url>http://genesis.UGent.be/maven</url>
+            <layout>legacy</layout>
+        </repository>
+        <!-- UGent Genesis Maven 2 repository -->
+        <repository>
+            <id>genesis-maven2-repository</id>
+            <name>Genesis maven2 repository</name>
+            <url>http://genesis.UGent.be/maven2</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+
+
+    <!-- The deployment maven2 repository-->
+    <distributionManagement>
+        <repository>
+            <id>genesis-maven2-repo</id>
+            <name>Genesis Maven Repository</name>
+            <url>scp://genesis.ugent.be/home/maven/public_html/maven2</url>
+        </repository>
+    </distributionManagement>
+</project>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.compomics.jtraml</groupId>
+    <artifactId>jtraml-web</artifactId>
+    <packaging>war</packaging>
+    <name>jtraml-web</name>
+    <version>${version.number}</version>
+    <url>http://jtraml.googlecode.com</url>
+
+    <properties>
+        <version.number>0.3</version.number>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <vaadin.version>6.6.0</vaadin.version>
+        <gwt.version>2.3.0</gwt.version>
+        <analytics.version>1.1.1</analytics.version>
+    </properties>
+
+    <parent>
+        <groupId>com.compomics.jtraml</groupId>
+        <artifactId>jtraml</artifactId>
+        <version>0.3</version>
+    </parent>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+
+            <!-- Compiles your custom GWT components with the GWT compiler -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>gwt-maven-plugin</artifactId>
+                <!-- Version 2.1.0-1 works at least with Vaadin 6.5 -->
+                <version>2.2.0</version>
+                <configuration>
+                    <!-- if you don't specify any modules, the plugin will find them -->
+                    <!--modules>
+                        ..
+                    </modules-->
+                    <webappDirectory>${project.build.directory}/${project.build.finalName}/VAADIN/widgetsets
+                    </webappDirectory>
+                    <extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
+                    <runTarget>clean</runTarget>
+                    <hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
+                    <noServer>true</noServer>
+                    <port>8080</port>
+                    <soyc>false</soyc>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.google.gwt</groupId>
+                        <artifactId>gwt-user</artifactId>
+                        <version>${gwt.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.google.gwt</groupId>
+                        <artifactId>gwt-dev</artifactId>
+                        <version>${gwt.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <goals>
+                            <!--<goal>resources</goal>-->
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Updates Vaadin 6.2+ widgetset definitions based on project dependencies -->
+            <plugin>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-maven-plugin</artifactId>
+                <version>1.0.1</version>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <!--<modules>-->
+                            <!--<module>com.compomics.jtraml.web.widget.MyAppWidgetSet</module>-->
+                            <!--</modules>-->
+                        </configuration>
+                        <goals>
+                            <goal>update-widgetset</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <!-- A simple Jetty test server at http://localhost:8080/untitled can be launched with the Maven goal jetty:run
+        and stopped with jetty:stop -->
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+                <version>6.1.24</version>
+                <configuration>
+                    <stopPort>9966</stopPort>
+                    <stopKey>untitled</stopKey>
+                    <!-- Redeploy every x seconds if changes are detected, 0 for no automatic redeployment -->
+                    <scanIntervalSeconds>0</scanIntervalSeconds>
+                    <!-- make sure Jetty also finds the widgetset -->
+                    <webAppConfig>
+                        <contextPath>/untitled</contextPath>
+                        <baseResource implementation="org.mortbay.resource.ResourceCollection">
+                            <!-- Workaround for Maven/Jetty issue http://jira.codehaus.org/browse/JETTY-680 -->
+                            <!-- <resources>src/main/webapp,${project.build.directory}/${project.build.finalName}</resources> -->
+                            <resourcesAsCSV>src/main/webapp,${project.build.directory}/${project.build.finalName}
+                            </resourcesAsCSV>
+                        </baseResource>
+                    </webAppConfig>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.5</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>compile</phase>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/${project.name}-${project.version}/VAADIN/themes</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources/themes</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>vaadin-snapshots</id>
+            <url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>vaadin-addons</id>
+            <url>http://maven.vaadin.com/vaadin-addons</url>
+        </repository>
+
+
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>codehaus-snapshots</id>
+            <url>http://nexus.codehaus.org/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+        <pluginRepository>
+            <id>vaadin-snapshots</id>
+            <url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <dependencies>
+        <!--jtraml core-->
+        <dependency>
+            <groupId>com.compomics.jtraml</groupId>
+            <artifactId>jtraml-core</artifactId>
+            <version>${version.number}</version>
+        </dependency>
+        <!--google analytics vaadin add-on-->
+        <dependency>
+            <groupId>org.vaadin.addons</groupId>
+            <artifactId>googleanalyticstracker</artifactId>
+            <version>${analytics.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.vaadin.addons</groupId>
+            <artifactId>reindeermods</artifactId>
+            <version>0.2</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.vaadin.addons</groupId>
+            <artifactId>confirmdialog</artifactId>
+            <version>1.0.5</version>
+        </dependency>
+
+        <!--vaadin framework-->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin</artifactId>
+            <version>${vaadin.version}</version>
+        </dependency>
+        <!--GWT framework-->
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <version>${gwt.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--javax validation framework-->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.0.0.GA</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--javax validation framework-->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.0.0.GA</version>
+            <classifier>sources</classifier>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Google guava-->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>r08</version>
+        </dependency>
+    </dependencies>
+</project>
