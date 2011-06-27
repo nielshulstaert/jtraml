@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 @SuppressWarnings("serial")
-public class UploadField extends FormLayout implements Property{
+public class UploadComponent extends FormLayout implements Property, Validator {
 
     private FileReceiver receiver = new FileReceiver();
 
@@ -26,7 +26,7 @@ public class UploadField extends FormLayout implements Property{
     private ConversionJobOptions iConversionJobOptions;
 
 
-    public UploadField(ConversionJobOptions aConversionJobOptions) {
+    public UploadComponent(ConversionJobOptions aConversionJobOptions) {
         super();
         iConversionJobOptions = aConversionJobOptions;
 
@@ -54,10 +54,55 @@ public class UploadField extends FormLayout implements Property{
     /**
      * This method will reset upload field.
      */
-    public void reset(){
+    public void reset() {
         upload = new Upload("", receiver);
         result.setCaption("");
         result.setIcon(null);
+    }
+
+    /**
+     * Checks the given value against this validator. If the value is valid the
+     * method does nothing. If the value is invalid, an
+     * {@link com.vaadin.data.Validator.InvalidValueException} is thrown.
+     *
+     * @param value the value to check
+     * @throws com.vaadin.data.Validator.InvalidValueException
+     *          if the value is invalid
+     */
+    public void validate(Object value) throws InvalidValueException {
+        Object lValue = getValue();
+        if (lValue instanceof File) {
+            if (((File) lValue).exists() == false) {
+//                throw new Validator.InvalidValueException("The Uploaded file does not exist!!");
+            } else {
+                // all fine!
+                setComponentError(null);
+            }
+        } else {
+            getWindow().showNotification("Please upload an input file", Window.Notification.TYPE_ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * Tests if the given value is valid. This method must be symmetric with
+     * {@link #validate(Object)} so that {@link #validate(Object)} throws an
+     * error iff this method returns false.
+     *
+     * @param value the value to check
+     * @return <code>true</code> if the value is valid, <code>false</code>
+     *         otherwise.
+     */
+    public boolean isValid(Object value) {
+        Object lValue = getValue();
+        if (lValue instanceof File) {
+            if (((File) lValue).exists() == false) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
     }
 
     public class FileReceiver implements Receiver {
@@ -126,7 +171,8 @@ public class UploadField extends FormLayout implements Property{
     public void setValue(Object newValue) throws ReadOnlyException, ConversionException {
         if (newValue instanceof File) {
             iConversionJobOptions.setInputFile((File) newValue);
-        };
+        }
+        ;
     }
 
     /**
@@ -141,33 +187,6 @@ public class UploadField extends FormLayout implements Property{
     public Class<?> getType() {
         return File.class;
     }
-
-
-    /**
-     * <p>
-     * Checks the validity of the validatable. If the validatable is valid this
-     * method should do nothing, and if it's not valid, it should throw
-     * <code>Validator.InvalidValueException</code>
-     * </p>
-     *
-     * @throws com.vaadin.data.Validator.InvalidValueException
-     *          if the value is not valid
-     */
-    public void validate() throws Validator.InvalidValueException {
-        Object lValue = getValue();
-        if (lValue instanceof File) {
-            if (((File) lValue).exists() == false) {
-//                throw new Validator.InvalidValueException("The Uploaded file does not exist!!");
-            }else{
-                // all fine!
-                setComponentError(null);
-            }
-        } else {
-            getWindow().showNotification("Please upload an input file", Window.Notification.TYPE_ERROR_MESSAGE);
-//            setComponentError(new UserError("The Upload value is not an instance of 'File'!!"));
-        }
-    }
-
 
 
 }

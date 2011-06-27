@@ -15,7 +15,6 @@ public class CheckBoxTextField extends FormLayout implements Property {
     CheckBox iCheckBox;
     TextField iTextField;
 
-
     /**
      * Constructs an empty <code>TextField</code> with no caption.
      */
@@ -28,7 +27,13 @@ public class CheckBoxTextField extends FormLayout implements Property {
         // Enable/Disable the Textfield by the CheckBox status.
         iCheckBox.addListener(new Button.ClickListener() {
             public void buttonClick(Button.ClickEvent event) {
-                iTextField.setEnabled((Boolean) iCheckBox.getValue());
+                Boolean isSelected = (Boolean) iCheckBox.getValue();
+                if(isSelected){
+                    iTextField.setEnabled(true);
+                }else{
+                    iTextField.setEnabled(false);
+                    iTextField.setValue("");
+                }
                 iTextField.requestRepaint();
             }
         });
@@ -59,6 +64,10 @@ public class CheckBoxTextField extends FormLayout implements Property {
      */
     public void addTextFieldListener(FieldEvents.TextChangeListener aListener) {
         iTextField.addListener(aListener);
+    }
+
+    public void addCheckBoxListener(Button.ClickListener aListener){
+        iCheckBox.addListener(aListener);
     }
 
     public void addTextFieldValidation(Validator aValidator){

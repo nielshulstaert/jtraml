@@ -1,6 +1,6 @@
 package com.compomics.jtraml.web.listener;
 
-import com.vaadin.data.Property;
+import com.compomics.jtraml.model.ConversionJobOptions;
 import com.vaadin.event.FieldEvents;
 import com.vaadin.ui.Layout;
 
@@ -14,19 +14,16 @@ public class RtShiftTextListener implements FieldEvents.TextChangeListener {
      */
     private Layout iParent;
 
-    /**
-     * Property handle to set the text changes.
-     */
-    private Property iProperty;
+    private ConversionJobOptions iConversionJobOptions;
 
     /**
      * Create a new Retenetion Time Shift listener.
      * @param aParent
-     * @param aProperty
+     * @param aConversionJobOptions
      */
-    public RtShiftTextListener(Layout aParent, Property aProperty) {
+    public RtShiftTextListener(Layout aParent, ConversionJobOptions aConversionJobOptions) {
         iParent = aParent;
-        iProperty = aProperty;
+        iConversionJobOptions = aConversionJobOptions;
     }
 
     /**
@@ -35,16 +32,16 @@ public class RtShiftTextListener implements FieldEvents.TextChangeListener {
     public void textChange(FieldEvents.TextChangeEvent event) {
         if (event.getText().equals("")) {
             // Text is blank.
-            iProperty.setValue("");
+            iConversionJobOptions.setRtShift(Double.MIN_VALUE);
         } else {
             Double lShift;
             try {
                 lShift = Double.parseDouble(event.getText());
                 // No number format exception, so set the value.
-                iProperty.setValue(lShift);
+                iConversionJobOptions.setRtShift(lShift);
             } catch (NumberFormatException ignored) {
                 iParent.getWindow().showNotification("set a postive or negative number!!");
-                iProperty.setValue("");
+                iConversionJobOptions.setRtShift(Double.MIN_VALUE);
             }
         }
     }
