@@ -1,4 +1,4 @@
-package com.compomics.jtraml.web.components;
+package com.compomics.jtraml.web.container;
 
 import com.compomics.jtraml.model.ConversionJobOptions;
 import com.compomics.jtraml.web.TramlConverterApplication;
@@ -15,26 +15,45 @@ import java.io.InputStream;
 import java.util.Date;
 
 /**
- * This class is a
+ * This class presents the conversion results within a single session.
  */
 public class ResultsPanel extends VerticalLayout {
 
+    /**
+     * The container manages the conversion jobs.
+     */
     private IndexedContainer iConversionData;
+
+    /**
+     * The Table component to display the conversion jobs.
+     */
     private Table iConversionTable = new Table("TraML Converter Results Table");
 
-    private static String[] fields = {"Download", "Filename", "Input", "Output",
-            "Date", "UUID"};
-    private static String[] visibleCols = new String[]{"Download", "Filename", "Input", "Output",
-            "Date"};
+    /**
+     * The visible columns for the Table.
+     */
+    private static String[] visibleCols = new String[]{"Download", "Filename", "Input", "Output", "Date"};
+
+    /**
+     * The results counter displayed in the Table.
+     */
     public int iItemCounter = 0;
 
 
+    /**
+     * Construct a new ResultsPanel to display the conversion job results.
+     */
     public ResultsPanel() {
         super();
         initLayout();
         initResultsTable();
     }
 
+    /**
+     * Table initition method.
+     *
+     * @return
+     */
     private String[] initResultsTable() {
         iConversionData = new IndexedContainer();
 
@@ -51,18 +70,23 @@ public class ResultsPanel extends VerticalLayout {
         iConversionTable.setWidth("100%");
         iConversionTable.setHeight("100px");
 
-
         return visibleCols;
-
     }
 
+    /**
+     * Layout initiation method.
+     */
     private void initLayout() {
         addComponent(iConversionTable);
         setExpandRatio(iConversionTable, 1);
         iConversionTable.setSizeFull();
-
     }
 
+    /**
+     * Add the results of a conversion job to the Table.
+     *
+     * @param aConversionJobOptions
+     */
     public void addItem(ConversionJobOptions aConversionJobOptions) {
         iItemCounter++;
         Object id = iConversionTable.addItem();
@@ -90,10 +114,12 @@ public class ResultsPanel extends VerticalLayout {
 
         } catch (IOException e) {
         }
-
-
     }
 
+    /**
+     * Return the number of conversion results displayed in the table.
+     * @return
+     */
     public int getNumberOfResults() {
         return iItemCounter;
     }

@@ -10,14 +10,18 @@ import java.util.UUID;
 /**
  * This class is a models the data of the GUI application.
  */
-public class ConversionJobOptions implements Serializable {
-
+public class ConversionJobOptions implements Serializable, Cloneable {
     private static Logger logger = Logger.getLogger(ConversionJobOptions.class);
 
     /**
      * The user specified delta retention time.
      */
     private double iRtDelta = Double.MIN_VALUE;
+
+    /**
+     * The user specified retention time shift.
+     */
+    private double iRtShift = Double.MIN_VALUE;
 
     /**
      * The user input file.
@@ -38,7 +42,6 @@ public class ConversionJobOptions implements Serializable {
      * The specified export type.
      */
     private FileTypeEnum iExportType = FileTypeEnum.TRAML;
-
     private UUID uuid;
 
     /**
@@ -48,13 +51,14 @@ public class ConversionJobOptions implements Serializable {
         uuid = UUID.fromString("3856c3da-ea56-4717-9f58-85f6c5f560a5");
     }
 
-
-    public FileTypeEnum getImportType() {
-        return iImportType;
-    }
-
-    public void setImportType(FileTypeEnum aImportType) {
-        iImportType = aImportType;
+    @Override
+    public String toString() {
+        return "ApplicationDataModel{" +
+                "iInputFile=" + iInputFile +
+                ", iOutputFile=" + iOutputFile +
+                ", iImportType=" + iImportType +
+                ", iExportType=" + iExportType +
+                '}';
     }
 
     public FileTypeEnum getExportType() {
@@ -65,22 +69,12 @@ public class ConversionJobOptions implements Serializable {
         iExportType = aExportType;
     }
 
-    /**
-     * Set the delta retention time specified by the user.
-     *
-     * @param aRtDelta
-     */
-    public void setRtDelta(double aRtDelta) {
-        iRtDelta = aRtDelta;
+    public FileTypeEnum getImportType() {
+        return iImportType;
     }
 
-    /**
-     * Returns whether an inputfile has been set.
-     *
-     * @return
-     */
-    public boolean hasInputFile() {
-        return !(iInputFile == null);
+    public void setImportType(FileTypeEnum aImportType) {
+        iImportType = aImportType;
     }
 
     /**
@@ -102,34 +96,6 @@ public class ConversionJobOptions implements Serializable {
     }
 
     /**
-     * Returns whether an outputfile has been set.
-     *
-     * @return
-     */
-    public boolean hasOutputFile() {
-        return !(iOutputFile == null);
-    }
-
-    /**
-     * Returns true if the RtDelta time was specified by the user.
-     *
-     * @return
-     */
-    public boolean hasRtDelta() {
-        return (iRtDelta != Double.MIN_VALUE);
-    }
-
-
-    /**
-     * Returns the user specified delta retention time.
-     *
-     * @return
-     */
-    public double getRtDelta() {
-        return iRtDelta;
-    }
-
-    /**
      * Return the user OutputFile
      *
      * @return
@@ -147,18 +113,91 @@ public class ConversionJobOptions implements Serializable {
         iOutputFile = aOutputFile;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    /**
+     * Returns the user specified delta retention time.
+     *
+     * @return
+     */
+    public double getRtDelta() {
+        return iRtDelta;
+    }
+
+    /**
+     * Set the delta retention time specified by the user.
+     *
+     * @param aRtDelta
+     */
+    public void setRtDelta(double aRtDelta) {
+        iRtDelta = aRtDelta;
+    }
+
+
+    /**
+     * Returns the user specified delta retention time.
+     *
+     * @return
+     */
+    public double getRtShift() {
+        return iRtShift;
+    }
+
+    /**
+     * Set the delta retention time specified by the user.
+     *
+     * @param aRtShift
+     */
+    public void setRtShift(double aRtShift) {
+        iRtShift = aRtShift;
+    }
+
+
+
+    /**
+     * Returns whether an inputfile has been set.
+     *
+     * @return
+     */
+    public boolean hasInputFile() {
+        return !(iInputFile == null);
+    }
+
+    /**
+     * Returns whether an outputfile has been set.
+     *
+     * @return
+     */
+    public boolean hasOutputFile() {
+        return !(iOutputFile == null);
+    }
+
+    /**
+     * Returns true if the RtDelta time was specified by the user.
+     *
+     * @return
+     */
+    public boolean hasRtDelta() {
+        return (iRtDelta != Double.MIN_VALUE);
+    }
+
+    /**
+     * Returns true if the RtShift time was specified by the user.
+     *
+     * @return
+     */
+    public boolean hasRtShift() {
+        return (iRtShift != Double.MIN_VALUE);
     }
 
     @Override
-    public String toString() {
-        return "ApplicationDataModel{" +
-                "iInputFile=" + iInputFile +
-                ", iOutputFile=" + iOutputFile +
-                ", iImportType=" + iImportType +
-                ", iExportType=" + iExportType +
-                '}';
-    }
+    public Object clone() throws CloneNotSupportedException {
+        ConversionJobOptions clone = new ConversionJobOptions();
+        clone.setRtShift(getRtShift());
+        clone.setExportType(getExportType());
+        clone.setImportType(getImportType());
+        clone.setInputFile(getInputFile());
+        clone.setOutputFile(getOutputFile());
+        clone.setRtDelta(getRtDelta());
 
+        return clone;
+    }
 }

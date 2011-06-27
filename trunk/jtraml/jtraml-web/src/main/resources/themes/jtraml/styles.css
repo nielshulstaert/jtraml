@@ -4,15 +4,21 @@
     background: white;
 }
 
-.v-horizontallayout{
-    vertical-align:baseline;
-    margin:10px
+.v-horizontallayout {
+    vertical-align: baseline;
+    margin: 10px
 }
 
-.split-line{
-    width:1px;
-    height:200px;
-    background:#dcdcdc;
-    margin:10px;
+.v-split-line {
+    width: 10px;
+    height: 200px;
+    background: #dcdcdc;
+    margin: 10px;
 }
 
+.v-textarea {
+    font-style: italic;
+    color: black;
+    font-size: large;
+    border-color: #dcdcdc;
+}
