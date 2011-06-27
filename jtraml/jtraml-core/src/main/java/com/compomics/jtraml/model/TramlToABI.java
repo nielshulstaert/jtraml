@@ -6,17 +6,14 @@ import com.compomics.jtraml.enumeration.FrequentOBoEnum;
 import com.compomics.jtraml.interfaces.TSVFileExportModel;
 import org.hupo.psi.ms.traml.*;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 /**
  * This class is a FileExportModel to write separated file format of transitions similar to the ABI QTRAP 5500.
  */
-public class TramlToABI implements TSVFileExportModel {
-
-    /**
-     * This MessageBean keeps track of the
-     */
-    private MessageBean iMessageBean = null;
+public class TramlToABI extends TSVFileExportModel {
 
     /**
      * Returns whether this export model has a header.
@@ -118,6 +115,13 @@ public class TramlToABI implements TSVFileExportModel {
 
         lRt = new RetentionTimeParser(aTransitionType, aTraMLType, lRt, lPeptideType).invoke();
 
+        if (boolShiftRetentionTime) { // Do we need to shift the retention time?
+            Double d = Double.parseDouble(lRt);
+            d = d + iRetentionTimeShift;
+            BigDecimal bd = new BigDecimal(d);
+            bd = bd.setScale(4, RoundingMode.HALF_UP);
+            lRt = bd.toString();
+        }
 
         // Get the configuration options.
         List<ConfigurationType> ConfigurationList = aTransitionType.getProduct().getConfigurationList().getConfiguration();
@@ -157,7 +161,7 @@ public class TramlToABI implements TSVFileExportModel {
     /**
      * The ABI export model does not need the retention time delta.
      */
-    public void setRetentionTimeDelta(double aRetentionTimeWindow) {
+    public void setRetentionTimeDelta(double aRetentionTimeDelta) {
         //
     }
 

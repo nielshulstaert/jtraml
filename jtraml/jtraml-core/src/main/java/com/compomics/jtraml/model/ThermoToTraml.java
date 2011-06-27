@@ -9,6 +9,8 @@ import org.hupo.psi.ms.traml.*;
 
 import javax.xml.rpc.ServiceException;
 import java.io.File;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -18,9 +20,8 @@ import java.util.List;
  * ""
  * Q1,Q3,CE,Start time (min),Stop time (min),Polarity,Trigger,Reaction category,Name
  * 651.8366,790.4038,25.5,18.61,28.61,1,1.00E+04,0,AAELQTGLETNR.2y7-1
- *
  */
-public class ThermoToTraml implements TSVFileImportModel {
+public class ThermoToTraml extends TSVFileImportModel {
 
     private static Logger logger = Logger.getLogger(ThermoToTraml.class);
 
@@ -59,6 +60,22 @@ public class ThermoToTraml implements TSVFileImportModel {
 
         String lStartTime = aRowValues[3];//OK
         String lStopTime = aRowValues[4];//OK
+
+        if (boolShiftRetentionTime) { // Do we need to shift the retention time?
+            // Modify the start time.
+            Double d = Double.parseDouble(lStartTime);
+            d = d + iRetentionTimeShift;
+            BigDecimal bd = new BigDecimal(d);
+            bd = bd.setScale(4, RoundingMode.HALF_UP);
+            lStartTime = bd.toString();
+
+            // Modify the stop time.
+            d = Double.parseDouble(lStopTime);
+            d = d + iRetentionTimeShift;
+            bd = new BigDecimal(d);
+            bd = bd.setScale(4, RoundingMode.HALF_UP);
+            lStopTime = bd.toString();
+        }
 
         String lPolarity = aRowValues[5];
         String lTrigger = aRowValues[6];
@@ -125,7 +142,7 @@ public class ThermoToTraml implements TSVFileImportModel {
 
             CompoundListType lCompoundList = aTraMLType.getCompoundList();
 
-            if(lCompoundList == null){
+            if (lCompoundList == null) {
                 // Create the object upon first encounter.
                 lCompoundList = iObjectFactory.createCompoundListType();
                 aTraMLType.setCompoundList(lCompoundList);
@@ -133,14 +150,14 @@ public class ThermoToTraml implements TSVFileImportModel {
 
             List<PeptideType> lPeptideTypeList = lCompoundList.getPeptide();
             for (PeptideType lRunningPeptideType : lPeptideTypeList) {
-                if(lRunningPeptideType.getId().equals(lPeptideID)){
+                if (lRunningPeptideType.getId().equals(lPeptideID)) {
                     // Ok! We need this PeptideType!
                     lCurrentPeptideType = lRunningPeptideType;
                     break;
                 }
             }
 
-            if(lCurrentPeptideType == null){
+            if (lCurrentPeptideType == null) {
                 // If null, then current PeptideId has not been seen in the previous loop.
                 // so create one!
                 lCurrentPeptideType = iObjectFactory.createPeptideType();
@@ -158,7 +175,7 @@ public class ThermoToTraml implements TSVFileImportModel {
                 lRetentionTimeType.getCvParam().add(lCVType_retentionTimeStop);
 
                 RetentionTimeListType lRetentionTimeList = lCurrentPeptideType.getRetentionTimeList();
-                if(lRetentionTimeList == null){
+                if (lRetentionTimeList == null) {
                     lRetentionTimeList = iObjectFactory.createRetentionTimeListType();
                     lCurrentPeptideType.setRetentionTimeList(lRetentionTimeList);
                 }

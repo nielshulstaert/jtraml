@@ -81,8 +81,13 @@ public class TRAMLToSepJob extends Observable implements Runnable, Interruptible
                 aConversionJobOptions.getExportType()
         );
 
-        if(aConversionJobOptions.hasRtDelta()){
+        if (aConversionJobOptions.hasRtDelta()) {
             iTSVFileExportModel.setRetentionTimeDelta(aConversionJobOptions.getRtDelta());
+        }
+
+        if (aConversionJobOptions.hasRtShift()) { // Retention time shift has been set.
+            iTSVFileExportModel.shiftRetentionTime(true);
+            iTSVFileExportModel.setRetentionTimeShift(aConversionJobOptions.getRtShift());
         }
     }
 
@@ -201,7 +206,7 @@ public class TRAMLToSepJob extends Observable implements Runnable, Interruptible
      */
     public void proceed(Object o) {
         String s = o.toString();
-        if(!s.equals("")){
+        if (!s.equals("")) {
             Double d = new Double(s);
             iTSVFileExportModel.setRetentionTimeDelta(d.doubleValue());
         }

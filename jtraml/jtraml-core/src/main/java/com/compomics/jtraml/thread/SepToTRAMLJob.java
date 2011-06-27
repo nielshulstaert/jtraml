@@ -56,6 +56,11 @@ public class SepToTRAMLJob extends Observable implements Runnable{
                 aConversionJobOptions.getOutputFile(),
                 aConversionJobOptions.getImportType()
         );
+
+        if(aConversionJobOptions.hasRtShift()){ // Retention time shift has been set.
+            iTSVFileImportModel.shiftRetentionTime(true);
+            iTSVFileImportModel.setRetentionTimeShift(aConversionJobOptions.getRtShift());
+        }
     }
 
 
@@ -79,6 +84,7 @@ public class SepToTRAMLJob extends Observable implements Runnable{
         }else {
             throw new JTramlException("unsupported import format!!");
         }
+
     }
 
     /**
@@ -104,6 +110,7 @@ public class SepToTRAMLJob extends Observable implements Runnable{
                 // skip the first line.
                 br.readLine();
             }
+
 
             String sep = "" + iTSVFileImportModel.getSeparator();
             logger.debug("reading input file\t" + iInputFile);

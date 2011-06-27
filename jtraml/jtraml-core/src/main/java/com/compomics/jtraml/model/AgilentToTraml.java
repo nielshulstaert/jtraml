@@ -9,6 +9,8 @@ import org.hupo.psi.ms.traml.*;
 
 import javax.xml.rpc.ServiceException;
 import java.io.File;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -20,7 +22,7 @@ import java.util.List;
  * Compound Name	ISTD?	Precursor Ion	MS1 Res	Product Ion	MS2 Res	Fragmentor	Collision Energy	Cell Accelerator Voltage	Ret Time (min)	Delta Ret Time	Polarity
  * CSASVLPVDVQTLNSSGPPFGK.2y16-1	FALSE	1130.5681	Wide	1642.8233	Unit	125	39.8	5	42.35	5.00	Positive
  */
-public class AgilentToTraml implements TSVFileImportModel {
+public class AgilentToTraml extends TSVFileImportModel {
 
     private static Logger logger = Logger.getLogger(AgilentToTraml.class);
 
@@ -81,6 +83,14 @@ public class AgilentToTraml implements TSVFileImportModel {
         String lAccVoltage = aRowValues[8];//OK
 
         String lRt = aRowValues[9];//OK
+        if (boolShiftRetentionTime) { // Do we need to shift the retention time?
+            Double d = Double.parseDouble(lRt);
+            d = d + iRetentionTimeShift;
+            BigDecimal bd = new BigDecimal(d);
+            bd = bd.setScale(4, RoundingMode.HALF_UP);
+            lRt = bd.toString();
+        }
+
         String lRtdelta = aRowValues[10];//OK
         String lPolarity = aRowValues[11];
 

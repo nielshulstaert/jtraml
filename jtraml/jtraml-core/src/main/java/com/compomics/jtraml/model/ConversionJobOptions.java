@@ -124,7 +124,7 @@ public class ConversionJobOptions implements Serializable, Cloneable {
 
     /**
      * Set the delta retention time specified by the user.
-     *
+     * Set to Double.MIN_VALUE to disable this variable
      * @param aRtDelta
      */
     public void setRtDelta(double aRtDelta) {
@@ -143,7 +143,7 @@ public class ConversionJobOptions implements Serializable, Cloneable {
 
     /**
      * Set the delta retention time specified by the user.
-     *
+     * Set to Double.MIN_VALUE to disable this variable
      * @param aRtShift
      */
     public void setRtShift(double aRtShift) {
@@ -181,6 +181,7 @@ public class ConversionJobOptions implements Serializable, Cloneable {
 
     /**
      * Returns true if the RtShift time was specified by the user.
+     * Set to Double.MIN_VALUE to disable this variable.
      *
      * @return
      */
