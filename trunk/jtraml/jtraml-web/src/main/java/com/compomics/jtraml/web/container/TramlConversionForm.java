@@ -10,6 +10,7 @@ import com.compomics.jtraml.validation.ConversionJobOptionValidator;
 import com.compomics.jtraml.web.TramlConverterApplication;
 import com.compomics.jtraml.web.components.*;
 import com.compomics.jtraml.web.dialog.InputDialog;
+import com.compomics.jtraml.web.listener.RtShiftCheckBoxListener;
 import com.compomics.jtraml.web.listener.RtShiftTextListener;
 import com.compomics.jtraml.web.validate.RtShiftValidator;
 import com.vaadin.data.Item;
@@ -57,7 +58,7 @@ public class TramlConversionForm extends VerticalLayout implements Observer {
      * Layout components.
      */
     public ProgressIndicator iProgressIndicator;
-    private UploadField iUploadField;
+    private UploadComponent iUploadField;
     private CheckBoxTextField iRtShiftCheckboxTextField;
 
     /**
@@ -96,12 +97,14 @@ public class TramlConversionForm extends VerticalLayout implements Observer {
 
 
         // First add The upload field.
-        iUploadField = new UploadField(iConversionJobOptions);
+        iUploadField = new UploadComponent(iConversionJobOptions);
+
         iConversionForm.getLayout().addComponent(iUploadField);
 
         // FieldFactory for customizing the fields and adding validators
         iConversionForm.setFormFieldFactory(new ConversionFieldFactory());
         iConversionForm.setItemDataSource(lConversionItem); // bind to POJO via BeanItem
+
 
         // Add pojo and filter based components
         iConversionForm.setVisibleItemProperties(Arrays.asList(new String[]{"importType", "exportType"}));
@@ -111,19 +114,25 @@ public class TramlConversionForm extends VerticalLayout implements Observer {
         iRtShiftCheckboxTextField = new CheckBoxTextField("±x min", "fill in the retention time shift");
         iRtShiftCheckboxTextField.addTextFieldValidation(new RtShiftValidator());
         iRtShiftCheckboxTextField.setCaption("retention shift");
-        iRtShiftCheckboxTextField.addTextFieldListener(
-                new RtShiftTextListener(
-                        this,
-                        iRtShiftCheckboxTextField));
-        iConversionForm.getLayout().addComponent(iRtShiftCheckboxTextField);// Add to Form.
+        iRtShiftCheckboxTextField.addTextFieldListener(new RtShiftTextListener(iRtShiftCheckboxTextField, iConversionJobOptions));
+        iRtShiftCheckboxTextField.addCheckBoxListener(new RtShiftCheckBoxListener(iConversionJobOptions));
 
+        // Add to Form.
+        iConversionForm.getLayout().addComponent(iRtShiftCheckboxTextField);
 
-        // Add form to layout
+        // Validate the UploadComponent fields via an invisible button.
+        Button btn = new Button();
+        btn.addValidator(iUploadField);
+        btn.setVisible(false);
+        btn.setValidationVisible(false);
+        iConversionForm.addField("invisible", btn);
+
+        // Add form to layout.
         addComponent(iConversionForm);
 
         // Disable the validation icons.
         iConversionForm.setValidationVisible(false);
-        iConversionForm.setValidationVisibleOnCommit(false);
+        iConversionForm.setValidationVisibleOnCommit(true);
 
         // The cancel / btnConvert buttons
         HorizontalLayout buttons = new HorizontalLayout();
@@ -343,6 +352,7 @@ public class TramlConversionForm extends VerticalLayout implements Observer {
 
         /**
          * Convenience method to create a ComboBox that is aware of the different conversion types.
+         *
          * @return
          */
         private ComboBox makeConversionTypeComboBox() {
