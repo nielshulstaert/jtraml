@@ -17,10 +17,10 @@ package com.compomics.jtraml.web;
 
 
 import com.compomics.jtraml.model.ConversionJobOptions;
-import com.compomics.jtraml.web.components.FooterPanel;
-import com.compomics.jtraml.web.components.HeaderPanel;
-import com.compomics.jtraml.web.components.ResultsPanel;
-import com.compomics.jtraml.web.components.TramlConversionForm;
+import com.compomics.jtraml.web.container.FooterPanel;
+import com.compomics.jtraml.web.container.HeaderPanel;
+import com.compomics.jtraml.web.container.*;
+import com.compomics.jtraml.web.container.TramlConversionForm;
 import com.google.common.io.Files;
 import com.vaadin.Application;
 import com.vaadin.ui.*;
@@ -81,7 +81,7 @@ public class TramlConverterApplication extends Application {
 
 
         iSeparatorPanel = new Panel();
-        iSeparatorPanel.setStyleName("split-line");
+        iSeparatorPanel.setStyleName("v-split-line");
 
 
         if (iOutputTable.getNumberOfResults() == 0) {

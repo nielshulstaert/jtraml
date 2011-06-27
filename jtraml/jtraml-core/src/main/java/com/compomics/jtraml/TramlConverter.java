@@ -37,6 +37,8 @@ public class TramlConverter {
             } else {
                 logger.debug("parameters ok!");
 
+                ConversionJobOptions lConversionJobOptions = new ConversionJobOptions();
+
                 File lInputFile = new File(line.getOptionValue("input"));
                 File lOutputFile = new File(line.getOptionValue("output"));
                 FileTypeEnum lInputType = getFileTypeEnum(line.getOptionValue("importtype"));
@@ -45,14 +47,22 @@ public class TramlConverter {
                 double lRtDelta = -1;
                 if (line.hasOption("rtdelta")) {
                     lRtDelta = Double.parseDouble(line.getOptionValue("rtdelta"));
+                    lConversionJobOptions.setRtDelta(lRtDelta);
                 }
 
-                ConversionJobOptions lConversionJobOptions = new ConversionJobOptions();
-                lConversionJobOptions.setRtDelta(lRtDelta);
+                double lRtShift = -1;
+                if (line.hasOption("rtshift")) {
+                    lRtShift= Double.parseDouble(line.getOptionValue("rtshift"));
+                    lConversionJobOptions.setRtShift(lRtShift);
+                }
+
                 lConversionJobOptions.setOutputFile(lOutputFile);
                 lConversionJobOptions.setInputFile(lInputFile);
                 lConversionJobOptions.setExportType(lExportType);
                 lConversionJobOptions.setImportType(lInputType);
+
+                // Optional variables
+
 
                 boolean valid = ConversionJobOptionValidator.isValid(lConversionJobOptions);
                 String lStatus = ConversionJobOptionValidator.getStatus();
@@ -165,6 +175,8 @@ public class TramlConverter {
         aOptions.addOption("input", true, "The transition input file");
         aOptions.addOption("output", true, "The converted transition output file");
         aOptions.addOption("rtdelta", true, "This delta retention time (minutes) is used when appropriate (cfr. Wiki)");
+        aOptions.addOption("rtshift", true, "The retention time shift (minutes) value is used to added to the present retention times. Can be positive or negative. (cfr. Wiki)");
+
     }
 
     /**
@@ -219,6 +231,16 @@ public class TramlConverter {
                 Double.parseDouble(lRtdelta);
             } catch (NumberFormatException e) {
                 logger.error("rtdelta must be specified in minutes!! e.g.: --rtdelta 5.0");
+            }
+        }
+
+        // Is the rtShift specified?
+        if (aLine.hasOption("rtshift")) {
+            String lRtShift = aLine.getOptionValue("rtshift");
+            try {
+                Double.parseDouble(lRtShift);
+            } catch (NumberFormatException e) {
+                logger.error("rtshift must be specified in minutes!! e.g.: --rtshift 5.0");
             }
         }
 

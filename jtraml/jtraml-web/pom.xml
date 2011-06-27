@@ -70,7 +70,7 @@
                     <execution>
                         <goals>
                             <!--<goal>resources</goal>-->
-                            <goal>compile</goal>
+                            <!--<goal>compile</goal>-->
                         </goals>
                     </execution>
                 </executions>
@@ -123,10 +123,12 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.5</version>
                 <executions>
+
                     <execution>
                         <id>copy-resources</id>
-                        <phase>compile</phase>
+                        <phase>process-resources</phase>
                         <configuration>
+                            <overwrite>true</overwrite>
                             <outputDirectory>${project.build.directory}/${project.name}-${project.version}/VAADIN/themes</outputDirectory>
                             <resources>
                                 <resource>

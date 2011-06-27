@@ -79,7 +79,7 @@ public class TramlToAgilent implements TSVFileExportModel {
      * @return
      */
     public MessageBean getConversionMessage() {
-        return null;
+        return iMessageBean;
     }
 
     /**

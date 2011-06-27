@@ -76,7 +76,7 @@ public class TramlToThermo implements TSVFileExportModel {
      * @return
      */
     public MessageBean getConversionMessage() {
-        return null;
+        return iMessageBean;
     }
 
     /**
@@ -97,6 +97,8 @@ public class TramlToThermo implements TSVFileExportModel {
      *         ""
      *         Q1,Q3,CE,Start time (min),Stop time (min),Polarity,Trigger,Reaction category,Name
      *         651.8366,790.4038,25.5,18.61,28.61,1,1.00E+04,0,AAELQTGLETNR.2y7-1
+     *
+     *
      */
     public String parseTransitionType(TransitionType aTransitionType, TraMLType aTraMLType) {
         String lQ1 = "NA";

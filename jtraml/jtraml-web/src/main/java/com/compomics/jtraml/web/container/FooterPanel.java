@@ -1,4 +1,4 @@
-package com.compomics.jtraml.web.components;
+package com.compomics.jtraml.web.container;
 
 
 import com.compomics.jtraml.web.TramlConverterApplication;
