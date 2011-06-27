@@ -7,50 +7,102 @@ import org.hupo.psi.ms.traml.TransitionType;
 /**
  * This interface declares how separated file formats must be structured
  */
-public interface TSVFileExportModel {
+public abstract class TSVFileExportModel {
+
+    /**
+     * This MessageBean keeps track of the
+     */
+    protected MessageBean iMessageBean = null;
+
+    /**
+     * This double represents the delta retention time window.
+     */
+    protected double iRetentionTimeWindow = Double.MAX_VALUE;
+
+    /**
+     * This double represents the retention time shift that is added/subtracted to the retention time.
+     */
+    protected double iRetentionTimeShift = 0;
+
+    /**
+     * This boolean indicates if the retention time must be shifted.
+     */
+    protected boolean boolShiftRetentionTime = false;
+
+
+    public TSVFileExportModel() {
+        // Do nothing.
+    }
 
     /**
      * Returns whether this export model has a header.
      *
      * @return
      */
-    public boolean hasHeader();
+    public abstract boolean hasHeader();
 
     /**
      * Returns whether the header of this export model.
      *
      * @return
      */
-    public String getHeader();
+    public abstract String getHeader();
 
     /**
      * Returns whether the given TransitionType is convertable.
      *
      * @return
      */
-    public boolean isConvertable(TransitionType aTransitionType, TraMLType aTraMLType);
+    public abstract boolean isConvertable(TransitionType aTransitionType, TraMLType aTraMLType);
 
     /**
      * Returns the conversion Message if needed. Null if the TransitionType is convertable.
      *
      * @return
      */
-    public MessageBean getConversionMessage();
+    public abstract MessageBean getConversionMessage();
 
     /**
      * Returns the separator character associated to this filemodel.
      *
      * @return
      */
-    public char getSeparator();
+    public abstract char getSeparator();
 
     /**
      * Append a TransitionType instance as a single line.
      */
-    public String parseTransitionType(TransitionType aTransitionType, TraMLType aTraMLType);
+    public abstract String parseTransitionType(TransitionType aTransitionType, TraMLType aTraMLType);
 
     /**
-     * Add a constant CVParamType to be used by the ExportType
+     * Set a Retention Time Delta that can be used if needed.
      */
-    public void setRetentionTimeDelta(double aRetentionTimeWindow);
+    public void setRetentionTimeDelta(double aRetentionTimeDelta) {
+        iRetentionTimeWindow = aRetentionTimeDelta;
+    }
+    /**
+     * Set a Retention Time Shift value that will always be used.
+     */
+    public void setRetentionTimeShift(double aRetentionTimeShift) {
+        iRetentionTimeShift = aRetentionTimeShift;
+    }
+
+    /**
+     * Set a Retention Time Shift value that will always be used.
+     *
+     * @return
+     */
+    public double getRetentionTimeShift() {
+        return iRetentionTimeShift;
+    }
+
+    /**
+     * Set whether the retention time will be shifted.
+     * The shift must be specified in via the setter.
+     *
+     * @return
+     */
+    public void shiftRetentionTime(boolean aRetentionTimeShift) {
+        boolShiftRetentionTime = aRetentionTimeShift;
+    }
 }

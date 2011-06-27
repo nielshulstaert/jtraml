@@ -9,6 +9,8 @@ import org.hupo.psi.ms.traml.*;
 
 import javax.xml.rpc.ServiceException;
 import java.io.File;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +32,7 @@ import java.util.List;
  * <li >29.3 = retention time
  * </nu>
  */
-public class ABIToTraml implements TSVFileImportModel {
+public class ABIToTraml extends TSVFileImportModel {
 
 
     private static Logger logger = Logger.getLogger(AgilentToTraml.class);
@@ -105,6 +107,14 @@ public class ABIToTraml implements TSVFileImportModel {
         String lID = aRowValues[3];// OK
 
         String lRt = aRowValues[4];//OK
+
+        if(boolShiftRetentionTime){ // Do we need to shift the retention time?
+            Double d = Double.parseDouble(lRt);
+            d = d + iRetentionTimeShift;
+            BigDecimal bd = new BigDecimal(d);
+            bd = bd.setScale(4, RoundingMode.HALF_UP);
+            lRt = bd.toString();
+        }
 
 
         try {

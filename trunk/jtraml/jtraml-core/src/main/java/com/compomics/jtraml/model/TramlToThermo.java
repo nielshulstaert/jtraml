@@ -6,23 +6,14 @@ import com.compomics.jtraml.enumeration.FrequentOBoEnum;
 import com.compomics.jtraml.interfaces.TSVFileExportModel;
 import org.hupo.psi.ms.traml.*;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 /**
  * This class is aFileExportModel to write separated file format of transitions similar to the Thermo TSQ.
  */
-public class TramlToThermo implements TSVFileExportModel {
-
-    /**
-     * This MessageBean keeps track of the
-     */
-    private MessageBean iMessageBean = null;
-
-
-    /**
-     * This double represents the delta retention time window for the Agilent export model.
-     */
-    private double iRetentionTimeWindow = Double.MAX_VALUE;
+public class TramlToThermo extends TSVFileExportModel {
 
 
     /**
@@ -97,8 +88,6 @@ public class TramlToThermo implements TSVFileExportModel {
      *         ""
      *         Q1,Q3,CE,Start time (min),Stop time (min),Polarity,Trigger,Reaction category,Name
      *         651.8366,790.4038,25.5,18.61,28.61,1,1.00E+04,0,AAELQTGLETNR.2y7-1
-     *
-     *
      */
     public String parseTransitionType(TransitionType aTransitionType, TraMLType aTraMLType) {
         String lQ1 = "NA";
@@ -138,6 +127,22 @@ public class TramlToThermo implements TSVFileExportModel {
         lStartTime = retentionTimeParser.getStartTime();
         lStopTime = retentionTimeParser.getStopTime();
 
+
+        if (boolShiftRetentionTime) { // Do we need to shift the retention time?
+            // Modify the start time.
+            Double d = Double.parseDouble(lStartTime);
+            d = d + iRetentionTimeShift;
+            BigDecimal bd = new BigDecimal(d);
+            bd = bd.setScale(4, RoundingMode.HALF_UP);
+            lStartTime = bd.toString();
+
+            // Modify the stop time.
+            d = Double.parseDouble(lStopTime);
+            d = d + iRetentionTimeShift;
+            bd = new BigDecimal(d);
+            bd = bd.setScale(4, RoundingMode.HALF_UP);
+            lStopTime = bd.toString();
+        }
 
         // Get the configuration options.
         List<ConfigurationType> ConfigurationList = aTransitionType.getProduct().getConfigurationList().getConfiguration();
@@ -197,8 +202,8 @@ public class TramlToThermo implements TSVFileExportModel {
      * Add a constant CVParamType to be used by the ExportType
      */
 
-    public void setRetentionTimeDelta(double aRetentionTimeWindow) {
-        iRetentionTimeWindow = aRetentionTimeWindow;
+    public void setRetentionTimeDelta(double aRetentionTimeDelta) {
+        iRetentionTimeWindow = aRetentionTimeDelta;
     }
 
 

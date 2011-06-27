@@ -13,19 +13,7 @@ import java.util.List;
 /**
  * This class is aFileExportModel to write separated file format of transitions similar to the Agilent QQQ.
  */
-public class TramlToAgilent implements TSVFileExportModel {
-
-
-    /**
-     * This MessageBean keeps track of the
-     */
-    private MessageBean iMessageBean = null;
-
-    /**
-     * This double represents the delta retention time window for the Agilent export model.
-     */
-    private double iRetentionTimeWindow = Double.MAX_VALUE;
-
+public class TramlToAgilent extends TSVFileExportModel {
     /**
      * Returns whether this export model has a header.
      *
@@ -140,6 +128,13 @@ public class TramlToAgilent implements TSVFileExportModel {
         lRt = retentionTimeParser.getRt();
         lRtdelta = retentionTimeParser.getRtdelta();
 
+        if (boolShiftRetentionTime) { // Do we need to shift the retention time?
+            Double d = Double.parseDouble(lRt);
+            d = d + iRetentionTimeShift;
+            BigDecimal bd = new BigDecimal(d);
+            bd = bd.setScale(4, RoundingMode.HALF_UP);
+            lRt = bd.toString();
+        }
 
         // Get the configuration options.
         List<ConfigurationType> ConfigurationList = aTransitionType.getProduct().getConfigurationList().getConfiguration();
@@ -210,12 +205,6 @@ public class TramlToAgilent implements TSVFileExportModel {
 
     }
 
-    /**
-     * Add a constant CVParamType to be used by the ExportType
-     */
-    public void setRetentionTimeDelta(double aRetentionTimeWindow) {
-        iRetentionTimeWindow = aRetentionTimeWindow;
-    }
 
     /**
      * This private class can parse retention time information specific to the Agilent output format.
