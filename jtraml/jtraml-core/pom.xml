@@ -108,9 +108,7 @@
                 <version>2.5</version>
 
                 <executions>
-
                     <execution>
-                        <id>copy-class-resources</id>
                         <phase>compile</phase>
                     </execution>
 
