@@ -105,27 +105,24 @@
             <!-- Resources plugin -->
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>2.5</version>
-                <executions>
-                    <execution>
-                        <id>copy-resources</id>
-                        <phase>package</phase>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/jtraml-${project.version}</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>src/main/resources/</directory>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
+                <version>2.3</version>
 
+                <executions>
+
+                    <execution>
+                        <id>copy-class-resources</id>
+                        <phase>compile</phase>
+                    </execution>
 
                     <execution>
                         <id>copy-package-license</id>
-                        <phase>package</phase>
+                        <!-- here the phase you need -->
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}
+                            <outputDirectory>${project.build.directory}/jtraml-${project.version}
                             </outputDirectory>
                             <resources>
                                 <resource>
@@ -137,7 +134,6 @@
                             </resources>
                         </configuration>
                     </execution>
-
 
                 </executions>
             </plugin>
@@ -164,8 +160,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-
 
 
         </plugins>
