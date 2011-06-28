@@ -109,8 +109,22 @@
 
                 <executions>
                     <execution>
+                        <id>copy-class-resources</id>
+                        <!-- here the phase you need -->
                         <phase>compile</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/classes</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources/</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
                     </execution>
+
 
                     <execution>
                         <id>copy-package-license</id>
