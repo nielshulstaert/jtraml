@@ -121,14 +121,42 @@
 
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>2.5</version>
+                <version>2.3</version>
                 <executions>
+                    <execution>
+                        <phase>compile</phase>
+                    </execution>
+
 
                     <execution>
-                        <id>copy-resources</id>
-                        <phase>process-resources</phase>
+                        <id>copy-package-license</id>
+                        <!-- here the phase you need -->
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
                         <configuration>
-                            <overwrite>true</overwrite>
+                            <outputDirectory>${project.build.directory}/classes
+                            </outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}</directory>
+                                    <includes>
+                                        <include>LICENSE-2.0.txt</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>copy-vaadin-themes</id>
+                        <!-- here the phase you need -->
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
                             <outputDirectory>${project.build.directory}/${project.name}-${project.version}/VAADIN/themes</outputDirectory>
                             <resources>
                                 <resource>
