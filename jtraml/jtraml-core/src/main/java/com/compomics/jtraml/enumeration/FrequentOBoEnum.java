@@ -20,7 +20,11 @@ public enum FrequentOBoEnum {
     VOLT("volt"),
     MINUTES("minute"),
 
-    TSV_ABI("ABI_TSV");
+    TSV_ABI("ABI_TSV"),
+
+    POLARITY("polarity"),
+    POLARITY_NEGATIVE("Negative"),
+    POLARITY_POSITIVE("Positive");
 
     /**
      * The name for the input type enumeration.
