@@ -10,6 +10,8 @@ import com.compomics.jtraml.model.ConversionJobOptions;
 import com.compomics.jtraml.model.ThermoToTraml;
 import com.google.common.io.Files;
 import org.apache.log4j.Logger;
+import org.hupo.psi.ms.traml.InstrumentListType;
+import org.hupo.psi.ms.traml.InstrumentType;
 import org.hupo.psi.ms.traml.ObjectFactory;
 import org.hupo.psi.ms.traml.TraMLType;
 import org.systemsbiology.apps.tramlcreator.TraMLCreator;
@@ -22,7 +24,7 @@ import java.util.Observable;
 /**
  * This class converts a TSV file to a TRAML file in a single thread.
  */
-public class SepToTRAMLJob extends Observable implements Runnable{
+public class SepToTRAMLJob extends Observable implements Runnable {
     private static Logger logger = Logger.getLogger(SepToTRAMLJob.class);
 
     /**
@@ -48,6 +50,7 @@ public class SepToTRAMLJob extends Observable implements Runnable{
 
     /**
      * Creates a new job to convert a separated file with transitions into the TraML specification.
+     *
      * @param aConversionJobOptions
      */
     public SepToTRAMLJob(ConversionJobOptions aConversionJobOptions) {
@@ -57,7 +60,7 @@ public class SepToTRAMLJob extends Observable implements Runnable{
                 aConversionJobOptions.getImportType()
         );
 
-        if(aConversionJobOptions.hasRtShift()){ // Retention time shift has been set.
+        if (aConversionJobOptions.hasRtShift()) { // Retention time shift has been set.
             iTSVFileImportModel.shiftRetentionTime(true);
             iTSVFileImportModel.setRetentionTimeShift(aConversionJobOptions.getRtShift());
         }
@@ -66,6 +69,7 @@ public class SepToTRAMLJob extends Observable implements Runnable{
 
     /**
      * Creates a new job to convert a separated file with transitions into the TraML specification.
+     *
      * @param aInputFile
      * @param aOutputFile
      * @param aImportType
@@ -75,13 +79,13 @@ public class SepToTRAMLJob extends Observable implements Runnable{
         iOutputFile = aOutputFile;
 
 
-        if(aImportType == FileTypeEnum.TSV_THERMO_TSQ){
+        if (aImportType == FileTypeEnum.TSV_THERMO_TSQ) {
             iTSVFileImportModel = new ThermoToTraml(iInputFile);
-        }else if(aImportType == FileTypeEnum.TSV_AGILENT_QQQ){
+        } else if (aImportType == FileTypeEnum.TSV_AGILENT_QQQ) {
             iTSVFileImportModel = new AgilentToTraml(iInputFile);
-        }else if(aImportType == FileTypeEnum.TSV_ABI){
+        } else if (aImportType == FileTypeEnum.TSV_ABI) {
             iTSVFileImportModel = new ABIToTraml(iInputFile);
-        }else {
+        } else {
             throw new JTramlException("unsupported import format!!");
         }
 
@@ -125,6 +129,20 @@ public class SepToTRAMLJob extends Observable implements Runnable{
 
             lTraMLType.setCvList(CVFactory.getCvListType());
             lTraMLType.setSourceFileList(iTSVFileImportModel.getSourceTypeList());
+
+            if (iTSVFileImportModel.hasPolarity()) { // Does the tsv file has any polarity information?
+                InstrumentType lInstrumentType = lObjectFactory.createInstrumentType();
+                lInstrumentType.setId("1");
+
+                // Get the polarity type.
+                lInstrumentType.setCvParam(iTSVFileImportModel.getPolarityCVParam());
+
+                InstrumentListType lInstrumentListType = lObjectFactory.createInstrumentListType();
+                lInstrumentListType.getInstrument().add(lInstrumentType);
+
+                lTraMLType.setInstrumentList(lInstrumentListType);
+            }
+
 
             // Ok, all rows have been added.
             TraMLCreator lTraMLCreator = new TraMLCreator();

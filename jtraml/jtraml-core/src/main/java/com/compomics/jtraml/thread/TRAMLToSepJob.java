@@ -89,6 +89,7 @@ public class TRAMLToSepJob extends Observable implements Runnable, Interruptible
             iTSVFileExportModel.shiftRetentionTime(true);
             iTSVFileExportModel.setRetentionTimeShift(aConversionJobOptions.getRtShift());
         }
+        iTSVFileExportModel.setConstants(aConversionJobOptions.getConstants());
     }
 
 

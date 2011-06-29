@@ -27,6 +27,8 @@ public class ThermoToTraml extends TSVFileImportModel {
 
     private ObjectFactory iObjectFactory;
     private File iFile;
+    public boolean hasPolarity = false;
+    public CvParamType iParamTypePolarity = null;
 
     /**
      * Construct a new TSVFileImportModel implementation for Thermo TSQ inputformat.
@@ -110,6 +112,20 @@ public class ThermoToTraml extends TSVFileImportModel {
             // add this configuration to the configuration list.
             ConfigurationListType lConfigurationListType = iObjectFactory.createConfigurationListType();
             lConfigurationListType.getConfiguration().add(lConfigurationType);
+
+
+            // Try and set the Polarity Type.
+            if (hasPolarity() == false) {
+
+                if (lPolarity.toLowerCase().equals("1")) { // positive polarity
+                    iParamTypePolarity = CVFactory.createCVTypePolarity(true);
+                    hasPolarity = true;
+
+                } else if (lPolarity.toLowerCase().equals("0")) { // negative polarity
+                    iParamTypePolarity = CVFactory.createCVTypePolarity(false);
+                    hasPolarity = true;
+                }
+            }
 
 
             // 4. Parse the peptide, charge and iontypes from the id.
@@ -225,6 +241,27 @@ public class ThermoToTraml extends TSVFileImportModel {
         lSourceFileListType.getSourceFile().add(lSourceFileType);
 
         return lSourceFileListType;
+    }
+
+    /**
+     * Implementing classes must report whether they have found Polarity information.
+     *
+     * @return boolean True/False.
+     */
+    @Override
+    public boolean hasPolarity() {
+        return hasPolarity;
+    }
+
+    /**
+     * Implementing classes must be able to return a CvParameter.
+     * Can be NULL if the implementing class has not found Polarity information.
+     *
+     * @return CVParam instance.
+     */
+    @Override
+    public CvParamType getPolarityCVParam() {
+        return iParamTypePolarity;
     }
 
     /**

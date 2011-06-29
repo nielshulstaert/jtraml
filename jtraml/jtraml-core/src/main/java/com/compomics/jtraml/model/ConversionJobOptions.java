@@ -24,6 +24,11 @@ public class ConversionJobOptions implements Serializable, Cloneable {
     private double iRtShift = Double.MIN_VALUE;
 
     /**
+     * The set of constants to be used by this conversion job.
+     */
+    private Constants iConstants = new Constants();
+
+    /**
      * The user input file.
      */
     private File iInputFile = null;
@@ -189,6 +194,9 @@ public class ConversionJobOptions implements Serializable, Cloneable {
         return (iRtShift != Double.MIN_VALUE);
     }
 
+
+
+
     @Override
     public Object clone() throws CloneNotSupportedException {
         ConversionJobOptions clone = new ConversionJobOptions();
@@ -200,5 +208,23 @@ public class ConversionJobOptions implements Serializable, Cloneable {
         clone.setRtDelta(getRtDelta());
 
         return clone;
+    }
+
+    /**
+     * Gets the iConstants.
+     *
+     * @return The iConstants value.
+     */
+    public Constants getConstants() {
+        return iConstants;
+    }
+
+    /**
+     * Sets the iConstants.
+     *
+     * @param aConstants The iConstants value to set.
+     */
+    public void setConstants(Constants aConstants) {
+        this.iConstants = aConstants;
     }
 }

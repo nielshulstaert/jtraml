@@ -7,7 +7,7 @@ public class JTRAML_URL {
     /**
      * Location of latest TraML.xsd on the web
      */
-    public static final String TRAML_XSD_LOCATION = "http://psi.hupo.org/ms/traml TraML0.9.4.xsd";
+    public static final String TRAML_XSD_LOCATION = "http://psi.hupo.org/ms/traml TraML0.9.5.xsd";
 
     /**
      * URI of TRAML

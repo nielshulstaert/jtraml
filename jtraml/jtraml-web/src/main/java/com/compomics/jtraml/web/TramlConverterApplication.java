@@ -20,7 +20,7 @@ import com.compomics.jtraml.model.ConversionJobOptions;
 import com.compomics.jtraml.web.container.FooterPanel;
 import com.compomics.jtraml.web.container.HeaderPanel;
 import com.compomics.jtraml.web.container.*;
-import com.compomics.jtraml.web.container.TramlConversionForm;
+import com.compomics.jtraml.web.container.ConversionForm;
 import com.google.common.io.Files;
 import com.vaadin.Application;
 import com.vaadin.ui.*;
@@ -41,7 +41,7 @@ public class TramlConverterApplication extends Application {
 
     public static TramlConverterApplication iApplication = null;
     public ResultsPanel iOutputTable;
-    public TramlConversionForm iInputForm;
+    public ConversionForm iInputForm;
     public Panel iSeparatorPanel;
 
     @Override
@@ -76,7 +76,7 @@ public class TramlConverterApplication extends Application {
     private void initLayout() {
         window.addComponent(new HeaderPanel());
 
-        iInputForm = new TramlConversionForm();
+        iInputForm = new ConversionForm();
         iOutputTable = new ResultsPanel();
 
 

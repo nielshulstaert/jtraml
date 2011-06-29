@@ -1,5 +1,7 @@
 package com.compomics.jtraml.interfaces;
 
+import com.compomics.jtraml.model.Constants;
+import org.hupo.psi.ms.traml.CvParamType;
 import org.hupo.psi.ms.traml.SourceFileListType;
 import org.hupo.psi.ms.traml.TraMLType;
 
@@ -23,6 +25,11 @@ public abstract class TSVFileImportModel {
      */
     protected double iRetentionTimeWindow = Double.MAX_VALUE;
 
+    /**
+     * The constants instance to be used by the model.
+     */
+    protected Constants iConstants = new Constants();
+
 
     protected TSVFileImportModel() {
 
@@ -42,6 +49,21 @@ public abstract class TSVFileImportModel {
      * @return SourceFileListType for the implementing converting classes.
      */
     public abstract SourceFileListType getSourceTypeList();
+
+    /**
+     * Implementing classes must report whether they have found Polarity information.
+     *
+     * @return boolean True/False.
+     */
+    public abstract boolean hasPolarity();
+
+    /**
+     * Implementing classes must be able to return a CvParameter.
+     * Can be NULL if the implementing class has not found Polarity information.
+     *
+     * @return CVParam instance.
+     */
+    public abstract CvParamType getPolarityCVParam();
 
     /**
      * Returns the separator character associated to this filemodel.
@@ -81,6 +103,25 @@ public abstract class TSVFileImportModel {
      */
     public void shiftRetentionTime(boolean aRetentionTimeShift) {
         boolShiftRetentionTime = aRetentionTimeShift;
+    }
+
+
+    /**
+     * Gets the iConstants.
+     *
+     * @return The iConstants value.
+     */
+    public Constants getConstants() {
+        return iConstants;
+    }
+
+    /**
+     * Sets the iConstants.
+     *
+     * @param aConstants The iConstants value to set.
+     */
+    public void setConstants(Constants aConstants) {
+        this.iConstants = aConstants;
     }
 
 }

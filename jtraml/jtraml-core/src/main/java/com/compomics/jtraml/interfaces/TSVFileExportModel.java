@@ -1,5 +1,6 @@
 package com.compomics.jtraml.interfaces;
 
+import com.compomics.jtraml.model.Constants;
 import com.compomics.jtraml.MessageBean;
 import org.hupo.psi.ms.traml.TraMLType;
 import org.hupo.psi.ms.traml.TransitionType;
@@ -28,6 +29,11 @@ public abstract class TSVFileExportModel {
      * This boolean indicates if the retention time must be shifted.
      */
     protected boolean boolShiftRetentionTime = false;
+
+    /**
+     * The constants instance to be used by the model.
+     */
+    protected Constants iConstants = new Constants();
 
 
     public TSVFileExportModel() {
@@ -104,5 +110,23 @@ public abstract class TSVFileExportModel {
      */
     public void shiftRetentionTime(boolean aRetentionTimeShift) {
         boolShiftRetentionTime = aRetentionTimeShift;
+    }
+
+    /**
+     * Gets the iConstants.
+     *
+     * @return The iConstants value.
+     */
+    public Constants getConstants() {
+        return iConstants;
+    }
+
+    /**
+     * Sets the iConstants.
+     *
+     * @param aConstants The iConstants value to set.
+     */
+    public void setConstants(Constants aConstants) {
+        this.iConstants = aConstants;
     }
 }

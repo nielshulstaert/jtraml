@@ -219,7 +219,7 @@ public class TramlConverter {
         }
 
         // has import and export type?
-        if (aLine.hasOption("importtype") && aLine.hasOption("exporttype")) {
+        if (aLine.hasOption("importtype") == false || aLine.hasOption("exporttype") == false) {
             logger.error("importtype and exporttype must be supplied!!");
             return false;
         }
