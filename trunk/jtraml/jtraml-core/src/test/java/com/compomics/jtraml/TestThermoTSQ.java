@@ -202,7 +202,7 @@ public class TestThermoTSQ extends TestCase {
                 lineCounter++;
                 // hard coded test!
                 if(lineCounter == 2){
-                    String lExpectedFirstLine = "651.8366,790.4038,25.5,18.61,28.61,NA,NA,NA,AAELQTGLETNR.2y7-1";
+                    String lExpectedFirstLine = "651.8366,790.4038,25.5,18.61,28.61,NA,0,0,AAELQTGLETNR.2y7-1";
                     Assert.assertEquals(lExpectedFirstLine, line);
                 }
             }
