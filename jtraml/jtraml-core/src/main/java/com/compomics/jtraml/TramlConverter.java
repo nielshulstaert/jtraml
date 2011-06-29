@@ -12,6 +12,7 @@ import sun.misc.ConditionLock;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
@@ -24,15 +25,30 @@ public class TramlConverter {
     public static void main(String[] args) {
 
         try {
-            Options lOptions = new Options();
-            createOptions(lOptions);
+            Options lCoreOptions = new Options();
+            Options lConstantOptions = new Options();
+
+            createOptions(lCoreOptions, lConstantOptions);
 
             BasicParser parser = new BasicParser();
-            CommandLine line = parser.parse(lOptions, args);
+            CommandLine line = parser.parse(lCoreOptions, args);
 
             if (isValidStartup(line) == false) {
                 HelpFormatter formatter = new HelpFormatter();
-                formatter.printHelp("TraMLConverter", getHeader(), lOptions, getFooter());
+                PrintWriter lPrintWriter = new PrintWriter(System.out);
+//                formatter.printHelp("TraMLConverter", getHeader(), lCoreOptions, getFooter());
+                lPrintWriter.print("TraMLConverter\n");
+
+                lPrintWriter.print(getHeader());
+
+                lPrintWriter.print("\nCore options:\n");
+                formatter.printOptions(lPrintWriter, 200, lCoreOptions, 0, 0);
+                lPrintWriter.print("\n\nConstant options:\n");
+                formatter.printOptions(lPrintWriter, 200, lConstantOptions, 0, 0);
+
+                lPrintWriter.flush();
+                lPrintWriter.close();
+
                 System.exit(0);
             } else {
                 logger.debug("parameters ok!");
@@ -44,6 +60,8 @@ public class TramlConverter {
                 FileTypeEnum lInputType = getFileTypeEnum(line.getOptionValue("importtype"));
                 FileTypeEnum lExportType = getFileTypeEnum(line.getOptionValue("exporttype"));
 
+
+                // Optional variables
                 double lRtDelta = -1;
                 if (line.hasOption("rtdelta")) {
                     lRtDelta = Double.parseDouble(line.getOptionValue("rtdelta"));
@@ -61,7 +79,9 @@ public class TramlConverter {
                 lConversionJobOptions.setExportType(lExportType);
                 lConversionJobOptions.setImportType(lInputType);
 
-                // Optional variables
+
+                // Constant variables.
+                parseConstantOptions();
 
 
                 boolean valid = ConversionJobOptionValidator.isValid(lConversionJobOptions);
@@ -112,6 +132,10 @@ public class TramlConverter {
         }
     }
 
+    private static void parseConstantOptions() {
+
+    }
+
     /**
      * This method attempts to decode reqruied FileType for a String by its name.
      *
@@ -160,7 +184,8 @@ public class TramlConverter {
     }
 
 
-    private static void createOptions(Options aOptions) {
+
+    private static void createOptions(Options aCoreOptions, Options aConstantOptions) {
         // Prepare.
         StringBuffer sb = new StringBuffer("The available file types:");
         FileTypeEnum[] lTypeEnums = FileTypeEnum.values();
@@ -170,12 +195,20 @@ public class TramlConverter {
         String lFileTypes = sb.toString();
 
         // Set.
-        aOptions.addOption("importtype", true, lFileTypes);
-        aOptions.addOption("exporttype", true, lFileTypes);
-        aOptions.addOption("input", true, "The transition input file");
-        aOptions.addOption("output", true, "The converted transition output file");
-        aOptions.addOption("rtdelta", true, "This delta retention time (minutes) is used when appropriate (cfr. Wiki)");
-        aOptions.addOption("rtshift", true, "The retention time shift (minutes) value is used to added to the present retention times. Can be positive or negative. (cfr. Wiki)");
+        aCoreOptions.addOption("importtype", true, lFileTypes);
+        aCoreOptions.addOption("exporttype", true, lFileTypes);
+        aCoreOptions.addOption("input", true, "The transition input file");
+        aCoreOptions.addOption("output", true, "The converted transition output file");
+        aCoreOptions.addOption("rtdelta", true, "This delta retention time (minutes) is used when appropriate (cfr. Wiki)");
+        aCoreOptions.addOption("rtshift", true, "The retention time shift (minutes) value is used to added to the present retention times. Can be positive or negative. (cfr. Wiki)");
+
+        aConstantOptions.addOption(new Option("constant_trigger", true, "default variable - thermo - set 1 to trigger recording of full MS/MS spectra."));
+        aConstantOptions.addOption(new Option("constant_rcategory", true, "default variable - thermo - reaction category (iSRM) - Set 0 for primaries, or 1 for secondaries."));
+        aConstantOptions.addOption(new Option("constant_istd", true, "default variable - agilent - internal standard - TRUE/FALSE"));
+        aConstantOptions.addOption(new Option("constant_resms1", true, "default variable - agilent - MS1 resolution  - 'Unit' (0.7AMU) - 'Wide' (1.2AMU) - 'Widest' (2.5AMU)"));
+        aConstantOptions.addOption(new Option("constant_resms2", true, "default variable - agilent - MS2 resolution  - 'Unit' (0.7AMU) - 'Wide' (1.2AMU) - 'Widest' (2.5AMU)"));
+        aConstantOptions.addOption(new Option("constant_fragmentor", true, "default variable - agilent - LC/MS value '125'"));
+        aConstantOptions.addOption(new Option("constant_qtrapcol3", true, "default variable - abi - tsv column 3 variable '10'"));
 
     }
 
