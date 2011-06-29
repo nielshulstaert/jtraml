@@ -99,9 +99,9 @@ public class TramlToThermo extends TSVFileExportModel {
         String lStopTime = "NA";
 
         String lPolarity = "NA";
-        String lTrigger = "NA";
 
-        String lReactionCategory = "NA";
+        String lTrigger = iConstants.getTRIGGER();
+        String lReactionCategory = iConstants.getREACTION_CATEGORY();
 
         String lID = "NA";
 

@@ -123,6 +123,29 @@ public class CVFactory {
         return createCustomCVType(aValue, aMSType, aUnitType, false); // lookup in the Unit Ontology!
     }
 
+    /**
+     * Creates a CVParamType for the polarity.
+     *
+     * @param aPolarity boolean. TRUE means positive charge, FALSE means negative charge.
+     * @throws RemoteException <cvParam cvRef="MS" accession="MS:1000037" name="polarity" value="40.02" unitCvRef="UO"
+     *                         unitAccession="UO:0000031" unitName="minute"/>
+     */
+    public static CvParamType createCVTypePolarity(boolean aPolarity) throws ServiceException, RemoteException {
+        CvParamType lCvParamType = iObjectFactory.createCvParamType();
+
+        HashMap lTerm = OboManager.getInstance().getMSTerm(FrequentOBoEnum.POLARITY.getName());
+        lCvParamType.setAccession(lTerm.get("id").toString());
+        lCvParamType.setName(FrequentOBoEnum.POLARITY.getName());
+        lCvParamType.setCvRef(getCV_MS());
+        if(aPolarity){
+            lCvParamType.setValue(FrequentOBoEnum.POLARITY_POSITIVE.getName());
+        }else{
+            lCvParamType.setValue(FrequentOBoEnum.POLARITY_NEGATIVE.getName());
+        }
+
+        return lCvParamType;
+    }
+
 
     /**
      * Creates a CVParamType for a m/z value.

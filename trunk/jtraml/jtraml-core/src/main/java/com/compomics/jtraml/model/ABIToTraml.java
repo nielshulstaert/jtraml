@@ -47,6 +47,7 @@ public class ABIToTraml extends TSVFileImportModel {
      */
     private File iFile;
 
+
     /**
      * Construct a new TSVFileImportModel instance for an ABI QTRAP csv file.
      * <p/>
@@ -299,6 +300,27 @@ public class ABIToTraml extends TSVFileImportModel {
         lSourceFileListType.getSourceFile().add(lSourceFileType);
 
         return lSourceFileListType;
+    }
+
+    /**
+     * Implementing classes must report whether they have found Polarity information.
+     *
+     * @return boolean True/False.
+     */
+    @Override
+    public boolean hasPolarity() {
+        return false;
+    }
+
+    /**
+     * Implementing classes must be able to return a CvParameter.
+     * Can be NULL if the implementing class has not found Polarity information.
+     *
+     * @return CVParam instance.
+     */
+    @Override
+    public CvParamType getPolarityCVParam() {
+        return null;
     }
 
     /**

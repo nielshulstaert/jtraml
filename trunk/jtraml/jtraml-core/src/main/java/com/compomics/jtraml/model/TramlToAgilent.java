@@ -93,15 +93,16 @@ public class TramlToAgilent extends TSVFileExportModel {
     public String parseTransitionType(TransitionType aTransitionType, TraMLType aTraMLType) {
         String lID = "NA";
 
-        String ISTD = "NA";// todo
+        String ISTD = iConstants.getISTD();
 
         String lQ1 = "NA";
-        String lRes1 = "NA";// todo
+        String lRes1 = iConstants.getMS1_RESOLUTION();
 
         String lQ3 = "NA";
-        String lRes3 = "NA";// todo
+        String lRes3 = iConstants.getMS2_RESOLUTION();
 
-        String lFragmentor = "NA";// todo
+        String lFragmentor = iConstants.getFRAGMENTOR();
+
         String lEnergy = "NA";
         String lAccVoltage = "NA";// todo
 

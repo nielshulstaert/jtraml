@@ -95,7 +95,7 @@ public class TramlToABI extends TSVFileExportModel {
 
         String lQ1 = "NA";
         String lQ3 = "NA";
-        String lEnergy = "NA";
+        String lUnknownC3 = iConstants.getQTRAP_COL3();
         String lID = "NA";
         String lRt = "NA";
 
@@ -123,20 +123,6 @@ public class TramlToABI extends TSVFileExportModel {
             lRt = bd.toString();
         }
 
-        // Get the configuration options.
-        List<ConfigurationType> ConfigurationList = aTransitionType.getProduct().getConfigurationList().getConfiguration();
-        for (ConfigurationType lConfigurationType : ConfigurationList) {
-            List<CvParamType> lCvParam = lConfigurationType.getCvParam();
-
-            for (CvParamType lCvParamType : lCvParam) {
-                // cvparam on energy?
-                if (lCvParamType.getName().equals(FrequentOBoEnum.COLLISION_ENERGY.getName())) {
-                    lEnergy = lCvParamType.getValue();
-                }
-            }
-        }
-
-
         StringBuffer sb = new StringBuffer();
 
         sb.append(lQ1);
@@ -146,7 +132,7 @@ public class TramlToABI extends TSVFileExportModel {
         sb.append(getSeparator());
 
         // @TODO what does this parameter mean?
-        sb.append(lEnergy);
+        sb.append(lUnknownC3);
         sb.append(getSeparator());
 
         sb.append(lID);
