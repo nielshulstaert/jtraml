@@ -202,7 +202,7 @@ public class TestAgilentQQQ extends TestCase {
                 lineCounter++;
                 // hard coded test!
                 if(lineCounter == 3){
-                    String lExpectedFirstLine = "CSASVLPVDVQTLNSSGPPFGK.2y16-1\tNA\t1130.5681\tNA\t1642.8233\tNA\tNA\t39.8\t5\t42.35\t5.00\tNA";
+                    String lExpectedFirstLine = "CSASVLPVDVQTLNSSGPPFGK.2y16-1\tFALSE\t1130.5681\tWide\t1642.8233\tUnit\t125\t39.8\t5\t42.35\t5.00\tNA";
                     Assert.assertEquals(lExpectedFirstLine, line);
                 }
             }
