@@ -2,6 +2,10 @@
 #labels Featured,wiki
 #sidebar toc
 
+==0.4 (30 June 2011)==
+  * FEATURE : implemented constant variables for vendor file formats.
+  * FEATURE : implemented retention time shift functionality 
+
 ==0.3 (20 June 2011)==
   * FEATURE : implemented TraML XSD 0.9.5
   * FEATURE : implemented smart retention time conversion across different vendor formats 
