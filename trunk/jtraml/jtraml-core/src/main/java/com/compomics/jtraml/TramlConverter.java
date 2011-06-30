@@ -25,26 +25,25 @@ public class TramlConverter {
     public static void main(String[] args) {
 
         try {
-            Options lCoreOptions = new Options();
-            Options lConstantOptions = new Options();
+            Options lOptions = new Options();
 
-            createOptions(lCoreOptions, lConstantOptions);
+            createOptions(lOptions);
 
             BasicParser parser = new BasicParser();
-            CommandLine line = parser.parse(lCoreOptions, args);
+
+            CommandLine line = null;
+            line = parser.parse(lOptions, args);
 
             if (isValidStartup(line) == false) {
                 HelpFormatter formatter = new HelpFormatter();
                 PrintWriter lPrintWriter = new PrintWriter(System.out);
-//                formatter.printHelp("TraMLConverter", getHeader(), lCoreOptions, getFooter());
+//                formatter.printHelp("TraMLConverter", getHeader(), lOptions, getFooter());
                 lPrintWriter.print("TraMLConverter\n");
 
                 lPrintWriter.print(getHeader());
 
-                lPrintWriter.print("\nCore options:\n");
-                formatter.printOptions(lPrintWriter, 200, lCoreOptions, 0, 0);
-                lPrintWriter.print("\n\nConstant options:\n");
-                formatter.printOptions(lPrintWriter, 200, lConstantOptions, 0, 0);
+                lPrintWriter.print("\nOptions:\n");
+                formatter.printOptions(lPrintWriter, 200, lOptions, 0, 0);
 
                 lPrintWriter.flush();
                 lPrintWriter.close();
@@ -70,7 +69,7 @@ public class TramlConverter {
 
                 double lRtShift = -1;
                 if (line.hasOption("rtshift")) {
-                    lRtShift= Double.parseDouble(line.getOptionValue("rtshift"));
+                    lRtShift = Double.parseDouble(line.getOptionValue("rtshift"));
                     lConversionJobOptions.setRtShift(lRtShift);
                 }
 
@@ -80,8 +79,7 @@ public class TramlConverter {
                 lConversionJobOptions.setImportType(lInputType);
 
 
-                // Constant variables.
-                parseConstantOptions();
+                parseConstantOptions(line, lConversionJobOptions);
 
 
                 boolean valid = ConversionJobOptionValidator.isValid(lConversionJobOptions);
@@ -127,13 +125,59 @@ public class TramlConverter {
                     logger.error(lStatus, new JTramlException(lStatus));
                 }
             }
-        } catch (ParseException e) {
-            logger.error(e.getMessage(), e);
+
+        } catch (ParseException pe) {
+            logger.error(pe.getMessage(), pe);
         }
     }
 
-    private static void parseConstantOptions() {
+    /**
+     * This method parses the 'Constant' options provided by the user.
+     *
+     * @param aConstantOptions
+     * @param aConversionJobOptions
+     */
+    private static void parseConstantOptions(CommandLine aConstantOptions, ConversionJobOptions aConversionJobOptions) {
 
+        // Trigger
+        if (aConstantOptions.hasOption("trigger")) {
+            aConversionJobOptions.getConstants().setTRIGGER(aConstantOptions.getOptionValue("trigger"));
+        }
+
+        // Reaction Category
+        if (aConstantOptions.hasOption("rcategory")) {
+            aConversionJobOptions.getConstants().setREACTION_CATEGORY(aConstantOptions.getOptionValue("rcategory"));
+        }
+
+        // Reaction Category
+        if (aConstantOptions.hasOption("rcategory")) {
+            aConversionJobOptions.getConstants().setREACTION_CATEGORY(aConstantOptions.getOptionValue("rcategory"));
+        }
+
+        // Internal Standard
+        if (aConstantOptions.hasOption("istd")) {
+            aConversionJobOptions.getConstants().setISTD(aConstantOptions.getOptionValue("istd"));
+        }
+
+        // MS1 Resolution
+        if (aConstantOptions.hasOption("resms1")) {
+            aConversionJobOptions.getConstants().setMS1_RESOLUTION(aConstantOptions.getOptionValue("resms1"));
+        }
+
+        // MS2 Resolution
+        if (aConstantOptions.hasOption("resms2")) {
+            aConversionJobOptions.getConstants().setMS2_RESOLUTION(aConstantOptions.getOptionValue("resms2"));
+        }
+
+        // fragmentor
+        if (aConstantOptions.hasOption("fragmentor")) {
+            aConversionJobOptions.getConstants().setFRAGMENTOR(aConstantOptions.getOptionValue("fragmentor"));
+        }
+
+        // qtrapcol3
+        if (aConstantOptions.hasOption("qtrapcol3")) {
+            aConversionJobOptions.getConstants().setQTRAP_COL3(aConstantOptions.getOptionValue("qtrapcol3"));
+        }
     }
 
     /**
@@ -184,8 +228,7 @@ public class TramlConverter {
     }
 
 
-
-    private static void createOptions(Options aCoreOptions, Options aConstantOptions) {
+    private static void createOptions(Options aOptions) {
         // Prepare.
         StringBuffer sb = new StringBuffer("The available file types:");
         FileTypeEnum[] lTypeEnums = FileTypeEnum.values();
@@ -195,20 +238,20 @@ public class TramlConverter {
         String lFileTypes = sb.toString();
 
         // Set.
-        aCoreOptions.addOption("importtype", true, lFileTypes);
-        aCoreOptions.addOption("exporttype", true, lFileTypes);
-        aCoreOptions.addOption("input", true, "The transition input file");
-        aCoreOptions.addOption("output", true, "The converted transition output file");
-        aCoreOptions.addOption("rtdelta", true, "This delta retention time (minutes) is used when appropriate (cfr. Wiki)");
-        aCoreOptions.addOption("rtshift", true, "The retention time shift (minutes) value is used to added to the present retention times. Can be positive or negative. (cfr. Wiki)");
+        aOptions.addOption("importtype", true, lFileTypes);
+        aOptions.addOption("exporttype", true, lFileTypes);
+        aOptions.addOption("input", true, "The transition input file");
+        aOptions.addOption("output", true, "The converted transition output file");
+        aOptions.addOption("rtdelta", true, "This delta retention time (minutes) is used when appropriate (cfr. Wiki)");
+        aOptions.addOption("rtshift", true, "The retention time shift (minutes) value is used to added to the present retention times. Can be positive or negative. (cfr. Wiki)");
 
-        aConstantOptions.addOption(new Option("constant_trigger", true, "default variable - thermo - set 1 to trigger recording of full MS/MS spectra."));
-        aConstantOptions.addOption(new Option("constant_rcategory", true, "default variable - thermo - reaction category (iSRM) - Set 0 for primaries, or 1 for secondaries."));
-        aConstantOptions.addOption(new Option("constant_istd", true, "default variable - agilent - internal standard - TRUE/FALSE"));
-        aConstantOptions.addOption(new Option("constant_resms1", true, "default variable - agilent - MS1 resolution  - 'Unit' (0.7AMU) - 'Wide' (1.2AMU) - 'Widest' (2.5AMU)"));
-        aConstantOptions.addOption(new Option("constant_resms2", true, "default variable - agilent - MS2 resolution  - 'Unit' (0.7AMU) - 'Wide' (1.2AMU) - 'Widest' (2.5AMU)"));
-        aConstantOptions.addOption(new Option("constant_fragmentor", true, "default variable - agilent - LC/MS value '125'"));
-        aConstantOptions.addOption(new Option("constant_qtrapcol3", true, "default variable - abi - tsv column 3 variable '10'"));
+        aOptions.addOption(new Option("trigger", true, "constant - thermo - set 1 to trigger recording of full MS/MS spectra."));
+        aOptions.addOption(new Option("rcategory", true, "constant - thermo - reaction category (iSRM) - Set 0 for primaries, or 1 for secondaries."));
+        aOptions.addOption(new Option("istd", true, "constant - agilent - internal standard - TRUE/FALSE"));
+        aOptions.addOption(new Option("resms1", true, "constant - agilent - MS1 resolution  - 'Unit' (0.7AMU) - 'Wide' (1.2AMU) - 'Widest' (2.5AMU)"));
+        aOptions.addOption(new Option("resms2", true, "constant - agilent - MS2 resolution  - 'Unit' (0.7AMU) - 'Wide' (1.2AMU) - 'Widest' (2.5AMU)"));
+        aOptions.addOption(new Option("fragmentor", true, "constant - agilent - LC/MS value '125'"));
+        aOptions.addOption(new Option("qtrapcol3", true, "constant - abi - tsv column 3 variable '10'"));
 
     }
 
@@ -277,6 +320,47 @@ public class TramlConverter {
             }
         }
 
+        // Is the trigger specified?
+        if (aLine.hasOption("trigger")) {
+            String lTrigger = aLine.getOptionValue("trigger");
+            try {
+                Double.parseDouble(lTrigger);
+            } catch (NumberFormatException e) {
+                logger.error("trigger must be numerical value!! e.g.: --trigger 20");
+            }
+        }
+
+        // Is the reaction category specified?
+        if (aLine.hasOption("rcategory")) {
+            String lRcategory = aLine.getOptionValue("rcategory");
+            if (lRcategory.equals("0") == false && lRcategory.equals("1") == false) {
+                logger.error("reaction category must be either '1' or '0'");
+            }
+        }
+
+        // Is the internal standard value specified?
+        if (aLine.hasOption("istd")) {
+            String lRcategory = aLine.getOptionValue("istd");
+            if (lRcategory.toLowerCase().equals("true") == false && lRcategory.toLowerCase().equals("false") == false) {
+                logger.error("internal standard must be either 'TRUE' or 'FALSE'");
+            }
+        }
+
+        // Is the MS1 resolution specified?
+        if (aLine.hasOption("resms1")) {
+            String lRcategory = aLine.getOptionValue("resms1");
+            if (lRcategory.toLowerCase().equals("unit") == false && lRcategory.toLowerCase().equals("wide") == false && lRcategory.toLowerCase().equals("widest") == false) {
+                logger.error("ms1 resolution must be either 'Unit' or 'Wide' or 'Widest'");
+            }
+        }
+
+        // Is the MS2 resolution specified?
+        if (aLine.hasOption("resms2")) {
+            String lRcategory = aLine.getOptionValue("resms2");
+            if (lRcategory.toLowerCase().equals("unit") == false && lRcategory.toLowerCase().equals("wide") == false && lRcategory.toLowerCase().equals("widest") == false) {
+                logger.error("ms2 resolution must be either 'Unit' or 'Wide' or 'Widest'");
+            }
+        }
 
         // All is fine!
         return true;

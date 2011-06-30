@@ -10,7 +10,7 @@
     <url>http://jtraml.googlecode.com</url>
 
     <properties>
-        <version.number>0.3</version.number>
+        <version.number>0.4</version.number>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <vaadin.version>6.6.0</vaadin.version>
         <gwt.version>2.3.0</gwt.version>
@@ -20,7 +20,7 @@
     <parent>
         <groupId>com.compomics.jtraml</groupId>
         <artifactId>jtraml</artifactId>
-        <version>0.3</version>
+        <version>0.4</version>
     </parent>
 
     <build>
@@ -69,8 +69,8 @@
                 <executions>
                     <execution>
                         <goals>
-                            <!--<goal>resources</goal>-->
-                            <!--<goal>compile</goal>-->
+                            <goal>resources</goal>
+                            <goal>compile</goal>
                         </goals>
                     </execution>
                 </executions>

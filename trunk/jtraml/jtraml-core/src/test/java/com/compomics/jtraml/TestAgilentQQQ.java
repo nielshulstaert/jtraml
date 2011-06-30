@@ -169,7 +169,6 @@ public class TestAgilentQQQ extends TestCase {
 
             TSVFileExportModel lTSVFileExportModel = new TramlToAgilent();
 
-
             File lTempOutput = new File(MyTestSuite.getTestResourceURI().getPath(), "test.agilent.csv");
             if (lTempOutput.exists()) {
                 lTempOutput.delete();
