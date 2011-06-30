@@ -57,11 +57,11 @@ example transition:
 example transition:
 {{{
 # Dynamic MRM
-# Compound Name	ISTD?	Precursor Ion	MS1 Res	Product Ion	MS2 Res	Fragmentor	Collision Energy	Cell Accelerator Voltage	Ret Time (min)	Delta Ret Time	Polarity
-# CSASVLPVDVQTLNSSGPPFGK.2y16-1	FALSE	1130.5681	Wide	1642.8233	Unit	125	39.8	5	42.35	5.00	Positive
+# Compound NameISTD?Precursor IonMS1 ResProduct IonMS2 ResFragmentorCollision EnergyCell Accelerator VoltageRet Time (min)Delta Ret TimePolarity
+# CSASVLPVDVQTLNSSGPPFGK.2y16-1FALSE1130.5681Wide1642.8233Unit12539.8542.355.00Positive
 }}}
 
-	
+
   # CSASVLPVDVQTLNSSGPPFGK.2y16-1 = name
   # FALSE = ISTD (?)
   # 1130.5681 = precursor ion m/z (Q1)
@@ -90,28 +90,37 @@ java -jar jtraml-core-x.x.jar
 If no options are provided, then the command line usage will be displayed in the prompt.
 
 <code>
-usage: TraMLConverter
+TraMLConverter
 ----------------------
 INFO
 ----------------------
+
 The TraML converter command line tool takes an input file and an input type and generates an output file.
 If the input type is a .TraML file, then the converter generates be a .TSV file.
 Otherwise, if the input type is a .TSV file, then the converter generates a .TraML file.
+
 ----------------------
 OPTIONS
+
 ----------------------
--exporttype <arg>   The available file
-                     types:<TraML><thermo_csv><agilent_tsv><abi_csv>
 
--importtype <arg>   The available file
-                     types:<TraML><thermo_csv><agilent_tsv><abi_csv>
+Core options:
+ - exporttype <arg>The available file types:<TraML><thermo_csv><agilent_tsv><abi_csv>
+ - importtype <arg>The available file types:<TraML><thermo_csv><agilent_tsv><abi_csv>
+ - input <arg>     The transition input file
+ - output <arg>    The converted transition output file
+ - rtdelta <arg>   This delta retention time (minutes) is used when appropriate (cfr. Wiki)
+ - rtshift <arg>   The retention time shift (minutes) value is used to added to the present retention times. Can be positive or negative. (cfr. Wiki)
 
--input <arg>        The transition input file
 
--output <arg>       The converted transition output file
-
--rtdelta <arg>      This delta retention time (minutes) is used when
-                     appropriate (cfr. Wiki)
+Constant options:
+ - fragmentor <arg>constant - agilent - LC/MS value '125'
+ - istd <arg>      constant - agilent - internal standard - TRUE/FALSE
+ - qtrapcol3 <arg> constant - abi - tsv column 3 variable '10'
+ - rcategory <arg> constant - thermo - reaction category (iSRM) - Set 0 for primaries, or 1 for secondaries.
+ - resms1 <arg>    constant - agilent - MS1 resolution  - 'Unit' (0.7AMU) - 'Wide' (1.2AMU) - 'Widest' (2.5AMU)
+ - resms2 <arg>    constant - agilent - MS2 resolution  - 'Unit' (0.7AMU) - 'Wide' (1.2AMU) - 'Widest' (2.5AMU)
+ - trigger <arg>   constant - thermo - set 1 to trigger recording of full MS/MS spectra.
 
 
 </code>
