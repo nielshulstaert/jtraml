@@ -10,4 +10,10 @@ public class JTramlException extends RuntimeException {
     public JTramlException(String s) {
         super(s);
     }
+    /**
+     * {@inheritDoc}
+     */
+    public JTramlException(String s, Object o) {
+        super(s + "\n" + o.toString());
+    }
 }

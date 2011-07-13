@@ -119,8 +119,6 @@ public class TramlConverter {
                             }
                         }
                     }
-
-                    logger.debug("finished writing \t" + lOutputFile.getName());
                 } else {
                     logger.error(lStatus, new JTramlException(lStatus));
                 }
@@ -139,6 +137,10 @@ public class TramlConverter {
      */
     private static void parseConstantOptions(CommandLine aConstantOptions, ConversionJobOptions aConversionJobOptions) {
 
+        // Polarity
+        if (aConstantOptions.hasOption("polarity")) {
+            aConversionJobOptions.getConstants().setTRIGGER(aConstantOptions.getOptionValue("trigger"));
+        }
         // Trigger
         if (aConstantOptions.hasOption("trigger")) {
             aConversionJobOptions.getConstants().setTRIGGER(aConstantOptions.getOptionValue("trigger"));

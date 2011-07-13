@@ -42,12 +42,12 @@ public class TramlToThermo extends TSVFileExportModel {
      */
     public boolean isConvertable(TransitionType aTransitionType, TraMLType aTraMLType) {
 
-        RetentionTimeEvaluation lEvaluation = new RetentionTimeEvaluation(aTransitionType, aTraMLType);
+        RetentionTimeEvaluation lEvaluation = new RetentionTimeEvaluation(aTransitionType);
 
         if (lEvaluation.hasRtLower() && lEvaluation.hasRtUpper()) {
             // Ok!
             return true;
-        } else if (lEvaluation.hasRt() && lEvaluation.hasRtDelta()) {
+        } else if (lEvaluation.hasRt() && (lEvaluation.hasRtDelta() || iRetentionTimeWindow != Double.MAX_VALUE)) {
             // We are missing the Delta RetentionTime!
             iMessageBean = new MessageBean("No lower and upper retention times are found.\nYet, a centroid retention time and a window have been found that will be used as lower and upper retentiontimes.", false);
             return false;
@@ -144,9 +144,17 @@ public class TramlToThermo extends TSVFileExportModel {
             lStopTime = bd.toString();
         }
 
-        // Get the configuration options.
-        List<ConfigurationType> ConfigurationList = aTransitionType.getProduct().getConfigurationList().getConfiguration();
-        for (ConfigurationType lConfigurationType : ConfigurationList) {
+        // Try to get the lConfigurationList options.
+        ConfigurationListType lConfigurationList = null;
+
+        if (aTransitionType.getProduct().getConfigurationList() != null) {
+            lConfigurationList = aTransitionType.getProduct().getConfigurationList();
+
+        } else if (aTransitionType.getIntermediateProduct().get(0).getConfigurationList() != null) {
+            lConfigurationList = aTransitionType.getIntermediateProduct().get(0).getConfigurationList();
+        }
+
+        for (ConfigurationType lConfigurationType : lConfigurationList.getConfiguration()) {
             List<CvParamType> lCvParam = lConfigurationType.getCvParam();
 
             for (CvParamType lCvParamType : lCvParam) {
@@ -156,6 +164,7 @@ public class TramlToThermo extends TSVFileExportModel {
                 }
             }
         }
+
 
         StringBuffer sb = new StringBuffer();
 
@@ -235,19 +244,18 @@ public class TramlToThermo extends TSVFileExportModel {
         }
 
         public RetentionTimeParser invoke() {
-            RetentionTimeEvaluation lEvaluation = new RetentionTimeEvaluation(iTransitionType, iTraMLType);
+            RetentionTimeEvaluation lEvaluation = new RetentionTimeEvaluation(iTransitionType);
+            RetentionTimeType lRetentionTimeType = lEvaluation.getRetentionTimeType();
+
 
             if (lEvaluation.hasRtLower() && lEvaluation.hasRtUpper()) {
                 // Ok!
-                List<RetentionTimeType> lRetentionTime = iPeptideType.getRetentionTimeList().getRetentionTime();
-                for (RetentionTimeType lRetentionTimeType : lRetentionTime) {
-                    List<CvParamType> lCvParams = lRetentionTimeType.getCvParam();
-                    for (CvParamType lCvParamType : lCvParams) {
-                        if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_LOWER.getName())) {
-                            iStartTime = lCvParamType.getValue();
-                        } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_UPPER.getName())) {
-                            iStopTime = lCvParamType.getValue();
-                        }
+                List<CvParamType> lCvParams = lRetentionTimeType.getCvParam();
+                for (CvParamType lCvParamType : lCvParams) {
+                    if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_LOWER.getName())) {
+                        iStartTime = lCvParamType.getValue();
+                    } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_UPPER.getName())) {
+                        iStopTime = lCvParamType.getValue();
                     }
                 }
 
@@ -257,15 +265,14 @@ public class TramlToThermo extends TSVFileExportModel {
                 double lRt = 0;
                 double lRtDelta = 0;
 
-                List<RetentionTimeType> lRetentionTime = iPeptideType.getRetentionTimeList().getRetentionTime();
-                for (RetentionTimeType lRetentionTimeType : lRetentionTime) {
-                    List<CvParamType> lCvParams = lRetentionTimeType.getCvParam();
-                    for (CvParamType lCvParamType : lCvParams) {
-                        if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME.getName())) {
-                            lRt = Double.parseDouble(lCvParamType.getValue());
-                        } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_WINDOW.getName())) {
-                            lRtDelta = Double.parseDouble(lCvParamType.getValue());
-                        }
+                List<CvParamType> lCvParams = lRetentionTimeType.getCvParam();
+                for (CvParamType lCvParamType : lCvParams) {
+                    if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME.getName())) {
+                        lRt = Double.parseDouble(lCvParamType.getValue());
+                    } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_NORMALIZED.getName())) {
+                        lRt = Double.parseDouble(lCvParamType.getValue());
+                    } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_WINDOW.getName())) {
+                        lRtDelta = Double.parseDouble(lCvParamType.getValue());
                     }
                 }
 
@@ -280,21 +287,19 @@ public class TramlToThermo extends TSVFileExportModel {
                     double lRt = 0;
                     double lRtDelta = 0;
 
-                    List<RetentionTimeType> lRetentionTime = iPeptideType.getRetentionTimeList().getRetentionTime();
-                    for (RetentionTimeType lRetentionTimeType : lRetentionTime) {
-                        List<CvParamType> lCvParams = lRetentionTimeType.getCvParam();
-                        for (CvParamType lCvParamType : lCvParams) {
-                            if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME.getName())) {
-                                lRt = Double.parseDouble(lCvParamType.getValue());
-                            }
+                    List<CvParamType> lCvParams = lRetentionTimeType.getCvParam();
+                    for (CvParamType lCvParamType : lCvParams) {
+                        if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME.getName())) {
+                            lRt = Double.parseDouble(lCvParamType.getValue());
+                        } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_NORMALIZED.getName())) {
+                            lRt = Double.parseDouble(lCvParamType.getValue());
                         }
                     }
                     iStartTime = "" + (lRt - iRetentionTimeWindow);
                     iStopTime = "" + (lRt + iRetentionTimeWindow);
+                } else {
+                    // Leave lRt and lRtdelta as 'NA'.
                 }
-
-            } else {
-                // Leave lRt and lRtdelta as 'NA'.
             }
             return this;
         }

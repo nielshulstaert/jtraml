@@ -114,8 +114,6 @@ public class TRAMLToSepJob extends Observable implements Runnable, Interruptible
         } else {
             throw new JTramlException("export format is not implemented!!");
         }
-
-
     }
 
     /**
@@ -144,7 +142,19 @@ public class TRAMLToSepJob extends Observable implements Runnable, Interruptible
                 // Validate the first transition.
                 if (iCounter == 1) {
                     boolean lConvertable = iTSVFileExportModel.isConvertable(lTransitionType, iTraML);
-                    if (lConvertable == false) {
+                    if(isGraphical() == false && lConvertable == false){
+                        String lMessage = iTSVFileExportModel.getConversionMessage().getMessage();
+                        lMessage = lMessage + "\n" + "Start without parameters to see all options.";
+                        if(iTSVFileExportModel.getConversionMessage().isRequiresAnswer()){
+                            // We need additional input, so stop the converter.
+                            throw new JTramlException(lMessage, this);
+
+                        }else{
+                            // No additional input required, simply log the conversion message.
+                            logger.debug(lMessage);
+                        }
+
+                    }else if (lConvertable == false) {
                         // Cannot be converted, at the moment. Try and solve!
                         MessageBean lConversionMessage = iTSVFileExportModel.getConversionMessage();
                         lConversionMessage.setInterruptible(this);
@@ -167,6 +177,7 @@ public class TRAMLToSepJob extends Observable implements Runnable, Interruptible
             // finished, spread the word!
             setChanged();
             notifyObservers();
+
 
         } catch (FileNotFoundException e) {
             logger.error(e.getMessage(), e);
@@ -222,4 +233,18 @@ public class TRAMLToSepJob extends Observable implements Runnable, Interruptible
         iGraphical = aGraphical;
     }
 
+    @Override
+    public String toString() {
+        return "TRAMLToSepJob{" +
+                "iTSVFileExportModel=" + iTSVFileExportModel +
+                ", iInputFile=" + iInputFile +
+                ", iOutputFile=" + iOutputFile +
+                ", iExportType=" + iExportType +
+                ", iGraphical=" + iGraphical +
+                ", boolInterrupted=" + boolInterrupted +
+                ", iStatus='" + iStatus + '\'' +
+                ", iCounter=" + iCounter +
+                ", iTraML=" + iTraML +
+                '}';
+    }
 }

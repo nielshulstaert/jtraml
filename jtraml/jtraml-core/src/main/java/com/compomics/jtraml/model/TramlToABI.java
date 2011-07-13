@@ -8,7 +8,6 @@ import org.hupo.psi.ms.traml.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.List;
 
 /**
  * This class is a FileExportModel to write separated file format of transitions similar to the ABI QTRAP 5500.
@@ -41,7 +40,7 @@ public class TramlToABI extends TSVFileExportModel {
      */
     public boolean isConvertable(TransitionType aTransitionType, TraMLType aTraMLType) {
 
-        RetentionTimeEvaluation lEvaluation = new RetentionTimeEvaluation(aTransitionType, aTraMLType);
+        RetentionTimeEvaluation lEvaluation = new RetentionTimeEvaluation(aTransitionType);
 
         if (lEvaluation.hasRt()) {
             // Ok!
@@ -170,26 +169,24 @@ public class TramlToABI extends TSVFileExportModel {
 
         public String invoke() {
             // Get the retention time.
-            RetentionTimeEvaluation lEvaluation = new RetentionTimeEvaluation(iTransitionType, iTraMLType);
+            RetentionTimeEvaluation lEvaluation = new RetentionTimeEvaluation(iTransitionType);
+            RetentionTimeType lRetentionTimeType = lEvaluation.getRetentionTimeType();
 
             if (lEvaluation.hasRt()) {
                 // Ok!
-                List<RetentionTimeType> lRetentionTime = iPeptideType.getRetentionTimeList().getRetentionTime();
-                for (RetentionTimeType aLRetentionTime : lRetentionTime) {
-                    CvParamType lCvParamType = aLRetentionTime.getCvParam().get(0);
-                    if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME.getName())) {
-                        iRt = lCvParamType.getValue();
-                    }
+
+                CvParamType lCvParamType = lRetentionTimeType.getCvParam().get(0);
+                if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME.getName())) {
+                    iRt = lCvParamType.getValue();
+                } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_NORMALIZED.getName())) {
+                    iRt = lCvParamType.getValue();
                 }
 
             } else if (lEvaluation.hasRtLower()) {
                 // Ok, use the lower retention time as the centroid time.
-                List<RetentionTimeType> lRetentionTime = iPeptideType.getRetentionTimeList().getRetentionTime();
-                for (RetentionTimeType aLRetentionTime : lRetentionTime) {
-                    CvParamType lCvParamType = aLRetentionTime.getCvParam().get(0);
-                    if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_LOWER.getName())) {
-                        iRt = lCvParamType.getValue();
-                    }
+                CvParamType lCvParamType = lRetentionTimeType.getCvParam().get(0);
+                if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_LOWER.getName())) {
+                    iRt = lCvParamType.getValue();
                 }
 
             } else {
