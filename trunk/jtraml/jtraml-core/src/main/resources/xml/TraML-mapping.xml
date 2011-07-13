@@ -147,7 +147,7 @@
             <CvTerm termAccession="MS:1000828" useTerm="true" termName="isolation window lower offset" isRepeatable="false" allowChildren="false" cvIdentifierRef="MS"></CvTerm>
             <CvTerm termAccession="MS:1000829" useTerm="true" termName="isolation window upper offset" isRepeatable="false" allowChildren="false" cvIdentifierRef="MS"></CvTerm>
         </CvMappingRule>
-        <CvMappingRule id="product_may" cvElementPath="/TraML/TransitionList/Transition/IntermediateProduct/cvParam/@accession" requirementLevel="MAY" scopePath="/TraML/TransitionList/Transition/IntermediateProduct" cvTermsCombinationLogic="AND">
+        <CvMappingRule id="intermediate_product_may" cvElementPath="/TraML/TransitionList/Transition/IntermediateProduct/cvParam/@accession" requirementLevel="MAY" scopePath="/TraML/TransitionList/Transition/IntermediateProduct" cvTermsCombinationLogic="AND">
             <CvTerm termAccession="MS:1000041" useTerm="true" termName="charge state" isRepeatable="false" allowChildren="false" cvIdentifierRef="MS"></CvTerm>
         </CvMappingRule>
 

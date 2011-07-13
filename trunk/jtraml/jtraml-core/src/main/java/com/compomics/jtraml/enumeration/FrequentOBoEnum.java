@@ -15,6 +15,7 @@ public enum FrequentOBoEnum {
     RETENTION_TIME_LOWER("retention time window lower offset"),
     RETENTION_TIME_UPPER("retention time window upper offset"),
     RETENTION_TIME_WINDOW("retention time window attribute"),
+    RETENTION_TIME_NORMALIZED("normalized retention time"),
 
     ELECTRON_VOLT("electronvolt"),
     VOLT("volt"),

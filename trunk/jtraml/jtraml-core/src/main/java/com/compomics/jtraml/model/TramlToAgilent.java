@@ -41,14 +41,17 @@ public class TramlToAgilent extends TSVFileExportModel {
      */
     public boolean isConvertable(TransitionType aTransitionType, TraMLType aTraMLType) {
 
-        RetentionTimeEvaluation lEvaluation = new RetentionTimeEvaluation(aTransitionType, aTraMLType);
+        RetentionTimeEvaluation lEvaluation = new RetentionTimeEvaluation(aTransitionType);
 
         if (lEvaluation.hasRt() && lEvaluation.hasRtDelta()) {
             // Ok!
             return true;
+        }if (lEvaluation.hasRt() && iRetentionTimeWindow != Double.MAX_VALUE) {
+            // Ok!
+            return true;
         } else if (lEvaluation.hasRt() && !lEvaluation.hasRtDelta()) {
             // We are missing the Delta RetentionTime!
-            iMessageBean = new MessageBean("The window around the centroid retention time is missing.\nPlease return the required window:", true);
+            iMessageBean = new MessageBean("The window around the centroid retention time is missing.\nPlease provide the required window.", true);
             return false;
         } else if (lEvaluation.hasRtLower() && lEvaluation.hasRtUpper()) {
             // We are missing the Delta RetentionTime!
@@ -137,9 +140,17 @@ public class TramlToAgilent extends TSVFileExportModel {
             lRt = bd.toString();
         }
 
-        // Get the configuration options.
-        List<ConfigurationType> ConfigurationList = aTransitionType.getProduct().getConfigurationList().getConfiguration();
-        for (ConfigurationType lConfigurationType : ConfigurationList) {
+        // Try to get the lConfigurationList options.
+        ConfigurationListType lConfigurationList = null;
+
+        if(aTransitionType.getProduct().getConfigurationList() != null){
+            lConfigurationList = aTransitionType.getProduct().getConfigurationList();
+
+        }else if(aTransitionType.getIntermediateProduct().get(0).getConfigurationList() != null){
+            lConfigurationList = aTransitionType.getIntermediateProduct().get(0).getConfigurationList();
+        }
+
+        for (ConfigurationType lConfigurationType : lConfigurationList.getConfiguration()) {
             List<CvParamType> lCvParam = lConfigurationType.getCvParam();
 
             for (CvParamType lCvParamType : lCvParam) {
@@ -236,19 +247,20 @@ public class TramlToAgilent extends TSVFileExportModel {
         public RetentionTimeParser invoke() {
             // Get the retention time.
             // Agilent needs a Centroid Retention Time and a Delta Retention Time.
-            RetentionTimeEvaluation lEvaluation = new RetentionTimeEvaluation(iTransitionType, iTraMLType);
+            RetentionTimeEvaluation lEvaluation = new RetentionTimeEvaluation(iTransitionType);
+            RetentionTimeType lRetentionTimeType = lEvaluation.getRetentionTimeType();
+
 
             if (lEvaluation.hasRt() && lEvaluation.hasRtDelta()) {
                 // Ok!
-                List<RetentionTimeType> lRetentionTime = iPeptideType.getRetentionTimeList().getRetentionTime();
-                for (RetentionTimeType lRetentionTimeType : lRetentionTime) {
-                    List<CvParamType> lCvParams = lRetentionTimeType.getCvParam();
-                    for (CvParamType lCvParamType : lCvParams) {
-                        if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME.getName())) {
-                            iRt = lCvParamType.getValue();
-                        } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_WINDOW.getName())) {
-                            iRtdelta = lCvParamType.getValue();
-                        }
+                List<CvParamType> lCvParams = lRetentionTimeType.getCvParam();
+                for (CvParamType lCvParamType : lCvParams) {
+                    if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME.getName())) {
+                        iRt = lCvParamType.getValue();
+                    } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_NORMALIZED.getName())) {
+                        iRt = lCvParamType.getValue();
+                    } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_WINDOW.getName())) {
+                        iRtdelta = lCvParamType.getValue();
                     }
                 }
 
@@ -257,16 +269,14 @@ public class TramlToAgilent extends TSVFileExportModel {
                 if (iRetentionTimeWindow != Double.MAX_VALUE) {
                     // The window has been defined!
 
-                    List<RetentionTimeType> lRetentionTime = iPeptideType.getRetentionTimeList().getRetentionTime();
-                    for (RetentionTimeType lRetentionTimeType : lRetentionTime) {
-                        List<CvParamType> lCvParams = lRetentionTimeType.getCvParam();
-                        for (CvParamType lCvParamType : lCvParams) {
-                            if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME.getName())) {
-                                iRt = lCvParamType.getValue();
-                            }
+                    List<CvParamType> lCvParams = lRetentionTimeType.getCvParam();
+                    for (CvParamType lCvParamType : lCvParams) {
+                        if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME.getName())) {
+                            iRt = lCvParamType.getValue();
+                        } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_NORMALIZED.getName())) {
+                            iRt = lCvParamType.getValue();
                         }
                     }
-
                     // We are missing the Delta RetentionTime, see if it was set by the user.
                     if (iRetentionTimeWindow != -1) {
                         iRtdelta = "" + iRetentionTimeWindow;
@@ -281,15 +291,12 @@ public class TramlToAgilent extends TSVFileExportModel {
                 double lRtUpper = 0;
                 double lRtLower = 0;
 
-                List<RetentionTimeType> lRetentionTime = iPeptideType.getRetentionTimeList().getRetentionTime();
-                for (RetentionTimeType lRetentionTimeType : lRetentionTime) {
-                    List<CvParamType> lCvParams = lRetentionTimeType.getCvParam();
-                    for (CvParamType lCvParamType : lCvParams) {
-                        if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_LOWER.getName())) {
-                            lRtLower = Double.parseDouble(lCvParamType.getValue());
-                        } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_WINDOW.getName())) {
-                            lRtUpper = Double.parseDouble(lCvParamType.getValue());
-                        }
+                List<CvParamType> lCvParams = lRetentionTimeType.getCvParam();
+                for (CvParamType lCvParamType : lCvParams) {
+                    if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_LOWER.getName())) {
+                        lRtLower = Double.parseDouble(lCvParamType.getValue());
+                    } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_WINDOW.getName())) {
+                        lRtUpper = Double.parseDouble(lCvParamType.getValue());
                     }
                 }
 

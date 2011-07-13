@@ -86,7 +86,7 @@ public class SepToTRAMLJob extends Observable implements Runnable {
         } else if (aImportType == FileTypeEnum.TSV_ABI) {
             iTSVFileImportModel = new ABIToTraml(iInputFile);
         } else {
-            throw new JTramlException("unsupported import format!!");
+            throw new JTramlException("unsupported import format!!", this);
         }
 
     }
@@ -176,4 +176,13 @@ public class SepToTRAMLJob extends Observable implements Runnable {
         return iStatus;
     }
 
+    @Override
+    public String toString() {
+        return "SepToTRAMLJob{" +
+                "iTSVFileImportModel=" + iTSVFileImportModel +
+                ", iInputFile=" + iInputFile +
+                ", iOutputFile=" + iOutputFile +
+                ", iStatus='" + iStatus + '\'' +
+                '}';
+    }
 }

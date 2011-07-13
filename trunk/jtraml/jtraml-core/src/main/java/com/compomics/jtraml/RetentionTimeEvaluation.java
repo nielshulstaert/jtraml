@@ -14,25 +14,32 @@ public class RetentionTimeEvaluation {
     boolean iRtDelta = false;
     boolean iRtLower = false;
     boolean iRtUpper = false;
+    public RetentionTimeType iRetentionTimeType;
 
-    public RetentionTimeEvaluation(TransitionType aTransitionType, TraMLType aTraMLType) {
+    public RetentionTimeEvaluation(TransitionType aTransitionType) {
         // Get the peptide instance of the current transition.
         PeptideType lPeptideType = (PeptideType) aTransitionType.getPeptideRef();
-        List<RetentionTimeType> lRetentionTimes = lPeptideType.getRetentionTimeList().getRetentionTime();
+        List<RetentionTimeType> lRetentionTimes = (List<RetentionTimeType>) lPeptideType.getRetentionTimeList();
+
+        if (lRetentionTimes != null && lRetentionTimes.size() > 0) {
+            iRetentionTimeType = lRetentionTimes.get(0);
+        } else {
+            iRetentionTimeType = aTransitionType.getRetentionTime();
+        }
 
         // Get the retention time.
-        for (RetentionTimeType lRetentionTimeType : lRetentionTimes) {
-            List<CvParamType> lCvParams = lRetentionTimeType.getCvParam();
-            for (CvParamType lCvParamType : lCvParams) {
-                if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME.getName())) {
-                    iRt = true;
-                } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_WINDOW.getName())) {
-                    iRtDelta = true;
-                } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_LOWER.getName())) {
-                    iRtLower = true;
-                } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_UPPER.getName())) {
-                    iRtUpper = true;
-                }
+        List<CvParamType> lCvParams = iRetentionTimeType.getCvParam();
+        for (CvParamType lCvParamType : lCvParams) {
+            if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME.getName())) {
+                iRt = true;
+            } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_NORMALIZED.getName())) {
+                iRt = true;
+            } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_WINDOW.getName())) {
+                iRtDelta = true;
+            } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_LOWER.getName())) {
+                iRtLower = true;
+            } else if (lCvParamType.getName().equals(FrequentOBoEnum.RETENTION_TIME_UPPER.getName())) {
+                iRtUpper = true;
             }
         }
     }
@@ -54,5 +61,8 @@ public class RetentionTimeEvaluation {
     }
 
 
+    public RetentionTimeType getRetentionTimeType() {
+        return iRetentionTimeType;
+    }
 }
 
