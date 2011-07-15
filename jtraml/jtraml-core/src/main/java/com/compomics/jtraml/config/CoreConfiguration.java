@@ -11,7 +11,7 @@ public class CoreConfiguration {
     /**
      * The current version of the library.
      */
-    public final static String VERSION = "0.4";
+    public final static String VERSION = "0.9";
 
     /**
      * The current version of the TraML XSD.
