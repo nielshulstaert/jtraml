@@ -2,6 +2,9 @@
 #labels Featured,wiki
 #sidebar toc
 
+==0.9 (15 July 2011)==
+  * FEATURE: implemented parsing of multiple RetentionTimeType and ConfigurationType locations.
+
 ==0.4 (30 June 2011)==
   * FEATURE : implemented constant variables for vendor file formats.
   * FEATURE : implemented retention time shift functionality 
