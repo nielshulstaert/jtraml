@@ -6,14 +6,14 @@
     <artifactId>jtraml-core</artifactId>
     <packaging>jar</packaging>
     <name>jtraml-core</name>
-    <version>0.9</version>
+    <version>0.9.1</version>
 
     <url>http://jtraml.googlecode.com</url>
 
     <parent>
         <groupId>com.compomics.jtraml</groupId>
         <artifactId>jtraml</artifactId>
-        <version>0.9</version>
+        <version>0.9.1</version>
     </parent>
 
     <!-- Licence -->
