@@ -2,6 +2,7 @@ package com.compomics.jtraml.web.components;
 
 import com.compomics.jtraml.model.ConversionJobOptions;
 import com.compomics.jtraml.web.TramlConverterApplication;
+import com.compomics.jtraml.web.runner.FileImportParser;
 import com.google.common.io.Files;
 import com.vaadin.data.Property;
 import com.vaadin.data.Validator;
@@ -10,14 +11,17 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.Upload.FinishedEvent;
 import com.vaadin.ui.Upload.Receiver;
 import com.vaadin.ui.themes.Reindeer;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.concurrent.Executors;
 
 @SuppressWarnings("serial")
 public class UploadComponent extends FormLayout implements Property, Validator {
 
+    private static Logger logger = Logger.getLogger(UploadComponent.class);
     private FileReceiver receiver = new FileReceiver();
 
     private Upload upload = new Upload("", receiver);
@@ -41,6 +45,12 @@ public class UploadComponent extends FormLayout implements Property, Validator {
             public void uploadFinished(FinishedEvent event) {
                 result.setCaption("uploaded " + receiver.getFileName());
                 result.setIcon(new ClassResource("/images/16x16/success.png", TramlConverterApplication.getApplication()));
+
+                try {
+                    Executors.newSingleThreadExecutor().submit(new FileImportParser(iConversionJobOptions, UploadComponent.this, receiver.getFileName()));
+                } catch (IOException e) {
+                    logger.error(e.getMessage(), e);
+                }
             }
         });
 
