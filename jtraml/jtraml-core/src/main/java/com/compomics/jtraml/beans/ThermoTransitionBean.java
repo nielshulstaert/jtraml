@@ -1,10 +1,57 @@
 package com.compomics.jtraml.beans;
 
+import com.google.common.base.Joiner;
+
 /**
  * This class is a Bean representation of a single transition in the .csv file format of Thermo instruments
  */
 public class ThermoTransitionBean {
 
+    /**
+     * Empty constructor
+     */
+    public ThermoTransitionBean() {
+    }
+
+    /**
+     * Create a new Bean from the specified Strings.
+     *
+     * @param aQ1Mass
+     * @param aQ3Mass
+     * @param aStartTime
+     * @param aEndTime
+     * @param aPolarity
+     * @param aTrigger
+     * @param aReactionCategory
+     * @param aID
+     */
+    public ThermoTransitionBean(String aQ1Mass, String aQ3Mass, String aStartTime, String aEndTime, String aPolarity, String aTrigger, String aReactionCategory, String aID) {
+        setQ1Mass(Double.parseDouble(aQ1Mass));
+        setQ3Mass(Double.parseDouble(aQ3Mass));
+        setStartTime(Double.parseDouble(aStartTime));
+        setEndTime(Double.parseDouble(aEndTime));
+        setPolarity(aPolarity);
+        setTrigger(aTrigger);
+        setReactionCategory(aReactionCategory);
+        setID(aID);
+    }
+
+    /**
+     * Create a new Bean from an array of Strings. Note that the order in the array is essential!!
+     *
+     * @param aValues size = 9
+     */
+    public ThermoTransitionBean(String[] aValues) {
+        this(
+                aValues[0],
+                aValues[1],
+                aValues[2],
+                aValues[3],
+                aValues[4],
+                aValues[5],
+                aValues[7], aValues[6]
+        );
+    }
 
     /**
      * The precursor ion mass
@@ -36,15 +83,19 @@ public class ThermoTransitionBean {
     /**
      * The trigger (cfr iSRM)
      */
-    private int iTrigger = -1;
+    private String iTrigger = "";
+
+
+    /**
+     * The reaction category value of this transition
+     */
+    private String iReactionCategory = "";
 
     /**
      * The identifier of this transition
      */
 
     private String iID = "";
-
-
 
 
     /**
@@ -88,7 +139,7 @@ public class ThermoTransitionBean {
      *
      * @param aTrigger The iTrigger value to set.
      */
-    public void setTrigger(int aTrigger) {
+    public void setTrigger(String aTrigger) {
         this.iTrigger = aTrigger;
     }
 
@@ -106,7 +157,7 @@ public class ThermoTransitionBean {
      *
      * @return The iTrigger value.
      */
-    public int getTrigger() {
+    public String getTrigger() {
         return iTrigger;
     }
 
@@ -142,7 +193,7 @@ public class ThermoTransitionBean {
      *
      * @param aStartTime The iStartTime value to set.
      */
-    public void setIStartTime(double aStartTime) {
+    public void setStartTime(double aStartTime) {
         this.iStartTime = aStartTime;
     }
 
@@ -171,5 +222,47 @@ public class ThermoTransitionBean {
      */
     public double getIQ1Mass() {
         return iQ1Mass;
+    }
+
+    /**
+     * Sets the iReactionCategory.
+     *
+     * @param aReactionCategory The iReactionCategory value to set.
+     */
+    public void setReactionCategory(String aReactionCategory) {
+        this.iReactionCategory = aReactionCategory;
+    }
+
+    /**
+     * Gets the iReactionCategory.
+     *
+     * @return The iReactionCategory value.
+     */
+    public String getReactionCategory() {
+        return iReactionCategory;
+    }
+
+    /**
+     * Returns a String[] with the specific order as they variables would appear in the Thermo CSV file.
+     * @return
+     */
+    public String[] getCSVOrder() {
+        return new String[]{
+                "" + iQ1Mass,
+                "" + iQ3Mass,
+                "" + iStartTime,
+                "" + iEndTime,
+                iPolarity,
+                iTrigger,
+                iReactionCategory,
+                iID};
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String asCSVLine(){
+        return Joiner.on(',').join(getCSVOrder());
     }
 }
