@@ -24,7 +24,7 @@ public class HeaderPanel extends com.vaadin.ui.HorizontalLayout {
         addComponent(l);
 
         ComponentContainer labels = new VerticalLayout();
-        Label title = new Label("<h1>TraML Converter v0.9</h1>");
+        Label title = new Label("<h1>TraML Converter v1.0</h1>");
         title.setContentMode(Label.CONTENT_XHTML);
         Label subtitle = new Label("<em>based on TraML XSD version " + CoreConfiguration.TRAML_VERSION + " </em>");
         subtitle.setContentMode(Label.CONTENT_XHTML);
