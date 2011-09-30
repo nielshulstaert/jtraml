@@ -5,7 +5,8 @@ import com.google.common.base.Joiner;
 /**
  * This class is a Bean representation of a single transition in the .csv file format of Thermo instruments
  */
-public class ThermoTransitionBean {
+public class ThermoTransitionBean extends TransitionBean {
+
 
     /**
      * Empty constructor
@@ -25,9 +26,10 @@ public class ThermoTransitionBean {
      * @param aReactionCategory
      * @param aID
      */
-    public ThermoTransitionBean(String aQ1Mass, String aQ3Mass, String aStartTime, String aEndTime, String aPolarity, String aTrigger, String aReactionCategory, String aID) {
+    public ThermoTransitionBean(String aQ1Mass, String aQ3Mass, String aCollisionEnergy, String aStartTime, String aEndTime, String aPolarity, String aTrigger, String aReactionCategory, String aID) {
         setQ1Mass(Double.parseDouble(aQ1Mass));
         setQ3Mass(Double.parseDouble(aQ3Mass));
+        setCollisionEnergy(Double.parseDouble(aCollisionEnergy));
         setStartTime(Double.parseDouble(aStartTime));
         setEndTime(Double.parseDouble(aEndTime));
         setPolarity(aPolarity);
@@ -49,19 +51,11 @@ public class ThermoTransitionBean {
                 aValues[3],
                 aValues[4],
                 aValues[5],
-                aValues[7], aValues[6]
+                aValues[6],
+                aValues[7],
+                aValues[8]
         );
     }
-
-    /**
-     * The precursor ion mass
-     */
-    private double iQ1Mass = -1;
-
-    /**
-     * The product ion mass
-     */
-    private double iQ3Mass = -1;
 
     /**
      * The start time
@@ -73,57 +67,29 @@ public class ThermoTransitionBean {
      */
     private double iEndTime = -1;
 
+    /**
+     * The collision energy to be used.
+     */
+    private double iCollisionEnergy = -1;
+
 
     /**
      * The polarity
      */
-    private String iPolarity = "";
+    private String iPolarity = "NA";
 
 
     /**
      * The trigger (cfr iSRM)
      */
-    private String iTrigger = "";
+    private String iTrigger = "NA";
 
 
     /**
      * The reaction category value of this transition
      */
-    private String iReactionCategory = "";
+    private String iReactionCategory = "NA";
 
-    /**
-     * The identifier of this transition
-     */
-
-    private String iID = "";
-
-
-    /**
-     * Sets the iQ3Mass.
-     *
-     * @param aQ3Mass The iQ3Mass value to set.
-     */
-    public void setQ3Mass(double aQ3Mass) {
-        this.iQ3Mass = aQ3Mass;
-    }
-
-    /**
-     * Gets the iID.
-     *
-     * @return The iID value.
-     */
-    public String getID() {
-        return iID;
-    }
-
-    /**
-     * Sets the iID.
-     *
-     * @param aID The iID value to set.
-     */
-    public void setID(String aID) {
-        this.iID = aID;
-    }
 
     /**
      * Sets the iPolarity.
@@ -180,15 +146,6 @@ public class ThermoTransitionBean {
     }
 
     /**
-     * Sets the iQ1Mass.
-     *
-     * @param aQ1Mass The iQ1Mass value to set.
-     */
-    public void setQ1Mass(double aQ1Mass) {
-        this.iQ1Mass = aQ1Mass;
-    }
-
-    /**
      * Sets the iStartTime.
      *
      * @param aStartTime The iStartTime value to set.
@@ -198,30 +155,12 @@ public class ThermoTransitionBean {
     }
 
     /**
-     * Gets the iQ3Mass.
-     *
-     * @return The iQ3Mass value.
-     */
-    public double getQ3Mass() {
-        return iQ3Mass;
-    }
-
-    /**
      * Gets the iPolarity.
      *
      * @return The iPolarity value.
      */
     public String getIPolarity() {
         return iPolarity;
-    }
-
-    /**
-     * Gets the iQ1Mass.
-     *
-     * @return The iQ1Mass value.
-     */
-    public double getIQ1Mass() {
-        return iQ1Mass;
     }
 
     /**
@@ -242,27 +181,50 @@ public class ThermoTransitionBean {
         return iReactionCategory;
     }
 
+
+    /**
+     * Sets the iCollisionEnergy.
+     *
+     * @param aCollisionEnergy The iCollisionEnergy value to set.
+     */
+    public void setCollisionEnergy(double aCollisionEnergy) {
+        this.iCollisionEnergy = aCollisionEnergy;
+    }
+
+    /**
+     * Gets the iCollisionEnergy.
+     *
+     * @return The iCollisionEnergy value.
+     */
+    public double getCollisionEnergy() {
+        return iCollisionEnergy;
+    }
+
     /**
      * Returns a String[] with the specific order as they variables would appear in the Thermo CSV file.
+     *
      * @return
      */
-    public String[] getCSVOrder() {
+    @Override
+    public String[] getSeparatedOrder() {
         return new String[]{
-                "" + iQ1Mass,
-                "" + iQ3Mass,
+                "" + getQ1Mass(),
+                "" + getQ3Mass(),
+                "" + getCollisionEnergy(),
                 "" + iStartTime,
                 "" + iEndTime,
                 iPolarity,
                 iTrigger,
                 iReactionCategory,
-                iID};
+                getID()};
     }
 
     /**
-     *
      * @return
      */
-    public String asCSVLine(){
-        return Joiner.on(',').join(getCSVOrder());
+    @Override
+    public String asCSVLine() {
+        return Joiner.on(',').join(getSeparatedOrder());
     }
+
 }
