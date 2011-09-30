@@ -1,12 +1,11 @@
 @import "../reindeer/styles.css";
+/*@import url(http://fonts.googleapis.com/css?family=Andika);*/
+
 
 .v-app {
     background: white;
-}
-
-.v-horizontallayout {
-    vertical-align: baseline;
-    margin: 10px
+    /*font-family: 'Andika', serif;*/
+    line-height: 1.5;
 }
 
 .v-split-line {
