@@ -39,6 +39,14 @@ public class ThermoToTraml extends TSVFileImportModel {
     }
 
     /**
+     * Construct a new TSVFileImportModel implementation for Thermo TSQ inputformat.
+     */
+    public ThermoToTraml() {
+        iFile = null;
+        iObjectFactory = new ObjectFactory();
+    }
+
+    /**
      * Implementing classes must be capable of writing an array of rowvalues into a TramlType instance.
      *
      * @param aTraMLType The TraMLType instance to store the rows into.
@@ -235,8 +243,11 @@ public class ThermoToTraml extends TSVFileImportModel {
         SourceFileType lSourceFileType = iObjectFactory.createSourceFileType();
 
         lSourceFileType.setId("ThermoTSQ_to_traml_converter_v" + CoreConfiguration.VERSION);
-        lSourceFileType.setLocation(iFile.getParent());
-        lSourceFileType.setName(iFile.getName());
+
+        if(iFile != null){
+            lSourceFileType.setLocation(iFile.getParent());
+            lSourceFileType.setName(iFile.getName());
+        }
 
         lSourceFileListType.getSourceFile().add(lSourceFileType);
 
