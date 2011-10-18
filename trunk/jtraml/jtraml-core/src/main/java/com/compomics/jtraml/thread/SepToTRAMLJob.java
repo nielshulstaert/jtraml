@@ -72,6 +72,20 @@ public class SepToTRAMLJob extends Observable implements Runnable {
      *
      * @param aInputFile
      * @param aOutputFile
+     * @param aImportModel
+     */
+    public SepToTRAMLJob(File aInputFile, File aOutputFile, TSVFileImportModel aImportModel) {
+        iInputFile = aInputFile;
+        iOutputFile = aOutputFile;
+        logger.debug("using TraML importmodel " + aImportModel.getClass().getName());
+        iTSVFileImportModel = aImportModel;
+    }
+
+    /**
+     * Creates a new job to convert a separated file with transitions into the TraML specification.
+     *
+     * @param aInputFile
+     * @param aOutputFile
      * @param aImportType
      */
     public SepToTRAMLJob(File aInputFile, File aOutputFile, FileTypeEnum aImportType) {
