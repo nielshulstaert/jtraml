@@ -13,7 +13,7 @@ import com.vaadin.ui.themes.Reindeer;
 public class FooterPanel extends com.vaadin.ui.HorizontalLayout {
 
 
-    public FooterPanel() {
+    public FooterPanel(TramlConverterApplication aApplication) {
 
 
         // Create a grid layout
@@ -32,7 +32,7 @@ public class FooterPanel extends com.vaadin.ui.HorizontalLayout {
         l = new Link();
         l.setResource(new ExternalResource("http://www.compomics.com/"));
         l.setDescription("go to psi website");
-        l.setIcon(new ClassResource("/images/compomics.png", TramlConverterApplication.getApplication()));
+        l.setIcon(new ClassResource("/images/compomics.png", aApplication));
 
         horiz.addComponent(l);
         horiz.setComponentAlignment(l, Alignment.BOTTOM_RIGHT);

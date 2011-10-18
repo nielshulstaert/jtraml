@@ -12,7 +12,7 @@ import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
 public class HeaderPanel extends com.vaadin.ui.HorizontalLayout {
-    public HeaderPanel() {
+    public HeaderPanel(TramlConverterApplication aApplication) {
         setSizeUndefined();
         setMargin(true);
         setSpacing(true);
@@ -20,7 +20,7 @@ public class HeaderPanel extends com.vaadin.ui.HorizontalLayout {
         Link l = new Link();
         l.setResource(new ExternalResource("http://jtraml.googlecode.com"));
         l.setDescription("go to jTraML googlecode website");
-        l.setIcon(new ClassResource("/images/jtraml_icon.png", TramlConverterApplication.getApplication()));
+        l.setIcon(new ClassResource("/images/jtraml_icon.png", aApplication));
         addComponent(l);
 
         ComponentContainer labels = new VerticalLayout();

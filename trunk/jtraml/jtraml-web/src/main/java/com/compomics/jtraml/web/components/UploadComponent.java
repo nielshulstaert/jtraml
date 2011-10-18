@@ -28,11 +28,13 @@ public class UploadComponent extends FormLayout implements Property, Validator {
     private Label result = new Label("");
 
     private ConversionJobOptions iConversionJobOptions;
+    private final TramlConverterApplication iApplication;
 
 
-    public UploadComponent(ConversionJobOptions aConversionJobOptions) {
+    public UploadComponent(ConversionJobOptions aConversionJobOptions, TramlConverterApplication aApplication) {
         super();
         iConversionJobOptions = aConversionJobOptions;
+        iApplication = aApplication;
 
         setStyleName(Reindeer.PANEL_LIGHT);
         setCaption("input file");
@@ -43,11 +45,9 @@ public class UploadComponent extends FormLayout implements Property, Validator {
 
         upload.addListener(new Upload.FinishedListener() {
             public void uploadFinished(FinishedEvent event) {
-                result.setCaption("uploaded " + receiver.getFileName());
-                result.setIcon(new ClassResource("/images/16x16/success.png", TramlConverterApplication.getApplication()));
-
+                setUploadSuccess(receiver.getFileName());
                 try {
-                    Executors.newSingleThreadExecutor().submit(new FileImportParser(iConversionJobOptions, UploadComponent.this, receiver.getFileName()));
+                    Executors.newSingleThreadExecutor().submit(new FileImportParser(iApplication, iConversionJobOptions, UploadComponent.this, receiver.getFileName()));
                 } catch (IOException e) {
                     logger.error(e.getMessage(), e);
                 }
@@ -59,6 +59,15 @@ public class UploadComponent extends FormLayout implements Property, Validator {
         lLayout.addComponent(result);
 
         addComponent(lLayout);
+    }
+
+    /**
+     * Set the upload panel to be successfull for the specified filename.
+     * @param aFileName
+     */
+    public void setUploadSuccess(String aFileName) {
+        result.setCaption("uploaded " + aFileName);
+        result.setIcon(new ClassResource("/images/16x16/success.png", iApplication));
     }
 
     /**
@@ -128,7 +137,7 @@ public class UploadComponent extends FormLayout implements Property, Validator {
             fileName = filename;
             mtype = MIMEType;
 
-            File lFile = new File(TramlConverterApplication.getApplication().getTempDir(), filename);
+            File lFile = new File(iApplication.getTempDir(), filename);
             setValue(lFile);
             try {
                 return Files.newOutputStreamSupplier(lFile).getOutput();

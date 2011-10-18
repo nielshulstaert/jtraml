@@ -38,13 +38,15 @@ public class ResultsPanel extends VerticalLayout {
      * The results counter displayed in the Table.
      */
     public int iItemCounter = 0;
+    private final TramlConverterApplication iApplication;
 
 
     /**
      * Construct a new ResultsPanel to display the conversion job results.
      */
-    public ResultsPanel() {
+    public ResultsPanel(TramlConverterApplication aApplication) {
         super();
+        iApplication = aApplication;
         initLayout();
         initResultsTable();
     }
@@ -107,7 +109,7 @@ public class ResultsPanel extends VerticalLayout {
                     return is;
                 }
             };
-            StreamResource lStreamResource = new StreamResource(lStreamSource, lOutputFile.getName(), TramlConverterApplication.getApplication());
+            StreamResource lStreamResource = new StreamResource(lStreamSource, lOutputFile.getName(), iApplication);
 
             Link l = new Link("Download", lStreamResource);
             iConversionTable.getContainerProperty(id, "Download").setValue(l);

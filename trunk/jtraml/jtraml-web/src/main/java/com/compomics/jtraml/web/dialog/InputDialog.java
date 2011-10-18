@@ -1,5 +1,6 @@
 package com.compomics.jtraml.web.dialog;
 
+import com.compomics.jtraml.web.TramlConverterApplication;
 import com.compomics.jtraml.web.components.InfoLink;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
@@ -14,6 +15,7 @@ public class InputDialog extends Window {
      * The target object that will receive the result from the input dialog.
      */
     Recipient r;
+    private final TramlConverterApplication iApplication;
 
     // Layout components.
     private AbsoluteLayout mainLayout;
@@ -30,9 +32,10 @@ public class InputDialog extends Window {
      * @param recipient The Target receiever of the user's input.
      * @param showInput Boolean whether this input dialog requires a TextField input field.
      */
-    public InputDialog(final Window parent, String question, Recipient recipient, boolean showInput) {
+    public InputDialog(final Window parent, String question, Recipient recipient, boolean showInput, TramlConverterApplication aApplication) {
 
         r = recipient;
+        iApplication = aApplication;
 
         final Window dialog = this;
 
@@ -73,7 +76,7 @@ public class InputDialog extends Window {
         }
 
         // lnkInfo
-        lnkInfo = new InfoLink(InfoLink.InfoPages.RETENTION_CONVERSION);
+        lnkInfo = new InfoLink(iApplication, InfoLink.InfoPages.RETENTION_CONVERSION);
         lnkInfo.setImmediate(false);
         lnkInfo.setWidth("-1px");
         lnkInfo.setHeight("-1px");
