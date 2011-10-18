@@ -20,14 +20,16 @@ public class FileImportParser implements Runnable {
 
     private static Logger logger = Logger.getLogger(FileImportParser.class);
 
+    private final TramlConverterApplication iApplication;
     private final ConversionJobOptions iConversionJobOptions;
     private final UploadComponent iComponent;
     private final File iFile;
 
-    public FileImportParser(ConversionJobOptions aConversionJobOptions, UploadComponent aComponent, String aFileName) throws IOException {
+    public FileImportParser(TramlConverterApplication aApplication, ConversionJobOptions aConversionJobOptions, UploadComponent aComponent, String aFileName) throws IOException {
+        iApplication = aApplication;
         iConversionJobOptions = aConversionJobOptions;
         iComponent = aComponent;
-        iFile = new File(TramlConverterApplication.getApplication().getTempDir(), aFileName);
+        iFile = new File(iApplication.getTempDir(), aFileName);
     }
 
     public void run() {
@@ -47,7 +49,7 @@ public class FileImportParser implements Runnable {
                 }
             }
 
-            TramlConverterApplication.getApplication().getMainWindow().requestRepaintAll();
+            iApplication.getMainWindow().requestRepaintAll();
 
         } catch (FileNotFoundException e) {
             logger.error(e.getMessage(), e);

@@ -40,12 +40,10 @@ public class ConversionForm extends VerticalLayout implements Observer {
      */
     ConversionJobOptions iConversionJobOptions;
 
-
     /**
      * Layout properties.
      */
     private static final String COMMON_FIELD_WIDTH = "12em";
-
 
     /**
      * The actual form.
@@ -81,12 +79,14 @@ public class ConversionForm extends VerticalLayout implements Observer {
      * ExcecutorService to launch new conversion Threads.
      */
     public ExecutorService iExecutorService;
+    private TramlConverterApplication iApplication;
 
 
     /**
      * Create a new TraML Conversion Form.
      */
-    public ConversionForm() {
+    public ConversionForm(TramlConverterApplication aApplication) {
+        iApplication = aApplication;
 
         // Initiate the progress bar.
         iProgressIndicator = new ProgressIndicator();
@@ -109,7 +109,7 @@ public class ConversionForm extends VerticalLayout implements Observer {
 
 
         // First add The upload field.
-        iUploadField = new UploadComponent(iConversionJobOptions);
+        iUploadField = new UploadComponent(iConversionJobOptions, iApplication);
 
         iConversionForm.getLayout().addComponent(iUploadField);
 
@@ -184,7 +184,7 @@ public class ConversionForm extends VerticalLayout implements Observer {
         btnCancel.setVisible(false);
 
         buttons.addComponent(btnConvert);
-        buttons.addComponent(new InfoLink());
+        buttons.addComponent(new InfoLink(iApplication));
         buttons.addComponent(iProgressIndicator);
         buttons.addComponent(btnCancel);
 
@@ -249,7 +249,7 @@ public class ConversionForm extends VerticalLayout implements Observer {
         txtFieldConstantReactionMS1Resolution.addListener(new Property.ValueChangeListener() {
             public void valueChange(Property.ValueChangeEvent event) {
                 String lMS1_resolution = event.getProperty().getValue().toString();
-                if(lMS1_resolution.length() > 0){
+                if (lMS1_resolution.length() > 0) {
                     iConversionJobOptions.getConstants().setMS1_RESOLUTION(lMS1_resolution);
                 }
             }
@@ -441,7 +441,13 @@ public class ConversionForm extends VerticalLayout implements Observer {
             };
             // Open a new InputDialog, and wait for its return.
             new InputDialog(getWindow(), lMessageBean.getMessage(),
-                    lRecipient, lMessageBean.isRequiresAnswer());
+                    lRecipient, lMessageBean.isRequiresAnswer(), iApplication);
+
+        } else if (o instanceof File) {
+            // The Observable instance has submitted a Input File!
+            File lFile = (File) o;
+            iUploadField.reset();
+            iUploadField.setUploadSuccess(lFile.getName());
 
         } else {
             // Any way else, the job has been finished!
@@ -450,7 +456,7 @@ public class ConversionForm extends VerticalLayout implements Observer {
                 try {
                     // Make a copy of the options instance.
                     ConversionJobOptions lOptions = (ConversionJobOptions) iConversionJobOptions.clone();
-                    TramlConverterApplication.getApplication().addResult(lOptions);
+                    iApplication.addResult(lOptions);
                 } catch (CloneNotSupportedException e) {
                     logger.error(e.getMessage(), e);
                 }
@@ -479,6 +485,14 @@ public class ConversionForm extends VerticalLayout implements Observer {
         requestRepaintAll();
     }
 
+    /**
+     * Returns the current ConversionJobOptions element from the active form.
+     *
+     * @return
+     */
+    public ConversionJobOptions getConversionJobOptions() {
+        return iConversionJobOptions;
+    }
 
     /**
      * This FieldFactory isolates the Field creation for a TraML conversion Form.
@@ -555,7 +569,7 @@ public class ConversionForm extends VerticalLayout implements Observer {
      * Class ExportTypeChangeListener ...
      *
      * @author kennyhelsens
-     * Created on 28/06/11
+     *         Created on 28/06/11
      */
     protected class ExportTypeChangeListener implements Property.ValueChangeListener {
         /**
@@ -603,4 +617,6 @@ public class ConversionForm extends VerticalLayout implements Observer {
             txtFieldConstantReactionMS2Resolution.setVisible(false);
         }
     }
+
+
 }
