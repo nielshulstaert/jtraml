@@ -32,4 +32,12 @@ public class WebConfiguration {
         return input.getString("jtraml.home.url");
     }
 
+    /**
+     * Returns the predefined home path when redirecting parameters.
+     * @return
+     */
+    public static boolean doAnalytics(){
+        return input.getBoolean("jtraml.analytics");
+    }
+
 }
