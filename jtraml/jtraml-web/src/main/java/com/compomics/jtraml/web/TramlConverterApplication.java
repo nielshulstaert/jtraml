@@ -17,6 +17,7 @@ package com.compomics.jtraml.web;
 
 
 import com.compomics.jtraml.model.ConversionJobOptions;
+import com.compomics.jtraml.web.analytics.AnalyticsLogger;
 import com.compomics.jtraml.web.container.ConversionForm;
 import com.compomics.jtraml.web.container.FooterPanel;
 import com.compomics.jtraml.web.container.HeaderPanel;
@@ -24,29 +25,34 @@ import com.compomics.jtraml.web.container.ResultsPanel;
 import com.compomics.jtraml.web.listener.FileParameterHandler;
 import com.google.common.io.Files;
 import com.vaadin.Application;
+import com.vaadin.terminal.gwt.server.WebApplicationContext;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Window;
+import org.apache.log4j.Logger;
 import org.vaadin.googleanalytics.tracking.GoogleAnalyticsTracker;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
-import java.net.URL;
 
 /**
  * The Application's "main" class
  */
 @SuppressWarnings("serial")
 public class TramlConverterApplication extends Application {
+    private static Logger logger = Logger.getLogger(TramlConverterApplication.class);
+
     private Window window;
     public File iTempDir;
     public ResultsPanel iOutputTable;
     public ConversionForm iInputForm;
     public Panel iSeparatorPanel;
     public FileParameterHandler iParameterHandler;
-    public URL mainURL;
+    public String iSessionID;
 
     @Override
     public void init() {
+        logger.debug("opening new jTraML session");
         // initiate the window
         window = new Window("TraML converter");
 
@@ -73,6 +79,27 @@ public class TramlConverterApplication extends Application {
 
         setMainWindow(window);
 
+        parseSessionId();
+
+    }
+
+    private void parseSessionId() {
+        WebApplicationContext ctx = null;
+        HttpSession session = null;
+        try {
+            ctx = ((WebApplicationContext) getContext());
+            session = ctx.getHttpSession();
+        } catch (ClassCastException cce) {
+            logger.error(cce.getMessage(), cce);
+        }
+
+        if(session != null){
+            iSessionID = session.getId();
+        }else{
+            iSessionID = "TIMESTAMP_ID_" + System.currentTimeMillis();
+        }
+
+        AnalyticsLogger.newSession(iSessionID);
     }
 
     /**
@@ -118,7 +145,11 @@ public class TramlConverterApplication extends Application {
         }
     }
 
-    public URL getMainURL() {
-        return mainURL;
+    /**
+     * Returns the session id of the current application
+     * @return
+     */
+    public String getSessionID() {
+        return iSessionID;
     }
 }

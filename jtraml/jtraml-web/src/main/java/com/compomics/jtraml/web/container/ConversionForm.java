@@ -8,6 +8,7 @@ import com.compomics.jtraml.thread.SepToTRAMLJob;
 import com.compomics.jtraml.thread.TRAMLToSepJob;
 import com.compomics.jtraml.validation.ConversionJobOptionValidator;
 import com.compomics.jtraml.web.TramlConverterApplication;
+import com.compomics.jtraml.web.analytics.AnalyticsLogger;
 import com.compomics.jtraml.web.components.CheckBoxTextField;
 import com.compomics.jtraml.web.components.InfoLink;
 import com.compomics.jtraml.web.components.UploadComponent;
@@ -339,6 +340,8 @@ public class ConversionForm extends VerticalLayout implements Observer {
      * @throws IOException
      */
     private void startConversion() throws IOException {
+        // Trace this conversion.
+        AnalyticsLogger.startConversion(iApplication.getSessionID());
 
         // First, verify if the form is valid.
         if (iConversionForm.isValid()) {
@@ -457,6 +460,7 @@ public class ConversionForm extends VerticalLayout implements Observer {
                     // Make a copy of the options instance.
                     ConversionJobOptions lOptions = (ConversionJobOptions) iConversionJobOptions.clone();
                     iApplication.addResult(lOptions);
+                    AnalyticsLogger.endConversion(iApplication.getSessionID(), lOptions);
                 } catch (CloneNotSupportedException e) {
                     logger.error(e.getMessage(), e);
                 }

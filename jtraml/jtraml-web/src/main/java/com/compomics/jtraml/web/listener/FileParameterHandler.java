@@ -3,6 +3,7 @@ package com.compomics.jtraml.web.listener;
 import com.compomics.jtraml.enumeration.FileTypeEnum;
 import com.compomics.jtraml.model.ConversionJobOptions;
 import com.compomics.jtraml.web.TramlConverterApplication;
+import com.compomics.jtraml.web.analytics.AnalyticsLogger;
 import com.compomics.jtraml.web.config.WebConfiguration;
 import com.google.common.base.Joiner;
 import com.vaadin.terminal.ExternalResource;
@@ -62,6 +63,8 @@ public class FileParameterHandler extends Observable implements ParameterHandler
                     logger.debug("reloading the application");
                     iApplication.getMainWindow().open(new ExternalResource(WebConfiguration.getHomeURL()));
                     iApplication.getMainWindow().requestRepaintAll();
+
+                    AnalyticsLogger.startConversionViaURL(iApplication.getSessionID(), parameters);
 
                 } else {
                     logger.debug("importtype not specified");
