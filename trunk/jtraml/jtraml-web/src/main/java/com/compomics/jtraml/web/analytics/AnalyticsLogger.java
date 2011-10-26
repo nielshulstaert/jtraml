@@ -37,7 +37,7 @@ public class AnalyticsLogger {
     public static void startConversionViaURL(String aSessionID, Map aParams) {
         logMetric( aSessionID + sep + "NEW_URL_JOB");
         for (Object lParam: aParams.keySet()) {
-            logMetric( aSessionID + sep + "NEW_URL_JOB_" + lParam.toString().toUpperCase() + sep + aParams.get(lParam));
+            logMetric( aSessionID + sep + "NEW_URL_JOB_" + lParam.toString().toUpperCase() + sep + aParams.get(lParam).toString());
         }
     }
 
