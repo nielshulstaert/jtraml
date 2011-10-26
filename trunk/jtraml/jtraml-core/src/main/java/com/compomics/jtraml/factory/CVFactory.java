@@ -110,6 +110,48 @@ public class CVFactory {
     /**
      * Creates a CVParamType for a retention time.
      *
+     * @param aValue                retention time window for this CV Param.
+     * @param aMSType               FrequentOboEnum type to be looked up in the MS vocabulary.
+     * @return Valid CvParamType for the retention time (minutes).
+     * @throws ServiceException
+     * @throws RemoteException  <cvParam cvRef="MS" accession="MS:1000895" name="local retention time" value="40.02" unitCvRef="UO"
+     *                          unitAccession="UO:0000031" unitName="minute"/>
+     */
+    public static CvParamType createCustomCVType(String aValue, FrequentOBoEnum aMSType) throws ServiceException, RemoteException {
+        CvParamType lCvParamType = iObjectFactory.createCvParamType();
+
+        HashMap lTerm = OboManager.getInstance().getMSTerm(aMSType.getName());
+        lCvParamType.setAccession(lTerm.get("id").toString());
+        lCvParamType.setValue(aValue);
+        lCvParamType.setName(aMSType.getName());
+        lCvParamType.setCvRef(getCV_MS());
+
+        return lCvParamType;
+    }
+
+    /**
+     * Creates a CVParamType for a retention time.
+     *
+     * @param aMSType               FrequentOboEnum type to be looked up in the MS vocabulary.
+     * @return Valid CvParamType for the retention time (minutes).
+     * @throws ServiceException
+     * @throws RemoteException  <cvParam cvRef="MS" accession="MS:1000895" name="local retention time" value="40.02" unitCvRef="UO"
+     *                          unitAccession="UO:0000031" unitName="minute"/>
+     */
+    public static CvParamType createCustomCVType(FrequentOBoEnum aMSType) throws ServiceException, RemoteException {
+        CvParamType lCvParamType = iObjectFactory.createCvParamType();
+
+        HashMap lTerm = OboManager.getInstance().getMSTerm(aMSType.getName());
+        lCvParamType.setAccession(lTerm.get("id").toString());
+        lCvParamType.setName(aMSType.getName());
+        lCvParamType.setCvRef(getCV_MS());
+
+        return lCvParamType;
+    }
+
+    /**
+     * Creates a CVParamType for a retention time.
+     *
      * @param aValue    retention time window for this CV Param.
      * @param aMSType   FrequentOboEnum type to be looked up in the MS vocabulary.
      * @param aUnitType FrequentOBoEnum type to be looked up in the UO vocabulary

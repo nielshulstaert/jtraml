@@ -25,7 +25,9 @@ public enum FrequentOBoEnum {
 
     POLARITY("polarity"),
     POLARITY_NEGATIVE("Negative"),
-    POLARITY_POSITIVE("Positive");
+    POLARITY_POSITIVE("Positive"),
+
+    PREDICTED_TRANSITION_BY_INFORMATICS ("transition predicted by informatic analysis");
 
     /**
      * The name for the input type enumeration.
