@@ -2,6 +2,10 @@
 #labels Featured,wiki
 #sidebar toc
 
+==1.04 (30 January 2014)==
+  * Bug fixes in the in the ABI -> TraML conversion
+  * Improved error handling
+
 ==0.9 (15 July 2011)==
   * FEATURE: implemented parsing of multiple RetentionTimeType and ConfigurationType locations.
 
