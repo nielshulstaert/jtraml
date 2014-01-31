@@ -3,25 +3,35 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.compomics.jtraml</groupId>
-    <artifactId>jtraml</artifactId>
+    <artifactId>jtraml</artifactId>    
+    <version>1.0.4</version>
     <packaging>pom</packaging>
-    <version>1.0.3</version>
+    
+    <modules>
+        <module>jtraml-core</module>
+        <module>jtraml-web</module>
+    </modules>
+    
     <name>jtraml</name>
+    
     <url>http://jtraml.googlecode.com</url>
-
+        
+    <issueManagement>
+        <url>https://code.google.com/p/jtraml/issues/list</url>
+        <system>Google Code</system>
+    </issueManagement>
+    
+    <scm>
+        <url>https://code.google.com/p/jtraml/source/browse/</url>
+    </scm>
+    
     <!-- Licence -->
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
             <url>LICENSE-2.0.txt</url>
         </license>
-    </licenses>
-
-
-    <modules>
-        <module>jtraml-core</module>
-        <module>jtraml-web</module>
-    </modules>
+    </licenses>           
 
     <!-- Developers -->
     <developers>
@@ -40,12 +50,58 @@
             <organization>Computational Biology, Seattle Proteome Center</organization>
         </developer>
     </developers>
-
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties> 
 
     <!-- Build -->
     <build>
+        <pluginManagement>
+            <!-- Plugins -->
+            <plugins>
+                <!-- Compiler plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.5.1</version>
+                    <inherited>true</inherited>
+                    <configuration>
+                        <source>1.5</source>
+                        <target>1.5</target>
+                        <showDeprecation>true</showDeprecation>
+                        <debug>true</debug>
+                    </configuration>
+                </plugin>
+                <!-- sources plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>2.1.1</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>  
         <!-- Plugins -->
         <plugins>
+            <!-- Compiler plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <!-- Compiler plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-idea-plugin</artifactId>
@@ -53,19 +109,62 @@
                     <jdkName>1.5</jdkName>
                 </configuration>
             </plugin>
-
-
         </plugins>
     </build>
+    
+    <dependencyManagement>
+        <dependencies>
+            <!-- Cross concern -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.11</version>
+                <scope>test</scope>
+            </dependency>
+            <!--jtraml core-->
+            <dependency>
+                <groupId>com.compomics.jtraml</groupId>
+                <artifactId>jtraml-core</artifactId>
+                <version>1.0.4</version>
+            </dependency>
+            <!--google analytics vaadin add-on-->
+            <dependency>
+                <groupId>org.vaadin.addons</groupId>
+                <artifactId>googleanalyticstracker</artifactId>
+                <version>1.1.1</version>
+            </dependency>            
+        </dependencies>
+    </dependencyManagement>
+    
+    <dependencies>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <!-- This project makes use of convenience methods from google guava-->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>r08</version>
+        </dependency>
+        <!--vaadin framework-->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin</artifactId>
+            <version>6.6.6</version>
+        </dependency>
+    </dependencies>
+    
     <!-- Repositories -->
     <repositories>
         <!-- UGent Genesis Maven 1 repository -->
-        <repository>
+<!--        <repository>
             <id>genesis-maven-repository</id>
             <name>Genesis repository</name>
             <url>http://genesis.UGent.be/maven</url>
             <layout>legacy</layout>
-        </repository>
+        </repository>-->
         <!-- UGent Genesis Maven 2 repository -->
         <repository>
             <id>genesis-maven2-repository</id>

@@ -31,9 +31,9 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * This class is a test scenario to generate a TraML file from an AgilentQQQ input file.
+ * This class is a test scenario to generate a TraML file from an AgilentQQQ
+ * input file.
  */
-
 public class TestAgilentQQQ extends TestCase {
 
     private static Logger logger = Logger.getLogger(TestAgilentQQQ.class);
@@ -107,7 +107,6 @@ public class TestAgilentQQQ extends TestCase {
             lWriter.flush();
             lWriter.close();
 
-
             // Now re-read the file.
             TraMLParser lTraMLParser = new TraMLParser();
             lTraMLParser.parse_file(lTempOutput.getAbsolutePath(), logger);
@@ -117,17 +116,19 @@ public class TestAgilentQQQ extends TestCase {
             // Now test whether we have actually parsed 'n' transitions.
             Assert.assertEquals(1354, lSize);
 
-
             // Now run the Validator.
-
             logger.debug("Running validator");
-            File ontologyFile = new File(Resources.getResource("xml" + File.separator + "ontologies.xml").getFile());
-            File mappingRules = new File(Resources.getResource("xml" + File.separator + "TraML-mapping.xml").getFile());
-            File objectRules = new File(Resources.getResource("xml" + File.separator + "object_rules.xml").getFile());
+//            File ontologyFile = new File(Resources.getResource("xml" + File.separator + "ontologies.xml").getFile());
+            File ontologyFile = new File(Resources.getResource("xml/ontologies.xml").getFile());
+//            File mappingRules = new File(Resources.getResource("xml" + File.separator + "TraML-mapping.xml").getFile());
+            File mappingRules = new File(Resources.getResource("xml/TraML-mapping.xml").getFile());
+//            File objectRules = new File(Resources.getResource("xml" + File.separator + "object_rules.xml").getFile());
 
+//            TraMLValidator validator = new TraMLValidator(new FileInputStream(ontologyFile),
+//                    new FileInputStream(mappingRules),
+//                    new FileInputStream(objectRules));
             TraMLValidator validator = new TraMLValidator(new FileInputStream(ontologyFile),
-                    new FileInputStream(mappingRules),
-                    new FileInputStream(objectRules));
+                    new FileInputStream(mappingRules));
 
             TraMLType traml = lTraMLParser.getTraML();
 
@@ -192,7 +193,6 @@ public class TestAgilentQQQ extends TestCase {
             // Ok. The File should have been written!
             lWriter.flush();
             lWriter.close();
-
 
             // Ok, now re-read the file.
             BufferedReader lBufferedReader = Files.newReader(lTempOutput, Charset.defaultCharset());

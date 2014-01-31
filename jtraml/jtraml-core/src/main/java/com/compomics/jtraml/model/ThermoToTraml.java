@@ -3,6 +3,7 @@ package com.compomics.jtraml.model;
 import com.compomics.jtraml.config.CoreConfiguration;
 import com.compomics.jtraml.exception.JTramlException;
 import com.compomics.jtraml.factory.CVFactory;
+import com.compomics.jtraml.factory.InstrumentFactory;
 import com.compomics.jtraml.interfaces.TSVFileImportModel;
 import org.apache.log4j.Logger;
 import org.hupo.psi.ms.traml.*;
@@ -115,6 +116,7 @@ public class ThermoToTraml extends TSVFileImportModel {
 
             // 3. Define the configuration
             ConfigurationType lConfigurationType = iObjectFactory.createConfigurationType();
+            lConfigurationType.setInstrumentRef(InstrumentFactory.getThermoInstrument());
             lConfigurationType.getCvParam().add(lCV_CollisionEnergy);
 
             // add this configuration to the configuration list.
@@ -248,6 +250,13 @@ public class ThermoToTraml extends TSVFileImportModel {
             lSourceFileType.setLocation(iFile.getParent());
             lSourceFileType.setName(iFile.getName());
         }
+        
+        CvParamType cvParamType = new CvParamType();
+        cvParamType.setAccession("MS:1000914");
+        cvParamType.setName("tab delimited text file");
+        cvParamType.setCvRef(CVFactory.getCV_MS());
+        
+        lSourceFileType.getCvParam().add(cvParamType);
 
         lSourceFileListType.getSourceFile().add(lSourceFileType);
 
@@ -280,5 +289,15 @@ public class ThermoToTraml extends TSVFileImportModel {
      */
     public char getSeparator() {
         return ',';
+    }
+    
+     @Override
+    public InstrumentListType getInstrumentTypeList() {
+        InstrumentListType instrumentListType = iObjectFactory.createInstrumentListType();
+        
+        // add default instrument
+        instrumentListType.getInstrument().add(InstrumentFactory.getThermoInstrument());
+        
+        return instrumentListType;
     }
 }

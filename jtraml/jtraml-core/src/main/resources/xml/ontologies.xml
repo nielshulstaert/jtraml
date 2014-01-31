@@ -6,9 +6,9 @@
     <cvSource source="psidev.psi.tools.ontology_manager.impl.ols.OlsOntology"
               uri="http://psidev.cvs.sourceforge.net/*checkout*/psidev/psi/psi-ms/mzML/controlledVocabulary/psi-ms.obo"
               format="OBO" name="PSI-MS" identifier="MS" version="2.28.0"/>
-    <cvSource source="psidev.psi.tools.ontology_manager.impl.ols.OlsOntology"
+<!--    <cvSource source="psidev.psi.tools.ontology_manager.impl.ols.OlsOntology"
               uri="http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/anatomy/BrendaTissue.obo" format="OBO"
-              name="BrendaTissue" identifier="BTO" version="1.258"/>
+              name="BrendaTissue" identifier="BTO" version="1.258"/>-->
     <cvSource source="psidev.psi.tools.ontology_manager.impl.ols.OlsOntology"
               uri="http://pride-proteome.cvs.sourceforge.net/*checkout*/pride-proteome/PRIDE/schema/pride_cv.obo"
               format="OBO" name="PRIDE Ontology" identifier="PRIDE" version="1.54"/>

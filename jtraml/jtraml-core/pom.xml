@@ -4,11 +4,17 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.compomics.jtraml</groupId>
     <artifactId>jtraml-core</artifactId>
-    <packaging>jar</packaging>
-    <name>jtraml-core</name>
     <version>1.0.4</version>
+    <packaging>jar</packaging>
+    <name>jtraml-core</name>    
 
     <url>http://jtraml.googlecode.com</url>
+    
+    <parent>
+        <groupId>com.compomics.jtraml</groupId>
+        <artifactId>jtraml</artifactId>
+        <version>1.0.4</version>
+    </parent> 
 
     <!-- Licence -->
     <licenses>
@@ -17,6 +23,7 @@
             <url>LICENSE-2.0.txt</url>
         </license>
     </licenses>
+    
     <!-- Developers -->
     <developers>
         <developer>
@@ -34,6 +41,11 @@
             </organization>
         </developer>
     </developers>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties> 
+    
     <!-- Build -->
     <build>
         <!-- Copy the resources required during building -->
@@ -50,41 +62,30 @@
         <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
-            <artifactId>wagon-ssh</artifactId>
+                <artifactId>wagon-ssh</artifactId>
                 <version>1.0-beta-2</version>
             </extension>
         </extensions>
 
-	<!-- Plugins -->
-        <plugins>
-
-            <!-- Pack sources on build -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>2.1.1</version>
+        <!-- Plugins -->
+        <plugins>    
+<!--            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>1.5</version>
                 <executions>
                     <execution>
-                        <id>attach-sources</id>
-                        <phase>verify</phase>
+                        <id>xjc</id>
                         <goals>
-                            <goal>jar-no-fork</goal>
+                            <goal>xjc</goal>
                         </goals>
-                    </execution>
+                    </execution>                                                       
                 </executions>
-            </plugin>
-
-
-            <!-- Compiler plugin -->
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                    <showDeprecation>true</showDeprecation>
-                    <debug>true</debug>
+                    <packageName>org.hupo.psi.ms.traml</packageName>                   
                 </configuration>
-            </plugin>
+            </plugin>-->
+                    
             <!-- Jar plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -197,12 +198,12 @@
     <!-- Repositories -->
     <repositories>
         <!-- UGent Genesis Maven 1 repository -->
-        <repository>
+<!--        <repository>
             <id>genesis-maven-repository</id>
             <name>Genesis repository</name>
             <url>http://genesis.UGent.be/maven</url>
             <layout>legacy</layout>
-        </repository>
+        </repository>-->
         <!-- UGent Genesis Maven 2 repository -->
         <repository>
             <id>genesis-maven2-repository</id>
@@ -243,48 +244,40 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.8.2</version>
-            <scope>build</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.14</version>
         </dependency>
 
         <dependency>
             <groupId>psidev.psi.tools</groupId>
             <artifactId>ontology-config-reader</artifactId>
-            <version>2.0.0</version>
+            <version>2.0.5-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
 
         <dependency>
             <groupId>psidev.psi.tools</groupId>
             <artifactId>ontology-manager</artifactId>
-            <version>2.0.0</version>
+            <version>2.0.5-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
 
         <dependency>
             <groupId>psidev.psi.tools</groupId>
             <artifactId>validator</artifactId>
-            <version>2.0.0</version>
+            <version>2.0.5-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
 
         <dependency>
             <groupId>psidev.psi.tools</groupId>
             <artifactId>object-rule-reader</artifactId>
-            <version>2.0.0</version>
+            <version>2.0.5-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
 
         <dependency>
             <groupId>psidev.psi.tools</groupId>
             <artifactId>cv-rule-reader</artifactId>
-            <version>2.0.0</version>
+            <version>2.0.5-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
 
@@ -301,15 +294,12 @@
             <version>1.14.1</version>
         </dependency>
 
-
         <!--Apache commons configuration-->
         <dependency>
             <groupId>commons-configuration</groupId>
             <artifactId>commons-configuration</artifactId>
             <version>1.4</version>
-        </dependency>
-        <!-- This project depends on the junit JAR file.
-        -->
+        </dependency>        
 
         <dependency>
             <groupId>jgoodies</groupId>
@@ -328,12 +318,7 @@
             <artifactId>looks</artifactId>
             <version>1.2.2</version>
         </dependency>
-        <!-- This project makes use of convenience methods from google guava-->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>r08</version>
-        </dependency>
+        
         <dependency>
             <groupId>axis</groupId>
             <artifactId>axis</artifactId>
@@ -345,15 +330,8 @@
             <artifactId>jbusycomponent</artifactId>
             <version>1.2.1</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin</artifactId>
-            <version>6.6.0</version>
-        </dependency>
-
-
     </dependencies>
+    
     <!-- The deployment maven2 repository-->
     <distributionManagement>
         <repository>

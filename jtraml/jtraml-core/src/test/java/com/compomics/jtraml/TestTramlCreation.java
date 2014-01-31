@@ -29,9 +29,9 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * This class is a test scenario to generate a TraML file from an AgilentQQQ input file.
+ * This class is a test scenario to generate a TraML file from an AgilentQQQ
+ * input file.
  */
-
 public class TestTramlCreation extends TestCase {
 
     private static Logger logger = Logger.getLogger(TestTramlCreation.class);
@@ -69,9 +69,6 @@ public class TestTramlCreation extends TestCase {
             // define the controlled vocabularies that can be used. (Mass Spectrometry Ontology, Unit Ontoloy, Unimod Ontology)
             lTraMLType.setCvList(CVFactory.getCvListType());
 
-
-
-
             // Ok, all rows have been added.
             TraMLCreator lTraMLCreator = new TraMLCreator();
             lTraMLCreator.setTraML(lTraMLType);
@@ -94,17 +91,23 @@ public class TestTramlCreation extends TestCase {
             // Now test whether we have actually parsed 'n' transitions.
             Assert.assertEquals(1941, lSize);
 
-
             // Now run the Validator.
             logger.debug("Running validator");
-            File ontologyFile = new File(Resources.getResource("xml" + File.separator + "ontologies.xml").getFile());
-            File mappingRules = new File(Resources.getResource("xml" + File.separator + "TraML-mapping.xml").getFile());
-            File objectRules = new File(Resources.getResource("xml" + File.separator + "object_rules.xml").getFile());
+//            File ontologyFile = new File(Resources.getResource("xml" + File.separator + "ontologies.xml").getFile());
+            File ontologyFile = new File(Resources.getResource("xml/ontologies.xml").getFile());
+//            File mappingRules = new File(Resources.getResource("xml" + File.separator + "TraML-mapping.xml").getFile());
+            File mappingRules = new File(Resources.getResource("xml/TraML-mapping.xml").getFile());
+//            File objectRules = new File(Resources.getResource("xml" + File.separator + "object_rules.xml").getFile());
 
+//            TraMLValidator validator = new TraMLValidator(
+//                    new FileInputStream(ontologyFile),
+//                    new FileInputStream(mappingRules),
+//                    new FileInputStream(objectRules)
+//            );
+            
             TraMLValidator validator = new TraMLValidator(
                     new FileInputStream(ontologyFile),
-                    new FileInputStream(mappingRules),
-                    new FileInputStream(objectRules)
+                    new FileInputStream(mappingRules)
             );
 
             TraMLType traml = lTraMLParser.getTraML();
@@ -148,7 +151,6 @@ public class TestTramlCreation extends TestCase {
 
             TSVFileExportModel lTSVFileExportModel = new TramlToThermo();
 
-
             File lTempOutput = new File(MyTestSuite.getTestResourceURI().getPath(), "test.thermo.csv");
             if (lTempOutput.exists()) {
                 lTempOutput.delete();
@@ -171,7 +173,6 @@ public class TestTramlCreation extends TestCase {
             // Ok. The File should have been written!
             lWriter.flush();
             lWriter.close();
-
 
             // Ok, now re-read the file.
             BufferedReader lBufferedReader = Files.newReader(lTempOutput, Charset.defaultCharset());

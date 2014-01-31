@@ -28,7 +28,7 @@ import java.util.Observable;
 /**
  * This class converts a a TRAML file into a TSV/CSV file in a single thread.
  */
-public class TRAMLToSepJob extends Observable implements Runnable, Interruptible {
+public class TRAMLToSepJob extends Observable implements Job, Interruptible {
     private static Logger logger = Logger.getLogger(TRAMLToSepJob.class);
 
     /**
@@ -190,6 +190,7 @@ public class TRAMLToSepJob extends Observable implements Runnable, Interruptible
         }
     }
 
+    @Override
     public String getStatus() {
         return iStatus;
     }

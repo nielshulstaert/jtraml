@@ -3,6 +3,7 @@ package com.compomics.jtraml.model;
 import com.compomics.jtraml.config.CoreConfiguration;
 import com.compomics.jtraml.exception.JTramlException;
 import com.compomics.jtraml.factory.CVFactory;
+import com.compomics.jtraml.factory.InstrumentFactory;
 import com.compomics.jtraml.interfaces.TSVFileImportModel;
 import org.apache.log4j.Logger;
 import org.hupo.psi.ms.traml.*;
@@ -119,6 +120,7 @@ public class AgilentToTraml extends TSVFileImportModel {
 
             // 3. Define the configuration
             ConfigurationType lConfigurationType = iObjectFactory.createConfigurationType();
+            lConfigurationType.setInstrumentRef(InstrumentFactory.getAgilentInstrument());
             lConfigurationType.getCvParam().add(lCV_CollisionEnergy);
             lConfigurationType.getCvParam().add(lCV_AcceleratingVoltage);
 
@@ -246,6 +248,13 @@ public class AgilentToTraml extends TSVFileImportModel {
         lSourceFileType.setId("AgilentQQQ_to_traml_converter_v" + CoreConfiguration.VERSION);
         lSourceFileType.setLocation(iFile.getParent());
         lSourceFileType.setName(iFile.getName());
+        
+        CvParamType cvParamType = new CvParamType();
+        cvParamType.setAccession("MS:1000914");
+        cvParamType.setName("tab delimited text file");
+        cvParamType.setCvRef(CVFactory.getCV_MS());
+        
+        lSourceFileType.getCvParam().add(cvParamType);
 
         lSourceFileListType.getSourceFile().add(lSourceFileType);
 
@@ -278,5 +287,15 @@ public class AgilentToTraml extends TSVFileImportModel {
      */
     public char getSeparator() {
         return '\t';
+    }
+    
+    @Override
+    public InstrumentListType getInstrumentTypeList() {
+        InstrumentListType instrumentListType = iObjectFactory.createInstrumentListType();
+        
+        // add default instrument
+        instrumentListType.getInstrument().add(InstrumentFactory.getAgilentInstrument());
+        
+        return instrumentListType;
     }
 }

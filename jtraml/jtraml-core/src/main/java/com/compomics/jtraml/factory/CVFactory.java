@@ -31,17 +31,20 @@ public class CVFactory {
         mscvType.setFullName("Proteomics Standards Initiative Mass Spectrometry Ontology");
         mscvType.setId("MS");
         mscvType.setURI("http://psidev.cvs.sourceforge.net/*checkout*/psidev/psi/psi-ms/mzML/controlledVocabulary/psi-ms.obo");
+        mscvType.setVersion("3.59.0");
 
         uocvType = new CvType();
         uocvType.setFullName("Unit Ontology");
         uocvType.setId("UO");
         uocvType.setURI("http://obo.cvs.sourceforge.net/obo/obo/ontology/phenotype/unit.obo");
+        uocvType.setVersion("unknown");
+        
 
         modcvType = new CvType();
         modcvType.setFullName("UNIMOD CV for modifications");
         modcvType.setId("UNIMOD");
         modcvType.setURI("http://www.unimod.org/obo/unimod.obo");
-
+        modcvType.setVersion("unknown");
     }
 
 
