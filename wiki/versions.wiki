@@ -3,6 +3,7 @@
 #sidebar toc
 
 ==1.04 (30 January 2014)==
+  * FEATURE : implemented TraML XSD 1.0.0
   * Bug fixes in the in the ABI -> TraML conversion
   * Improved error handling
 
