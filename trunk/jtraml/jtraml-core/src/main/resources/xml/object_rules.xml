@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objectRuleList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:noNamespaceSchemaLocation="http://www.psidev.info/files/validator/object-rule.xsd">
+                xsi:noNamespaceSchemaLocation="http://www.psidev.info/files/validator/object-rule.xsd">    
+    
 </objectRuleList>

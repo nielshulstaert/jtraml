@@ -2,6 +2,7 @@ package com.compomics.jtraml.interfaces;
 
 import com.compomics.jtraml.model.Constants;
 import org.hupo.psi.ms.traml.CvParamType;
+import org.hupo.psi.ms.traml.InstrumentListType;
 import org.hupo.psi.ms.traml.SourceFileListType;
 import org.hupo.psi.ms.traml.TraMLType;
 
@@ -49,6 +50,13 @@ public abstract class TSVFileImportModel {
      * @return SourceFileListType for the implementing converting classes.
      */
     public abstract SourceFileListType getSourceTypeList();
+    
+    /**
+     * Implementing classes must be capable to describe a InstrumentListType to insert into a TraMLType
+     *
+     * @return InstrumentListType for the implementing converting classes.
+     */
+    public abstract InstrumentListType getInstrumentTypeList();
 
     /**
      * Implementing classes must report whether they have found Polarity information.

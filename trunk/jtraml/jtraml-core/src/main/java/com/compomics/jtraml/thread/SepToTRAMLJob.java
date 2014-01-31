@@ -20,11 +20,12 @@ import javax.xml.bind.JAXBException;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.Observable;
+import org.systemsbiology.constants.JTRAML_URL;
 
 /**
  * This class converts a TSV file to a TRAML file in a single thread.
  */
-public class SepToTRAMLJob extends Observable implements Runnable {
+public class SepToTRAMLJob extends Observable implements Job {
     private static Logger logger = Logger.getLogger(SepToTRAMLJob.class);
 
     /**
@@ -116,6 +117,9 @@ public class SepToTRAMLJob extends Observable implements Runnable {
 
             ObjectFactory lObjectFactory = new ObjectFactory();
             TraMLType lTraMLType = lObjectFactory.createTraMLType();
+            
+            // set version
+            lTraMLType.setVersion(JTRAML_URL.TRAML_XSD_VERSION);
 
             String line = "";
 
@@ -143,6 +147,7 @@ public class SepToTRAMLJob extends Observable implements Runnable {
 
             lTraMLType.setCvList(CVFactory.getCvListType());
             lTraMLType.setSourceFileList(iTSVFileImportModel.getSourceTypeList());
+            lTraMLType.setInstrumentList(iTSVFileImportModel.getInstrumentTypeList());
 
             if (iTSVFileImportModel.hasPolarity()) { // Does the tsv file has any polarity information?
                 InstrumentType lInstrumentType = lObjectFactory.createInstrumentType();
@@ -177,15 +182,14 @@ public class SepToTRAMLJob extends Observable implements Runnable {
             setChanged();
             notifyObservers();
 
-        } catch (FileNotFoundException e) {
-            logger.error(e.getMessage(), e);
         } catch (JAXBException e) {
-            logger.error(e.getMessage(), e);
+            throw new RuntimeException(e);
         } catch (IOException e) {
-            logger.error(e.getMessage(), e);
+            throw new RuntimeException(e);
         }
     }
 
+    @Override
     public String getStatus() {
         return iStatus;
     }

@@ -119,14 +119,21 @@ public class TestThermoTSQ extends TestCase {
 
             // Now run the Validator.
             logger.debug("Running validator");
-            File ontologyFile = new File(Resources.getResource("xml" + File.separator + "ontologies.xml").getFile());
-            File mappingRules = new File(Resources.getResource("xml" + File.separator + "TraML-mapping.xml").getFile());
-            File objectRules = new File(Resources.getResource("xml" + File.separator + "object_rules.xml").getFile());
+//            File ontologyFile = new File(Resources.getResource("xml" + File.separator + "ontologies.xml").getFile());
+            File ontologyFile = new File(Resources.getResource("xml/ontologies.xml").getFile());
+//            File mappingRules = new File(Resources.getResource("xml" + File.separator + "TraML-mapping.xml").getFile());
+            File mappingRules = new File(Resources.getResource("xml/TraML-mapping.xml").getFile());
+//            File objectRules = new File(Resources.getResource("xml" + File.separator + "object_rules.xml").getFile());
 
+//            TraMLValidator validator = new TraMLValidator(
+//                    new FileInputStream(ontologyFile),
+//                    new FileInputStream(mappingRules),
+//                    new FileInputStream(objectRules)
+//            );
+            
             TraMLValidator validator = new TraMLValidator(
                     new FileInputStream(ontologyFile),
-                    new FileInputStream(mappingRules),
-                    new FileInputStream(objectRules)
+                    new FileInputStream(mappingRules)                  
             );
 
             TraMLType traml = lTraMLParser.getTraML();

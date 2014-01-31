@@ -11,12 +11,12 @@ public class CoreConfiguration {
     /**
      * The current version of the library.
      */
-    public final static String VERSION = "1.0.3";
+    public final static String VERSION = "1.0.4";
 
     /**
      * The current version of the TraML XSD.
      */
-    public final static String TRAML_VERSION = "0.9.5";
+    public final static String TRAML_VERSION = "1.0.0";
 
     /**
      * Properties instance to manage the properties of the library.

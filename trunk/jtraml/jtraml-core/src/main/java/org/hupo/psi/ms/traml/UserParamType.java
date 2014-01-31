@@ -17,19 +17,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * Controlled vocabulary term adding information to the parent term
+ * Uncontrolled user parameters (essentially allowing free text). Before using these, one should verify whether there is an appropriate CV term available, and if so, use the CV term instead
  * 
- * <p>Java class for cvParamType complex type.
+ * <p>Java class for UserParamType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="cvParamType">
+ * &lt;complexType name="UserParamType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="cvRef" use="required" type="{http://www.w3.org/2001/XMLSchema}IDREF" />
  *       &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="accession" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="type" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="value" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="unitAccession" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="unitName" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -42,17 +41,13 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "cvParamType")
-public class CvParamType {
+@XmlType(name = "UserParamType")
+public class UserParamType {
 
-    @XmlAttribute(name = "cvRef", required = true)
-    @XmlIDREF
-    @XmlSchemaType(name = "IDREF")
-    protected Object cvRef;
     @XmlAttribute(name = "name", required = true)
     protected String name;
-    @XmlAttribute(name = "accession", required = true)
-    protected String accession;
+    @XmlAttribute(name = "type")
+    protected String type;
     @XmlAttribute(name = "value")
     protected String value;
     @XmlAttribute(name = "unitAccession")
@@ -63,30 +58,6 @@ public class CvParamType {
     @XmlIDREF
     @XmlSchemaType(name = "IDREF")
     protected Object unitCvRef;
-
-    /**
-     * Gets the value of the cvRef property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Object }
-     *     
-     */
-    public Object getCvRef() {
-        return cvRef;
-    }
-
-    /**
-     * Sets the value of the cvRef property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Object }
-     *     
-     */
-    public void setCvRef(Object value) {
-        this.cvRef = value;
-    }
 
     /**
      * Gets the value of the name property.
@@ -113,27 +84,27 @@ public class CvParamType {
     }
 
     /**
-     * Gets the value of the accession property.
+     * Gets the value of the type property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getAccession() {
-        return accession;
+    public String getType() {
+        return type;
     }
 
     /**
-     * Sets the value of the accession property.
+     * Sets the value of the type property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setAccession(String value) {
-        this.accession = value;
+    public void setType(String value) {
+        this.type = value;
     }
 
     /**

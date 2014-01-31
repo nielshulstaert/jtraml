@@ -3,6 +3,7 @@ package com.compomics.jtraml.model;
 import com.compomics.jtraml.config.CoreConfiguration;
 import com.compomics.jtraml.exception.JTramlException;
 import com.compomics.jtraml.factory.CVFactory;
+import com.compomics.jtraml.factory.InstrumentFactory;
 import com.compomics.jtraml.interfaces.TSVFileImportModel;
 import org.apache.log4j.Logger;
 import org.hupo.psi.ms.traml.*;
@@ -92,7 +93,15 @@ public class ABIToTraml extends TSVFileImportModel {
     public void addRowToTraml(TraMLType aTraMLType, String[] aRowValues) {
 
         // validate number of line values.
-        if (aRowValues.length != 5) {
+        switch (aRowValues.length) {
+        case 5:
+            break;
+        case 9:         // convert to 5 column format
+            aRowValues = new String[] { aRowValues[0], aRowValues[1], aRowValues[2],
+              aRowValues[3] + "." + aRowValues[4] + "." + aRowValues[5] + "." + aRowValues[6] + "." + aRowValues[7],
+              aRowValues[8] };
+            break;
+        default:
             throw new JTramlException("Unexpected number of columns for the ABI QTRAP TSVFileImportModel!!");
         }
 
@@ -136,6 +145,7 @@ public class ABIToTraml extends TSVFileImportModel {
 
             // 3. Define the configuration
             ConfigurationType lConfigurationType = iObjectFactory.createConfigurationType();
+            lConfigurationType.setInstrumentRef(InstrumentFactory.getAbiInstrument());
             lConfigurationType.getCvParam().add(lCV_CollisionEnergy);
 
             // add this configuration to the configuration list.
@@ -273,9 +283,11 @@ public class ABIToTraml extends TSVFileImportModel {
             aTraMLType.getTransitionList().getTransition().add(lTransitionType);
 
         } catch (ServiceException e) {
-            logger.error(e.getMessage(), e);
+            throw new RuntimeException(e);
         } catch (RemoteException e) {
-            logger.error(e.getMessage(), e);
+            throw new RuntimeException(e);
+        } catch (RuntimeException e) {
+            throw e;
         }
     }
 
@@ -296,6 +308,13 @@ public class ABIToTraml extends TSVFileImportModel {
         lSourceFileType.setId("ABIQTRAP_to_traml_converter_v" + CoreConfiguration.VERSION);
         lSourceFileType.setLocation(iFile.getParent());
         lSourceFileType.setName(iFile.getName());
+        
+        CvParamType cvParamType = new CvParamType();
+        cvParamType.setAccession("MS:1000914");
+        cvParamType.setName("tab delimited text file");
+        cvParamType.setCvRef(CVFactory.getCV_MS());
+        
+        lSourceFileType.getCvParam().add(cvParamType);
 
         lSourceFileListType.getSourceFile().add(lSourceFileType);
 
@@ -328,5 +347,15 @@ public class ABIToTraml extends TSVFileImportModel {
      */
     public char getSeparator() {
         return ',';
+    }
+
+    @Override
+    public InstrumentListType getInstrumentTypeList() {
+        InstrumentListType instrumentListType = iObjectFactory.createInstrumentListType();
+        
+        // add default instrument
+        instrumentListType.getInstrument().add(InstrumentFactory.getAbiInstrument());
+        
+        return instrumentListType;
     }
 }

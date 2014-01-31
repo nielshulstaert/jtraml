@@ -11,9 +11,11 @@ import java.math.RoundingMode;
 import java.util.List;
 
 /**
- * This class is aFileExportModel to write separated file format of transitions similar to the Agilent QQQ.
+ * This class is aFileExportModel to write separated file format of transitions
+ * similar to the Agilent QQQ.
  */
 public class TramlToAgilent extends TSVFileExportModel {
+
     /**
      * Returns whether this export model has a header.
      *
@@ -29,13 +31,13 @@ public class TramlToAgilent extends TSVFileExportModel {
      * @return
      */
     public String getHeader() {
-        return "Dynamic MRM\n" +
-                "Compound Name\tISTD?\tPrecursor Ion\tMS1 Res\tProduct Ion\tMS2 Res\tFragmentor\tCollision Energy\tCell Accelerator Voltage\tRet Time (min)\tDelta Ret Time\tPolarity";
+        return "Dynamic MRM\n"
+                + "Compound Name\tISTD?\tPrecursor Ion\tMS1 Res\tProduct Ion\tMS2 Res\tFragmentor\tCollision Energy\tCell Accelerator Voltage\tRet Time (min)\tDelta Ret Time\tPolarity";
     }
 
     /**
-     * Returns whether the given TransitionType is convertable.
-     * The ABI export separated file format expects the collision energy, as well as a centroid
+     * Returns whether the given TransitionType is convertable. The ABI export
+     * separated file format expects the collision energy, as well as a centroid
      *
      * @return
      */
@@ -46,7 +48,8 @@ public class TramlToAgilent extends TSVFileExportModel {
         if (lEvaluation.hasRt() && lEvaluation.hasRtDelta()) {
             // Ok!
             return true;
-        }if (lEvaluation.hasRt() && iRetentionTimeWindow != Double.MAX_VALUE) {
+        }
+        if (lEvaluation.hasRt() && iRetentionTimeWindow != Double.MAX_VALUE) {
             // Ok!
             return true;
         } else if (lEvaluation.hasRt() && !lEvaluation.hasRtDelta()) {
@@ -63,9 +66,9 @@ public class TramlToAgilent extends TSVFileExportModel {
         }
     }
 
-
     /**
-     * Returns the conversion Message if needed. Null if the TransitionType is convertable.
+     * Returns the conversion Message if needed. Null if the TransitionType is
+     * convertable.
      *
      * @return
      */
@@ -83,15 +86,15 @@ public class TramlToAgilent extends TSVFileExportModel {
     }
 
     /**
-     * Parse a TransitionType instance into a single line compatible with the ABI QTRAP 5500
+     * Parse a TransitionType instance into a single line compatible with the
+     * ABI QTRAP 5500
      *
      * @param aTransitionType
      * @param aTraMLType
-     * @return * e.g.
-     *         ""
-     *         Dynamic MRM
-     *         Compound Name	ISTD?	Precursor Ion	MS1 Res	Product Ion	MS2 Res	Fragmentor	Collision Energy	Cell Accelerator Voltage	Ret Time (min)	Delta Ret Time	Polarity
-     *         CSASVLPVDVQTLNSSGPPFGK.2y16-1	FALSE	1130.5681	Wide	1642.8233	Unit	125	39.8	5	42.35	5.00	Positive
+     * @return * e.g. "" Dynamic MRM Compound Name	ISTD?	Precursor Ion	MS1 Res
+     * Product Ion	MS2 Res	Fragmentor	Collision Energy	Cell Accelerator Voltage
+     * Ret Time (min)	Delta Ret Time	Polarity CSASVLPVDVQTLNSSGPPFGK.2y16-1
+     * FALSE	1130.5681	Wide	1642.8233	Unit	125	39.8	5	42.35	5.00	Positive
      */
     public String parseTransitionType(TransitionType aTransitionType, TraMLType aTraMLType) {
         String lID = "NA";
@@ -113,7 +116,6 @@ public class TramlToAgilent extends TSVFileExportModel {
         String lRtdelta = "NA";
 
         String lPolarity = "NA";
-
 
         // Set the identifier.
         lID = aTransitionType.getId();
@@ -143,10 +145,10 @@ public class TramlToAgilent extends TSVFileExportModel {
         // Try to get the lConfigurationList options.
         ConfigurationListType lConfigurationList = null;
 
-        if(aTransitionType.getProduct().getConfigurationList() != null){
+        if (aTransitionType.getProduct().getConfigurationList() != null) {
             lConfigurationList = aTransitionType.getProduct().getConfigurationList();
 
-        }else if(aTransitionType.getIntermediateProduct().get(0).getConfigurationList() != null){
+        } else if (aTransitionType.getIntermediateProduct().get(0).getConfigurationList() != null) {
             lConfigurationList = aTransitionType.getIntermediateProduct().get(0).getConfigurationList();
         }
 
@@ -162,7 +164,6 @@ public class TramlToAgilent extends TSVFileExportModel {
                 }
             }
         }
-
 
         StringBuffer sb = new StringBuffer();
 
@@ -217,11 +218,12 @@ public class TramlToAgilent extends TSVFileExportModel {
 
     }
 
-
     /**
-     * This private class can parse retention time information specific to the Agilent output format.
+     * This private class can parse retention time information specific to the
+     * Agilent output format.
      */
     private class RetentionTimeParser {
+
         private TransitionType iTransitionType;
         private TraMLType iTraMLType;
         private String iRt;
@@ -249,7 +251,6 @@ public class TramlToAgilent extends TSVFileExportModel {
             // Agilent needs a Centroid Retention Time and a Delta Retention Time.
             RetentionTimeEvaluation lEvaluation = new RetentionTimeEvaluation(iTransitionType);
             RetentionTimeType lRetentionTimeType = lEvaluation.getRetentionTimeType();
-
 
             if (lEvaluation.hasRt() && lEvaluation.hasRtDelta()) {
                 // Ok!
@@ -283,7 +284,6 @@ public class TramlToAgilent extends TSVFileExportModel {
                     }
                 }
 
-
             } else if (lEvaluation.hasRtLower() && lEvaluation.hasRtUpper()) {
                 // We are missing the Delta RetentionTime!
                 // But we do have the lower an the upper times.
@@ -299,7 +299,6 @@ public class TramlToAgilent extends TSVFileExportModel {
                         lRtUpper = Double.parseDouble(lCvParamType.getValue());
                     }
                 }
-
 
                 BigDecimal lRtBD = new BigDecimal((lRtLower + lRtUpper) / 2).setScale(2, RoundingMode.HALF_UP);
                 iRt = "" + lRtBD.toString();

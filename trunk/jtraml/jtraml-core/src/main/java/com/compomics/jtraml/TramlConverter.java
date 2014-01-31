@@ -20,6 +20,7 @@ import java.util.concurrent.Future;
  * This class has a main method for converting tab separated files to TraML.
  */
 public class TramlConverter {
+
     private static Logger logger = Logger.getLogger(TramlConverter.class);
 
     public static void main(String[] args) {
@@ -59,7 +60,6 @@ public class TramlConverter {
                 FileTypeEnum lInputType = getFileTypeEnum(line.getOptionValue("importtype"));
                 FileTypeEnum lExportType = getFileTypeEnum(line.getOptionValue("exporttype"));
 
-
                 // Optional variables
                 double lRtDelta = -1;
                 if (line.hasOption("rtdelta")) {
@@ -78,9 +78,7 @@ public class TramlConverter {
                 lConversionJobOptions.setExportType(lExportType);
                 lConversionJobOptions.setImportType(lInputType);
 
-
                 parseConstantOptions(line, lConversionJobOptions);
-
 
                 boolean valid = ConversionJobOptionValidator.isValid(lConversionJobOptions);
                 String lStatus = ConversionJobOptionValidator.getStatus();
@@ -183,7 +181,8 @@ public class TramlConverter {
     }
 
     /**
-     * This method attempts to decode reqruied FileType for a String by its name.
+     * This method attempts to decode reqruied FileType for a String by its
+     * name.
      *
      * @param aInputtype
      */
@@ -228,7 +227,6 @@ public class TramlConverter {
                 + "----------------------\n"
                 + "http://code.google.com/p/jtraml/";
     }
-
 
     private static void createOptions(Options aOptions) {
         // Prepare.

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CvMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.psidev.info/files/validator/CvMapping.xsd"
-  modelName="TraML1.0.0.xsd" modelURI="http://psidev.cvs.sourceforge.net/*checkout*/psidev/psi/psi-ms/TraML/schema/TraML1.0.0.xsd" modelVersion="1.0.0">
+  modelName="TraML.xsd" modelURI="http://psidev.cvs.sourceforge.net/*checkout*/psidev/psi/psi-ms/TraML/schema/TraML0.9.4.xsd" modelVersion="0.9.4">
 
     <CvReferenceList>
         <CvReference cvName="PSI-MS" cvIdentifier="MS"/>
@@ -147,7 +147,7 @@
             <CvTerm termAccession="MS:1000828" useTerm="true" termName="isolation window lower offset" isRepeatable="false" allowChildren="false" cvIdentifierRef="MS"></CvTerm>
             <CvTerm termAccession="MS:1000829" useTerm="true" termName="isolation window upper offset" isRepeatable="false" allowChildren="false" cvIdentifierRef="MS"></CvTerm>
         </CvMappingRule>
-        <CvMappingRule id="product_may" cvElementPath="/TraML/TransitionList/Transition/IntermediateProduct/cvParam/@accession" requirementLevel="MAY" scopePath="/TraML/TransitionList/Transition/IntermediateProduct" cvTermsCombinationLogic="AND">
+        <CvMappingRule id="intermediate_product_may" cvElementPath="/TraML/TransitionList/Transition/IntermediateProduct/cvParam/@accession" requirementLevel="MAY" scopePath="/TraML/TransitionList/Transition/IntermediateProduct" cvTermsCombinationLogic="AND">
             <CvTerm termAccession="MS:1000041" useTerm="true" termName="charge state" isRepeatable="false" allowChildren="false" cvIdentifierRef="MS"></CvTerm>
         </CvMappingRule>
 

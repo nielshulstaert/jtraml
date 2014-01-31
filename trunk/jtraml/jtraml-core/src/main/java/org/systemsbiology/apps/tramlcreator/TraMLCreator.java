@@ -56,11 +56,12 @@ public class TraMLCreator {
 
         java.io.StringWriter sw = new StringWriter();
         JAXBContext ctx = JAXBContext.newInstance("org.hupo.psi.ms.traml");
+
         Marshaller m = ctx.createMarshaller();
         m.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, JTRAML_URL.TRAML_XSD_LOCATION);
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        m.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-
+        m.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");        
+        
         JAXBElement<TraMLType> tramlWrap =
                 new JAXBElement<TraMLType>(new QName(JTRAML_URL.TRAML_URI, "TraML"), TraMLType.class, traML);
 
