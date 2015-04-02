@@ -1,7 +1,7 @@
 # jTraML
 
  * [Project Description](#project-description)
- * [Download](#download)
+ * [Downloads](#downloads)
  * [Usage](#usage)
  * [Project Support](#project-support)
 
@@ -15,8 +15,15 @@ This library aims to provide a Java API for creating TraML files.
 
 ----
 
-## Download
+## Downloads
 Download jTraML 1.0.4 [here](http://genesis.ugent.be/maven2/com/compomics/jtraml/jtraml-core/1.0.4/jtraml-core-1.0.4.zip).
+
+### Example Files
+  * [Example transition file - TraML 0.9.5 document](http://genesis.ugent.be/public_data/jtraml/tsq_example_095.traml)
+  * [Example transition file - Agilent](http://genesis.ugent.be/public_data/jtraml/AgilentQQQ_example.tsv)
+  * [Example transition file - ABI QTRAP](http://genesis.ugent.be/public_data/jtraml/QTRAP5500_example.csv)
+  * [Example transition file - Thermo](http://genesis.ugent.be/public_data/jtraml/TSQ_example.csv)
+  * [traml-core-0.9](http://genesis.ugent.be/public_data/jtraml/jtraml-core-0.9.zip)
 
 [Go to top of page](#jtraml)
 
