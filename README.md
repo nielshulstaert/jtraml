@@ -9,7 +9,13 @@
 
 ## Project Description
 
-This library aims to provide a Java API for creating TraML files.
+The jTraML project is a Java API for the Proteomics Standards Initiative TraML data standard. The library provides fully functional classes for all elements specified in the TraML XSD document, as well as convenient methods to construct controlled vocabulary based instances required to define SRM transitions.
+
+The use of jTraML is demonstrated via a two-way conversion tool between TraML documents and vendor specific files, facilitating the adoption process of this new community standard.
+
+The library is released as open source under the permissive Apache2 license, and can be downloaded from the project in the Downloads section.
+
+TraML files can also be converted online at http://iomics.ugent.be/jtraml.
 
 [Go to top of page](#jtraml)
 
