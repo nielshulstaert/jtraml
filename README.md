@@ -1,4 +1,5 @@
 # jTraML
+![logo](http://genesis.ugent.be/uvpublicdata/jtraml/jtraml_logo.png) 
 
  * [Project Description](#project-description)
  * [Downloads](#downloads)
