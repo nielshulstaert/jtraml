@@ -2,12 +2,14 @@ package com.compomics.jtraml.config;
 
 import com.compomics.jtraml.exception.JTramlException;
 import org.apache.log4j.Logger;
-import uk.ac.ebi.ols.soap.QueryServiceLocator;
+import uk.ac.ebi.pride.utilities.ols.web.service.client.Client;
+import uk.ac.ebi.pride.utilities.ols.web.service.client.OLSClient;
+import uk.ac.ebi.pride.utilities.ols.web.service.config.OLSWsConfigProd;
+import uk.ac.ebi.pride.utilities.ols.web.service.model.Term;
 
-import javax.xml.rpc.ServiceException;
-import java.rmi.RemoteException;
 import java.util.HashMap;
-import java.util.Set;
+import java.util.List;
+import java.util.Map;
 
 /**
  * This class manages access to ontology terms.
@@ -19,20 +21,19 @@ public class OboManager {
      * Singleton instance.
      */
     private static OboManager iManager = null;
-
     /**
      * HashMap which stores the MS ontology terms to reduce the load on the service.
      */
-    private HashMap<String, HashMap> iMSTermsMap = new HashMap<String, HashMap>();
+    private HashMap<String, Map<String, List<String>>> iMSTermsMap = new HashMap<>();
 
     /**
      * HashMap which stores the Unit ontology terms to reduce the load on the service.
      */
-    private HashMap<String, HashMap> iUOTermsMap = new HashMap<String, HashMap>();
-
-
-    private QueryServiceLocator iServiceLocator;
-
+    private HashMap<String, Map<String, List<String>>> iUOTermsMap = new HashMap<>();
+    /**
+     * The OLS client.
+     */
+    private Client olsClient;
 
     /**
      * Returns the singleton instance of the Obo manager.
@@ -50,7 +51,7 @@ public class OboManager {
      * Private singleton constructor for a Obo file manager.
      */
     private OboManager() {
-        iServiceLocator = new QueryServiceLocator();
+        olsClient = new OLSClient(new OLSWsConfigProd());
     }
 
     /**
@@ -59,7 +60,7 @@ public class OboManager {
      * @param aTermName MS vocabulary term name
      * @return HashMap with the name, description and id for the specified term name.
      */
-    public HashMap getMSTerm(String aTermName) throws ServiceException, RemoteException {
+    public Map<String, List<String>> getMSTerm(String aTermName) {
 
         if (iMSTermsMap.containsKey(aTermName)) {
             // Return the cached value.
@@ -67,24 +68,19 @@ public class OboManager {
         } else {
             logger.debug("querying PSI-MS ontology for " + aTermName);
 
+            Term term = olsClient.getExactTermByName(aTermName, "ms");
 
-            Set lTerms = iServiceLocator.getOntologyQuery().getTermsByExactName(aTermName, "MS").keySet();
-
-            if (lTerms.size() == 0) {
+            if (term == null) {
                 throw new JTramlException("cannot find term for name " + aTermName + "!!");
-            } else if (lTerms.size() > 1) {
-                throw new JTramlException("more then one term was returned for name " + aTermName + "!!");
             }
 
-            String lID = lTerms.toArray()[0].toString();
-            HashMap lMetadata = iServiceLocator.getOntologyQuery().getTermMetadata(lID, "MS");
-            lMetadata.put("id", lID);
+            Map<String, List<String>> annotations = olsClient.getAnnotations(term.getOboId(), "ms");
 
             // Store the value in our locally cached TermsMap.
-            iMSTermsMap.put(aTermName, lMetadata);
+            iMSTermsMap.put(aTermName, annotations);
 
             // And return this value.
-            return lMetadata;
+            return annotations;
         }
     }
 
@@ -95,30 +91,26 @@ public class OboManager {
      * @param aName UO vocabulary term name
      * @return HashMap with the name, description and id for the specified term name.
      */
-    public HashMap getUOTerm(String aName) throws ServiceException, RemoteException {
+    public Map getUOTerm(String aName) {
         if (iUOTermsMap.containsKey(aName)) {
             // Return the cached value.
             return iUOTermsMap.get(aName);
         } else {
             logger.debug("querying UO for " + aName);
 
-            Set lTerms = iServiceLocator.getOntologyQuery().getTermsByExactName(aName, "UO").keySet();
+            Term term = olsClient.getExactTermByName(aName, "uo");
 
-            if (lTerms.size() == 0) {
+            if (term == null) {
                 throw new JTramlException("cannot find term for name " + aName + "!!");
-            } else if (lTerms.size() > 1) {
-                throw new JTramlException("more then one term was returned for name " + aName + "!!");
             }
 
-            String lID = lTerms.toArray()[0].toString();
-            HashMap lMetadata = iServiceLocator.getOntologyQuery().getTermMetadata(lID, "UO");
-            lMetadata.put("id", lID);
+            Map<String, List<String>> annotations = olsClient.getAnnotations(term.getOboId(), "ms");
 
-            // Store the value,
-            iUOTermsMap.put(aName, lMetadata);
+            // Store the value in our locally cached TermsMap.
+            iUOTermsMap.put(aName, annotations);
 
             // And return this value.
-            return lMetadata;
+            return annotations;
         }
     }
 

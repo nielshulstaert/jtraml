@@ -1,6 +1,5 @@
 package com.compomics.jtraml;
 
-import com.compomics.jtraml.factory.CVFactory;
 import com.compomics.jtraml.interfaces.TSVFileExportModel;
 import com.compomics.jtraml.model.TramlToThermo;
 import com.google.common.io.Files;
@@ -10,22 +9,15 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import org.apache.log4j.Logger;
-import org.hupo.psi.ms.traml.ObjectFactory;
 import org.hupo.psi.ms.traml.TraMLType;
 import org.hupo.psi.ms.traml.TransitionType;
-import org.systemsbiology.apps.tramlcreator.TraMLCreator;
 import org.systemsbiology.apps.tramlparser.TraMLParser;
-import org.systemsbiology.apps.tramlvalidator.TraMLValidator;
-import psidev.psi.tools.validator.MessageLevel;
-import psidev.psi.tools.validator.ValidatorMessage;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -57,92 +49,10 @@ public class TestTramlCreation extends TestCase {
     /**
      * Main test.
      */
-    public void createCustomTraml() {
-
-        try {
-            // create a Traml root instance
-            ObjectFactory lObjectFactory = new ObjectFactory();
-            TraMLType lTraMLType = lObjectFactory.createTraMLType();
-
-            String line = "";
-
-            // define the controlled vocabularies that can be used. (Mass Spectrometry Ontology, Unit Ontoloy, Unimod Ontology)
-            lTraMLType.setCvList(CVFactory.getCvListType());
-
-            // Ok, all rows have been added.
-            TraMLCreator lTraMLCreator = new TraMLCreator();
-            lTraMLCreator.setTraML(lTraMLType);
-
-            File lOutputFile = new File("/Users/kennyhelsens/tmp/example.traml");
-
-            BufferedWriter lWriter = Files.newWriter(lOutputFile, Charset.defaultCharset());
-
-            lWriter.write(lTraMLCreator.asString());
-            // Ok. The File should have been written!
-            lWriter.flush();
-            lWriter.close();
-
-            // Now re-read the file.
-            TraMLParser lTraMLParser = new TraMLParser();
-            lTraMLParser.parse_file(lOutputFile.getAbsolutePath(), logger);
-
-            int lSize = lTraMLParser.getTraML().getTransitionList().getTransition().size();
-
-            // Now test whether we have actually parsed 'n' transitions.
-            Assert.assertEquals(1941, lSize);
-
-            // Now run the Validator.
-            logger.debug("Running validator");
-//            File ontologyFile = new File(Resources.getResource("xml" + File.separator + "ontologies.xml").getFile());
-            File ontologyFile = new File(Resources.getResource("xml/ontologies.xml").getFile());
-//            File mappingRules = new File(Resources.getResource("xml" + File.separator + "TraML-mapping.xml").getFile());
-            File mappingRules = new File(Resources.getResource("xml/TraML-mapping.xml").getFile());
-//            File objectRules = new File(Resources.getResource("xml" + File.separator + "object_rules.xml").getFile());
-
-//            TraMLValidator validator = new TraMLValidator(
-//                    new FileInputStream(ontologyFile),
-//                    new FileInputStream(mappingRules),
-//                    new FileInputStream(objectRules)
-//            );
-            
-            TraMLValidator validator = new TraMLValidator(
-                    new FileInputStream(ontologyFile),
-                    new FileInputStream(mappingRules)
-            );
-
-            TraMLType traml = lTraMLParser.getTraML();
-
-            final Collection<ValidatorMessage> messages = validator.validate(traml);
-
-            logger.debug("Validation run collected " + messages.size() + " message(s):");
-            String errorMessage = "";
-            for (ValidatorMessage message : messages) {
-                if (message.getLevel().isHigher(MessageLevel.INFO)) {
-                    errorMessage += message.getMessage() + "\n";
-                } else {
-                    logger.debug(message.getMessage());
-                }
-            }
-
-            if (!errorMessage.equals("")) {
-//                Assert.fail("The should not have been errors in the Validation!!");
-                logger.debug("The should not have been errors in the Validation!!");
-                logger.debug(errorMessage);
-            }
-
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-        }
-
-    }
-
-    /**
-     * Main test.
-     */
     public void testTramlToThermo() {
 
         try {
-            URL lURL = Resources.getResource("test.thermo.traml");
+            URL lURL = Resources.getResource("ToyExample1.TraML");
             iThermoTSQInputFile = new File(lURL.getFile());
 
             // Now re-read the file.
@@ -151,7 +61,7 @@ public class TestTramlCreation extends TestCase {
 
             TSVFileExportModel lTSVFileExportModel = new TramlToThermo();
 
-            File lTempOutput = new File(MyTestSuite.getTestResourceURI().getPath(), "test.thermo.csv");
+            File lTempOutput = new File(MyTestSuite.getTestResourceURI().getPath(), "ToyExample1.csv");
             if (lTempOutput.exists()) {
                 lTempOutput.delete();
             }
@@ -182,12 +92,12 @@ public class TestTramlCreation extends TestCase {
                 lineCounter++;
                 // hard coded test!
                 if (lineCounter == 2) {
-                    String lExpectedFirstLine = "651.8366,790.4038,25.5,18.61,28.61,NA,0,0,AAELQTGLETNR.2y7-1";
+                    String lExpectedFirstLine = "862.9467,1040.57,26,NA,NA,NA,0,0,ADTHFLLNIYDQLR-M1-T1";
                     Assert.assertEquals(lExpectedFirstLine, line);
                 }
             }
             // Asset the number of entries that must have been read.
-            Assert.assertEquals(1942, lineCounter);
+            Assert.assertEquals(3, lineCounter);
             lBufferedReader.close();
 
         } catch (Exception e) {

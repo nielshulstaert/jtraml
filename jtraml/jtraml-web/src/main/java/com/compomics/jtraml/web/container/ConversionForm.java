@@ -123,7 +123,7 @@ public class ConversionForm extends VerticalLayout implements Observer {
 
         // Add expert components.
         // CheckBoxTextField for the RetentionTimeShift option.
-        iRtShiftCheckboxTextField = new CheckBoxTextField("±x min", "fill in the retention time shift");
+        iRtShiftCheckboxTextField = new CheckBoxTextField("Â±x min", "fill in the retention time shift");
         iRtShiftCheckboxTextField.addTextFieldValidation(new RtShiftValidator());
         iRtShiftCheckboxTextField.setCaption("retention shift");
         iRtShiftCheckboxTextField.addTextFieldListener(new RtShiftTextListener(iRtShiftCheckboxTextField, iConversionJobOptions));

@@ -6,6 +6,8 @@ import org.hupo.psi.ms.traml.InstrumentListType;
 import org.hupo.psi.ms.traml.SourceFileListType;
 import org.hupo.psi.ms.traml.TraMLType;
 
+import java.net.MalformedURLException;
+
 /**
  * This class is a generic model for a number of Transition specifying columns.
  */
@@ -41,8 +43,9 @@ public abstract class TSVFileImportModel {
      *
      * @param aTraMLType The TraMLType instance to store the rows into.
      * @param aRowValues The separates values from a single row.
+     * @throws MalformedURLException in case a malformed URL occurred
      */
-    public abstract void addRowToTraml(TraMLType aTraMLType, String[] aRowValues);
+    public abstract void addRowToTraml(TraMLType aTraMLType, String[] aRowValues) throws MalformedURLException;
 
     /**
      * Implementing classes must be capable to describe a SourceFileListType to insert into a TraMLType

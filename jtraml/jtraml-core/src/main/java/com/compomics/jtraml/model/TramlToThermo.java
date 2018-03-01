@@ -85,9 +85,9 @@ public class TramlToThermo extends TSVFileExportModel {
      * @param aTransitionType
      * @param aTraMLType
      * @return * e.g.
-     *         ""
-     *         Q1,Q3,CE,Start time (min),Stop time (min),Polarity,Trigger,Reaction category,Name
-     *         651.8366,790.4038,25.5,18.61,28.61,1,1.00E+04,0,AAELQTGLETNR.2y7-1
+     * ""
+     * Q1,Q3,CE,Start time (min),Stop time (min),Polarity,Trigger,Reaction category,Name
+     * 651.8366,790.4038,25.5,18.61,28.61,1,1.00E+04,0,AAELQTGLETNR.2y7-1
      */
     public String parseTransitionType(TransitionType aTransitionType, TraMLType aTraMLType) {
         String lQ1 = "NA";
@@ -122,11 +122,9 @@ public class TramlToThermo extends TSVFileExportModel {
         // Get the retention time.
         // The Thermo format requires a lower and upper time.
 
-
         RetentionTimeParser retentionTimeParser = new RetentionTimeParser(aTransitionType, aTraMLType, lStartTime, lStopTime, lPeptideType).invoke();
         lStartTime = retentionTimeParser.getStartTime();
         lStopTime = retentionTimeParser.getStopTime();
-
 
         if (boolShiftRetentionTime) { // Do we need to shift the retention time?
             // Modify the start time.
@@ -149,20 +147,24 @@ public class TramlToThermo extends TSVFileExportModel {
 
         if (aTransitionType.getProduct().getConfigurationList() != null) {
             lConfigurationList = aTransitionType.getProduct().getConfigurationList();
-
-        } else if (aTransitionType.getIntermediateProduct().get(0).getConfigurationList() != null) {
+        } else if (aTransitionType.getIntermediateProduct() != null && !aTransitionType.getIntermediateProduct().isEmpty() && aTransitionType.getIntermediateProduct().get(0).getConfigurationList() != null) {
             lConfigurationList = aTransitionType.getIntermediateProduct().get(0).getConfigurationList();
         }
 
-        for (ConfigurationType lConfigurationType : lConfigurationList.getConfiguration()) {
-            List<CvParamType> lCvParam = lConfigurationType.getCvParam();
+        if (lConfigurationList != null) {
+            for (ConfigurationType lConfigurationType : lConfigurationList.getConfiguration()) {
+                List<CvParamType> lCvParam = lConfigurationType.getCvParam();
 
-            for (CvParamType lCvParamType : lCvParam) {
-                // cvparam on energy?
-                if (lCvParamType.getName().equals(FrequentOBoEnum.COLLISION_ENERGY.getName())) {
-                    lEnergy = lCvParamType.getValue();
+                for (CvParamType lCvParamType : lCvParam) {
+                    // cvparam on energy?
+                    if (lCvParamType.getName().equals(FrequentOBoEnum.COLLISION_ENERGY.getName())) {
+                        lEnergy = lCvParamType.getValue();
+                    }
                 }
             }
+        }
+        else {
+            System.out.println("");
         }
 
 

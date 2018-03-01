@@ -12,6 +12,7 @@ import javax.xml.rpc.ServiceException;
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,8 +90,9 @@ public class ABIToTraml extends TSVFileImportModel {
      *
      * @param aTraMLType The TraMLType instance to store the rows into.
      * @param aRowValues The separates values from a single row.
+     * @throws MalformedURLException in case a malformed URL occurred
      */
-    public void addRowToTraml(TraMLType aTraMLType, String[] aRowValues) {
+    public void addRowToTraml(TraMLType aTraMLType, String[] aRowValues) throws MalformedURLException {
 
         // validate number of line values.
         switch (aRowValues.length) {

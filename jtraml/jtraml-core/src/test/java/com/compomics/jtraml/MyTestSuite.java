@@ -25,7 +25,6 @@ public class MyTestSuite extends TestSuite {
         lTestSuite.addTest(TestABIQTRAP.suite());
         lTestSuite.addTest(TestOboInput.suite());
 
-
         return lTestSuite;
     }
 

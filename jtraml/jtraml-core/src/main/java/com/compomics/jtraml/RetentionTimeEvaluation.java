@@ -19,7 +19,10 @@ public class RetentionTimeEvaluation {
     public RetentionTimeEvaluation(TransitionType aTransitionType) {
         // Get the peptide instance of the current transition.
         PeptideType lPeptideType = (PeptideType) aTransitionType.getPeptideRef();
-        List<RetentionTimeType> lRetentionTimes = lPeptideType.getRetentionTimeList().getRetentionTime();
+        List<RetentionTimeType> lRetentionTimes = null;
+        if (lPeptideType.getRetentionTimeList() != null) {
+            lRetentionTimes = lPeptideType.getRetentionTimeList().getRetentionTime();
+        }
 
         if (lRetentionTimes != null && lRetentionTimes.size() > 0) {
             iRetentionTimeType = lRetentionTimes.get(0);

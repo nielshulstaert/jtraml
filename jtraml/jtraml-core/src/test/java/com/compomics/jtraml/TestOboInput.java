@@ -8,8 +8,11 @@ import junit.framework.TestSuite;
 import org.apache.log4j.Logger;
 
 import javax.xml.rpc.ServiceException;
+import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * This class is a
@@ -39,18 +42,11 @@ public class TestOboInput extends TestCase {
      * Main test.
      */
     public void testMain() {
-        try {
-            HashMap lMSTerms = OboManager.getInstance().getMSTerm("m/z");
-            Assert.assertEquals("MS:1000040", lMSTerms.get("id"));
+        Map<String, List<String>> lMSTerms = OboManager.getInstance().getMSTerm("m/z");
+        Assert.assertEquals("MS:1000040", lMSTerms.get("id").get(0));
 
-            HashMap lUOTerms = OboManager.getInstance().getUOTerm("dalton");
-            Assert.assertEquals("UO:0000221", lUOTerms.get("id"));
-
-        } catch (ServiceException e) {
-            logger.error(e.getMessage(), e);
-        } catch (RemoteException e) {
-            logger.error(e.getMessage(), e);
-        }
+        Map<String, List<String>> lUOTerms = OboManager.getInstance().getUOTerm("dalton");
+        Assert.assertEquals("UO:0000221", lUOTerms.get("id").get(0));
     }
 
     @Override

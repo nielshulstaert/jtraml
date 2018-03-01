@@ -62,103 +62,103 @@ public class TestABIQTRAP extends TestCase {
     /**
      * Main test.
      */
-    public void testABIToTraml() throws FileNotFoundException, IOException, JAXBException, Exception {
+    public void testABIToTraml() throws Exception {
 
 //        try {
-            URL lURL = Resources.getResource("QTRAP5500_example.csv");            
-            
-            iQtrapInputFile = new File(lURL.getFile());
+        URL lURL = Resources.getResource("QTRAP5500_example.csv");
 
-            BufferedReader br = Files.newReader(iQtrapInputFile, Charset.defaultCharset());
+        iQtrapInputFile = new File(lURL.getFile());
 
-            ObjectFactory lObjectFactory = new ObjectFactory();
-            TraMLType lTraMLType = lObjectFactory.createTraMLType();
+        BufferedReader br = Files.newReader(iQtrapInputFile, Charset.defaultCharset());
 
-            String line = "";
+        ObjectFactory lObjectFactory = new ObjectFactory();
+        TraMLType lTraMLType = lObjectFactory.createTraMLType();
 
-            TSVFileImportModel lTSVFileImportModel = new ABIToTraml(iQtrapInputFile);
-            String sep = "" + lTSVFileImportModel.getSeparator();
+        String line = "";
 
-            logger.debug("reading QTRAP5500 input file\t" + lURL);
+        TSVFileImportModel lTSVFileImportModel = new ABIToTraml(iQtrapInputFile);
+        String sep = "" + lTSVFileImportModel.getSeparator();
 
-            while ((line = br.readLine()) != null) {
-                String[] lValues = line.split(sep);
-                lTSVFileImportModel.addRowToTraml(lTraMLType, lValues);
-            }
-            logger.debug("finished reading QTRAP5500 input file\t");
+        logger.debug("reading QTRAP5500 input file\t" + lURL);
 
-            lTraMLType.setCvList(CVFactory.getCvListType());
-            lTraMLType.setSourceFileList(lTSVFileImportModel.getSourceTypeList());
-            lTraMLType.setInstrumentList(lTSVFileImportModel.getInstrumentTypeList());
+        while ((line = br.readLine()) != null) {
+            String[] lValues = line.split(sep);
+            lTSVFileImportModel.addRowToTraml(lTraMLType, lValues);
+        }
+        logger.debug("finished reading QTRAP5500 input file\t");
 
-            // Ok, all rows have been added.
-            TraMLCreator lTraMLCreator = new TraMLCreator();
-            lTraMLCreator.setTraML(lTraMLType);
+        lTraMLType.setCvList(CVFactory.getCvListType());
+        lTraMLType.setSourceFileList(lTSVFileImportModel.getSourceTypeList());
+        lTraMLType.setInstrumentList(lTSVFileImportModel.getInstrumentTypeList());
 
-            File lTempOutput = new File(MyTestSuite.getTestResourceURI().getPath(), "test.qtrap.traml");
+        // Ok, all rows have been added.
+        TraMLCreator lTraMLCreator = new TraMLCreator();
+        lTraMLCreator.setTraML(lTraMLType);
 
-            if (lTempOutput.exists()) {
-                lTempOutput.delete();
-            }
+        File lTempOutput = new File(MyTestSuite.getTestResourceURI().getPath(), "test.qtrap.traml");
 
-            BufferedWriter lWriter = Files.newWriter(lTempOutput, Charset.defaultCharset());
+        if (lTempOutput.exists()) {
+            lTempOutput.delete();
+        }
 
-            lWriter.write(lTraMLCreator.asString());
-            // Ok. The File should have been written!
-            lWriter.flush();
-            lWriter.close();
+        BufferedWriter lWriter = Files.newWriter(lTempOutput, Charset.defaultCharset());
+
+        lWriter.write(lTraMLCreator.asString());
+        // Ok. The File should have been written!
+        lWriter.flush();
+        lWriter.close();
 
 
-            // Now re-read the file.
-            TraMLParser lTraMLParser = new TraMLParser();
-            lTraMLParser.parse_file(lTempOutput.getAbsolutePath(), logger);
+        // Now re-read the file.
+        TraMLParser lTraMLParser = new TraMLParser();
+        lTraMLParser.parse_file(lTempOutput.getAbsolutePath(), logger);
 
-            int lSize = lTraMLParser.getTraML().getTransitionList().getTransition().size();
+        int lSize = lTraMLParser.getTraML().getTransitionList().getTransition().size();
 
-            // Now test whether we have actually parsed 'n' transitions.
+        // Now test whether we have actually parsed 'n' transitions.
 //            Assert.assertEquals(192, lSize);
 
 
-            // Now run the Validator.
+        // Now run the Validator.
 
-            logger.debug("Running validator");
+        logger.debug("Running validator");
 //            File ontologyFile = new File(Resources.getResource("xml" + File.separator + "ontologies.xml").getFile());
-            File ontologyFile = new File(Resources.getResource("xml/ontologies.xml").getFile());
+        File ontologyFile = new File(Resources.getResource("xml/ontologies.xml").getFile());
 //            File mappingRules = new File(Resources.getResource("xml" + File.separator + "TraML-mapping.xml").getFile());
-            File mappingRules = new File(Resources.getResource("xml/TraML-mapping_old.xml").getFile());
+        File mappingRules = new File(Resources.getResource("xml/TraML-mapping_old.xml").getFile());
 //            File objectRules = new File(Resources.getResource("xml" + File.separator + "object_rules.xml").getFile());
-            //File objectRules = new File(Resources.getResource("xml/object_rules.xml").getFile());
+        //File objectRules = new File(Resources.getResource("xml/object_rules.xml").getFile());
 
 //            TraMLValidator validator = new TraMLValidator(
 //                    new FileInputStream(ontologyFile),
 //                    new FileInputStream(mappingRules),
 //                    new FileInputStream(objectRules)
 //            );
-            
-            TraMLValidator validator = new TraMLValidator(
-                    new FileInputStream(ontologyFile),
-                    new FileInputStream(mappingRules)                  
-            );
 
-            TraMLType traml = lTraMLParser.getTraML();
+        TraMLValidator validator = new TraMLValidator(
+                new FileInputStream(ontologyFile),
+                new FileInputStream(mappingRules)
+        );
 
-            final Collection<ValidatorMessage> messages = validator.validate(traml);
+        TraMLType traml = lTraMLParser.getTraML();
 
-            logger.debug("Validation run collected " + messages.size() + " message(s):");
-            String errorMessage = "";
-            for (ValidatorMessage message : messages) {
-                if (message.getLevel().isHigher(MessageLevel.INFO)) {
-                    errorMessage += message.getMessage() + "\n";
-                } else {
-                    logger.debug(message.getMessage());
-                }
+        final Collection<ValidatorMessage> messages = validator.validate(traml);
+
+        logger.debug("Validation run collected " + messages.size() + " message(s):");
+        String errorMessage = "";
+        for (ValidatorMessage message : messages) {
+            if (message.getLevel().isHigher(MessageLevel.INFO)) {
+                errorMessage += message.getMessage() + "\n";
+            } else {
+                logger.debug(message.getMessage());
             }
+        }
 
-            if (!errorMessage.equals("")) {
+        if (!errorMessage.equals("")) {
 //                Assert.fail("The should not have been errors in the Validation!!");
-                logger.debug("The should not have been errors in the Validation!!");
-                logger.debug(errorMessage);
-            }
+            logger.debug("The should not have been errors in the Validation!!");
+            logger.debug(errorMessage);
+        }
 
 //        } catch (Exception e) {
 //            logger.error(e.getMessage(), e);
@@ -188,7 +188,7 @@ public class TestABIQTRAP extends TestCase {
             }
             BufferedWriter lWriter = Files.newWriter(lTempOutput, Charset.defaultCharset());
 
-            if(lTSVFileExportModel.hasHeader()){
+            if (lTSVFileExportModel.hasHeader()) {
                 lWriter.write(lTSVFileExportModel.getHeader());
                 lWriter.write("\n");
             }
@@ -210,10 +210,10 @@ public class TestABIQTRAP extends TestCase {
             BufferedReader lBufferedReader = Files.newReader(lTempOutput, Charset.defaultCharset());
             String line = "";
             int lineCounter = 0;
-            while((line = lBufferedReader.readLine()) != null){
+            while ((line = lBufferedReader.readLine()) != null) {
                 lineCounter++;
                 // hard coded test!
-                if(lineCounter == 1){
+                if (lineCounter == 1) {
                     String lExpectedFirstLine = "564.9618,663.4081,10,LSTADPADASTIYAVVV.O95866.O95866-3.O95866-5.3y6,29.3";
                     Assert.assertEquals(line, lExpectedFirstLine);
                 }

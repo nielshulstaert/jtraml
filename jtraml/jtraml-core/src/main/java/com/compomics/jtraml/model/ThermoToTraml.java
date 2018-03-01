@@ -12,6 +12,7 @@ import javax.xml.rpc.ServiceException;
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -53,7 +54,7 @@ public class ThermoToTraml extends TSVFileImportModel {
      * @param aTraMLType The TraMLType instance to store the rows into.
      * @param aRowValues The separates values from a single row.
      */
-    public void addRowToTraml(TraMLType aTraMLType, String[] aRowValues) {
+    public void addRowToTraml(TraMLType aTraMLType, String[] aRowValues) throws MalformedURLException {
 
         // validate number of line values.
         if (aRowValues.length != 9) {

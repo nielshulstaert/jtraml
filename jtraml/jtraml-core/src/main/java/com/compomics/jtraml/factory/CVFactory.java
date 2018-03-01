@@ -8,8 +8,10 @@ import org.hupo.psi.ms.traml.CvType;
 import org.hupo.psi.ms.traml.ObjectFactory;
 
 import javax.xml.rpc.ServiceException;
+import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This factory generates a series of Types.
@@ -85,18 +87,19 @@ public class CVFactory {
      * @throws ServiceException
      * @throws RemoteException  <cvParam cvRef="MS" accession="MS:1000895" name="local retention time" value="40.02" unitCvRef="UO"
      *                          unitAccession="UO:0000031" unitName="minute"/>
+     * @throws MalformedURLException in case a malformed URL occurred
      */
-    public static CvParamType createCustomCVType(String aValue, FrequentOBoEnum aMSType, FrequentOBoEnum aUnitType, boolean aUnitFromMSVocabulary) throws ServiceException, RemoteException {
+    public static CvParamType createCustomCVType(String aValue, FrequentOBoEnum aMSType, FrequentOBoEnum aUnitType, boolean aUnitFromMSVocabulary) throws ServiceException, RemoteException, MalformedURLException {
         CvParamType lCvParamType = iObjectFactory.createCvParamType();
 
-        HashMap lTerm = OboManager.getInstance().getMSTerm(aMSType.getName());
+        Map lTerm = OboManager.getInstance().getMSTerm(aMSType.getName());
         lCvParamType.setAccession(lTerm.get("id").toString());
         lCvParamType.setValue(aValue);
         lCvParamType.setName(aMSType.getName());
         lCvParamType.setCvRef(getCV_MS());
 
 
-        HashMap lUnitTerm;
+        Map lUnitTerm;
         if (aUnitFromMSVocabulary) {
             lUnitTerm = OboManager.getInstance().getMSTerm(aUnitType.getName());
             lCvParamType.setUnitCvRef(getCV_MS());
@@ -119,11 +122,12 @@ public class CVFactory {
      * @throws ServiceException
      * @throws RemoteException  <cvParam cvRef="MS" accession="MS:1000895" name="local retention time" value="40.02" unitCvRef="UO"
      *                          unitAccession="UO:0000031" unitName="minute"/>
+     * @throws MalformedURLException in case a malformed URL occurred
      */
-    public static CvParamType createCustomCVType(String aValue, FrequentOBoEnum aMSType) throws ServiceException, RemoteException {
+    public static CvParamType createCustomCVType(String aValue, FrequentOBoEnum aMSType) throws ServiceException, RemoteException, MalformedURLException {
         CvParamType lCvParamType = iObjectFactory.createCvParamType();
 
-        HashMap lTerm = OboManager.getInstance().getMSTerm(aMSType.getName());
+        Map lTerm = OboManager.getInstance().getMSTerm(aMSType.getName());
         lCvParamType.setAccession(lTerm.get("id").toString());
         lCvParamType.setValue(aValue);
         lCvParamType.setName(aMSType.getName());
@@ -140,11 +144,12 @@ public class CVFactory {
      * @throws ServiceException
      * @throws RemoteException  <cvParam cvRef="MS" accession="MS:1000895" name="local retention time" value="40.02" unitCvRef="UO"
      *                          unitAccession="UO:0000031" unitName="minute"/>
+     * @throws MalformedURLException in case a malformed URL occurred
      */
-    public static CvParamType createCustomCVType(FrequentOBoEnum aMSType) throws ServiceException, RemoteException {
+    public static CvParamType createCustomCVType(FrequentOBoEnum aMSType) throws ServiceException, RemoteException, MalformedURLException {
         CvParamType lCvParamType = iObjectFactory.createCvParamType();
 
-        HashMap lTerm = OboManager.getInstance().getMSTerm(aMSType.getName());
+        Map lTerm = OboManager.getInstance().getMSTerm(aMSType.getName());
         lCvParamType.setAccession(lTerm.get("id").toString());
         lCvParamType.setName(aMSType.getName());
         lCvParamType.setCvRef(getCV_MS());
@@ -163,8 +168,9 @@ public class CVFactory {
      * @throws ServiceException
      * @throws RemoteException  <cvParam cvRef="MS" accession="MS:1000895" name="local retention time" value="40.02" unitCvRef="UO"
      *                          unitAccession="UO:0000031" unitName="minute"/>
+     * @throws MalformedURLException in case a malformed URL occurred
      */
-    public static CvParamType createCustomCVType(String aValue, FrequentOBoEnum aMSType, FrequentOBoEnum aUnitType) throws ServiceException, RemoteException {
+    public static CvParamType createCustomCVType(String aValue, FrequentOBoEnum aMSType, FrequentOBoEnum aUnitType) throws ServiceException, RemoteException, MalformedURLException {
         return createCustomCVType(aValue, aMSType, aUnitType, false); // lookup in the Unit Ontology!
     }
 
@@ -174,11 +180,12 @@ public class CVFactory {
      * @param aPolarity boolean. TRUE means positive charge, FALSE means negative charge.
      * @throws RemoteException <cvParam cvRef="MS" accession="MS:1000037" name="polarity" value="40.02" unitCvRef="UO"
      *                         unitAccession="UO:0000031" unitName="minute"/>
+     * @throws MalformedURLException in case a malformed URL occurred
      */
-    public static CvParamType createCVTypePolarity(boolean aPolarity) throws ServiceException, RemoteException {
+    public static CvParamType createCVTypePolarity(boolean aPolarity) throws ServiceException, RemoteException, MalformedURLException {
         CvParamType lCvParamType = iObjectFactory.createCvParamType();
 
-        HashMap lTerm = OboManager.getInstance().getMSTerm(FrequentOBoEnum.POLARITY.getName());
+        Map lTerm = OboManager.getInstance().getMSTerm(FrequentOBoEnum.POLARITY.getName());
         lCvParamType.setAccession(lTerm.get("id").toString());
         lCvParamType.setName(FrequentOBoEnum.POLARITY.getName());
         lCvParamType.setCvRef(getCV_MS());
@@ -199,8 +206,9 @@ public class CVFactory {
      * @return Valid CvParamType for the specified m/z value.
      * @throws ServiceException
      * @throws RemoteException
+     * @throws MalformedURLException in case a malformed URL occurred
      */
-    public static CvParamType createCVType_MZ(String aValue) throws ServiceException, RemoteException {
+    public static CvParamType createCVType_MZ(String aValue) throws ServiceException, RemoteException, MalformedURLException {
         return createCustomCVType(aValue, FrequentOBoEnum.ISOLATION_WINDOW, FrequentOBoEnum.MZ, true);
     }
 
@@ -213,8 +221,9 @@ public class CVFactory {
      * @throws ServiceException
      * @throws RemoteException  '<'cvParam cvRef="MS" accession="MS:1000045" name="collision energy" value="26" unitCvRef="UO"
      *                          unitAccession="UO:0000266" unitName="electronvolt"/>
+     * @throws MalformedURLException in case a malformed URL occurred
      */
-    public static CvParamType createCVType_CollisionEnergy(String aValue) throws ServiceException, RemoteException {
+    public static CvParamType createCVType_CollisionEnergy(String aValue) throws ServiceException, RemoteException, MalformedURLException {
         return createCustomCVType(aValue, FrequentOBoEnum.COLLISION_ENERGY, FrequentOBoEnum.ELECTRON_VOLT);
     }
 
@@ -226,8 +235,9 @@ public class CVFactory {
      * @throws ServiceException
      * @throws RemoteException  '<'cvParam cvRef="MS" accession="MS:1000045" name="collision energy" value="26" unitCvRef="UO"
      *                          unitAccession="UO:0000266" unitName="electronvolt"/>
+     * @throws MalformedURLException in case a malformed URL occurred
      */
-    public static CvParamType createCVType_AcceleratingVoltage(String aValue) throws ServiceException, RemoteException {
+    public static CvParamType createCVType_AcceleratingVoltage(String aValue) throws ServiceException, RemoteException, MalformedURLException {
         return createCustomCVType(aValue, FrequentOBoEnum.ACCELERATING_VOLTAGE, FrequentOBoEnum.VOLT);
     }
 
@@ -240,8 +250,9 @@ public class CVFactory {
      * @throws ServiceException
      * @throws RemoteException  <cvParam cvRef="MS" accession="MS:1000895" name="retention time window lower offset" value="40.02" unitCvRef="UO"
      *                          unitAccession="UO:0000031" unitName="minute"/>
+     * @throws MalformedURLException in case a malformed URL occurred
      */
-    public static CvParamType createCVType_RetentionTimeStart(String aValue) throws ServiceException, RemoteException {
+    public static CvParamType createCVType_RetentionTimeStart(String aValue) throws ServiceException, RemoteException, MalformedURLException {
         return createCustomCVType(aValue, FrequentOBoEnum.RETENTION_TIME_LOWER, FrequentOBoEnum.MINUTES);
     }
 
@@ -254,8 +265,9 @@ public class CVFactory {
      * @throws ServiceException
      * @throws RemoteException  <cvParam cvRef="MS" accession="MS:1000895" name="retention time window lower offset" value="40.02" unitCvRef="UO"
      *                          unitAccession="UO:0000031" unitName="minute"/>
+     * @throws MalformedURLException in case a malformed URL occurred
      */
-    public static CvParamType createCVType_RetentionTimeStop(String aValue) throws ServiceException, RemoteException {
+    public static CvParamType createCVType_RetentionTimeStop(String aValue) throws ServiceException, RemoteException, MalformedURLException {
         return createCustomCVType(aValue, FrequentOBoEnum.RETENTION_TIME_UPPER, FrequentOBoEnum.MINUTES);
     }
 
@@ -268,8 +280,9 @@ public class CVFactory {
      * @throws ServiceException
      * @throws RemoteException  <cvParam cvRef="MS" accession="MS:1000895" name="local retention time" value="40.02" unitCvRef="UO"
      *                          unitAccession="UO:0000031" unitName="minute"/>
+     * @throws MalformedURLException in case a malformed URL occurred
      */
-    public static CvParamType createCVType_RetentionTime(String aValue) throws ServiceException, RemoteException {
+    public static CvParamType createCVType_RetentionTime(String aValue) throws ServiceException, RemoteException, MalformedURLException {
         return createCustomCVType(aValue, FrequentOBoEnum.RETENTION_TIME, FrequentOBoEnum.MINUTES);
     }
 
@@ -282,8 +295,9 @@ public class CVFactory {
      * @throws ServiceException
      * @throws RemoteException  <cvParam cvRef="MS" accession="MS:1000895" name="local retention time" value="40.02" unitCvRef="UO"
      *                          unitAccession="UO:0000031" unitName="minute"/>
+     * @throws MalformedURLException in case a malformed URL occurred
      */
-    public static CvParamType createCVType_RetentionTimeWindow(String aValue) throws ServiceException, RemoteException {
+    public static CvParamType createCVType_RetentionTimeWindow(String aValue) throws ServiceException, RemoteException, MalformedURLException {
         return createCustomCVType(aValue, FrequentOBoEnum.RETENTION_TIME_WINDOW, FrequentOBoEnum.MINUTES);
     }
 
