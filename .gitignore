@@ -1,7 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea/
-jtraml/jtraml-core/jtraml-core.iml
-jtraml/jtraml-core/target/
-jtraml/jtraml-web/jtraml-web.iml
-jtraml/jtraml-web/target/
-jtraml/jtraml.iml
+jtraml-core/jtraml-core.iml
+jtraml-core/target/
+jtraml-web/jtraml-web.iml
+jtraml-web/target/
+jtraml.iml
